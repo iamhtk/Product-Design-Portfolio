@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Build output
+build/
+dist/
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+*.log
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Wrangler (Cloudflare)
+.wrangler/
