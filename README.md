@@ -1,11 +1,33 @@
+# Product Design Portfolio
 
-  # Portfolio 2026
+A modern, interactive portfolio showcasing product design work and case studies.
 
-  This is a code bundle for Portfolio 2026. The original project is available at https://www.figma.com/design/yXCNXipP0cIxK63bia2SiK/Portfolio-2026.
+## Built With
 
-  ## Running the code
+- React
+- TypeScript
+- Vite
+- Tailwind CSS
 
-  Run `npm i` to install the dependencies.
+## Getting Started
 
-  Run `npm run dev` to start the development server.
-  # Product-Design-Portfolio
+Install dependencies:
+```bash
+npm install
+```
+
+Run the development server:
+```bash
+npm run dev
+```
+
+Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
+
+## Build
+```bash
+npm run build
+```
+
+## Contact
+
+Hrithik Sanyal - Product Designer
