@@ -237,11 +237,11 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
                 );
               })()}
             </div>
-          ) : (
-            <svg className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]" viewBox="0 0 24 24" fill="white">
-              <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
-            </svg>
-          )}
+        ) : (
+          <svg className="w-[60px] h-[60px] md:w-[80px] md:h-[80px]" viewBox="0 0 24 24" fill="white">
+            <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+          </svg>
+        )}
         </div>
       </div>
 
@@ -403,12 +403,12 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
                   <div className="w-full max-h-[120px] overflow-hidden rounded-lg">
                     {isVideo ? (
                       <video src={block.src} controls className="w-full h-full max-h-[120px] object-cover rounded-lg" playsInline>
-                        Your browser does not support the video tag.
-                      </video>
-                    ) : (
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
                       <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
-                    )}
-                  </div>
+              )}
+            </div>
                 </div>
               );
             }
@@ -427,11 +427,11 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
                     {block.headerRight && (
                       <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                         {block.headerRight}
-                      </h3>
-                    )}
+                </h3>
+              )}
                     <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
                   </div>
-                </div>
+            </div>
               );
             }
             if (block.type === 'image') {
@@ -446,12 +446,12 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
                 <div key={index} className="w-full" style={containerStyle}>
                   {isVideo ? (
                     <video src={block.src} controls className="w-full h-auto" playsInline style={mediaStyle}>
-                      Your browser does not support the video tag.
-                    </video>
-                  ) : (
+                  Your browser does not support the video tag.
+                </video>
+              ) : (
                     <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
-                  )}
-                </div>
+              )}
+            </div>
               );
             }
             if (block.type === 'colors') {
@@ -459,8 +459,8 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
                 <div key={index} className="grid grid-cols-4 gap-4">
                   {block.colors.map((color, i) => (
                     <div key={i} className="aspect-square rounded-lg" style={{ backgroundColor: color }} />
-                  ))}
-                </div>
+                ))}
+              </div>
               );
             }
             return null;
@@ -498,7 +498,7 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
             </span>
             <span>© 2026</span>
           </div>
-
+          
           <div className="flex items-center gap-3 md:gap-5">
             <a href="https://www.linkedin.com/in/iamhtk" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors" aria-label="LinkedIn">
               <Linkedin className="w-[18px] h-[18px]" />

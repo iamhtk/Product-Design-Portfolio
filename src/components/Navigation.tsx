@@ -20,10 +20,14 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   ];
 
   const socialLinks = [
-    { label: 'Figma', url: '#' },
-    { label: 'Github', url: '#' },
-    { label: 'LinkedIn', url: '#' },
-    { label: 'Twitter', url: '#' },
+    { label: 'Figma', url: 'https://www.figma.com/@iamhtk' },
+    { label: 'GitHub', url: 'https://github.com/iamhtk' },
+    { label: 'LinkedIn', url: 'https://www.linkedin.com/in/iamhtk' },
+    { label: 'YouTube', url: 'https://www.youtube.com/@avlnce' },
+    { label: 'Instagram', url: 'https://www.instagram.com/hrithiksanyal/' },
+    { label: 'Facebook', url: 'https://www.facebook.com/Avlnce/' },
+    { label: 'X (Twitter)', url: 'https://x.com/hrithiksanyal' },
+    { label: 'SoundCloud', url: 'https://soundcloud.com/avlncemusic' },
   ];
 
   const handleNavigation = (page: Page) => {
@@ -64,9 +68,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 )}
               </button>
             ))}
-            <button className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-200 ease-out">
+            <a
+              href="mailto:sanyalhrithik@gmail.com"
+              className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-200 ease-out"
+            >
               Email
-            </button>
+            </a>
           </div>
 
           {/* Mobile Hamburger Button */}
@@ -135,9 +142,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                     {social.label}
                   </a>
                 ))}
-                <button className="block text-[15px] text-gray-900">
+                <a
+                  href="mailto:sanyalhrithik@gmail.com"
+                  className="block text-[15px] text-gray-900"
+                >
                   Email
-                </button>
+                </a>
                 <p className="text-[13px] text-gray-400 pt-6">
                   © 2026
                 </p>

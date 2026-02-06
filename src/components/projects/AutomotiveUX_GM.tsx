@@ -613,8 +613,8 @@ export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) 
                     {block.headerRight && (
                       <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                         {block.headerRight}
-                      </h3>
-                    )}
+                </h3>
+              )}
                     <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
                   </div>
                 </div>
@@ -698,7 +698,7 @@ export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) 
             </span>
             <span>© 2026</span>
           </div>
-
+          
           <div className="flex items-center gap-3 md:gap-5">
             <a href="https://www.linkedin.com/in/iamhtk" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors" aria-label="LinkedIn">
               <Linkedin className="w-[18px] h-[18px]" />

@@ -3,6 +3,8 @@ import {
   Youtube,
   Instagram,
   Facebook,
+  Github,
+  Figma,
 } from "lucide-react";
 import { ScrollToTop } from "./ScrollToTop";
 import { useState } from "react";
@@ -34,7 +36,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
       image:
-        "/title-image.mp4",
+        "/public/cwpc/tile_main.mp4",
     },
     {
       id: "AutomotiveUX_GM",
@@ -676,6 +678,24 @@ Beyond his design expertise, Hrithik is a great team player who is approachable,
 
           {/* Right - Social Links */}
           <div className="flex items-center gap-3 md:gap-5">
+            <a
+              href="https://www.figma.com/@iamhtk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-900 transition-colors"
+              aria-label="Figma"
+            >
+              <Figma className="w-[18px] h-[18px]" />
+            </a>
+            <a
+              href="https://github.com/iamhtk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-900 transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-[18px] h-[18px]" />
+            </a>
             <a
               href="https://www.linkedin.com/in/iamhtk"
               target="_blank"

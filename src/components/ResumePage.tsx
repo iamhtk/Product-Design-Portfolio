@@ -1,4 +1,4 @@
-import { Download, Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
+import { Download, Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
 
 // Set your resume PDF URL here (e.g. "/resume.pdf" if file is in public folder, or a full URL)
@@ -617,6 +617,24 @@ export function ResumePage() {
 
           {/* Right - Social Links */}
           <div className="flex items-center gap-3 md:gap-5">
+            <a
+              href="https://www.figma.com/@iamhtk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-900 transition-colors"
+              aria-label="Figma"
+            >
+              <Figma className="w-[18px] h-[18px]" />
+            </a>
+            <a
+              href="https://github.com/iamhtk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-gray-900 transition-colors"
+              aria-label="GitHub"
+            >
+              <Github className="w-[18px] h-[18px]" />
+            </a>
             <a
               href="https://www.linkedin.com/in/iamhtk"
               target="_blank"
