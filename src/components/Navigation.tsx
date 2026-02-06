@@ -139,7 +139,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   Email
                 </button>
                 <p className="text-[13px] text-gray-400 pt-6">
-                  © 2025
+                  © 2026
                 </p>
               </div>
             </div>
