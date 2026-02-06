@@ -34,7 +34,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
       image:
-        "/cwpc/main.png",
+        "/title-image.mp4",
     },
     {
       id: "AutomotiveUX_GM",
@@ -161,20 +161,32 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                 }}
               >
                 {project.image && (
-                <img
-                  src={project.image}
-                  alt={project.title}
-                    className={`transition-transform duration-300 ease-out ${
-                      project.id === 'CalmiRing' 
-                        ? 'max-w-full max-h-full object-contain' 
+                  (() => {
+                    const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(project.image);
+                    const mediaClass = `transition-transform duration-300 ease-out ${
+                      project.id === 'CalmiRing'
+                        ? 'max-w-full max-h-full object-contain'
                         : 'w-full h-full object-cover'
-                    } ${
-                      isDisabled 
-                        ? '' 
-                        : 'hover:scale-105'
-                    }`}
-                    loading="lazy"
-                />
+                    } ${isDisabled ? '' : 'hover:scale-105'}`;
+                    return isVideo ? (
+                      <video
+                        src={project.image}
+                        className={mediaClass}
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        aria-label={project.title}
+                      />
+                    ) : (
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        className={mediaClass}
+                        loading="lazy"
+                      />
+                    );
+                  })()
                 )}
               </div>
 
