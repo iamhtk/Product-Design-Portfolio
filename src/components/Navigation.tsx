@@ -34,8 +34,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   return (
     <>
       {/* Desktop & Mobile Nav Bar - Liquid Glass effect */}
-      <nav className="liquid-glass fixed top-0 left-0 right-0 z-50 min-h-[var(--nav-height)] flex items-center">
-        <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-5 flex items-center justify-between w-full">
+      <nav className="liquid-glass fixed top-0 left-0 right-0 z-50 min-h-[var(--nav-height)] flex flex-row items-center w-full">
+        <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-5 flex flex-row flex-nowrap items-center justify-between gap-4 min-w-0">
           <button 
             onClick={() => handleNavigation('work')}
             className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity"
@@ -44,7 +44,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           </button>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center gap-6 md:gap-8">
+          <div className="hidden md:flex md:flex-shrink-0 items-center gap-6 md:gap-8">
             {links.map((link) => (
               <button
                 key={link.page}
