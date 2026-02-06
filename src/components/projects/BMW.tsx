@@ -65,7 +65,7 @@ export function BMWProject({ onBack }: BMWProjectProps) {
   const team = 'Hrithik Sanyal, and Prof. James Rhampton';
   const when = 'January 2024 - May 2024';
   const overview = "In this personal project, I overhauled the screens in a BMW equipped with iDrive 8, inspired by my admiration for BMW and a keen interest in vehicle screen design. The journey started with thorough research and sketches of the BMW's exterior, leading to the development of wireframes for the interior screens. The final redesign prioritizes clarity and functionality, ensuring an enhanced user experience.";
-  const speedReadChallenge = "Redesigning the BMW iDrive 8 screens to improve UX while keeping BMW's minimalist aesthetic. The project was driven by research and a focus on clarity and functionality.";
+  const speedReadChallenge = "The goal was to redesign BMW's iDrive 8 interface to enhance usability while preserving its minimalist aesthetic. Key challenges included improving information hierarchy, ensuring seamless navigation, and balancing aesthetics with functional clarity.";
   const speedReadProcess = "I conducted research, studied BMW's brand guide, sketched exterior and interior views, and developed wireframes for the four main interfaces—vehicle controls, driver display, main unit, and sub-unit.";
   const speedReadTakeaways = "Prioritizing layout and interaction in wireframes before color; designing default and dynamic screens that reflect real driving scenarios; balancing consistency with flexibility for future updates.";
   const speedReadImpact = "A coherent iDrive 8 redesign that enhances usability and maintains BMW's design language, with clear navigation, audio, and vehicle controls for both driver and passenger.";
@@ -83,11 +83,11 @@ export function BMWProject({ onBack }: BMWProjectProps) {
     { type: 'text', header: "Exploring iDrive 8: Part One", content: "This exploration highlighted BMW's dedication to a sophisticated and minimalist aesthetic. This design ethos not only resonates with the preferences of BMW's customer base but also reflects the company's desired image. Personally, I am drawn to this minimalist approach and aim to integrate it into my redesign efforts.", indent: true },
     { type: 'image', src: '/bmw/bmw1.jpg' },
     
-    { type: 'textImageRow', header: '2022, BMW i7', content: "BMW i7's Adaptive Cruise Control (ACC) interface, showcases a clear, user-friendly and intuitive interface. It allows users to customize following distances, following distance and enabling/disabling ACC and intervention thresholds making it more user-centric user-friendly for ease of interaction during driving.", src: '/bmw/bmw2.jpg' },
+    { type: 'textImageRow', header: '2022, BMW i7', content: "BMW i7's Adaptive Cruise Control (ACC) interface, showcases a clear, user-friendly and intuitive interface. It allows users to customize following distances, following distance and enabling/disabling ACC and intervention thresholds making it more user-centric user-friendly for ease of interaction during driving.", src: '/bmw/bmw_compt.png' },
     
-    { type: 'textImageRow', header: "2020, Mercedes-Benz S-Class", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/bmw3.jpg' },
+    { type: 'textImageRow', header: "2020, Mercedes-Benz S-Class", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/merc_compt.png' },
 
-    { type: 'textImageRow', header: "2019, Porche Taycan", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/bmw5.jpg' },
+    { type: 'textImageRow', header: "2019, Porche Taycan", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/p_compt.png' },
 
     { type: 'text', header: "Takeaways & Considerations", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", indent: true },
     { type: 'image', src: '/bmw/bmw6.jpeg' },
@@ -105,7 +105,7 @@ export function BMWProject({ onBack }: BMWProjectProps) {
     { type: 'text', content: "Once the frames were set up, I began placing labeled content blocks within them to outline a potential layout. These placements weren't final but served as a preliminary step to visualize potential design directions. This phase was crucial for generating initial ideas and exploring how to approach the overall redesign."},
     
     { type: 'image', src: '/bmw/Frame1.png' },
-    { type: 'image', src: '/bmw/center display landing page_v2png' },
+    { type: 'image', src: '/bmw/center display landing page_v2.png', maxHeight: '640px' },
     
   
     { type: 'text', header: "Wireframes", content: "In the final stage of this redesign process, I developed wireframes focusing on BMW's iDrive 8 system. I began by crafting the default or idle screens for the four main interfaces. Subsequently, I expanded upon these by incorporating additional pages for both the head unit and subunits. For features such as vehicle controls and the driver display, I aimed for a single-page layout, where elements like the speedometer dynamically update during operation." },
@@ -381,9 +381,9 @@ export function BMWProject({ onBack }: BMWProjectProps) {
                       {block.header}
                     </h3>
                   )}
-                  <ul className="list-disc pl-6 space-y-2 text-[18px] leading-[1.85] text-gray-700">
+                  <ul className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6" style={{ listStyleType: 'disc' }}>
                     {block.items.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <li key={i} className="pl-1">{item}</li>
                     ))}
                   </ul>
                 </div>
@@ -411,6 +411,28 @@ export function BMWProject({ onBack }: BMWProjectProps) {
               )}
             </div>
             </div>
+              );
+            }
+            if (block.type === 'textTextRow') {
+              return (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+                  <div className="space-y-6">
+                    {block.headerLeft && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerLeft}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
+                  </div>
+                  <div className="space-y-6">
+                    {block.headerRight && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerRight}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
+                  </div>
+                </div>
               );
             }
             if (block.type === 'image') {

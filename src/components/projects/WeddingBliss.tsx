@@ -285,9 +285,9 @@ export function WeddingBlissProject({ onBack }: WeddingBlissProjectProps) {
                       {block.header}
                     </h3>
                   )}
-                  <ul className="list-disc pl-6 space-y-2 text-[18px] leading-[1.85] text-gray-700">
+                  <ul className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6" style={{ listStyleType: 'disc' }}>
                     {block.items.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <li key={i} className="pl-1">{item}</li>
                     ))}
                   </ul>
                 </div>
@@ -313,6 +313,28 @@ export function WeddingBlissProject({ onBack }: WeddingBlissProjectProps) {
                     ) : (
                       <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
                     )}
+                  </div>
+                </div>
+              );
+            }
+            if (block.type === 'textTextRow') {
+              return (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+                  <div className="space-y-6">
+                    {block.headerLeft && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerLeft}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
+                  </div>
+                  <div className="space-y-6">
+                    {block.headerRight && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerRight}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
                   </div>
                 </div>
               );

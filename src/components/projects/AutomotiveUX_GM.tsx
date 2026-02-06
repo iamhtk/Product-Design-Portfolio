@@ -137,6 +137,8 @@ export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) 
     // { type: 'image', src: '/bmw/Frame1.png' },
     // { type: 'image', src: '/bmw/center display landing page_v2png' },
 
+    // { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
+
 
     { type: 'image', src: '/gm/Cover Page.png' },
     
@@ -593,6 +595,28 @@ export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) 
                       <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
               )}
             </div>
+                </div>
+              );
+            }
+            if (block.type === 'textTextRow') {
+              return (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+                  <div className="space-y-6">
+                    {block.headerLeft && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerLeft}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
+                  </div>
+                  <div className="space-y-6">
+                    {block.headerRight && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerRight}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
+                  </div>
                 </div>
               );
             }

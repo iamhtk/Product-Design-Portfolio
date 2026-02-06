@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
 import type { ContentBlock } from './types';
 
 interface RaseetHealthProjectProps {
@@ -59,130 +60,91 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
   const company = 'Raseet Health';
   const subtitle = 'An intuitive platform for pharmacies, catering to users of all ages and tech levels, with a focus on a broad audience.';
   const headerColor = '#50C878';
-  const icon = ''; // Sidebar icon (left column) - Add image/video path here
+  const icon = 'raseet/raseet_logo2.png'; // Sidebar icon (left column) - Add image/video path here
   const headerIcon = '/raseet/test5.png'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'UX Research, End to end Product Design, UX/UI Design, Design Systems';
   const team = 'Solo Designer with Cross-functional Collaboration';
   const when = '2021 - 2022';
-  const overview = 'Raseet Health is a comprehensive platform designed to digitize local pharmacies, helping them evolve into e-commerce-ready, one-stop-shops for customers\' health and wellness needs. The platform connects pharmacies, healthcare providers, and customers by offering features like electronic medical records (EMRs), inventory management, and a seamless e-commerce experience. Through Raseet, pharmacies can offer trusted healthcare and wellness services such as doctor consultations, lab tests, and health insurance, all while reducing operational inefficiencies.';
-  const speedReadChallenge = 'Creating a digital platform to empower local pharmacies as e-commerce-ready, one-stop health hubs. Key challenges: seamless stakeholder collaboration, simple adoption for pharmacies, and a frictionless yet compliant customer experience.';
-  const speedReadProcess = 'User research (interviews, contextual inquiries, competitor analysis); wireframes for pharmacists, customers, and providers; high-fidelity prototypes and iterative usability testing for onboarding, navigation, and checkout.';
-  const speedReadTakeaways = 'Designing for diverse users in a regulated healthcare domain; simplifying complex workflows and building trust; the value of iterative feedback with stakeholders.';
-  const speedReadImpact = 'Operational efficiency improved (30% reduction in manual tasks); customer engagement up, cart abandonment down 25%, repeat orders up 35%; 20% revenue increase for partner pharmacies within three months.';
+  /** Optional: set to undefined to hide overview on this project. Hidden for all when SHOW_PROJECT_OVERVIEW is false in projectConfig.ts */
+  // const overview: string | undefined = 'Raseet Health is a comprehensive platform designed to digitize local pharmacies, helping them evolve into e-commerce-ready, one-stop-shops for customers\' health and wellness needs. The platform connects pharmacies, healthcare providers, and customers by offering features like electronic medical records (EMRs), inventory management, and a seamless e-commerce experience. Through Raseet, pharmacies can offer trusted healthcare and wellness services such as doctor consultations, lab tests, and health insurance, all while reducing operational inefficiencies.';
+  const overview: string | undefined = '';
+  const speedReadChallenge = 'The goal was to create a digital platform that empowers local pharmacies to transition into e-commerce-ready, one-stop health and wellness hubs. The key challenges included ensuring seamless collaboration among stakeholders, simplifying technical adoption for pharmacies, and providing a frictionless customer experience while prioritizing data security and compliance.';
+  const speedReadProcess = "I conducted in-depth user research, including interviews, contextual inquiries, and competitor analysis, to uncover pain points and opportunities. The design process involved three phases: Created role-specific dashboards for pharmacists, customers, and healthcare providers. Built high-fidelity prototypes to test user flows and interactions. Conducted usability tests and incorporated feedback to refine navigation, onboarding, and checkout processes.";
+  const speedReadTakeaways = 'This project enhanced my ability to design for diverse user needs within a highly regulated healthcare domain. I honed skills in simplifying complex workflows, fostering user trust, and designing accessible, scalable systems. Collaborating with stakeholders taught me the value of iterative feedback loops in delivering impactful solutions.';
+  const speedReadImpact = 'The platform improved operational efficiency for pharmacies, reducing manual tasks by 30%. Customer engagement increased, with cart abandonment rates dropping by 25% and repeat orders growing by 35%. Raseet Health successfully positioned itself as a leading platform, driving a 20% revenue increase for partner pharmacies within three months.';
 
   const scrollToCaseStudy = () => {
     document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  // CONTENT SECTIONS - Edit these to change what appears on the page
-  const sections = [
-    {
-      header: 'SPEED READ - IN A RUSH? HERE\'S THE GIST',
-      content: 'Challenge: The goal was to create a digital platform that empowers local pharmacies to transition into e-commerce-ready, one-stop health and wellness hubs. The key challenges included ensuring seamless collaboration among stakeholders, simplifying technical adoption for pharmacies, and providing a frictionless customer experience while prioritizing data security and compliance. Process: I conducted in-depth user research, including interviews, contextual inquiries, and competitor analysis, to uncover pain points and opportunities. The design process involved three phases: Wireframes (Created role-specific dashboards for pharmacists, customers, and healthcare providers), Prototyping (Built high-fidelity prototypes to test user flows and interactions), and Iterative Testing (Conducted usability tests and incorporated feedback to refine navigation, onboarding, and checkout processes). Takeaways: This project enhanced my ability to design for diverse user needs within a highly regulated healthcare domain. I honed skills in simplifying complex workflows, fostering user trust, and designing accessible, scalable systems. Collaborating with stakeholders taught me the value of iterative feedback loops in delivering impactful solutions. Impact: The platform improved operational efficiency for pharmacies, reducing manual tasks by 30%. Customer engagement increased, with cart abandonment rates dropping by 25% and repeat orders growing by 35%. Raseet Health successfully positioned itself as a leading platform, driving a 20% revenue increase for partner pharmacies within three months.'
-    },
-    {
-      header: 'PROJECT STATEMENT',
-      content: 'Mission: Raseet\'s mission is to make quality healthcare accessible to everyone by empowering local pharmacies. By addressing stagnant revenues and low customer lifetime value for pharmacies, Raseet also aims to reduce out-of-pocket healthcare expenses for customers, ensuring trust and timely assistance. Vision: To empower local pharmacists to compete with e-pharmacy giants by providing a "Vocal for Local" platform that transforms their business into a sustainable, digitally-driven model. Raseet connects credible healthcare providers to customers via local pharmacies, creating a collaborative and mutually beneficial ecosystem. Target Audience includes Healthcare Providers (Doctors and healthcare professionals requiring secure and collaborative patient record systems), Customers (Individuals seeking convenient, trusted, and transparent healthcare services), and Pharmacies (Small to mid-sized pharmacies looking to expand their reach and boost revenue, owners struggling with outdated systems and limited digital presence).'
-    },
-    {
-      header: 'VALUE PROPOSITION',
-      content: 'Increasing Revenue for Partner Pharmacies: Attracting new customers through enhanced online presence and services. Simplifying Health Management for Patients: Offering tools for prescription refills, health record management, and online consultations. Enhancing Delivery and Order Fulfillment: Providing real-time tracking and streamlined logistics for superior user experience.'
-    },
-    {
-      header: 'DESIGN PROCESS',
-      content: 'Designing Raseet Health\'s digital experience required a structured yet flexible design process, rooted in Agile methodologies and Design Sprints. Our goal was to create an intuitive, scalable, and accessible pharmacy platform while balancing business goals and technical feasibility. I followed a user-centered iterative design approach with rapid prototyping, continuous feedback loops, and close cross-functional collaboration. The design process followed a dual-track Agile framework, where design and development ran in parallel to ensure continuous iteration and refinement. This included Design Sprints (Rapid 5-day sprints to ideate, prototype, and validate concepts), Agile UX (Weekly stand-ups with the product and development teams to align design deliverables with sprint cycles), Cross-functional Collaboration (Close coordination with engineers, marketers, and business stakeholders), and Data-Driven Decision-Making (A/B testing and usability research informed key iterations). This framework enabled fast iterations, allowing the team to validate hypotheses early and avoid costly design changes later.'
-    },
-    {
-      header: 'USER RESEARCH - BACKGROUND & OBJECTIVES',
-      content: 'To design a solution that meets the needs of pharmacies, healthcare providers, and customers, it was essential to understand their existing workflows, pain points, and expectations. Through a mix of qualitative and quantitative research, we identified gaps in the current ecosystem and opportunities to create a more streamlined, user-friendly platform. Research Objectives: Identify inefficiencies in pharmacy operations and customer engagement. Understand barriers to digital adoption for pharmacies and customers. Explore how healthcare providers and pharmacies collaborate to manage patient data and prescriptions.'
-    },
-    {
-      header: 'RESEARCH METHODOLOGY',
-      content: 'We employed a multi-method research approach to gather insights from diverse stakeholders. User Interviews: Conducted 1-hour interviews with 10 pharmacists and pharmacy staff, 15 customers across urban and semi-urban areas, and 5 healthcare providers (doctors, lab technicians) focusing on workflows, challenges, and expectations. Open-ended questions like "What is your biggest challenge when managing prescriptions or inventory?" encouraged participants to share detailed experiences. Surveys: Reached 50 pharmacy owners and 150 customers with key focus on frequency of pharmacy visits, preferred features for managing health records digitally, and trust factors influencing digital adoption. Key Insights showed 72% of respondents preferred a simplified interface for order tracking and 63% indicated concerns about data privacy in healthcare apps. Contextual Inquiries: Observed 5 pharmacies over 2 weeks, shadowing pharmacy staff during inventory updates, order management, and customer interactions. We documented pain points, bottlenecks, and opportunities for digital intervention. A pharmacy owner spent over 3 hours manually reconciling orders and inventory. Competitor Analysis studied platforms like 1mg (pharmacy application providing specialized and generic medicines with home delivery, medicines calculator, 24-hour service, appointment options, and doctor consultations), PharmEasy (another famous online pharmacy offering pharmaceutical and healthcare products with similar features), and Zeno Health (Mumbai-based pharmacy application providing generic and branded medicines with home delivery and doctor consultations).'
-    },
-    {
-      header: 'KEY FINDINGS FROM RESEARCH',
-      content: 'Pharmacy Workflows Are Inefficient: Pharmacists rely heavily on manual processes for inventory management and order tracking. "Managing stock manually is exhausting. I\'ve lost customers due to delays." This created a critical need for dynamic inventory management and order fulfillment tools. Digital Adoption Barriers for Pharmacies: Many pharmacy owners feel overwhelmed by the technical setup required to go online. "I\'m not familiar with digital tools. It feels like too much work." Simplified onboarding workflows and dedicated support are essential for adoption. Customers Struggle With Navigation: Poor search functionality and complex checkout processes lead to frustration and drop-offs. "It took me ages to find what I needed. The filters were confusing." Intuitive navigation and personalized search recommendations are top priorities. Lack of Guidance Post-Rejection: Customers feel lost when prescriptions or orders are rejected due to incomplete information. "I didn\'t know why my prescription was rejected or what to do next." Clear guidance and actionable steps are needed to rebuild trust and retain users. Trust Issues With Digital Platforms: Privacy concerns are a significant barrier to adoption. "I\'m worried about sharing my health data. How can I be sure it\'s secure?" Transparent communication about data security and compliance is vital.'
-    },
-    {
-      header: 'IMPACT OF RESEARCH',
-      content: 'The insights from user research directly informed the design goals and solutions for Raseet Health. User-Centric Onboarding: Simplified workflows to reduce onboarding time by 50%. Enhanced Navigation: Redesigned search and checkout processes increased order completion rates by 25%. Privacy Assurance: Clear communication about data security built trust among users. These insights served as a valuable tool to identify opportunities for introducing a potential solution. More than 20% increase in overall pharmacy revenue by combining improved workflows, faster onboarding, and enhanced customer experiences. Unified platform equals improved efficiency plus enhanced customer trust plus higher pharmacy adoption rates.'
-    },
-    {
-      header: 'PRODUCT GOALS: SORT QUALITATIVE FEEDBACK',
-      content: 'The success of Raseet Health depended on aligning business objectives with user needs, ensuring a seamless and scalable experience for all stakeholders. By analyzing research insights and market trends, we defined core product goals. Business Goals: (1) Seamless integration between stakeholders - Establish a connected ecosystem where pharmacies, healthcare providers, and customers interact efficiently. (2) Easier onboarding for partner pharmacies - Reduce technical barriers, enabling small to mid-sized pharmacies to transition into e-commerce-ready businesses with minimal effort. User Goals: (1) Easy refill prescription scheduling - Allow customers to set automated refills, reducing friction in managing recurring medications. (2) Easy inventory management - Enable pharmacies to track stock levels, receive alerts for low inventory, and optimize order fulfillment. Shared Goals (User plus Business): (1) Online access to medicines/storefront - Provide a reliable digital storefront, making healthcare products more accessible while driving pharmacy revenue. (2) Better health outcomes - Improve medication adherence and patient engagement by offering a user-friendly and trustworthy healthcare platform.'
-    },
-    {
-      header: 'SOLUTION 1: SEAMLESS INTEGRATION OF STAKEHOLDER SYSTEMS',
-      content: 'Problem: Disconnected systems for pharmacies, doctors, and customers led to inefficiencies, missed opportunities, and frustration. Solution: Unified Dashboards and Secure Collaboration Tools with Role-Based Dashboards. For Pharmacists: A centralized dashboard consolidates inventory levels, order statuses, and customer data with real-time alerts for stock depletion and order processing to streamline daily operations. For Doctors: Secure access to patient prescriptions and medical records enables informed decision-making with real-time updates ensuring accurate and timely care for patients. For Patients: A personal dashboard allows users to manage prescriptions, view health records, and track orders seamlessly. Three-way platform Integration connects pharmacies, healthcare providers, and customers, ensuring real-time data flow and consistency. Example: A doctor updates a prescription, which is immediately reflected in the pharmacy and customer dashboards. Secure Data Sharing implemented end-to-end encryption and role-based access control to safeguard sensitive data like medical records and prescriptions. Impact: "Finally, everything I need is in one place. It saves me so much time and keeps everything organized." Reduced operational errors by 30%, saving pharmacies an average of 5 hours per week. Enhanced collaboration between stakeholders increased prescription fulfillment rates by 20%.'
-    },
-    {
-      header: 'SOLUTION 2: SIMPLIFYING COMPLEX ONBOARDING FOR PHARMACIES',
-      content: 'Problem: Small pharmacies struggled with the technical barriers of going digital, including setting up online catalogs and training staff. Solution: Automated Onboarding Workflows. Features include Bulk Catalog Uploads where pharmacies upload product catalogs via .xls files, saving time on manual data entry. The system automatically flags and corrects errors, ensuring clean data. Example: A pharmacy with 500 plus SKUs onboarded in under 30 minutes. Step-by-Step Onboarding Guides provided interactive walkthroughs guiding pharmacy owners through system setup, from uploading inventories to customizing their storefront. Progress trackers provide visibility into onboarding milestones. Dedicated Support offered 24/7 live chat support for troubleshooting during setup and on-call assistance for pharmacies with specific needs or technical challenges. Impact: "The onboarding guide was so straightforward. I was up and running in no time!" Reduced onboarding time by 50%, with most pharmacies completing setup within 2 to 3 days. Onboarding success rate increased to 85%, enabling faster adoption across partner pharmacies.'
-    },
-    {
-      header: 'SOLUTION 3: ENHANCING UX IN E-COMMERCE',
-      content: 'Problem: Customers struggled with poor navigation, complex checkout processes, and lack of real-time updates, leading to high drop-off rates. Solution: Intuitive Navigation and Streamlined Checkout. Features include Advanced Search and Filters with voice-enabled search for faster discovery of products, AI-driven recommendations based on purchase history and customer preferences, and filters for categories, price range, and availability to reduce frustration during browsing. Streamlined Checkout uses auto-fill forms for returning users to reduce the time required to complete a purchase, with multiple payment options including UPI, credit/debit cards, and cash on delivery catering to diverse user needs. Example: A returning customer completed their order in under 2 minutes. Real-Time Order Tracking sends push notifications informing users at every stage: order confirmation, processing, dispatch, and delivery. A visual progress tracker provides transparency and reduces customer anxiety. Impact: "Shopping for medicines has never been this easy. I love how fast and smooth the process is now." Product discovery time reduced by 40%, allowing customers to find what they need faster. Cart abandonment rates decreased by 25%, and order completion rates increased by 20%.'
-    },
-    {
-      header: 'DESIGN GOALS & CONSIDERATIONS',
-      content: 'Information Architecture: To create a seamless and efficient user experience, the information architecture was carefully designed to cater to different user roles (pharmacists, healthcare providers, and customers). The goal was to structure the platform in a way that improves discoverability, usability, and accessibility while ensuring smooth navigation for all stakeholders. Key Considerations included Role-Specific Navigation (Tailored dashboards for pharmacies, customers, and healthcare providers to minimize cognitive load and present relevant information), E-Commerce and Healthcare Services (A clear distinction between shopping for medications, managing prescriptions, and accessing healthcare services), Search and Filtering (Robust search functionality and category-based navigation to enhance product and service discovery), Support and Accessibility (Dedicated help sections, including FAQs, live chat, and feedback options, ensuring users can easily seek assistance), and Security and Privacy (Profile management with role-based access control to safeguard sensitive user and medical data). Structure Breakdown: Pharmacies get inventory management, order tracking, CRM integration, and analytics. Healthcare Providers access patient records, collaboration tools, and prescription management. Customers use dashboard for health records, shopping, and order tracking. Global Components include header (search, filters, profile), footer (privacy policies, support), and system notifications.'
-    },
-    {
-      header: 'TASK FLOWS',
-      content: 'Three key scenarios were mapped: Scenario 1 - Pharmacy staff managing stock and placing bulk orders. Scenario 2 - Customer ordering medicines for the first time. Scenario 3 - Reordering medicines for elderly patients. These task flows ensured that each user journey was optimized for efficiency and clarity.'
-    },
-    {
-      header: 'FEATURE HIGHLIGHTS',
-      content: 'A complete view of operations ensures efficiency and better customer service. Simplified processes improve convenience and trust in the platform. Real-time updates and secure data sharing enhance care delivery. Key features delivered measurable impact: Saved pharmacies an average of 5 hours per week by automating workflows. Reduced drop-off rates by 25% and increased order completion rates by 20%. Partner pharmacies experienced a 20% increase in revenue within three months of adoption.'
-    },
-    {
-      header: 'MEDSCOPE: A SCALABLE & SYSTEMATIC DESIGN SYSTEM',
-      content: 'The Challenge: As Raseet Health expanded, maintaining design consistency, efficiency, and scalability became a challenge. A fragmented UI led to inconsistencies in components, longer design cycles, and increased development overhead. The need for a unified design system became evident to streamline collaboration, reduce redundancy, and enhance the user experience across all touchpoints. The Goal: Establish a scalable design system following Atomic Design Principles. Ensure cross-platform consistency while allowing flexibility for future expansions. Improve efficiency by reducing time spent on repetitive UI decisions. Enable a structured decision-making process to govern component usage and modifications. MedScope was built using Atomic Design Principles (Breaking down components into atoms, molecules, organisms, templates, and pages for modular reusability), A Reusable Component Library (Standardizing UI elements to ensure consistency across different features), and Scalability Standards (Creating a foundation for future expansion without compromising usability). The design system encompassed Typography and Color Systems (Ensuring accessibility and brand alignment), Spacing and Grid Systems (Providing a structured layout framework), Component Library (Predefined UI elements for seamless design iteration), and Interactive Patterns and States (Standardizing hover states, transitions, and user feedback mechanisms).'
-    },
-    {
-      header: 'MEDSCOPE DECISION-MAKING PROCESS',
-      content: 'A structured decision-making framework was implemented to maintain consistency and prevent design fragmentation. Step 1 - Assess the Need: Does a similar component exist in MedScope? If Yes, use the existing component. If No, proceed to the next step. Step 2 - Modify vs. Create: Can an existing component be adapted for this use case? If Yes, modify and document changes in the system. If No, move to prototyping. Step 3 - Prototype and Validation: If the component cannot be generalized, it is added as a one-off to the repository. If it can be standardized, it is documented and integrated into MedScope for global reuse. Step 4 - Integration and Documentation: The new/updated component is incorporated into the design system, and guidelines and best practices are documented for seamless adoption. Key Outcomes and Impact: (1) 50% faster design iterations due to reusable components. (2) 30% reduction in inconsistencies by enforcing MedScope guidelines. (3) Scalability ensured for future growth and expansion. (4) Stronger developer-designer collaboration through standardized documentation and clear workflows.'
-    },
-    {
-      header: 'ACCESSIBILITY: DESIGNING FOR AN INCLUSIVE EXPERIENCE',
-      content: 'The Goal: Given that a significant portion of Raseet Health\'s target audience includes chronic and geriatric patients, accessibility was a core consideration in the design process. The goal was to create an intuitive and frictionless experience that accommodates users with varying levels of digital literacy and physical limitations. Key Outcomes and Impact: (1) 40% faster product discovery for users with limited tech proficiency. (2) Increased order completion rate by 20%, reducing frustration and improving overall user satisfaction. (3) Higher adoption rate among elderly users, attributed to an intuitive, minimal-interaction design approach.'
-    },
-    {
-      header: 'WIREFRAMES & UI DESIGN',
-      content: 'Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that\'s aligned with the brand\'s values and message. The design followed a fresh, clean visual style optimized for mobile-first experiences. I ensured the platform worked seamlessly across Android and iOS devices, with special attention to low-end devices common in rural areas. The final design reflected learnings about users through simplified navigation, clear visual hierarchy, generous touch targets for elderly users, and high-contrast color schemes for better readability.'
-    },
-    {
-      header: 'RETROSPECTIVE: KEY LEARNINGS',
-      content: 'Empathy-Driven Design: The iterative design process, grounded in user feedback, ensured that the platform met the unique needs of pharmacists, healthcare providers, and customers. "The changes make it so much easier to manage everything. My staff and I feel more confident now." Importance of Simplicity: Simplified workflows and intuitive interfaces reduced onboarding barriers and user frustration. Streamlined experiences, like the improved checkout process, significantly boosted user satisfaction and engagement. Leveraging Ecosystem Synergy: Integrating tools and features within the Raseet Health ecosystem enhanced its value proposition for both users and the business. Example: The seamless connection between inventory management and customer-facing features created a cohesive experience.'
-    },
-    {
-      header: 'COLLABORATION AT RASEET HEALTH',
-      content: 'At Raseet Health, collaboration was a fundamental part of the design process. As the Product/UX Designer, I worked closely with cross-functional teams, ensuring that design decisions were aligned with business goals, technical feasibility, and user needs. How Collaboration Shaped the Final Product: (1) Iterative Design Process - Constant feedback loops from engineers and stakeholders ensured smooth development and reduced rework. (2) Cross-Team Alignment - Regular stand-ups and sprint reviews ensured transparency and rapid iteration. (3) Enhanced User Experience - By incorporating business insights and user feedback, we designed a seamless pharmacy ordering and inventory management system.'
-    },
-    {
-      header: 'LESSONS LEARNED',
-      content: 'Continuous Feedback Is Key: Regular usability testing and feedback loops were instrumental in identifying areas for improvement and driving iterative changes. Localized Solutions Matter: Localized onboarding guides and multilingual support helped expand adoption in diverse regions. Trust Is Foundational: Transparent communication about data privacy and security built confidence among users, addressing one of the biggest barriers to digital adoption.'
-    },
-    {
-      header: 'CLOSING REFLECTIONS',
-      content: 'The success of Raseet Health lies in its ability to empower local pharmacies, improve healthcare accessibility for customers, and foster seamless collaboration across stakeholders. By continuously iterating based on user feedback and leveraging technology to solve real-world problems, Raseet Health achieved its mission to make quality healthcare accessible and equitable. This project enhanced my ability to design for diverse user needs within a highly regulated healthcare domain, teaching me invaluable lessons about simplifying complex workflows, fostering user trust, and designing accessible, scalable systems that create meaningful impact in underserved communities.'
-    }
-  ];
-  
-  // IMAGES - Add your image URLs or file paths here
-  const images = [
-    'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=80',
-    'https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80'
-  ];
-  const colorPalette = ['#50C878', '#7AD699', '#A3E4BA', '#CCF1DB'];
-
-  // Single list in page order: first image, then all sections, then rest of images, then colors
+  // Page content: add text or image/video in the order you want. Order here = order on page.
   const blocks: ContentBlock[] = [
-    ...(images[0] ? [{ type: 'image' as const, src: images[0] }] : []),
-    ...sections.map((s) => ({ type: 'text' as const, header: s.header, content: s.content })),
-    ...images.slice(1).map((src) => ({ type: 'image' as const, src })),
-    ...(colorPalette?.length ? [{ type: 'colors' as const, colors: colorPalette }] : []),
+    // DEFAULT CONTENT BLOCKS (uncomment or duplicate lines to use; comment out to hide)
+    { type: 'text', header: "User Research", content: "Before embarking on the redesign, I conducted initial research to gain a deeper understanding of the pharmacy and healthcare domain. This included studying existing platforms and reviewing user needs across pharmacists, customers, and providers." },
+
+    { type: 'text', header: "Project Statement", content: "" },
+    { type: 'text', header: "Mission", content: "Raseet’s mission is to make quality healthcare accessible to everyone by empowering local pharmacies. By addressing stagnant revenues and low customer lifetime value for pharmacies, Raseet also aims to reduce out-of-pocket healthcare expenses for customers, ensuring trust and timely assistance. ", indent: true },
+
+    { type: 'text', header: "Vision", content: "To empower local pharmacists to compete with e-pharmacy giants by providing a 'Vocal for Local' platform that transforms their business into a sustainable, digitally-driven model. Raseet connects credible healthcare providers to customers via local pharmacies, creating a collaborative and mutually beneficial ecosystem. ", indent: true },
+
+    { type: 'textTextRow', headerLeft: 'Overview / Summary', contentLeft: "", headerRight: '', contentRight: "Raseet Health is a comprehensive platform designed to digitize local pharmacies, helping them evolve into e-commerce-ready, one-stop-shops for customers' health and wellness needs. The platform connects pharmacies, healthcare providers, and customers by offering features like electronic medical records (EMRs), inventory management, and a seamless e-commerce experience. Through Raseet, pharmacies can offer trusted healthcare and wellness services such as doctor consultations, lab tests, and health insurance, all while reducing operational inefficiencies. The platform also promotes eco-conscious practices by replacing paper bills with interactive, mobile-responsive digital bills." },
+    
+    { type: 'textBullets', header: "Target Audience", items: [
+      "Healthcare Providers: Doctors and healthcare professionals requiring secure and collaborative patient record systems.",
+      "Customers: Individuals seeking convenient, trusted, and transparent healthcare services.",
+      "Pharmacies: Small to mid-sized pharmacies looking to expand their reach and boost revenue. Owners struggling with outdated systems and limited digital presence.",
+    ]},
+
+    { type: 'textBullets', header: "Value Proposition", items: [
+      "Increasing Revenue for Partner Pharmacies: Attracting new customers through enhanced online presence and services.",
+      "Simplifying Health Management for Patients: Offering tools for prescription refills, health record management, and online consultations.",
+      "Enhancing Delivery and Order Fulfillment: Providing real-time tracking and streamlined logistics for superior user experience.",
+    ]},
+    
+    
+    
+    { type: 'text', header: "Design Process", content: "Designing Raseet Health’s digital experience required a structured yet flexible design process, rooted in Agile methodologies and Design Sprints. Our goal was to create an intuitive, scalable, and accessible pharmacy platform while balancing business goals and technical feasibility. To achieve this, I followed a user-centered iterative design approach with rapid prototyping, continuous feedback loops, and close cross-functional collaboration."},
+    
+    { type: 'text', header: "Lean UX & Agile Approach", content: "The design process followed a dual-track Agile framework, where design and development ran in parallel to ensure continuous iteration and refinement."},
+    
+    { type: 'textBullets', header: "", items: [
+      "Design Sprints: Rapid 5-day sprints to ideate, prototype, and validate concepts.",
+      "Agile UX: Weekly stand-ups with the product and development teams to align design deliverables with sprint cycles.",
+      "Cross-functional Collaboration: Close coordination with engineers, marketers, and business stakeholders.",
+      "Data-Driven Decision-Making: A/B testing and usability research informed key iterations.",
+    ], indent: true},
+    
+    { type: 'text', header: "", content: "This framework enabled fast iterations, allowing the team to validate hypotheses early and avoid costly design changes later."},
+    { type: 'image', src: '/raseet/test5.png' },
+    
+    
+    
+    
+    
+    
+
+    
+    // { type: 'textTextRow', headerLeft: 'Target Audience', contentLeft: "", headerRight: '', contentRight: "Healthcare Providers: Doctors and healthcare professionals requiring secure and collaborative patient record systems. " },
+    
+    
+    
+    { type: 'textImageRow', header: 'Raseet platform', content: "The Raseet Health interface showcases a clear, user-friendly experience for pharmacists and customers. It allows users to manage inventory, orders, and health records in one place.", src: '/raseet/example2.jpg' },
+    { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
+    { type: 'text', header: "Exploring Raseet: Part One", content: "This exploration highlighted the need for a unified platform that could serve pharmacies, healthcare providers, and customers. The design ethos focused on clarity, trust, and ease of adoption for pharmacies with limited digital experience.", indent: true },
+    { type: 'image', src: '/raseet/example1.jpg' },
+    
+    { type: 'textBullets', header: "Key requirements", items: [
+      "Large center display accessible to the front passenger is a fundamental requirement.",
+      "Optional driver displays to provide cost-saving options for customers.",
+      "Emphasis on easy navigation and functionality tailored to essential features.",
+    ], indent: true, indentLevel: 2 },
+    
+    { type: 'textImageRow', header: 'Raseet platform', content: "The Raseet Health interface showcases a clear, user-friendly experience for pharmacists and customers. It allows users to manage inventory, orders, and health records in one place.", src: '/raseet/example2.jpg' },
+    
+    { type: 'text', header: "Takeaways & Considerations", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights.", indent: true },
+    { type: 'image', src: '/raseet/example3.jpeg' },
+
+    
   ];
 
   // ═══════════════════════════════════════════════════════════════════════
@@ -346,6 +308,11 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
               <p className="text-[26px] md:text-[28px] lg:text-[30px] text-gray-700 leading-relaxed font-medium">
                 {subtitle}
               </p>
+              {SHOW_PROJECT_OVERVIEW && overview && (
+                <p className="text-[18px] md:text-[20px] text-gray-700 leading-[1.8]">
+                  {overview}
+                </p>
+              )}
             </div>
 
             {/* Speed Read / Gist */}
@@ -413,9 +380,9 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
                       {block.header}
                     </h3>
                   )}
-                  <ul className="list-disc pl-6 space-y-2 text-[18px] leading-[1.85] text-gray-700">
+                  <ul className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6" style={{ listStyleType: 'disc' }}>
                     {block.items.map((item, i) => (
-                      <li key={i}>{item}</li>
+                      <li key={i} className="pl-1">{item}</li>
                     ))}
                   </ul>
                 </div>
@@ -441,6 +408,28 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
                     ) : (
                       <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
                     )}
+                  </div>
+                </div>
+              );
+            }
+            if (block.type === 'textTextRow') {
+              return (
+                <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+                  <div className="space-y-6">
+                    {block.headerLeft && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerLeft}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
+                  </div>
+                  <div className="space-y-6">
+                    {block.headerRight && (
+                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                        {block.headerRight}
+                      </h3>
+                    )}
+                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
                   </div>
                 </div>
               );

@@ -7,6 +7,7 @@ export type ContentBlock =
   | { type: 'image'; src: string; indent?: boolean; indentLevel?: 2; maxHeight?: string }
   | { type: 'video'; src: string; indent?: boolean; indentLevel?: 2; maxHeight?: string }
   | { type: 'textImageRow'; header?: string; content: string; src: string }
+  | { type: 'textTextRow'; headerLeft?: string; contentLeft: string; headerRight?: string; contentRight: string }
   | { type: 'colors'; colors: string[] };
 
 export type ProjectSection = {
