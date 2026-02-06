@@ -36,7 +36,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
       image:
-        "/public/cwpc/tile_main.mp4",
+        "/cwpc/tile_main2.mp4",
     },
     {
       id: "AutomotiveUX_GM",
