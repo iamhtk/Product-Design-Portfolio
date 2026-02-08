@@ -306,7 +306,7 @@ export function ResumePage() {
                 <strong>Star New Apps Of 2024</strong> — E-award (Europe)
               </h3>
               <p className="text-[13px] text-gray-500">
-                <strong>See it online</strong> at <a href="#" className="text-gray-900 underline">Ideo Awards</a>
+                <strong>See it online</strong> at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>Ideo Awards</a>
               </p>
             </div>
 
@@ -315,7 +315,7 @@ export function ResumePage() {
                 <strong>Top 5 online Of Shelter</strong> — at ideo online (Apple)
               </h3>
               <p className="text-[13px] text-gray-500">
-                <strong>Silver Near Apps for</strong> <a href="#" className="text-gray-900 underline">Apple Storeside</a>
+                <strong>Silver Near Apps for</strong> <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>Apple Storeside</a>
               </p>
             </div>
 
@@ -324,7 +324,7 @@ export function ResumePage() {
                 <strong>About Apps of 2024</strong> — in E-based (Europe)
               </h3>
               <p className="text-[13px] text-gray-500">
-                <strong>See online</strong> at <a href="#" className="text-gray-900 underline">E-based Europe</a>
+                <strong>See online</strong> at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>E-based Europe</a>
               </p>
             </div>
 
@@ -333,7 +333,7 @@ export function ResumePage() {
                 <strong>AppMotion, Version 2018</strong> — by content (UIKIT)
               </h3>
               <p className="text-[13px] text-gray-500">
-                <strong>Military Spectrum Place 18</strong> at <a href="#" className="text-gray-900 underline">Angular 2018</a>
+                <strong>Military Spectrum Place 18</strong> at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>Angular 2018</a>
               </p>
             </div>
 

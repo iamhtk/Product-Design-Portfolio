@@ -10,11 +10,67 @@ import { FavoritesPage } from './components/FavoritesPage';
 
 type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'project';
 
+const VALID_PAGES: Exclude<Page, 'project'>[] = ['work', 'about', 'friends', 'resume', 'favorites', 'blog'];
+const VALID_PROJECT_IDS = Object.keys(projectComponents);
+
+function getRouteFromHash(): { page: Page; projectId: string | null } {
+  const hash = window.location.hash.slice(1).toLowerCase() || 'work';
+  if (hash.startsWith('project/')) {
+    const id = hash.slice(8);
+    const projectId = VALID_PROJECT_IDS.find((p) => p.toLowerCase() === id) ?? null;
+    return { page: 'project', projectId };
+  }
+  const page = (VALID_PAGES.find((p) => p === hash) ?? 'work') as Exclude<Page, 'project'>;
+  return { page, projectId: null };
+}
+
+function buildHash(page: Page, projectId: string | null) {
+  if (page === 'project' && projectId) return `#project/${projectId}`;
+  if (page === 'work') return '#';
+  return `#${page}`;
+}
+
+function pushRoute(page: Page, projectId: string | null) {
+  const url = window.location.pathname + window.location.search + buildHash(page, projectId);
+  window.history.pushState({ page, projectId }, '', url);
+}
+
+function replaceRoute(page: Page, projectId: string | null) {
+  const url = window.location.pathname + window.location.search + buildHash(page, projectId);
+  window.history.replaceState({ page, projectId }, '', url);
+}
+
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('work');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const prevNavigationRef = useRef<{ page: Page; projectId: string | null } | null>(null);
+  const isInitialMount = useRef(true);
+
+  // Sync state from URL on load and when user uses back/forward (or swipe)
+  useEffect(() => {
+    const applyRoute = (route: { page: Page; projectId: string | null }) => {
+      setCurrentPage(route.page);
+      setSelectedProjectId(route.projectId);
+    };
+
+    const handlePopState = () => {
+      const route = getRouteFromHash();
+      setIsTransitioning(true);
+      applyRoute(route);
+      setTimeout(() => setIsTransitioning(false), 50);
+    };
+
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      const route = getRouteFromHash();
+      applyRoute(route);
+      replaceRoute(route.page, route.projectId);
+    }
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, []);
 
   // Scroll to top only when user navigates (not on initial mount / hot reload)
   useEffect(() => {
@@ -32,6 +88,7 @@ function App() {
     setTimeout(() => {
       setCurrentPage(page);
       setSelectedProjectId(null);
+      pushRoute(page, null);
       setTimeout(() => setIsTransitioning(false), 50);
     }, 150);
   };
@@ -41,6 +98,7 @@ function App() {
     setTimeout(() => {
       setSelectedProjectId(projectId);
       setCurrentPage('project');
+      pushRoute('project', projectId);
       setTimeout(() => setIsTransitioning(false), 50);
     }, 150);
   };
@@ -50,6 +108,7 @@ function App() {
     setTimeout(() => {
       setCurrentPage('work');
       setSelectedProjectId(null);
+      pushRoute('work', null);
       setTimeout(() => setIsTransitioning(false), 50);
     }, 150);
   };

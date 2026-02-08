@@ -225,7 +225,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
+            <a href="#" onClick={(e) => e.preventDefault()} className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4" aria-hidden>
             <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
 
                 <img

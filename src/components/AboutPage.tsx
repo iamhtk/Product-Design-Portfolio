@@ -54,7 +54,7 @@ export function AboutPage() {
             CURRENTLY
           </h2>
           <p className="text-[18px] leading-[1.7] text-gray-700 mb-6">
-            I'm currently a  Product Designer at <a href="#" className="text-gray-900 underline">Google</a>, where I work 
+            I'm currently a  Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>Google</a>, where I work 
             on consumer-facing products that reach millions of users worldwide. Before joining Meta, 
             I graduated from the University of Michigan's School of Information (#GoBlue💙), specializing in UX Design & Research and Human-Computer Interaction. My background in Electronics & Telecommunications gives me a unique edge in understanding and crafting interactions between people and technology.
 
