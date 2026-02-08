@@ -11,15 +11,19 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { AdjacentProjects } from './AdjacentProjects';
 import type { ContentBlock } from './types';
+
+const CURRENT_PROJECT_ID = 'CalmiRing';
 
 interface CalmiRingProjectProps {
   onBack: () => void;
+  onProjectClick?: (projectId: string) => void;
 }
 
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 
-export function CalmiRingProject({ onBack }: CalmiRingProjectProps) {
+export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -372,6 +376,7 @@ export function CalmiRingProject({ onBack }: CalmiRingProjectProps) {
           })}
 
           <div className="pt-24 pb-8">
+            <AdjacentProjects currentProjectId={CURRENT_PROJECT_ID} onProjectClick={onProjectClick} />
             <div className="mb-12">
               <button 
                 onClick={onBack}

@@ -1,4 +1,4 @@
-// This file maps project IDs to their components
+// This file maps project IDs to their components and defines homepage project order
 import React from 'react';
 import { AutomotiveUX_GMProject } from './AutomotiveUX_GM';
 import { CWPCProject } from './CWPC';
@@ -8,8 +8,11 @@ import { CalmiRingProject } from './CalmiRing';
 import { BoundProject } from './bound';
 import { WeddingBlissProject } from './WeddingBliss';
 
-interface ProjectComponentProps {
+export { PROJECT_ORDER } from './projectOrder';
+
+export interface ProjectComponentProps {
   onBack: () => void;
+  onProjectClick?: (projectId: string) => void;
 }
 
 export const projectComponents: Record<string, React.ComponentType<ProjectComponentProps>> = {

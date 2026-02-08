@@ -1,5 +1,6 @@
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
+import { AnimateIn } from './AnimateIn';
 
 export function FriendsPage() {
   const friends = [
@@ -45,19 +46,20 @@ export function FriendsPage() {
   ];
 
   return (
-    <div className="pt-24">
+    <div className="pt-24 min-h-screen">
+      <ScrollToTop />
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
-        <div className="py-12 md:py-20">
+        <AnimateIn variant="up-slow" rootMargin="0px" className="py-12 md:py-20">
           <h1 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase mb-12 md:mb-16">
             Friends
           </h1>
-        </div>
+        </AnimateIn>
 
-        <div className="space-y-0">
+        <AnimateIn variant="fade" rootMargin="0px 0px -40px 0px" className="space-y-0">
           {friends.map((friend) => (
             <div 
               key={friend.number}
-              className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_1.5fr_1fr_auto] gap-3 md:gap-8 py-4 md:py-6 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-start"
+              className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_1.5fr_1fr_auto] gap-3 md:gap-8 py-4 md:py-6 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-start min-w-0"
             >
               {/* Column 1: Number */}
               <div className="text-[12px] md:text-[13px] text-gray-400">
@@ -65,7 +67,7 @@ export function FriendsPage() {
               </div>
               
               {/* Column 2: Name */}
-              <div className="text-[14px] md:text-[15px] text-gray-900 group-hover:underline">
+              <div className="text-[14px] md:text-[15px] text-gray-900 group-hover:underline min-w-0 break-words">
                 {friend.name}
               </div>
               
@@ -90,7 +92,7 @@ export function FriendsPage() {
               </div>
             </div>
           ))}
-        </div>
+        </AnimateIn>
       </div>
 
       {/* Footer - same container as Blog for consistent layout */}
@@ -205,7 +207,6 @@ export function FriendsPage() {
           </div>
         </div>
       </div>
-      <ScrollToTop />
     </div>
   );
 }

@@ -1,7 +1,12 @@
-import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
+// import { useState } from 'react'; // for Me in a grid section
+import { Linkedin, Youtube, Instagram, Facebook, Github, Figma /* Sun, Trash2, X - for Me in a grid */ } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
+import { AnimateIn } from './AnimateIn';
 
 export function AboutPage() {
+  // const [pixelCount, setPixelCount] = useState(248);
+  // const [reduced, setReduced] = useState(false);
+
   const images = [
     'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
     'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80',
@@ -10,57 +15,60 @@ export function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen pt-20">
       <ScrollToTop />
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         
-        {/* Header */}
-        <div className="pt-20 pb-12">
-          <h1 className="text-[32px] md:text-[42px] leading-[1.2] text-gray-900 mb-8">
-            About Hrithik Sanyal
+        {/* Header - unchanged */}
+        <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-20 md:pb-16">
+          <h1 className="text-[32px] md:text-[42px] leading-[1.2] text-gray-900">
+            About Hrithik
           </h1>
-          <p className="text-[15px] leading-[1.7] text-gray-700 mb-6">
-          I'm a Product Designer with 5+ years of industry experience. I specialize in applying design thinking to break down complex problems and craft helpful experiences.
-          A Master's graduate in HCI/UX Design from the University of Michigan, School of Information, 
-          I've been learning from and collaborating with some of the best minds on the planet.
-          <br/>
-          {/* <br/>
-          Currently, open to full time Product/UX Design roles. */}
-          </p>
-        </div>
+        </AnimateIn>
 
-        {/* Image 1 */}
-        <div className="mb-16 flex justify-center">
-          <div className="w-full max-w-[800px] h-[400px] overflow-hidden rounded-lg">
-            <img 
-              src={"/about/more/IMG_3957.jpg"}
-              alt="Workspace"
-              className="w-full h-full object-cover"
-            />
+        {/* Intro: two columns — left: text, right: image */}
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mt-2 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+            <div>
+              <p className="text-[18px] leading-[1.7] text-gray-700">
+                I'm a Product Designer with 5+ years of industry experience. I specialize in applying design thinking to break down complex problems and craft helpful experiences.
+                A Master's graduate in HCI/UX Design from the University of Michigan, School of Information,
+                I've been learning from and collaborating with some of the best minds on the planet.
+              </p>
+            </div>
+            <div className="w-full min-w-0 overflow-hidden rounded-lg" style={{ maxHeight: 'min(620px, 70vh)' }}>
+              <img
+                src={"/about/more/IMG_3957.jpg"}
+                alt="Workspace"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
-        </div>
+        </AnimateIn>
+
+        
 
         {/* Content Section 1 */}
-        <div className="mb-16">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <h2 className="text-[17px] text-gray-900 mb-4 font-medium">
             CURRENTLY
           </h2>
-          <p className="text-[15px] leading-[1.7] text-gray-700 mb-6">
-            I'm currently a  Product Designer at <a href="#" className="text-gray-900 underline">IBM</a>, where I work 
-            on consumer-facing products that reach millions of users worldwide. Before joining IBM, 
+          <p className="text-[18px] leading-[1.7] text-gray-700 mb-6">
+            I'm currently a  Product Designer at <a href="#" className="text-gray-900 underline">Google</a>, where I work 
+            on consumer-facing products that reach millions of users worldwide. Before joining Meta, 
             I graduated from the University of Michigan's School of Information (#GoBlue💙), specializing in UX Design & Research and Human-Computer Interaction. My background in Electronics & Telecommunications gives me a unique edge in understanding and crafting interactions between people and technology.
 
           </p>
-          <p className="text-[15px] leading-[1.7] text-gray-700">
+          <p className="text-[18px] leading-[1.7] text-gray-700">
           During my school at Umich, I was a Graduate Student Instructor (GSI), where I taught SI 364: Building Data-Driven Applications under Prof. Charles Severance (Dr. Chuck!!). and SI 658: Information Architecture under Prof. Dan Klyn. These experiences have allowed me to deepen my understanding of both programming and design, as well as mentor students in these fields.
           </p>
-          <p className="text-[15px] leading-[1.7] text-gray-700">
+          <p className="text-[18px] leading-[1.7] text-gray-700">
           Outside of academia, I produce music, cook, and am learning Classical Piano. I am passionate about exploring different cuisines and enhancing my culinary skills. As a self-taught designer, I enjoy creating simple and effective solutions for complex systems and currently work as a freelancer, helping product teams build enjoyable user experiences. 
           </p>
-        </div>
+        </AnimateIn>
 
         {/* Images Grid */}
-        <div className="grid grid-cols-2 gap-6 mb-16">
+        <AnimateIn variant="scale" className="grid grid-cols-2 gap-6 mb-16">
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <img 
               src={"/about/more/Untitled.PNG"}
@@ -75,10 +83,10 @@ export function AboutPage() {
               className="w-full h-full object-cover"
             />
           </div>
-        </div>
+        </AnimateIn>
         
         {/* Images Grid */}
-        <div className="grid grid-cols-2 gap-6 mb-16">
+        <AnimateIn className="grid grid-cols-2 gap-6 mb-16">
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <img 
               src={"/about/more/Untitled2.PNG"}
@@ -94,19 +102,18 @@ export function AboutPage() {
             />
           </div>
           
-        </div>
+        </AnimateIn>
         
         {/* Image 2 */}
-        <div className="mb-16">
+        <AnimateIn variant="fade" className="mb-16">
           <img 
             src={"/about/more/IMG_9612.png"}
             alt="Presentation"
             className="w-full h-auto rounded-lg"
           />
-        </div>
-        "/about/more/IMG_9612.png"
+        </AnimateIn>
         {/* Images Grid */}
-        <div className="grid grid-cols-2 gap-6 mb-16">
+        <AnimateIn className="grid grid-cols-2 gap-6 mb-16">
           <img 
             src={images[2]}
             alt="Team collaboration"
@@ -117,20 +124,20 @@ export function AboutPage() {
             alt="Design work"
             className="w-full h-auto rounded-lg"
           />
-        </div>
+        </AnimateIn>
         
         {/* Content Section 2 */}
         {/* <div className="mb-16">
           <h2 className="text-[17px] text-gray-900 mb-4 font-medium">
             BACKGROUND
           </h2>
-          <p className="text-[15px] leading-[1.7] text-gray-700 mb-6">
+          <p className="text-[18px] leading-[1.7] text-gray-700 mb-6">
             I've been in tech for over 9 years now, and it's been quite a ride. I studied Communication 
             Design at Washington University in St. Louis, which gave me a strong foundation in visual 
             communication, typography, and design thinking. Since then, I've grown from a junior designer 
             to leading design initiatives at some of the world's most recognizable brands.
           </p>
-          <p className="text-[15px] leading-[1.7] text-gray-700">
+          <p className="text-[18px] leading-[1.7] text-gray-700">
             My approach blends user research, strategic thinking, and hands-on design craft. I believe 
             the best products come from deep empathy with users, close collaboration with cross-functional 
             teams, and relentless iteration based on feedback and data.
@@ -156,18 +163,51 @@ export function AboutPage() {
           <h2 className="text-[17px] text-gray-900 mb-4 font-medium">
             PHILOSOPHY
           </h2>
-          <p className="text-[15px] leading-[1.7] text-gray-700 mb-6">
+          <p className="text-[18px] leading-[1.7] text-gray-700 mb-6">
             I believe design is about solving problems, not just making things look pretty. Great design 
             is invisible—it anticipates user needs, removes friction, and creates moments of delight 
             without calling attention to itself.
           </p>
-          <p className="text-[15px] leading-[1.7] text-gray-700">
+          <p className="text-[18px] leading-[1.7] text-gray-700">
             I'm passionate about mentorship and giving back to the design community. I regularly speak 
             at design conferences, conduct portfolio reviews for aspiring designers, and contribute to 
             open-source design resources.
           </p>
         </div> */}
 
+        {/* Notable numbers - same 3-column grid as My toolset for alignment */}
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr_1fr] gap-8 md:gap-12">
+            <div>
+              <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium">
+                Notable numbers
+              </h2>
+            </div>
+            {/* Left stats column - aligns with "Here's a general look..." */}
+            <div className="min-w-0 flex flex-col gap-0">
+              <div>
+                <div className="text-[44px] md:text-[56px] font-semibold text-gray-900 leading-none mb-2">4</div>
+                <p className="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">years of impact</p>
+              </div>
+              <div className="mt-[7rem] md:mt-[9rem]">
+                <div className="text-[44px] md:text-[56px] font-semibold text-gray-900 leading-none mb-2">5+</div>
+                <p className="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">industries</p>
+              </div>
+            </div>
+            {/* Right stats column - aligns with "Highly valuing the technical craft..." */}
+            <div className="min-w-0 flex flex-col gap-0">
+              <div>
+                <div className="text-[44px] md:text-[56px] font-semibold text-gray-900 leading-none mb-2">60+</div>
+                <p className="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">design sprints</p>
+              </div>
+              <div className="mt-[7rem] md:mt-[9rem]">
+                <div className="text-[44px] md:text-[56px] font-semibold text-gray-900 leading-none mb-2">∞</div>
+                <p className="text-[18px] md:text-[20px] text-gray-500 leading-relaxed">coffees</p>
+              </div>
+            </div>
+          </div>
+        </AnimateIn>
+        
         {/* My Toolset Section */}
         <div className="mb-20">
           {/* Section Header with 3-column layout */}
@@ -181,14 +221,14 @@ export function AboutPage() {
             
             {/* Middle Column - Description 1 */}
             <div>
-              <p className="text-[14px] md:text-[15px] leading-[1.7] text-gray-700">
+              <p className="text-[18px] leading-[1.7] text-gray-700">
                 Here's a general look at the tools and technologies I enjoy using in my line of work as a designer and engineer. As a curious person by nature, I find that there's too much to learn and simply not enough time.
               </p>
             </div>
             
             {/* Right Column - Description 2 */}
             <div>
-              <p className="text-[14px] md:text-[15px] leading-[1.7] text-gray-700">
+              <p className="text-[18px] leading-[1.7] text-gray-700">
                 Highly valuing the technical craft and precision this interdisciplinary field of work can require, I genuinely enjoy my efforts spent in this space.
               </p>
             </div>
@@ -289,6 +329,93 @@ export function AboutPage() {
             ))}
           </div>
         </div>
+
+        {/* Me in a grid - commented out for now
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-20">
+          <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium mb-8">
+            Me in a grid
+          </h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 md:gap-8">
+            <div
+              className="rounded-2xl border border-black/[0.06] shadow-[var(--shadow-card)] p-6 text-white flex flex-col justify-between min-h-[200px] order-1"
+              style={{ background: 'linear-gradient(180deg, #38bdf8 0%, #0ea5e9 50%, #0284c7 100%)' }}
+            >
+              <Sun className="w-14 h-14 text-amber-200 shrink-0" aria-hidden />
+              <div className="mt-4">
+                <div className="text-[44px] md:text-[52px] font-semibold leading-none">17°</div>
+                <p className="text-[15px] text-white/95 mt-1">Clear Sky</p>
+                <p className="text-[13px] text-white/80 mt-0.5">New York</p>
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] bg-[#121212] min-h-[200px] order-2">
+              <iframe
+                title="Spotify playlist"
+                src="https://open.spotify.com/embed/playlist/37i9dQZF1DX4dyzvuaRJ0n?utm_source=generator"
+                width="100%"
+                height="352"
+                frameBorder="0"
+                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                loading="lazy"
+                className="block w-full min-h-[300px]"
+              />
+            </div>
+            <div className="rounded-2xl border border-black/[0.06] shadow-[var(--shadow-card)] bg-white p-6 flex flex-col min-h-[200px] order-3">
+              <div className="flex items-center gap-2 mb-1">
+                <h3 className="text-[17px] font-semibold text-gray-900">Drop pixels here</h3>
+                <Trash2 className="w-4 h-4 text-gray-400" aria-hidden />
+              </div>
+              <p className="text-[14px] text-gray-500 mb-4">Helps me build this site :)</p>
+              <p className="text-[12px] text-gray-400 mb-3">Click each color to add a pixel:</p>
+              <div className="flex gap-2 h-14 rounded-xl overflow-hidden border-2 border-gray-200">
+                <button
+                  type="button"
+                  onClick={() => setPixelCount((c) => c + 1)}
+                  className="flex-1 bg-red-500 hover:brightness-110 active:scale-[0.98] transition-all min-w-0 cursor-pointer"
+                  aria-label="Add red pixel"
+                />
+                <button
+                  type="button"
+                  onClick={() => setPixelCount((c) => c + 1)}
+                  className="flex-1 bg-green-500 hover:brightness-110 active:scale-[0.98] transition-all min-w-0 cursor-pointer"
+                  aria-label="Add green pixel"
+                />
+                <button
+                  type="button"
+                  onClick={() => setPixelCount((c) => c + 1)}
+                  className="flex-1 bg-blue-500 hover:brightness-110 active:scale-[0.98] transition-all min-w-0 cursor-pointer"
+                  aria-label="Add blue pixel"
+                />
+              </div>
+              <p className="text-[15px] font-medium text-gray-700 mt-3">{pixelCount} pixels</p>
+            </div>
+            <div
+              role="button"
+              tabIndex={0}
+              onClick={() => setReduced((r) => !r)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); setReduced((r) => !r); } }}
+              className="rounded-2xl border border-black/[0.06] shadow-[var(--shadow-card)] bg-white p-6 flex flex-col min-h-[200px] order-4 cursor-pointer hover:shadow-[var(--shadow-card-hover)] transition-all duration-300 relative focus:outline-none focus-visible:ring-2 focus-visible:ring-gray-400 focus-visible:ring-offset-2"
+              aria-label={reduced ? 'Click to expand' : 'Click to reduce'}
+            >
+              <div className="flex items-center gap-2 mb-2">
+                <h3 className="text-[17px] font-semibold text-amber-600">Reduce</h3>
+                <X className="w-4 h-4 text-amber-500 shrink-0" aria-hidden />
+              </div>
+              <p className="text-[14px] text-gray-700 leading-relaxed">
+                {reduced ? 'Less is more.' : 'Less is more through thoughtful reduction.'}
+              </p>
+              <p className="text-[13px] text-gray-500 mt-2">Laws of Simplicity by John Maeda.</p>
+              {!reduced && (
+                <div className="absolute right-5 top-1/2 -translate-y-1/2 flex flex-col gap-2 text-amber-400/80" aria-hidden>
+                  <div className="flex gap-1.5 justify-end">{"•".repeat(5)}</div>
+                  <div className="flex gap-1.5 justify-end">{"•".repeat(4)}</div>
+                  <div className="flex gap-1.5 justify-end">{"•".repeat(3)}</div>
+                </div>
+              )}
+              <p className="text-[11px] text-gray-400 mt-auto pt-2">{reduced ? 'Click again to expand' : 'Click to reduce'}</p>
+            </div>
+          </div>
+        </AnimateIn>
+        */}
       </div>
 
       {/* Footer - same container as Blog for consistent layout */}

@@ -6,8 +6,9 @@ import {
   Github,
   Figma,
 } from "lucide-react";
-import { ScrollToTop } from "./ScrollToTop";
 import { useState } from "react";
+import { ScrollToTop } from "./ScrollToTop";
+import { AnimateIn } from "./AnimateIn";
 
 interface HomePageProps {
   onProjectClick: (id: string) => void;
@@ -45,7 +46,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "12 MINUTE READ →",
       bgColor: "#f5f5f7",
       image:
-        "gm/header.png",
+        "main_title/gm.png",
     },
     {
       id: "RaseetHealth",
@@ -54,7 +55,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "16 MINUTE READ →",
       bgColor: "#4A90E2",
       image:
-        "raseet/main.png",
+        "main_title/raseet.png",
     },
     {
       id: "BMW",
@@ -72,7 +73,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#f5f5f7",
       image:
-        "calmi/main.png",
+        "main_title/calmi.png",
     },
     
     {
@@ -82,7 +83,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "14 MINUTE READ →",
       bgColor: "#fff5f7",
       image:
-        "bound/bound.png",
+        "main_title/bound.png",
     },
     {
       id: "WeddingBliss",
@@ -91,49 +92,54 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "9 MINUTE READ →",
       bgColor: "#f5f5f7",
       image:
-        "weddingbliss/weddingbliss.png",
+        "main_title/weeding.png",
     },
   ];
 
   return (
-    <div className="min-h-screen bg-white pt-20">
+    <div className="min-h-screen pt-20">
       <ScrollToTop />
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
         {/* Hero Section */}
-        <div className="mt-32 pt-32 md:mt-40 pb-16">
-          <h1 className="text-[28px] md:text-[36px] lg:text-[42px] font-bold text-gray-900 mb-3 leading-[1.2] tracking-tight" style={{ fontWeight: 700 }}>
-            Designer at IBM.
-          </h1>
-          <p className="text-[18px] md:text-[20px] lg:text-[22px] text-gray-900 mb-3 leading-relaxed">
-            Previously Design Engineer at{" "}
-            <span className="font-medium">CWPC, GM, Kryptonas, TUG</span><br />
-            <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
-            {/* <br />
-            University of Michigan, School of Information Alumni. Go Blue! */}
-          </p>
-          <p className="text-[17px] md:text-[18px] text-gray-600 max-w-[500px] leading-relaxed">
-            Curious about interfaces, intelligent systems
-            and the ways in which we interact with them.
-          </p>
+        <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
+          <AnimateIn variant="up-slow" rootMargin="0px" className="mb-3">
+            <h1 className="text-[28px] md:text-[36px] lg:text-[44px] font-bold text-gray-900 leading-[1.2] tracking-[-0.02em]" style={{ fontWeight: 700 }}>
+              Designer at CWPC.
+            </h1>
+          </AnimateIn>
+          <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="mb-3">
+            <p className="text-[18px] md:text-[20px] lg:text-[22px] text-gray-900 leading-relaxed">
+              Previously Design Engineer at{" "}
+              <span className="font-medium">CWPC, GM, Kryptonas, TUG</span><br />
+              <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
+            </p>
+          </AnimateIn>
+          <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-2">
+            <p className="text-[17px] md:text-[18px] text-gray-500 max-w-[500px] leading-[1.65]">
+              Curious about interfaces, intelligent systems
+              and the ways in which we interact with them.
+            </p>
+          </AnimateIn>
         </div>
 
         {/* Section Header */}
-        <div className="flex items-center justify-between mb-4 mt-20 md:mt-40">
-          <h2 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase">
+        <AnimateIn variant="scale" rootMargin="0px 0px -60px 0px" className="flex items-center justify-between mb-4 mt-20 md:mt-40">
+          <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium">
             Selected Work
           </h2>
-          <h2 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase">
+          <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium">
             Design x Engineering
           </h2>
-        </div>
+        </AnimateIn>
 
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-32 items-stretch">
-          {projects.map((project) => {
+          {projects.map((project, index) => {
             const isDisabled = project.id === 'bound' || project.id === 'WeddingBliss';
+            const staggerKey = (['stagger-1','stagger-2','stagger-3','stagger-4','stagger-5','stagger-6','stagger-7','stagger-8','stagger-9'] as const)[Math.min(index, 8)];
             return (
+            <AnimateIn key={project.id} stagger={staggerKey} rootMargin="0px 0px -80px 0px">
             <div
-              key={project.id}
               onClick={() => {
                 if (isDisabled) {
                   return; // Disabled - do nothing
@@ -144,23 +150,19 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                   onProjectClick(project.id);
                 }
               }}
-              className={`h-full flex flex-col transition-transform duration-300 ease-out ${
+              className={`h-full flex flex-col rounded-xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
                 isDisabled 
                   ? 'cursor-not-allowed opacity-60' 
-                  : 'cursor-pointer hover:-translate-y-1'
+                  : 'cursor-pointer hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08]'
               }`}
             >
               {/* Project Image - Fixed aspect ratio container */}
               <div
-                className={`mb-4 rounded-xl overflow-hidden shadow-sm w-full flex-shrink-0 transition-all duration-300 ease-out ${
+                className={`mb-4 w-full flex-shrink-0 overflow-hidden transition-transform duration-500 ease-out ${
                   project.id === 'CalmiRing' ? 'flex items-center justify-center' : ''
-                } ${
-                  isDisabled ? '' : 'hover:shadow-lg'
                 }`}
-                style={{ 
-                  backgroundColor: project.bgColor,
-                  aspectRatio: '4 / 3'
-                }}
+                style={{ backgroundColor: project.bgColor, aspectRatio: '1 / 1' }}
+
               >
                 {project.image && (
                   (() => {
@@ -193,7 +195,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
               </div>
 
               {/* Project Info - Flex column with read time at bottom */}
-              <div className="flex flex-col flex-1 space-y-2">
+              <div className="flex flex-col flex-1 space-y-2 px-3 pb-3">
                 <h3 className={`text-[16px] md:text-[17px] text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 ${
                   isDisabled ? '' : 'hover:opacity-70'
                 }`}>
@@ -207,13 +209,14 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                 </p>
               </div>
             </div>
+            </AnimateIn>
           );
           })}
         </div>
 
-        <div className="mb-32">
+        <AnimateIn variant="scale" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
-            <h2 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase mb-2">
+            <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium mb-2">
               Side Projects - Mini Apps
             </h2>
             <p className="text-[17px] text-gray-900">
@@ -222,16 +225,17 @@ export function HomePage({ onProjectClick }: HomePageProps) {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="#" target="_blank" rel="noopener noreferrer" className="group cursor-pointer">
-              <div className="mb-4 rounded-2xl overflow-hidden aspect-square bg-[#f5f5f7] shadow-sm">
+            <a href="" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
+            <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+
                 <img
                   src="miniapps/AVICII-FOREVER-ARTWORK-CLEAN_2.webp"
                   alt="LE7ELS"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                 />
               </div>
               <div>
-                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-60 transition-opacity">
+                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
                   LE7ELS
                 </h3>
                 <p className="text-[13px] text-gray-500">
@@ -240,16 +244,16 @@ export function HomePage({ onProjectClick }: HomePageProps) {
               </div>
             </a>
 
-            <a href="https://stories.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group cursor-pointer">
-              <div className="mb-4 rounded-2xl overflow-hidden aspect-square bg-[#f5f5f7] shadow-sm">
+            <a href="https://stories.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
+              <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                 <img
                   src="miniapps/avicii-stories-wallpaper-upscaled-3840-1900-v0-t0cxcu66a9of1.webp"
                   alt="Stories"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                 />
               </div>
               <div>
-                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-60 transition-opacity">
+                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
                   Stories
                 </h3>
                 <p className="text-[13px] text-gray-500">
@@ -258,12 +262,12 @@ export function HomePage({ onProjectClick }: HomePageProps) {
               </div>
             </a>
 
-            <a href="https://flux.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group cursor-pointer">
-              <div className="mb-4 rounded-2xl overflow-hidden aspect-square bg-[#f5f5f7] shadow-sm">
+            {/* <a href="https://flux.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-2xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-0.5 hover:border-black/[0.08]">
+              <div className="mb-4 rounded-2xl overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                 <img
                   src="miniapps/flux.png"
                   alt="Flux"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                 />
               </div>
               <div>
@@ -274,14 +278,14 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                   CSS Card Generator
                 </p>
               </div>
-            </a>
+            </a> */}
 
-            <a href="https://www.fibonacci.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group cursor-pointer">
-              <div className="mb-4 rounded-2xl overflow-hidden aspect-square bg-[#f5f5f7] shadow-sm">
+            {/* <a href="https://www.fibonacci.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-2xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-0.5 hover:border-black/[0.08]">
+              <div className="mb-4 rounded-2xl overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                 <img
                   src="miniapps/f.png"
                   alt="Fibonacci"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-[1.03] transition-transform duration-500 ease-out"
                 />
               </div>
               <div>
@@ -294,34 +298,34 @@ export function HomePage({ onProjectClick }: HomePageProps) {
               </div>
             </a>
 
-            <a href="https://www.fizzbuzz.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group cursor-pointer">
-              <div className="mb-4 rounded-2xl overflow-hidden aspect-square bg-[#f5f5f7] shadow-sm">
+            <a href="https://www.fizzbuzz.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
+              <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                 <img
-                src="miniapps/f2.png"
+                  src="miniapps/f2.png"
                   alt="Project Five"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                 />
               </div>
               <div>
-                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-60 transition-opacity">
+                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
                 FizzBuzz Calculator
                 </h3>
                 <p className="text-[13px] text-gray-500">
                 Generate FizzBuzz sequences with customizable rules
                 </p>
               </div>
-            </a>
+            </a> */}
 
-            <a href="https://www.mathematical-sequence-generator.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group cursor-pointer">
-              <div className="mb-4 rounded-2xl overflow-hidden aspect-square bg-[#f5f5f7] shadow-sm">
+            <a href="https://www.mathematical-sequence-generator.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
+              <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                 <img
                   src="miniapps/f3.png"
                   alt="Project Six"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                 />
               </div>
               <div>
-                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-60 transition-opacity">
+                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
                 Mathematical Sequence Generator
                 </h3>
                 <p className="text-[13px] text-gray-500">
@@ -330,12 +334,12 @@ export function HomePage({ onProjectClick }: HomePageProps) {
               </div>
             </a>
           </div>
-        </div>
+        </AnimateIn>
 
         {/* Recommendations Section */}
-        <div className="mb-32">
+        <AnimateIn variant="scale" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
-            <h2 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase mb-2">
+            <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium mb-2">
               Testimonials
             </h2>
             <p className="text-[17px] text-gray-900">
@@ -345,7 +349,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {/* Recommendation 1 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(0) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(0) 
@@ -387,7 +391,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
             </div>
 
             {/* Recommendation 2 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(1) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(1) 
@@ -425,7 +429,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
             </div>
 
             {/* Recommendation 3 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(2) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(2) 
@@ -465,7 +469,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
             </div>
 
             {/* Recommendation 4 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(3) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(3) 
@@ -503,7 +507,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
             </div>
 
             {/* Recommendation 5 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(4) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(4) 
@@ -544,7 +548,7 @@ Any organization would be lucky to have him on its systems or product team, espe
             </div>
 
             {/* Recommendation 6 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(5) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(5) 
@@ -583,7 +587,7 @@ Beyond his design expertise, Hrithik is a great team player who is approachable,
             </div>
 
             {/* Recommendation 7 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(6) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(6) 
@@ -621,7 +625,7 @@ Beyond his design expertise, Hrithik is a great team player who is approachable,
             </div>
 
             {/* Recommendation 8 */}
-            <div className="group">
+            <div className={`group glass-card rounded-2xl border border-black/[0.06] bg-white/60 shadow-[var(--shadow-subtle)] p-6 md:p-8 transition-all duration-300 hover:shadow-[var(--shadow-card)] ${expandedRecommendations.has(7) ? 'depth-expanded' : ''}`}>
               <div 
                 className={`text-[15px] text-gray-700 leading-relaxed mb-6 cursor-pointer transition-all overflow-hidden ${
                   expandedRecommendations.has(7) 
@@ -659,7 +663,7 @@ Beyond his design expertise, Hrithik is a great team player who is approachable,
               </div>
             </div>
           </div>
-        </div>
+        </AnimateIn>
       </div>
 
       {/* Footer - same container as Blog for consistent layout */}

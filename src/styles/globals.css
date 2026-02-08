@@ -6,10 +6,11 @@
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Consolas, monospace;
   --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-size: 16px;
-  --background: #ffffff;
-  --foreground: oklch(0.145 0 0);
+  --page-bg: #fafafa;
+  --background: #fafafa;
+  --foreground: oklch(0.18 0.01 265);
   --card: #ffffff;
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.18 0.01 265);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
   --primary: #030213;
@@ -35,6 +36,17 @@
   --chart-4: oklch(0.828 0.189 84.429);
   --chart-5: oklch(0.769 0.188 70.08);
   --radius: 0.625rem;
+  --shadow-subtle: 0 1px 2px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.06);
+  --shadow-card-hover: 0 12px 32px rgba(0, 0, 0, 0.1);
+  --shadow-depth: 0 20px 40px rgba(0, 0, 0, 0.1), 0 4px 12px rgba(0, 0, 0, 0.06);
+  --shadow-elevated: 0 8px 24px rgba(0, 0, 0, 0.08);
+  --shadow-glass: 0 4px 24px rgba(0, 0, 0, 0.06);
+  --shadow-expanded: 0 16px 48px rgba(0, 0, 0, 0.12), 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-nav-scrolled: 0 4px 20px rgba(0, 0, 0, 0.06);
+  --border-subtle: 1px solid rgba(0, 0, 0, 0.06);
+  --radius-card: 0.75rem;
+  --transition-premium: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
   --sidebar-primary: #030213;
@@ -131,15 +143,21 @@
 
   html {
     font-family: var(--font-primary) !important;
+    overflow-x: hidden;
   }
 
   body {
-    @apply bg-white text-foreground;
+    background: var(--page-bg);
+    color: var(--foreground);
     font-family: var(--font-primary) !important;
+    letter-spacing: 0.01em;
+    line-height: 1.6;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
     font-feature-settings: "kern" 1;
+    overflow-x: hidden;
+    min-width: 0;
   }
 }
 
@@ -198,27 +216,55 @@
     scroll-behavior: smooth;
   }
 
+  /* Premium selection and focus */
+  ::selection {
+    background: rgba(0, 0, 0, 0.08);
+    color: inherit;
+  }
+
   * {
     font-family: inherit;
   }
 
-/* Apple-style Liquid Glass effect (frosted, translucent, soft edge highlight) */
-/* Always use light style so nav looks correct on all hosts (e.g. Cloudflare Pages) and no dark-mode split */
+/* Premium nav: liquid glass, light border, soft shadow */
 .liquid-glass {
   background: rgba(255, 255, 255, 0.72);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
-  box-shadow:
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.9),
-    0 1px 0 0 rgba(0, 0, 0, 0.04);
+  -webkit-backdrop-filter: blur(32px) saturate(200%);
+  backdrop-filter: blur(32px) saturate(200%);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.3s ease;
+}
+.liquid-glass.nav-scrolled {
+  box-shadow: var(--shadow-nav-scrolled);
 }
 
-/* Mobile navigation improvements */
 @media (max-width: 768px) {
   nav.liquid-glass {
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    backdrop-filter: blur(32px) saturate(200%);
   }
+}
+
+/* Glass panel: frosted surface for sections (no layout/size change) */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.65);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  box-shadow: var(--shadow-glass);
+}
+
+/* Glass card: subtle frosted cards (e.g. testimonials) */
+.glass-card {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+/* Depth when recommendation/testimonial is expanded */
+.depth-expanded {
+  box-shadow: var(--shadow-expanded);
+  border-color: rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
 /* Smooth page transitions - Apple-like animations */
@@ -226,4 +272,140 @@
   will-change: opacity, transform;
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
+  transition:
+    opacity var(--duration-page) var(--ease-reveal),
+    transform var(--duration-page) var(--ease-reveal);
+}
+
+/* Premium scroll-triggered animations: calmer, slightly longer */
+:root {
+  --ease-premium: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --ease-out-smooth: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-reveal: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --duration-in: 0.9s;
+  --duration-in-slow: 1s;
+  --duration-page: 0.5s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-in: 0.01s;
+    --duration-in-slow: 0.01s;
+    --duration-page: 0.01s;
+  }
+}
+
+/* Base state: hidden, smaller motion (22px) for calmer reveals */
+.animate-in-up {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity var(--duration-in) var(--ease-premium),
+    transform var(--duration-in) var(--ease-premium);
+}
+
+.animate-in-up.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slower, calmer for heroes */
+.animate-in-up-slow {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity var(--duration-in-slow) var(--ease-out-smooth),
+    transform var(--duration-in-slow) var(--ease-out-smooth);
+}
+
+.animate-in-up-slow.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Fade only (subtle) */
+.animate-in-fade {
+  opacity: 0;
+  transition: opacity var(--duration-in) var(--ease-premium);
+}
+
+.animate-in-fade.in-view {
+  opacity: 1;
+}
+
+/* Scale-in: soft scale + fade for a premium reveal */
+.animate-in-scale {
+  opacity: 0;
+  transform: scale(0.98) translateY(12px);
+  transition:
+    opacity var(--duration-in) var(--ease-reveal),
+    transform var(--duration-in) var(--ease-reveal);
+}
+
+.animate-in-scale.in-view {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* Stagger children: longer delays for a calmer, premium cascade */
+.stagger-1 { transition-delay: 0.08s; }
+.stagger-2 { transition-delay: 0.16s; }
+.stagger-3 { transition-delay: 0.24s; }
+.stagger-4 { transition-delay: 0.32s; }
+.stagger-5 { transition-delay: 0.4s; }
+.stagger-6 { transition-delay: 0.48s; }
+.stagger-7 { transition-delay: 0.56s; }
+.stagger-8 { transition-delay: 0.64s; }
+.stagger-9 { transition-delay: 0.72s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .stagger-1, .stagger-2, .stagger-3, .stagger-4, .stagger-5,
+  .stagger-6, .stagger-7, .stagger-8, .stagger-9 {
+    transition-delay: 0s;
+  }
+}
+
+/* Premium card: subtle shadow + lift + shadow on hover */
+.premium-card {
+  box-shadow: var(--shadow-card);
+  border: var(--border-subtle);
+  border-radius: var(--radius-card);
+  transition:
+    transform var(--transition-premium),
+    box-shadow var(--transition-premium),
+    border-color 0.2s ease;
+}
+.premium-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+/* Softer lift for tiles (image only) */
+.premium-card-soft:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Premium scrollbar (webkit) */
+@media (min-width: 1024px) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* Focus ring for keyboard nav (premium, minimal) */
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(0, 0, 0, 0.2);
+  outline-offset: 2px;
 }

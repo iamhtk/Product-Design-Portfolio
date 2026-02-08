@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { ExploreMoreSection } from './ExploreMoreSection';
 import type { ContentBlock } from './types';
 
 /** Looping video (GIF-style): autoplay, muted, loop. Uses ref + play() for reliable autoplay. */
@@ -44,13 +45,16 @@ function LoopingVideo({ src, className, style }: { src: string; className?: stri
   );
 }
 
+const CURRENT_PROJECT_ID = 'AutomotiveUX_GM';
+
 interface AutomotiveUX_GMProjectProps {
   onBack: () => void;
+  onProjectClick?: (projectId: string) => void;
 }
 
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 
-export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) {
+export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_GMProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -247,7 +251,7 @@ export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) 
 
 
     { type: 'text', header: "Information Architectur", content: "" },
-    { type: 'video', src: '/gm/IA.mp4' },
+    { type: 'video', src: '/gm/IA.MOV' },
     { type: 'text', header: "Front Display Information Architecture", content: "", indent: true },
     { type: 'image', src: '/gm/Front Display IA.png', maxHeight: '640px' },
     { type: 'text', header: "Center Display Information Architecture", content: "", indent: true },
@@ -282,7 +286,7 @@ export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) 
     
     { type: 'image', src: '/gm/7.png', maxHeight: '640px' },
     { type: 'video', src: '/gm/Screen 1.mp4', maxHeight: '640px' },
-    { type: 'video', src: '/gm/Screen 2.mp4', maxHeight: '640px' },
+    { type: 'video', src: '/gm/Screen 2ab.mov', maxHeight: '640px' },
     { type: 'video', src: '/gm/Screen 3.mp4', maxHeight: '640px' },
     { type: 'video', src: '/gm/Screen 4.mp4', maxHeight: '640px' }, 
 
@@ -659,22 +663,17 @@ export function AutomotiveUX_GMProject({ onBack }: AutomotiveUX_GMProjectProps) 
                   {block.colors.map((color, i) => (
                     <div key={i} className="aspect-square rounded-lg" style={{ backgroundColor: color }} />
                   ))}
-                </div>
+            </div>
               );
             }
             return null;
           })}
 
-          <div className="pt-24 pb-8">
-            <div className="mb-12">
-              <button 
-                onClick={onBack}
-                className="text-[17px] text-gray-700 hover:text-gray-900 transition-colors font-medium"
-              >
-                ← Back to Homepage
-              </button>
-            </div>
-          </div>
+          <ExploreMoreSection
+            currentProjectId={CURRENT_PROJECT_ID}
+            onBack={onBack}
+            onProjectClick={onProjectClick}
+          />
 
           <div className="md:hidden pt-8">
             <button 

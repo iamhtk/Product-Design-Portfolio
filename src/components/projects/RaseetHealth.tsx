@@ -11,16 +11,20 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { ExploreMoreSection } from './ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
 import type { ContentBlock } from './types';
 
+const CURRENT_PROJECT_ID = 'RaseetHealth';
+
 interface RaseetHealthProjectProps {
   onBack: () => void;
+  onProjectClick?: (projectId: string) => void;
 }
 
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 
-export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
+export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -466,16 +470,11 @@ export function RaseetHealthProject({ onBack }: RaseetHealthProjectProps) {
             return null;
           })}
 
-          <div className="pt-24 pb-8">
-            <div className="mb-12">
-              <button 
-                onClick={onBack}
-                className="text-[17px] text-gray-700 hover:text-gray-900 transition-colors font-medium"
-              >
-                ← Back to Homepage
-              </button>
-            </div>
-          </div>
+          <ExploreMoreSection
+            currentProjectId={CURRENT_PROJECT_ID}
+            onBack={onBack}
+            onProjectClick={onProjectClick}
+          />
 
           <div className="md:hidden pt-8">
             <button 

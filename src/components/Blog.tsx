@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
+import { AnimateIn } from './AnimateIn';
 
 export function Blog() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -53,7 +54,7 @@ export function Blog() {
   ];
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen">
       <ScrollToTop />
       
       {/* Scroll Progress Bar */}
@@ -67,17 +68,20 @@ export function Blog() {
       {/* Main Content */}
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-20 md:py-32">
         {/* Header */}
-        <div className="mb-20 md:mb-32">
-          <h1 className="text-[48px] md:text-[72px] mb-6">Blogs</h1>
+        <AnimateIn variant="up-slow" rootMargin="0px" className="mb-20 md:mb-32">
+          <h1 className="text-[32px] sm:text-[48px] md:text-[72px] mb-6 tracking-tight text-gray-900">Blogs</h1>
           <p className="text-[15px] md:text-[16px] text-gray-600 leading-[1.8] max-w-[700px]">
             Recently, I began writing articles and sharing them on Medium, expressing my thoughts on miscellaneous subjects like Generative AI and UX Design.
           </p>
-        </div>
+        </AnimateIn>
 
         {/* Blog Posts */}
         <div className="space-y-24 md:space-y-32">
-          {blogPosts.map((post, index) => (
-            <article key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
+          {blogPosts.map((post, index) => {
+            const staggerKey = (['stagger-1', 'stagger-2', 'stagger-3'] as const)[Math.min(index, 2)];
+            return (
+            <AnimateIn key={index} variant="scale" rootMargin="0px 0px -80px 0px" stagger={staggerKey}>
+            <article className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
               {/* Left Column - Content */}
               <div className="space-y-6">
                 {/* Date */}
@@ -133,7 +137,9 @@ export function Blog() {
                 />
               </a>
             </article>
-          ))}
+            </AnimateIn>
+            );
+          })}
         </div>
       </div>
 

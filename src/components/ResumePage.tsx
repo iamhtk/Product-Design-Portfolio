@@ -1,5 +1,6 @@
 import { Download, Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
+import { AnimateIn } from './AnimateIn';
 
 // Set your resume PDF URL here (e.g. "/resume.pdf" if file is in public folder, or a full URL)
 const RESUME_PDF_URL = '/resume.pdf';
@@ -14,11 +15,11 @@ export function ResumePage() {
   };
 
   return (
-    <div className="min-h-screen bg-white pt-20">
-      <div className="max-w-[900px] mx-auto px-8 md:px-16">
+    <div className="min-h-screen pt-20">
+      <div className="max-w-[900px] mx-auto px-6 md:px-12 lg:px-16">
         
         {/* Header with Download Button */}
-        <div className="pt-20 pb-12 flex items-start justify-between">
+        <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-12 flex items-start justify-between">
           <div>
             <h1 className="text-[32px] md:text-[42px] leading-[1.2] text-gray-900 mb-3">
               Hrithik Sanyal
@@ -41,7 +42,7 @@ export function ResumePage() {
             <Download className="w-4 h-4" />
             Download PDF
           </a>
-        </div>
+        </AnimateIn>
 
         {/* Mobile Download Button */}
         <a
@@ -56,7 +57,7 @@ export function ResumePage() {
         </a>
 
         {/* EXPERIENCE Section */}
-        <div className="mb-16">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
             EXPERIENCE
           </h2>
@@ -64,7 +65,7 @@ export function ResumePage() {
           {/* IBM */}
           <div className="mb-10">
             <h3 className="text-[15px] text-gray-900 mb-1">
-              <strong>IBM</strong>, Product Designer
+              <strong>IBM</strong>, Product Designer, AI Applications
             </h3>
             <p className="text-[13px] text-gray-500 mb-4">
               <strong>March 2026—Present</strong> — San Jose, CA
@@ -189,7 +190,6 @@ export function ResumePage() {
               </li>
             </ul>
           </div>
-        </div>
 
           {/* UofM-GSI */}
           <div className="mb-10">
@@ -280,7 +280,7 @@ export function ResumePage() {
               </li>
             </ul>
           </div>
-
+        </AnimateIn>
 
         {/* AWARDS & FEATURES Section */}
         {/* <div className="mb-16">
@@ -349,7 +349,7 @@ export function ResumePage() {
         </div> */}
 
         {/* EDUCATION Section */}
-        <div className="mb-16">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
             EDUCATION
           </h2>
@@ -364,11 +364,21 @@ export function ResumePage() {
                 <strong>Master of Science in Information (MSI) – User Experience (UX), and Human-Computer Interaction (HCI) </strong>
               </p>
             </div>
+            <div>
+              <h3 className="text-[15px] text-gray-900 mb-1">
+                <strong>Bharati Vidyapeeth University</strong><br />College of Engineering 
+              </h3>
+              <p className="text-[13px] text-gray-500">
+                <strong>Bachelor of Technology (B. Tech) – Electronics and Telecommunications</strong>
+              </p>
+            </div>
           </div>
-        </div>
+          
+          
+        </AnimateIn>
 
         {/* TEACHING EXPERIENCE Section */}
-        <div className="mb-16">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
             TEACHING EXPERIENCE
           </h2>
@@ -416,10 +426,10 @@ export function ResumePage() {
               </ul>
             </div>
           </div>
-        </div>
+        </AnimateIn>
 
         {/* SKILLS Section */}
-        <div className="mb-16">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
             SKILLS
           </h2>
@@ -461,10 +471,10 @@ export function ResumePage() {
               </p>
             </div>
           </div>
-        </div>
+        </AnimateIn>
 
         {/* RESEARCH EXPERIENCE Section */}
-        <div className="mb-16">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
             RESEARCH EXPERIENCE
           </h2>
@@ -527,10 +537,10 @@ export function ResumePage() {
               </p>
             </div>
           </div>
-        </div>
+        </AnimateIn>
 
         {/* CERTIFICATIONS Section */}
-        <div className="mb-16">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
             CERTIFICATIONS
           </h2>
@@ -598,7 +608,7 @@ export function ResumePage() {
               </a>
             </div>
           </div>
-        </div>
+        </AnimateIn>
       </div>
 
       {/* Footer - same container as Blog for consistent layout */}

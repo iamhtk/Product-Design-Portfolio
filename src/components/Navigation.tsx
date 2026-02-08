@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
 type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog';
@@ -10,12 +10,21 @@ interface NavigationProps {
 
 export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   const links: { label: string; page: Page }[] = [
     { label: 'Work', page: 'work' },
     { label: 'Resume', page: 'resume' },
     { label: 'Blogs', page: 'blog' },
     { label: 'Friends', page: 'friends' },
+    { label: 'Favorites', page: 'favorites' },
     { label: 'About', page: 'about' },
   ];
 
@@ -37,12 +46,16 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
   return (
     <>
-      {/* Desktop & Mobile Nav Bar - Liquid Glass effect */}
-      <nav className="liquid-glass fixed top-0 left-0 right-0 z-50 min-h-[var(--nav-height)] flex flex-row items-center w-full">
+      {/* Desktop & Mobile Nav Bar - Liquid Glass effect, subtle shadow when scrolled */}
+      <nav
+        className={`liquid-glass fixed top-0 left-0 right-0 z-50 min-h-[var(--nav-height)] flex flex-row items-center w-full ${
+          scrolled ? 'nav-scrolled' : ''
+        }`}
+      >
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-5 flex flex-row flex-nowrap items-center justify-between gap-4 min-w-0">
           <button 
             onClick={() => handleNavigation('work')}
-            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity"
+            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-1 px-0.5"
           >
             Hrithik Sanyal
           </button>
@@ -53,12 +66,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               <button
                 key={link.page}
                 onClick={() => onNavigate(link.page)}
-                className="relative group"
+                className="relative group focus-ring rounded py-1 px-0.5"
               >
-                <span className={`text-[15px] transition-all duration-200 ease-out ${
+                <span className={`text-[15px] transition-colors duration-300 ${
                   currentPage === link.page 
-                    ? 'text-gray-900' 
-                    : 'text-gray-400 hover:text-gray-900'
+                    ? 'text-gray-900 font-medium' 
+                    : 'text-gray-500 hover:text-gray-900'
                 }`}>
                   {link.label}
                 </span>
@@ -70,7 +83,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             ))}
             <a
               href="mailto:sanyalhrithik@gmail.com"
-              className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-200 ease-out"
+              className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 ease-out focus-ring rounded py-1 px-0.5"
             >
               Email
             </a>
@@ -89,10 +102,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
 
       {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-white md:hidden">
+        <div className="fixed inset-0 z-50 bg-white/95 backdrop-blur-xl md:hidden">
           <div className="flex flex-col h-full">
             {/* Mobile Menu Header */}
-            <div className="px-8 py-5 flex items-center justify-between border-b border-gray-100">
+            <div className="px-8 py-5 flex items-center justify-between border-b border-gray-100/80">
               <button 
                 onClick={() => handleNavigation('work')}
                 className="text-[15px] text-gray-900"
