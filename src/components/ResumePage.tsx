@@ -65,7 +65,7 @@ export function ResumePage() {
           {/* IBM */}
           <div className="mb-10">
             <h3 className="text-[15px] text-gray-900 mb-1">
-              <strong>IBM</strong>, Product Designer, AI Applications
+              <strong>Apple</strong>, Product Designer, AI Applications
             </h3>
             <p className="text-[13px] text-gray-500 mb-4">
               <strong>March 2026—Present</strong> — San Jose, CA
