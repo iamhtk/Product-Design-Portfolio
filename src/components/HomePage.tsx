@@ -37,7 +37,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
       image:
-        "/cwpc/tile_main2.mp4",
+        "/main_title/main_cwpc.png",
     },
     {
       id: "AutomotiveUX_GM",
@@ -46,7 +46,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "12 MINUTE READ →",
       bgColor: "#f5f5f7",
       image:
-        "main_title/gm.png",
+        "/main_title/main_gm.png",
     },
     {
       id: "RaseetHealth",
@@ -55,7 +55,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "16 MINUTE READ →",
       bgColor: "#4A90E2",
       image:
-        "main_title/raseet.png",
+        "/main_title/main_raseet.png",
     },
     {
       id: "BMW",
@@ -64,7 +64,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "8 MINUTE READ →",
       bgColor: "#e8f4f8",
       image:
-        "bmw/BMW_main.png",
+        "/main_title/main_bmw.png",
     },
     {
       id: "CalmiRing",
@@ -73,7 +73,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#f5f5f7",
       image:
-        "main_title/calmi.png",
+        "/main_title/main_calmi.png",
     },
     
     {
@@ -83,17 +83,26 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "14 MINUTE READ →",
       bgColor: "#fff5f7",
       image:
-        "main_title/bound.png",
+        "/main_title/main_bound.png",
     },
     {
-      id: "WeddingBliss",
-      title: "Wedding Bliss - AR Planner Assistant",
-      company: "AR/VR DESIGN | UX DESIGN | UX RESEARCH",
+      id: "jobgenius",
+      title: "JobGenius",
+      company: "UX DESIGN | UX RESEARCH",
       readTime: "9 MINUTE READ →",
       bgColor: "#f5f5f7",
       image:
-        "main_title/weeding.png",
+        "/main_title/main_jobgenius.png",
     },
+    // {
+    //   id: "WeddingBliss",
+    //   title: "Wedding Bliss - AR Planner Assistant",
+    //   company: "AR/VR DESIGN | UX DESIGN | UX RESEARCH",
+    //   readTime: "9 MINUTE READ →",
+    //   bgColor: "#f5f5f7",
+    //   image:
+    //     "/main_title/main_cwpc.png",
+    // },
   ];
 
   return (
