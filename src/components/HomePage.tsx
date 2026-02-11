@@ -29,6 +29,13 @@ export function HomePage({ onProjectClick }: HomePageProps) {
     });
   };
 
+  // ═══════════════════════════════════════════════════════════════════════════
+  // PROJECT CONFIGURATION
+  // ═══════════════════════════════════════════════════════════════════════════
+  // To enable/disable projects, set `enabled: true` or `enabled: false`
+  // Disabled projects will still show with animations but won't be clickable
+  // ═══════════════════════════════════════════════════════════════════════════
+  
   const projects = [
     {
       id: "CWPC",
@@ -36,8 +43,8 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       company: "DESIGN SYSTEM | DOCUMENTATION | UX DESIGN & RESEARCH | ACCESSIBILITY",
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
-      image:
-        "/main_title/main_cwpc.png",
+      image: "/main_title/main_cwpc.png",
+      enabled: false, // ✅ Enabled - clickable
     },
     {
       id: "AutomotiveUX_GM",
@@ -45,8 +52,8 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       company: "END-TO-END PRODUCT DESIGN | UX DESIGN & RESEARCH",
       readTime: "12 MINUTE READ →",
       bgColor: "#f5f5f7",
-      image:
-        "/main_title/main_gm.png",
+      image: "/main_title/main_gm.png",
+      enabled: true, // ✅ Enabled - clickable
     },
     {
       id: "RaseetHealth",
@@ -54,8 +61,8 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       company: "END-TO-END PRODUCT DESIGN | UX RESEARCH | DESIGN SYSTEM",
       readTime: "16 MINUTE READ →",
       bgColor: "#4A90E2",
-      image:
-        "/main_title/main_raseet.png",
+      image: "/main_title/main_raseet.png",
+      enabled: false, // ✅ Enabled - clickable
     },
     {
       id: "BMW",
@@ -63,8 +70,8 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       company: "AUTOMOTIVE UX DESIGN",
       readTime: "8 MINUTE READ →",
       bgColor: "#e8f4f8",
-      image:
-        "/main_title/main_bmw.png",
+      image: "/main_title/main_bmw.png",
+      enabled: true, // ✅ Enabled - clickable
     },
     {
       id: "CalmiRing",
@@ -72,18 +79,8 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       company: "IOT | END-TO-END UX DESIGN | UX RESEARCH",
       readTime: "10 MINUTE READ →",
       bgColor: "#f5f5f7",
-      image:
-        "/main_title/main_calmi.png",
-    },
-    
-    {
-      id: "bound",
-      title: "Bound International UX Audit: Identifying and Solving Key Usability Issues",
-      company: "UX DESIGN & RESEARCH",
-      readTime: "14 MINUTE READ →",
-      bgColor: "#fff5f7",
-      image:
-        "/main_title/main_bound.png",
+      image: "/main_title/main_calmi.png",
+      enabled: true, // ✅ Enabled - clickable
     },
     {
       id: "jobgenius",
@@ -91,17 +88,27 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       company: "UX DESIGN | UX RESEARCH",
       readTime: "9 MINUTE READ →",
       bgColor: "#f5f5f7",
-      image:
-        "/main_title/main_jobgenius.png",
+      image: "/main_title/main_jobgenius.png",
+      enabled: false, // ❌ Disabled - not clickable (but still animated)
     },
+    {
+      id: "bound",
+      title: "Bound International UX Audit: Identifying and Solving Key Usability Issues",
+      company: "UX DESIGN & RESEARCH",
+      readTime: "14 MINUTE READ →",
+      bgColor: "#fff5f7",
+      image: "/main_title/main_bound.png",
+      enabled: false, // ❌ Disabled - not clickable (but still animated)
+    },
+    
     // {
     //   id: "WeddingBliss",
     //   title: "Wedding Bliss - AR Planner Assistant",
     //   company: "AR/VR DESIGN | UX DESIGN | UX RESEARCH",
     //   readTime: "9 MINUTE READ →",
     //   bgColor: "#f5f5f7",
-    //   image:
-    //     "/main_title/main_cwpc.png",
+    //   image: "/main_title/main_cwpc.png",
+    //   enabled: false, // ❌ Disabled - not clickable (but still animated)
     // },
   ];
 
@@ -113,7 +120,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
           <AnimateIn variant="up-slow" rootMargin="0px" className="mb-3">
             <h1 className="text-[28px] md:text-[36px] lg:text-[44px] font-bold text-gray-900 leading-[1.2] tracking-[-0.02em]" style={{ fontWeight: 700 }}>
-              Designer at CWPC.
+              Product Designer at IBM.
             </h1>
           </AnimateIn>
           <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="mb-3">
@@ -124,7 +131,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
             </p>
           </AnimateIn>
           <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-2">
-            <p className="text-[17px] md:text-[18px] text-gray-500 max-w-[500px] leading-[1.65]">
+            <p className="text-[17px] md:text-[20px] text-gray-500 max-w-[500px] leading-[1.65]">
               Curious about interfaces, intelligent systems
               and the ways in which we interact with them.
             </p>
@@ -144,14 +151,15 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-32 items-stretch">
           {projects.map((project, index) => {
-            const isDisabled = project.id === 'bound' || project.id === 'WeddingBliss';
+            // Check if project is enabled (defaults to true if not specified)
+            const isEnabled = project.enabled !== false;
             const staggerKey = (['stagger-1','stagger-2','stagger-3','stagger-4','stagger-5','stagger-6','stagger-7','stagger-8','stagger-9'] as const)[Math.min(index, 8)];
             return (
             <AnimateIn key={project.id} stagger={staggerKey} rootMargin="0px 0px -80px 0px">
             <div
               onClick={() => {
-                if (isDisabled) {
-                  return; // Disabled - do nothing
+                if (!isEnabled) {
+                  return; // Disabled - do nothing (but animations still work)
                 }
                 if (project.id === 'CalmiRing') {
                   window.open('https://beautiful-leader-fa9.notion.site/Calmi-Ring-ad8e4dee5a794da48dda0e5ad4bdde33', '_blank');
@@ -159,10 +167,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                   onProjectClick(project.id);
                 }
               }}
-              className={`h-full flex flex-col rounded-xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] ${
-                isDisabled 
-                  ? 'cursor-not-allowed opacity-60' 
-                  : 'cursor-pointer hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08]'
+              className={`h-full flex flex-col rounded-xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08] ${
+                isEnabled 
+                  ? 'cursor-pointer' 
+                  : 'cursor-not-allowed'
               }`}
             >
               {/* Project Image - Fixed aspect ratio container */}
@@ -180,7 +188,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                       project.id === 'CalmiRing'
                         ? 'max-w-full max-h-full object-contain'
                         : 'w-full h-full object-cover'
-                    } ${isDisabled ? '' : 'hover:scale-105'}`;
+                    } hover:scale-105`;
                     return isVideo ? (
                       <video
                         src={project.image}
@@ -205,9 +213,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
 
               {/* Project Info - Flex column with read time at bottom */}
               <div className="flex flex-col flex-1 space-y-2 px-3 pb-3">
-                <h3 className={`text-[16px] md:text-[17px] text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 ${
-                  isDisabled ? '' : 'hover:opacity-70'
-                }`}>
+                <h3 className="text-[16px] md:text-[17px] text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
                   {project.title}
                 </h3>
                 <p className="text-[13px] md:text-[14px] text-gray-500 leading-relaxed line-clamp-2">

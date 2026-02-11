@@ -13,30 +13,68 @@ type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'pr
 const VALID_PAGES: Exclude<Page, 'project'>[] = ['work', 'about', 'friends', 'resume', 'favorites', 'blog'];
 const VALID_PROJECT_IDS = Object.keys(projectComponents);
 
-function getRouteFromHash(): { page: Page; projectId: string | null } {
-  const hash = window.location.hash.slice(1).toLowerCase() || 'work';
-  if (hash.startsWith('project/')) {
-    const id = hash.slice(8);
+// ═══════════════════════════════════════════════════════════════════════════
+// ROUTE MAPPING - Professional URL paths
+// ═══════════════════════════════════════════════════════════════════════════
+// Map internal page IDs to professional URL paths
+// To change URLs, update the values here (keep keys the same)
+// ═══════════════════════════════════════════════════════════════════════════
+const ROUTE_PATHS: Record<Page, string> = {
+  'work': '/',
+  'about': '/about-me',
+  'friends': '/network-collaborators',
+  'resume': '/resume-experience',
+  'favorites': '/favorites-books-music',
+  'blog': '/design-blog-articles',
+  'project': '/project', // Base path, will append project ID
+};
+
+// Reverse lookup: URL path → page ID
+const PATH_TO_PAGE: Record<string, Page> = {
+  '/': 'work',
+  '/about-me': 'about',
+  '/network-collaborators': 'friends',
+  '/resume-experience': 'resume',
+  '/favorites-books-music': 'favorites',
+  '/design-blog-articles': 'blog',
+};
+
+function getRouteFromPath(): { page: Page; projectId: string | null } {
+  const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+  
+  // Handle project routes: /project/cwpc
+  if (path.startsWith('/project/')) {
+    const id = path.slice(9); // Remove '/project/'
     const projectId = VALID_PROJECT_IDS.find((p) => p.toLowerCase() === id) ?? null;
     return { page: 'project', projectId };
   }
-  const page = (VALID_PAGES.find((p) => p === hash) ?? 'work') as Exclude<Page, 'project'>;
+  
+  // Handle root: /
+  if (path === '/') {
+    return { page: 'work', projectId: null };
+  }
+  
+  // Look up page from professional URL path
+  const page = PATH_TO_PAGE[path] ?? 'work';
   return { page, projectId: null };
 }
 
-function buildHash(page: Page, projectId: string | null) {
-  if (page === 'project' && projectId) return `#project/${projectId}`;
-  if (page === 'work') return '#';
-  return `#${page}`;
+function buildPath(page: Page, projectId: string | null): string {
+  if (page === 'project' && projectId) {
+    return `/project/${projectId.toLowerCase()}`;
+  }
+  return ROUTE_PATHS[page];
 }
 
 function pushRoute(page: Page, projectId: string | null) {
-  const url = window.location.pathname + window.location.search + buildHash(page, projectId);
+  const path = buildPath(page, projectId);
+  const url = path + window.location.search;
   window.history.pushState({ page, projectId }, '', url);
 }
 
 function replaceRoute(page: Page, projectId: string | null) {
-  const url = window.location.pathname + window.location.search + buildHash(page, projectId);
+  const path = buildPath(page, projectId);
+  const url = path + window.location.search;
   window.history.replaceState({ page, projectId }, '', url);
 }
 
@@ -55,15 +93,17 @@ function App() {
     };
 
     const handlePopState = () => {
-      const route = getRouteFromHash();
+      const route = getRouteFromPath();
       setIsTransitioning(true);
+      // Always jump to top when navigating via browser back/forward
+      window.scrollTo(0, 0);
       applyRoute(route);
       setTimeout(() => setIsTransitioning(false), 50);
     };
 
     if (isInitialMount.current) {
       isInitialMount.current = false;
-      const route = getRouteFromHash();
+      const route = getRouteFromPath();
       applyRoute(route);
       replaceRoute(route.page, route.projectId);
     }
@@ -84,6 +124,8 @@ function App() {
 
   const handleNavigate = (page: Exclude<Page, 'project'>) => {
     if (page === currentPage) return;
+    // Ensure we start at the top whenever changing sections
+    window.scrollTo(0, 0);
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentPage(page);
@@ -94,6 +136,8 @@ function App() {
   };
 
   const handleProjectClick = (projectId: string) => {
+    // Jump to top when opening a project
+    window.scrollTo(0, 0);
     setIsTransitioning(true);
     setTimeout(() => {
       setSelectedProjectId(projectId);
@@ -104,6 +148,8 @@ function App() {
   };
 
   const handleBackToWork = () => {
+    // Jump to top when going back to work/home
+    window.scrollTo(0, 0);
     setIsTransitioning(true);
     setTimeout(() => {
       setCurrentPage('work');

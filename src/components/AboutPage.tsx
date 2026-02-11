@@ -54,8 +54,8 @@ export function AboutPage() {
             CURRENTLY
           </h2>
           <p className="text-[18px] leading-[1.7] text-gray-700 mb-6">
-            I'm currently a  Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>Google</a>, where I work 
-            on consumer-facing products that reach millions of users worldwide. Before joining Meta, 
+            I'm currently a  Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>IBM</a>, where I work 
+            on consumer-facing products that reach millions of users worldwide. Before joining IBM, 
             I graduated from the University of Michigan's School of Information (#GoBlue💙), specializing in UX Design & Research and Human-Computer Interaction. My background in Electronics & Telecommunications gives me a unique edge in understanding and crafting interactions between people and technology.
 
           </p>
@@ -114,7 +114,7 @@ export function AboutPage() {
         </AnimateIn>
         {/* Images Grid */}
         <AnimateIn className="grid grid-cols-2 gap-6 mb-16">
-          <img 
+          {/* <img 
             src={images[2]}
             alt="Team collaboration"
             className="w-full h-auto rounded-lg"
@@ -123,7 +123,7 @@ export function AboutPage() {
             src={images[3]}
             alt="Design work"
             className="w-full h-auto rounded-lg"
-          />
+          /> */}
         </AnimateIn>
         
         {/* Content Section 2 */}
@@ -145,7 +145,7 @@ export function AboutPage() {
         </div> */}
 
         {/* Images Grid */}
-        <div className="grid grid-cols-2 gap-6 mb-16">
+        {/* <div className="grid grid-cols-2 gap-6 mb-16">
           <img 
             src={images[2]}
             alt="Team collaboration"
@@ -156,7 +156,7 @@ export function AboutPage() {
             alt="Design work"
             className="w-full h-auto rounded-lg"
           />
-        </div>
+        </div> */}
 
         {/* Content Section 3 */}
         {/* <div className="mb-20">
