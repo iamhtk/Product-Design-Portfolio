@@ -55,7 +55,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-5 flex flex-row flex-nowrap items-center justify-between gap-4 min-w-0">
           <button 
             onClick={() => handleNavigation('work')}
-            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-1 px-0.5"
+            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-1 px-0.5 cursor-pointer"
           >
             Hrithik Sanyal
           </button>
@@ -66,7 +66,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               <button
                 key={link.page}
                 onClick={() => onNavigate(link.page)}
-                className="relative group focus-ring rounded py-1 px-0.5"
+                className="relative group focus-ring rounded py-1 px-0.5 cursor-pointer"
               >
                 <span className={`text-[15px] transition-colors duration-300 ${
                   currentPage === link.page 
@@ -92,7 +92,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           {/* Mobile Hamburger Button */}
           <button 
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-gray-900 p-2"
+            className="md:hidden text-gray-900 p-2 cursor-pointer"
             aria-label="Toggle menu"
           >
             <Menu className="w-6 h-6" />
@@ -108,13 +108,13 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             <div className="px-8 py-5 flex items-center justify-between border-b border-gray-100/80">
               <button 
                 onClick={() => handleNavigation('work')}
-                className="text-[15px] text-gray-900"
+                className="text-[15px] text-gray-900 cursor-pointer"
               >
                 Hrithik Sanyal
               </button>
               <button 
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-900 p-2"
+                className="text-gray-900 p-2 cursor-pointer"
                 aria-label="Close menu"
               >
                 <X className="w-6 h-6" />
@@ -129,7 +129,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   <button
                     key={link.page}
                     onClick={() => handleNavigation(link.page)}
-                    className={`block text-[20px] text-left relative ${
+                    className={`block text-[20px] text-left relative cursor-pointer ${
                       currentPage === link.page 
                         ? 'text-gray-900' 
                         : 'text-gray-400'

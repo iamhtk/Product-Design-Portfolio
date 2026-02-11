@@ -228,7 +228,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
 
             <button 
               onClick={onBack}
-              className="text-[16px] text-gray-500 hover:text-gray-900 transition-colors hidden md:block"
+              className="text-[16px] text-gray-500 hover:text-gray-900 transition-colors hidden md:block cursor-pointer"
             >
               ← Back to Work
             </button>
@@ -238,7 +238,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
             <div className="md:hidden">
               <button 
                 onClick={onBack}
-                className="text-[15px] text-gray-500 hover:text-gray-900 transition-colors"
+                className="text-[15px] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
               >
                 ← Back to Homepage
               </button>
@@ -283,7 +283,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
                 <button
                   type="button"
                   onClick={scrollToCaseStudy}
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors"
+                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors cursor-pointer"
                   aria-label="Scroll to case study"
                 >
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
@@ -413,7 +413,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
           <div className="md:hidden pt-8">
             <button 
               onClick={onBack}
-              className="text-[13px] text-gray-500 hover:text-gray-900 transition-colors"
+              className="text-[13px] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
             >
               ← Back to Work
             </button>

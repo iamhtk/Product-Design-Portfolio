@@ -200,6 +200,7 @@
       font-size: var(--text-base);
       font-weight: var(--font-weight-medium);
       line-height: 1.5;
+      cursor: pointer;
     }
 
     input {
@@ -402,6 +403,12 @@
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.2);
   }
+}
+
+/* Buttons and clickable elements show pointer cursor */
+button,
+[role="button"] {
+  cursor: pointer;
 }
 
 /* Focus ring for keyboard nav (premium, minimal) */

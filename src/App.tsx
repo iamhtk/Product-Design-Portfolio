@@ -139,7 +139,7 @@ function App() {
                 <p className="mt-4 text-gray-600">Project "{selectedProjectId}" is not available yet.</p>
                 <button 
                   onClick={handleBackToWork}
-                  className="mt-4 text-blue-600 hover:underline"
+                  className="mt-4 text-blue-600 hover:underline cursor-pointer"
                 >
                   ← Back to Homepage
                 </button>

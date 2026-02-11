@@ -15,7 +15,7 @@ export function FriendsPage() {
     { number: '09', name: 'Elena Godin', role: 'Teaching Professor and Lecturer IV', company: 'University of Michigan, School of Information', link: 'https://www.linkedin.com/in/elenagodin' },
     { number: '10', name: 'Emerald Paul', role: 'Business Analyst', company: 'CWPC @ CrowdDoing', link: 'https://www.linkedin.com/in/emerald-paul-365677b/' },
     { number: '11', name: 'Emily Claflin', role: 'Information Architect', company: 'The Understanding Group (TUG)', link: 'https://understandinggroup.com/emily-claflin' },
-    { number: '12', name: 'Esty Zilberman', role: 'Senior UX/UI designer', company: 'Lebara NL', link: 'https://www.estyzilberman.com/' },
+    { number: '12', name: 'Esty Zilberman', role: 'Founder', company: 'Build it Real', link: 'https://www.estyzilberman.com/' },
     { number: '13', name: 'Grant Carmichael', role: 'Information Architect', company: 'The Understanding Group (TUG)', link: 'https://understandinggroup.com/grant-carmichael' },
     { number: '14', name: 'Haripriya Vijayan', role: 'Product Manager', company: 'CWPC @ CrowdDoing', link: 'https://www.linkedin.com/in/haripriyavijayan' },
     { number: '15', name: 'Iris Yuning Ye', role: 'Product Manager', company: 'Microsoft', link: 'https://www.linkedin.com/in/irisyn-ye/' },

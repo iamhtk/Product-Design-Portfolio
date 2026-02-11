@@ -206,7 +206,7 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
 
             <button 
               onClick={onBack}
-              className="text-[16px] text-gray-500 hover:text-gray-900 transition-colors hidden md:block"
+              className="text-[16px] text-gray-500 hover:text-gray-900 transition-colors hidden md:block cursor-pointer"
             >
               ← Back to Work
             </button>
@@ -216,7 +216,7 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
             <div className="md:hidden">
               <button 
                 onClick={onBack}
-                className="text-[15px] text-gray-500 hover:text-gray-900 transition-colors"
+                className="text-[15px] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
               >
                 ← Back to Homepage
               </button>
@@ -258,7 +258,7 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
               <div className="space-y-4 pt-4 flex flex-col items-center text-center">
                 <p className="text-[18px] leading-[1.85] text-gray-700">Got more time? :)</p>
                 <p className="text-[16px] leading-relaxed text-gray-500">Click the arrow to read the entire case study</p>
-                <button type="button" onClick={scrollToCaseStudy} className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors" aria-label="Scroll to case study">
+                <button type="button" onClick={scrollToCaseStudy} className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors cursor-pointer" aria-label="Scroll to case study">
                   <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" /></svg>
                 </button>
               </div>
@@ -380,7 +380,7 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
             <div className="mb-12">
               <button 
                 onClick={onBack}
-                className="text-[17px] text-gray-700 hover:text-gray-900 transition-colors font-medium"
+                className="text-[17px] text-gray-700 hover:text-gray-900 transition-colors font-medium cursor-pointer"
               >
                 ← Back to Homepage
               </button>
@@ -390,7 +390,7 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
           <div className="md:hidden pt-8">
             <button 
               onClick={onBack}
-              className="text-[13px] text-gray-500 hover:text-gray-900 transition-colors"
+              className="text-[13px] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
             >
               ← Back to Work
             </button>

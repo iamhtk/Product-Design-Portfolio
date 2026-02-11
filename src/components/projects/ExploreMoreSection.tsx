@@ -39,7 +39,7 @@ export function ExploreMoreSection({
 
   return (
     <div className="pt-24 pb-8">
-      <div className="glass-panel rounded-2xl border border-black/[0.06] px-6 py-8 md:px-10 md:py-10 mb-12">
+      <div className="mb-12">
         <p className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium mb-6">
           Explore more
         </p>
@@ -108,7 +108,7 @@ export function ExploreMoreSection({
             aria-hidden
           />
 
-          {/* Next / Right block */}
+          {/* Next / Right block — 280px card, content right-aligned to match image */}
           <div
             className="min-w-0 flex-1 flex justify-end"
             style={{ maxWidth: 'min(48%, 480px)' }}
@@ -117,60 +117,52 @@ export function ExploreMoreSection({
               <button
                 type="button"
                 onClick={() => handleProjectNav(nextProject.id, onProjectClick)}
-                className="p-0 m-0 border-0 bg-transparent cursor-pointer block w-full group transition-transform duration-300 ease-out hover:-translate-y-1"
-
-
+                className="p-0 m-0 border-0 bg-transparent cursor-pointer flex-shrink-0 w-[280px] group transition-transform duration-300 ease-out hover:-translate-y-1"
+                style={{ textAlign: 'right' }}
               >
-<div className="w-full transition-all duration-300 ease-out">
-
-
-
-                  <div
-                    className="rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out group-hover:shadow-[var(--shadow-card)] w-full"
-
-
-
-                    style={{
-                      backgroundColor:
-                        PROJECT_TILE_MEDIA[nextProject.id]?.bgColor ?? '#f5f5f5',
-                      aspectRatio: '4 / 3',
-                    }}
-                  >
-                    {PROJECT_TILE_MEDIA[nextProject.id] &&
-                      (/\.(mp4|webm|mov)(\?|$)/i.test(
-                        PROJECT_TILE_MEDIA[nextProject.id].image
-                      ) ? (
-                        <video
-                          src={PROJECT_TILE_MEDIA[nextProject.id].image}
-                          className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out group-hover:scale-105"
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          aria-label={nextProject.title}
-                        />
-                      ) : (
-                        <img
-                          src={PROJECT_TILE_MEDIA[nextProject.id].image}
-                          alt={nextProject.title}
-                          className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out group-hover:scale-105"
-                          loading="lazy"
-                        />
-                      ))}
+                {/* Image: same width as card */}
+                <div
+                  className="rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out group-hover:shadow-[var(--shadow-card)]"
+                  style={{
+                    backgroundColor:
+                      PROJECT_TILE_MEDIA[nextProject.id]?.bgColor ?? '#f5f5f5',
+                    aspectRatio: '4 / 3',
+                  }}
+                >
+                  {PROJECT_TILE_MEDIA[nextProject.id] &&
+                    (/\.(mp4|webm|mov)(\?|$)/i.test(
+                      PROJECT_TILE_MEDIA[nextProject.id].image
+                    ) ? (
+                      <video
+                        src={PROJECT_TILE_MEDIA[nextProject.id].image}
+                        className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out group-hover:scale-105"
+                        autoPlay
+                        loop
+                        muted
+                        playsInline
+                        aria-label={nextProject.title}
+                      />
+                    ) : (
+                      <img
+                        src={PROJECT_TILE_MEDIA[nextProject.id].image}
+                        alt={nextProject.title}
+                        className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    ))}
+                </div>
+                {/* Label and title: right-aligned so "t" of Next lines up with image */}
+                <div style={{ textAlign: 'right' }}>
+                  <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
+                    Next
                   </div>
-                  <div className="w-full flex flex-col items-end min-w-0">
-  <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5 text-right w-full">
-    Next
-  </div>
-  <div className="text-[15px] md:text-[17px] text-gray-800 group-hover:opacity-80 transition-opacity duration-300 font-semibold leading-snug text-right w-full">
-    {nextProject.title} →
-  </div>
-</div>
-
+                  <div className="text-[15px] md:text-[17px] text-gray-800 group-hover:opacity-80 transition-opacity duration-300 font-semibold leading-snug">
+                    {nextProject.title} →
+                  </div>
                 </div>
               </button>
             ) : (
-              <div className="p-0 max-w-[280px] ml-auto opacity-60">
+              <div className="p-0 max-w-[280px] ml-auto opacity-60 text-right">
                 <span className="text-[15px] md:text-[17px] text-gray-400">
                   Next project
                 </span>
@@ -182,7 +174,7 @@ export function ExploreMoreSection({
       <div className="mb-12">
         <button
           onClick={onBack}
-          className="text-[17px] text-gray-700 hover:text-gray-900 transition-colors duration-300 font-medium focus-ring rounded focus:outline-none"
+          className="text-[17px] text-gray-700 hover:text-gray-900 transition-colors duration-300 font-medium cursor-pointer focus-ring rounded focus:outline-none"
         >
           ← Back to Homepage
         </button>
