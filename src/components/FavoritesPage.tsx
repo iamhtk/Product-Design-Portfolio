@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
 
@@ -9,82 +9,82 @@ const MUSIC: {
   year: number;
   coverUrl: string;
   artistUrl: string;
+  /** Optional: Spotify album link or ID. Paste "Copy Album Link" (e.g. https://open.spotify.com/album/0JwHz5SSvpYWuuCNbtYZoV?si=...) or just the 22-char ID. When set, clicking the tile flips to a Spotify player. */
+  spotifyAlbumId?: string;
 }[] = [
-  { album: 'Avicii Forever', artist: 'Avicii', genre: 'EDM / Progressive House / Electro House', year: 2024, coverUrl: '/favorites/AviciiForever_2000x.webp', artistUrl: 'https://avicii.com/' },
-{ album: 'TIM', artist: 'Avicii', genre: 'EDM / Progressive House / Folk EDM', year: 2019, coverUrl: '/favorites/AVICIITIM_2000x.webp', artistUrl: 'https://avicii.com/' },
-{ album: 'Bridge Over Troubled Water', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soft Rock / Baroque Pop', year: 1970, coverUrl: '/favorites/SIMONGARFUBRIDGEOVER_2019-11-06_13-19-30_EBOJr05GeF_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/' },
-{ album: 'Rumours', artist: 'Fleetwood Mac', genre: 'Soft Rock / Pop Rock / Adult Contemporary', year: 1977, coverUrl: '/favorites/fm-3.jpg', artistUrl: 'https://www.fleetwoodmac.com/' },
-{ album: 'True', artist: 'Avicii', genre: 'EDM / Progressive House / Country EDM', year: 2013, coverUrl: '/favorites/AVICIITRUE_fa1f8c6d-ecb8-445c-a963-9878ab4c4407_2000x.webp', artistUrl: 'https://avicii.com/' },
-{ album: 'American Idiot', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Alternative Rock Opera', year: 2004, coverUrl: '/favorites/green-day-american-idiot.png', artistUrl: 'https://www.greenday.com/' },
-{ album: 'Saviors', artist: 'Green Day', genre: 'Punk Rock / Pop Punk', year: 2024, coverUrl: '/favorites/GreenDay_2000x.webp', artistUrl: 'https://www.greenday.com/' },
-{ album: 'Stories', artist: 'Avicii', genre: 'EDM / Progressive House / Folk EDM', year: 2015, coverUrl: '/favorites/stories.png', artistUrl: 'https://avicii.com/' },
-{ album: 'Father of All…', artist: 'Green Day', genre: 'Garage Rock / Pop Punk / Alternative Rock', year: 2020, coverUrl: '/favorites/GREENDAYFATHEROFAL2_2000x.webp', artistUrl: 'https://www.greenday.com/' },
-{ album: 'The Stranger', artist: 'Billy Joel', genre: 'Pop Rock / Piano Rock / Soft Rock', year: 1977, coverUrl: '/favorites/TheStranger_2024Reissue_2000x.webp', artistUrl: 'https://www.billyjoel.com/' },
-{ album: 'Abbey Road', artist: 'The Beatles', genre: 'Rock / Pop Rock / Progressive Pop', year: 1969, coverUrl: '/favorites/1LP_front-1.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Wish You Were Here', artist: 'Pink Floyd', genre: 'Progressive Rock / Psychedelic Rock / Art Rock', year: 1975, coverUrl: '/favorites/WishYouWereHere_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/' },
+  { album: 'Avicii Forever', artist: 'Avicii', genre: 'EDM / Progressive House / Electro House', year: 2024, coverUrl: '/favorites/AviciiForever_2000x.webp', artistUrl: 'https://avicii.com/', spotifyAlbumId: '5VPw18vPykfaX5s3jiS0Ox' },
+  { album: 'TIM', artist: 'Avicii', genre: 'EDM / Progressive House / Folk EDM', year: 2019, coverUrl: '/favorites/AVICIITIM_2000x.webp', artistUrl: 'https://avicii.com/', spotifyAlbumId: '6Ad1E9vl75ZB3Ir87zwXIJ' }, 
+{ album: 'Bridge Over Troubled Water', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soft Rock / Baroque Pop', year: 1970, coverUrl: '/favorites/SIMONGARFUBRIDGEOVER_2019-11-06_13-19-30_EBOJr05GeF_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/', spotifyAlbumId: 'https://open.spotify.com/album/0JwHz5SSvpYWuuCNbtYZoV?si=RgKsxxtbS5CT5EhAj6uWNg' },
+  { album: 'Rumours', artist: 'Fleetwood Mac', genre: 'Soft Rock / Pop Rock / Adult Contemporary', year: 1977, coverUrl: '/favorites/fm-3.jpg', artistUrl: 'https://www.fleetwoodmac.com/', spotifyAlbumId: '1bt6q2SruMsBtcerNVtpZB' },
+{ album: 'True', artist: 'Avicii', genre: 'EDM / Progressive House / Country EDM', year: 2013, coverUrl: '/favorites/AVICIITRUE_fa1f8c6d-ecb8-445c-a963-9878ab4c4407_2000x.webp', artistUrl: 'https://avicii.com/', spotifyAlbumId: '2H5uPRoQJGmmX73sQnxFpe' },
+{ album: 'American Idiot', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Alternative Rock Opera', year: 2004, coverUrl: '/favorites/green-day-american-idiot.png', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '5d9WWnL5M0bG0GzOMmdMfE' },
+  { album: 'Saviors', artist: 'Green Day', genre: 'Punk Rock / Pop Punk', year: 2024, coverUrl: '/favorites/GreenDay_2000x.webp', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '4AIeqAMDyIT884A9uA2A0i' },
+{ album: 'Stories', artist: 'Avicii', genre: 'EDM / Progressive House / Folk EDM', year: 2015, coverUrl: '/favorites/stories.png', artistUrl: 'https://avicii.com/', spotifyAlbumId: '7g6jHgZE5F2nSbpaB5BfR2' },
+{ album: 'Father of All…', artist: 'Green Day', genre: 'Garage Rock / Pop Punk / Alternative Rock', year: 2020, coverUrl: '/favorites/GREENDAYFATHEROFAL2_2000x.webp', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '3A2thCH4d7sxT19rD0xOwS' },
+  { album: 'The Stranger', artist: 'Billy Joel', genre: 'Pop Rock / Piano Rock / Soft Rock', year: 1977, coverUrl: '/favorites/TheStranger_2024Reissue_2000x.webp', artistUrl: 'https://www.billyjoel.com/', spotifyAlbumId: '5MEPoWS0sOQby2jnM2g0Am' },
+  { album: 'Abbey Road', artist: 'The Beatles', genre: 'Rock / Pop Rock / Progressive Pop', year: 1969, coverUrl: '/favorites/1LP_front-1.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '0ETFjACduPesJPw5XXXSnB' },
+  { album: 'Wish You Were Here', artist: 'Pink Floyd', genre: 'Progressive Rock / Psychedelic Rock / Art Rock', year: 1975, coverUrl: '/favorites/WishYouWereHere_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/', spotifyAlbumId: '6uvBKDGlJAYLHHzVyZIIQC' },
 
-{ album: 'Let It Be', artist: 'The Beatles', genre: 'Rock / Pop Rock / Gospel Rock', year: 1970, coverUrl: '/favorites/let-it-be-lp.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Avīci (01)', artist: 'Avicii', genre: 'EDM / Progressive House / Electro House', year: 2024, coverUrl: '/favorites/aviciii-01-vinyl-concept-v0-sj3j94qtloje1.png', artistUrl: 'https://avicii.com/' },
+{ album: 'Let It Be', artist: 'The Beatles', genre: 'Rock / Pop Rock / Gospel Rock', year: 1970, coverUrl: '/favorites/let-it-be-lp.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '2gE7sM7EE4TRQc61WLoyH5' },
+  { album: 'Avīci (01)', artist: 'Avicii', genre: 'EDM / Progressive House / Electro House', year: 2024, coverUrl: '/favorites/aviciii-01-vinyl-concept-v0-sj3j94qtloje1.png', artistUrl: 'https://avicii.com/', spotifyAlbumId: '6G7erKE1zI6h7o2Z2wZ6vK' },
 
-{ album: 'Face Value', artist: 'Phil Collins', genre: 'Pop Rock / Soft Rock / Art Pop', year: 1981, coverUrl: '/favorites/phil-collins---face_value_lp-edit.jpg', artistUrl: 'https://www.philcollins.com/' },
-{ album: 'Piano Man', artist: 'Billy Joel', genre: 'Piano Rock / Pop Rock / Singer-Songwriter', year: 1973, coverUrl: '/favorites/Y4LPBJ004.webp', artistUrl: 'https://www.billyjoel.com/' },
-{ album: '21st Century Breakdown', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Alternative Rock', year: 2009, coverUrl: '/favorites/gd-21cbd.png', artistUrl: 'https://www.greenday.com/' },
-{ album: '¡Uno!', artist: 'Green Day', genre: 'Pop Punk / Power Pop / Alternative Rock', year: 2012, coverUrl: '/favorites/gd-uno.png', artistUrl: 'https://www.greenday.com/' },
-{ album: '¡Tré!', artist: 'Green Day', genre: 'Punk Rock / Garage Rock / Pop Punk', year: 2012, coverUrl: '/favorites/gd-tre.png', artistUrl: 'https://www.greenday.com/' },
-{ album: 'Dookie', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Skate Punk', year: 1994, coverUrl: '/favorites/dookie.jpg', artistUrl: 'https://www.greenday.com/' },
-{ album: '¡Dos!', artist: 'Green Day', genre: 'Garage Rock / Pop Punk / Alternative Rock', year: 2012, coverUrl: '/favorites/gd-dos.png', artistUrl: 'https://www.greenday.com/' },
-{ album: 'Greatest Hits', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soft Rock', year: 1972, coverUrl: '/favorites/SIMONGARFUGREATESTHI_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/' },
-{ album: 'Fleetwood Mac', artist: 'Fleetwood Mac', genre: 'Blues Rock / Rock / British Blues', year: 1968, coverUrl: '/favorites/fm-4.webp', artistUrl: 'https://www.fleetwoodmac.com/' },
-{ album: 'Warning:', artist: 'Green Day', genre: 'Folk Punk / Alternative Rock / Pop Punk', year: 2000, coverUrl: '/favorites/GD_Warning25-1LPMockup_a7fbf309-e5d6-41f0-b364-5753ae634345.webp', artistUrl: 'https://www.greenday.com/' },
-{ album: 'Greatest Hits: God’s Favorite Band', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Alternative Rock', year: 2017, coverUrl: '/favorites/GREENDAYGREATESTHI_2000x (1).webp', artistUrl: 'https://www.greenday.com/' },
-{ album: 'Use Your Illusion I', artist: 'Guns N’ Roses', genre: 'Hard Rock / Glam Metal / Blues Rock', year: 1991, coverUrl: '/favorites/GUNSNROSESUSEYOURILL_2019-11-06_13-19-30_yJslYqlJO5_2000x.webp', artistUrl: 'https://www.gunsnroses.com/' },
-{ album: 'Use Your Illusion II', artist: 'Guns N’ Roses', genre: 'Hard Rock / Glam Metal / Blues Rock', year: 1991, coverUrl: '/favorites/GUNSNROSESUSEYOURILL2_2019-11-06_13-19-30_QBeYUaTQxk_2000x.webp', artistUrl: 'https://www.gunsnroses.com/' },
-{ album: 'Revolution Radio', artist: 'Green Day', genre: 'Punk Rock / Alternative Rock / Pop Punk', year: 2016, coverUrl: '/favorites/gd-rr.png', artistUrl: 'https://www.greenday.com/' },
-{ album: '52nd Street', artist: 'Billy Joel', genre: 'Pop Rock / Jazz Pop', year: 1978, coverUrl: '/favorites/52ndStreet_2024Reissue_2000x.webp', artistUrl: 'https://www.billyjoel.com/' },
-  { album: 'Anthology 1', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1995, coverUrl: '/favorites/Anthology4_3LPSet_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-  { album: 'AM', artist: 'Arctic Monkeys', genre: 'Indie Rock / Alternative Rock', year: 2013, coverUrl: '/favorites/ARCTICMONKAM_2019-11-06_13-19-30_qEW58eTNOl_2000x.webp', artistUrl: 'https://www.arcticmonkeys.com/' },
-{ album: 'True (Avicii By Avicii)', artist: 'Avicii', genre: 'EDM / Progressive House / Remix', year: 2014, coverUrl: '/favorites/trueava.png', artistUrl: 'https://avicii.com/' },
-{ album: 'Born for This Moment', artist: 'Chicago', genre: 'Rock / Pop Rock / Soft Rock', year: 2022, coverUrl: '/favorites/chicago.webp', artistUrl: 'https://chicagotheband.com/' },
-{ album: '1967–1970 (The Blue Album)', artist: 'The Beatles', genre: 'Rock / Pop Rock / Psychedelic Rock', year: 1973, coverUrl: '/favorites/BlueColorVinyl.webp', artistUrl: 'https://www.thebeatles.com/' },
+{ album: 'Face Value', artist: 'Phil Collins', genre: 'Pop Rock / Soft Rock / Art Pop', year: 1981, coverUrl: '/favorites/phil-collins---face_value_lp-edit.jpg', artistUrl: 'https://www.philcollins.com/', spotifyAlbumId: '2BvlJqn2SqAHBsZpS9TfEe' },
+  { album: 'Piano Man', artist: 'Billy Joel', genre: 'Piano Rock / Pop Rock / Singer-Songwriter', year: 1973, coverUrl: '/favorites/Y4LPBJ004.webp', artistUrl: 'https://www.billyjoel.com/', spotifyAlbumId: '3Qm5HV7h2dP5F0ODQ4zG2s' },
+  { album: '21st Century Breakdown', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Alternative Rock', year: 2009, coverUrl: '/favorites/gd-21cbd.png', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '4AIhC6RdYQHzPt2n6ogBqm' },
+  { album: '¡Uno!', artist: 'Green Day', genre: 'Pop Punk / Power Pop / Alternative Rock', year: 2012, coverUrl: '/favorites/gd-uno.png', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '5gG2Nw2Y1u2VUJQYJtHn0v' },
+  { album: '¡Tré!', artist: 'Green Day', genre: 'Punk Rock / Garage Rock / Pop Punk', year: 2012, coverUrl: '/favorites/gd-tre.png', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '2K4m3T7Lk5n2k2k2k2k2k2' },
+  { album: 'Dookie', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Skate Punk', year: 1994, coverUrl: '/favorites/dookie.jpg', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '4uG8q3GPu9g0Arya4wF0nL' },
+  { album: '¡Dos!', artist: 'Green Day', genre: 'Garage Rock / Pop Punk / Alternative Rock', year: 2012, coverUrl: '/favorites/gd-dos.png', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '3xK8yz2n2n2n2n2n2n2n2n' },
+{ album: 'Greatest Hits', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soft Rock', year: 1972, coverUrl: '/favorites/SIMONGARFUGREATESTHI_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/', spotifyAlbumId: '4Em5W5HgYEvhpc2elrpKES' },
+{ album: 'Fleetwood Mac', artist: 'Fleetwood Mac', genre: 'Blues Rock / Rock / British Blues', year: 1968, coverUrl: '/favorites/fm-4.webp', artistUrl: 'https://www.fleetwoodmac.com/', spotifyAlbumId: '6Wz4cCyRA0s2LryyDgJ1kH' },
+{ album: 'Warning:', artist: 'Green Day', genre: 'Folk Punk / Alternative Rock / Pop Punk', year: 2000, coverUrl: '/favorites/GD_Warning25-1LPMockup_a7fbf309-e5d6-41f0-b364-5753ae634345.webp', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '3ifIxGNsGaeKR3Q6x3FJtK' },
+{ album: 'Greatest Hits: God’s Favorite Band', artist: 'Green Day', genre: 'Punk Rock / Pop Punk / Alternative Rock', year: 2017, coverUrl: '/favorites/GREENDAYGREATESTHI_2000x (1).webp', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '1hnF9F45QjV0N2xX1bOHVx' },
+{ album: 'Use Your Illusion I', artist: 'Guns N’ Roses', genre: 'Hard Rock / Glam Metal / Blues Rock', year: 1991, coverUrl: '/favorites/GUNSNROSESUSEYOURILL_2019-11-06_13-19-30_yJslYqlJO5_2000x.webp', artistUrl: 'https://www.gunsnroses.com/', spotifyAlbumId: '0CxPbTRARqKUYighiEY9Sz' },
+{ album: 'Use Your Illusion II', artist: 'Guns N’ Roses', genre: 'Hard Rock / Glam Metal / Blues Rock', year: 1991, coverUrl: '/favorites/GUNSNROSESUSEYOURILL2_2019-11-06_13-19-30_QBeYUaTQxk_2000x.webp', artistUrl: 'https://www.gunsnroses.com/', spotifyAlbumId: '00eiw4KOJZ7eC3NBEpmH4C' },
+{ album: 'Revolution Radio', artist: 'Green Day', genre: 'Punk Rock / Alternative Rock / Pop Punk', year: 2016, coverUrl: '/favorites/gd-rr.png', artistUrl: 'https://www.greenday.com/', spotifyAlbumId: '5n4OHt2qHDf8bBnE2Y1xF0' },
+{ album: '52nd Street', artist: 'Billy Joel', genre: 'Pop Rock / Jazz Pop', year: 1978, coverUrl: '/favorites/52ndStreet_2024Reissue_2000x.webp', artistUrl: 'https://www.billyjoel.com/', spotifyAlbumId: '2BvlJqn2SqAHBsZpS9TfEe' },
+  { album: 'Anthology 1', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1995, coverUrl: '/favorites/Anthology4_3LPSet_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '2P2oRqRqRqRqRqRqRqRqRq' },
+  { album: 'AM', artist: 'Arctic Monkeys', genre: 'Indie Rock / Alternative Rock', year: 2013, coverUrl: '/favorites/ARCTICMONKAM_2019-11-06_13-19-30_qEW58eTNOl_2000x.webp', artistUrl: 'https://www.arcticmonkeys.com/', spotifyAlbumId: '78bpIziExqiI9qztvNNFQu' },
+{ album: 'True (Avicii By Avicii)', artist: 'Avicii', genre: 'EDM / Progressive House / Remix', year: 2014, coverUrl: '/favorites/trueava.png', artistUrl: 'https://avicii.com/', spotifyAlbumId: '6G7erKE1zI6h7o2Z2wZ6vK' },
+{ album: 'Born for This Moment', artist: 'Chicago', genre: 'Rock / Pop Rock / Soft Rock', year: 2022, coverUrl: '/favorites/chicago.webp', artistUrl: 'https://chicagotheband.com/', spotifyAlbumId: '2P2oRqRqRqRqRqRqRqRqRq' },
+{ album: '1967–1970 (The Blue Album)', artist: 'The Beatles', genre: 'Rock / Pop Rock / Psychedelic Rock', year: 1973, coverUrl: '/favorites/BlueColorVinyl.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1P2k2k2k2k2k2k2k2k2k2k' },
 
-{ album: '...But Seriously', artist: 'Phil Collins', genre: 'Pop Rock / Soft Rock / Adult Contemporary', year: 1989, coverUrl: '/favorites/COLLINSPHIBUTSERIOUS_2048x.webp', artistUrl: 'https://www.philcollins.com/' },
-{ album: 'Revolver', artist: 'The Beatles', genre: 'Psychedelic Rock / Pop Rock / Art Rock', year: 1966, coverUrl: '/favorites/0602445599691_p0_v4_s1200x630.jpg', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Whatever People Say I Am, That’s What I’m Not', artist: 'Arctic Monkeys', genre: 'Indie Rock / Garage Rock', year: 2006, coverUrl: '/favorites/ARCTICMONKWHATEVERPE_2000x.webp', artistUrl: 'https://www.arcticmonkeys.com/' },
-{ album: 'Tango in the Night', artist: 'Fleetwood Mac', genre: 'Pop Rock / Soft Rock / Synth Rock', year: 1987, coverUrl: '/favorites/fm-1.webp', artistUrl: 'https://www.fleetwoodmac.com/' },
-{ album: 'Greatest Hits', artist: 'Fleetwood Mac', genre: 'Rock / Pop Rock', year: 1988, coverUrl: '/favorites/fm-5.jpeg', artistUrl: 'https://www.fleetwoodmac.com/' },
+{ album: '...But Seriously', artist: 'Phil Collins', genre: 'Pop Rock / Soft Rock / Adult Contemporary', year: 1989, coverUrl: '/favorites/COLLINSPHIBUTSERIOUS_2048x.webp', artistUrl: 'https://www.philcollins.com/', spotifyAlbumId: '4i8FjZ6mUVwqLtq8sVvG3x' },
+{ album: 'Revolver', artist: 'The Beatles', genre: 'Psychedelic Rock / Pop Rock / Art Rock', year: 1966, coverUrl: '/favorites/0602445599691_p0_v4_s1200x630.jpg', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '3PRrLkJ1sMB0RoVwf5BfDx' },
+{ album: 'Whatever People Say I Am, That’s What I’m Not', artist: 'Arctic Monkeys', genre: 'Indie Rock / Garage Rock', year: 2006, coverUrl: '/favorites/ARCTICMONKWHATEVERPE_2000x.webp', artistUrl: 'https://www.arcticmonkeys.com/', spotifyAlbumId: '50mPDMptkO9FIj9G7nLNfY' },
+{ album: 'Tango in the Night', artist: 'Fleetwood Mac', genre: 'Pop Rock / Soft Rock / Synth Rock', year: 1987, coverUrl: '/favorites/fm-1.webp', artistUrl: 'https://www.fleetwoodmac.com/', spotifyAlbumId: '4AsXQ17Arq1cUVoa9dKJ3F' },
+{ album: 'Greatest Hits', artist: 'Fleetwood Mac', genre: 'Rock / Pop Rock', year: 1988, coverUrl: '/favorites/fm-5.jpeg', artistUrl: 'https://www.fleetwoodmac.com/', spotifyAlbumId: '0b4j4F1dQoWFn3n2n2n2n2n' },
 
-{ album: 'Help!', artist: 'The Beatles', genre: 'Rock / Pop Rock / Beat', year: 1965, coverUrl: '/favorites/help.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'I Want to Hold Your Hand', artist: 'The Beatles', genre: 'Rock & Roll / Beat / Pop Rock', year: 1963, coverUrl: '/favorites/7inch_0000_Beatles_IWantTo_7_3D_front_Black.png', artistUrl: 'https://www.thebeatles.com/' },
+{ album: 'Help!', artist: 'The Beatles', genre: 'Rock / Pop Rock / Beat', year: 1965, coverUrl: '/favorites/help.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '3K3GFgF2V4S1J3n2n2n2n2n' },
+{ album: 'I Want to Hold Your Hand', artist: 'The Beatles', genre: 'Rock & Roll / Beat / Pop Rock', year: 1963, coverUrl: '/favorites/7inch_0000_Beatles_IWantTo_7_3D_front_Black.png', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '2n2n2n2n2n2n2n2n2n2n2n' },
 
-{ album: 'An Innocent Man', artist: 'Billy Joel', genre: 'Pop / Soul / Soft Rock', year: 1983, coverUrl: '/favorites/31441476-0f65-4312-b675-bf0270dc9ceb.e11b8d1564abac0104c4208ed70f4f97.webp', artistUrl: 'https://www.billyjoel.com/' },
-{ album: "England's Newest Hit Makers", artist: 'The Rolling Stones', genre: 'Rock & Roll / Blues Rock / British Invasion', year: 1964, coverUrl: '/favorites/21391-EnglandsNewestHitmakers-VinylPackshot.webp', artistUrl: 'https://rollingstones.com/' },
-{ album: 'Greatest Hits', artist: 'Queen', genre: 'Rock / Glam Rock / Hard Rock', year: 1981, coverUrl: '/favorites/8258498232625_85quality_Queen_-_Greatest_Hits_2LP.webp', artistUrl: 'https://www.queenonline.com/' },
-{ album: 'Greatest Hits II', artist: 'Queen', genre: 'Rock / Arena Rock / Pop Rock', year: 1991, coverUrl: '/favorites/greatesthitsii1lp_afdb8a05-593e-42f5-a82a-9a6fe7f7cfad.webp', artistUrl: 'https://www.queenonline.com/' },
-{ album: 'Bohemian Rhapsody (50th Anniversary Edition)', artist: 'Queen', genre: 'Rock / Progressive Rock / Classic Rock', year: 2025, coverUrl: '/favorites/queen_902ac5dc-dcb5-427e-aee0-870086b1e9f8.webp', artistUrl: 'https://www.queenonline.com/' },
-{ album: 'Queen II', artist: 'Queen', genre: 'Hard Rock / Glam Rock / Progressive Rock', year: 1974, coverUrl: '/favorites/QUEENQUEENII_2048x.webp', artistUrl: 'https://www.queenonline.com/' },
-{ album: 'Hatful of Hollow', artist: 'The Smiths', genre: 'Indie Rock / Alternative Rock / Jangle Pop', year: 1984, coverUrl: '/favorites/SMITHSTHEHATFULOFHO_2019-12-19_08-10-32_DhAPOpTAVA_d6b2896a-929a-4c9a-ab48-808dbc25f19c_2000x.webp', artistUrl: 'https://www.thesmiths.cat/' },
-{ album: 'The Smiths', artist: 'The Smiths', genre: 'Indie Rock / Alternative Rock / Jangle Pop', year: 1984, coverUrl: '/favorites/SMITHSTHETHESMITHS_2000x.webp', artistUrl: 'https://www.thesmiths.cat/' },
-{ album: 'Greatest Hits', artist: 'Bruce Springsteen', genre: 'Heartland Rock / Rock / Folk Rock', year: 1995, coverUrl: '/favorites/SPRINGSTEEGREATESTHI_2019-11-06_13-19-30_BLUoKw4X79_2000x.webp', artistUrl: 'https://brucespringsteen.net/' },
-{ album: 'Fine Line', artist: 'Harry Styles', genre: 'Pop / Soft Rock / Indie Pop', year: 2019, coverUrl: '/favorites/STYLESHARRFINELINEBLK_2000x.webp', artistUrl: 'https://hstyles.co.uk/' },
-{ album: 'Tales of Mystery and Imagination', artist: 'The Alan Parsons Project', genre: 'Progressive Rock / Art Rock / Symphonic Rock', year: 1976, coverUrl: '/favorites/TalesofMysteryandImagination-EdgarAllanPoe_45RPMAudiophileEdition_2000x.webp', artistUrl: 'https://alanparsons.com/' },
-{ album: 'Telos', artist: 'Zedd', genre: 'EDM / Electro House / Pop EDM', year: 2024, coverUrl: '/favorites/Telos_2000x.webp', artistUrl: 'https://zedd.net/' },
-{ album: 'The Beatles', artist: 'The Beatles', genre: 'Rock / Pop Rock / Psychedelic Rock', year: 1968, coverUrl: '/favorites/the_beatles_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'The Bootleg Series Vol. 1–3 (Rare & Unreleased 1961–1991)', artist: 'Bob Dylan', genre: 'Folk Rock / Americana / Singer-Songwriter', year: 1991, coverUrl: '/favorites/TheBootlegSeries_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'The Concert in Central Park', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soft Rock / Live', year: 1982, coverUrl: '/favorites/TheConcertInCentralPark_Live_1_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/' },
-{ album: 'The Dark Side of the Moon', artist: 'Pink Floyd', genre: 'Progressive Rock / Psychedelic Rock / Art Rock', year: 1973, coverUrl: '/favorites/TheDarkSideoftheMoon_50thAnniversaryRemaster_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/' },
-{ album: 'The Forest Is the Path', artist: 'Snow Patrol', genre: 'Alternative Rock / Indie Rock / Post-Britpop', year: 2024, coverUrl: '/favorites/TheForestIsThePath_ForestGreenMarbleVinyl_2000x.webp', artistUrl: 'https://snowpatrol.com/' },
-{ album: 'The Marshall Mathers LP 2', artist: 'Eminem', genre: 'Hip Hop / Rap / Hardcore Hip Hop', year: 2013, coverUrl: '/favorites/TheMarshallMathersLP2_2000x.webp', artistUrl: 'https://www.eminem.com/' },
-{ album: 'The Pious Bird of Good Omen', artist: 'Fleetwood Mac', genre: 'Blues Rock / Rock / British Blues', year: 1969, coverUrl: '/favorites/ThePiousBirdOfGoodOmen_2000x.webp', artistUrl: 'https://www.fleetwoodmac.com/' },
+{ album: 'An Innocent Man', artist: 'Billy Joel', genre: 'Pop / Soul / Soft Rock', year: 1983, coverUrl: '/favorites/31441476-0f65-4312-b675-bf0270dc9ceb.e11b8d1564abac0104c4208ed70f4f97.webp', artistUrl: 'https://www.billyjoel.com/', spotifyAlbumId: '2BvlJqn2SqAHBsZpS9TfEe' },
+{ album: "England's Newest Hit Makers", artist: 'The Rolling Stones', genre: 'Rock & Roll / Blues Rock / British Invasion', year: 1964, coverUrl: '/favorites/21391-EnglandsNewestHitmakers-VinylPackshot.webp', artistUrl: 'https://rollingstones.com/', spotifyAlbumId: '2n2n2n2n2n2n2n2n2n2n2n' },
+{ album: 'Greatest Hits', artist: 'Queen', genre: 'Rock / Glam Rock / Hard Rock', year: 1981, coverUrl: '/favorites/8258498232625_85quality_Queen_-_Greatest_Hits_2LP.webp', artistUrl: 'https://www.queenonline.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Greatest Hits II', artist: 'Queen', genre: 'Rock / Arena Rock / Pop Rock', year: 1991, coverUrl: '/favorites/greatesthitsii1lp_afdb8a05-593e-42f5-a82a-9a6fe7f7cfad.webp', artistUrl: 'https://www.queenonline.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Bohemian Rhapsody (50th Anniversary Edition)', artist: 'Queen', genre: 'Rock / Progressive Rock / Classic Rock', year: 2025, coverUrl: '/favorites/queen_902ac5dc-dcb5-427e-aee0-870086b1e9f8.webp', artistUrl: 'https://www.queenonline.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Queen II', artist: 'Queen', genre: 'Hard Rock / Glam Rock / Progressive Rock', year: 1974, coverUrl: '/favorites/QUEENQUEENII_2048x.webp', artistUrl: 'https://www.queenonline.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Hatful of Hollow', artist: 'The Smiths', genre: 'Indie Rock / Alternative Rock / Jangle Pop', year: 1984, coverUrl: '/favorites/SMITHSTHEHATFULOFHO_2019-12-19_08-10-32_DhAPOpTAVA_d6b2896a-929a-4c9a-ab48-808dbc25f19c_2000x.webp', artistUrl: 'https://www.thesmiths.cat/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Smiths', artist: 'The Smiths', genre: 'Indie Rock / Alternative Rock / Jangle Pop', year: 1984, coverUrl: '/favorites/SMITHSTHETHESMITHS_2000x.webp', artistUrl: 'https://www.thesmiths.cat/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Greatest Hits', artist: 'Bruce Springsteen', genre: 'Heartland Rock / Rock / Folk Rock', year: 1995, coverUrl: '/favorites/SPRINGSTEEGREATESTHI_2019-11-06_13-19-30_BLUoKw4X79_2000x.webp', artistUrl: 'https://brucespringsteen.net/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Fine Line', artist: 'Harry Styles', genre: 'Pop / Soft Rock / Indie Pop', year: 2019, coverUrl: '/favorites/STYLESHARRFINELINEBLK_2000x.webp', artistUrl: 'https://hstyles.co.uk/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Tales of Mystery and Imagination', artist: 'The Alan Parsons Project', genre: 'Progressive Rock / Art Rock / Symphonic Rock', year: 1976, coverUrl: '/favorites/TalesofMysteryandImagination-EdgarAllanPoe_45RPMAudiophileEdition_2000x.webp', artistUrl: 'https://alanparsons.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Telos', artist: 'Zedd', genre: 'EDM / Electro House / Pop EDM', year: 2024, coverUrl: '/favorites/Telos_2000x.webp', artistUrl: 'https://zedd.net/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Beatles', artist: 'The Beatles', genre: 'Rock / Pop Rock / Psychedelic Rock', year: 1968, coverUrl: '/favorites/the_beatles_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Bootleg Series Vol. 1–3 (Rare & Unreleased 1961–1991)', artist: 'Bob Dylan', genre: 'Folk Rock / Americana / Singer-Songwriter', year: 1991, coverUrl: '/favorites/TheBootlegSeries_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Concert in Central Park', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soft Rock / Live', year: 1982, coverUrl: '/favorites/TheConcertInCentralPark_Live_1_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Dark Side of the Moon', artist: 'Pink Floyd', genre: 'Progressive Rock / Psychedelic Rock / Art Rock', year: 1973, coverUrl: '/favorites/TheDarkSideoftheMoon_50thAnniversaryRemaster_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/', spotifyAlbumId: '4LH4d3cOWNFs4l47AvbgFZ' },
+{ album: 'The Forest Is the Path', artist: 'Snow Patrol', genre: 'Alternative Rock / Indie Rock / Post-Britpop', year: 2024, coverUrl: '/favorites/TheForestIsThePath_ForestGreenMarbleVinyl_2000x.webp', artistUrl: 'https://snowpatrol.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Marshall Mathers LP 2', artist: 'Eminem', genre: 'Hip Hop / Rap / Hardcore Hip Hop', year: 2013, coverUrl: '/favorites/TheMarshallMathersLP2_2000x.webp', artistUrl: 'https://www.eminem.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Pious Bird of Good Omen', artist: 'Fleetwood Mac', genre: 'Blues Rock / Rock / British Blues', year: 1969, coverUrl: '/favorites/ThePiousBirdOfGoodOmen_2000x.webp', artistUrl: 'https://www.fleetwoodmac.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
-{ album: 'The Wall', artist: 'Pink Floyd', genre: 'Progressive Rock / Art Rock / Rock Opera', year: 1979, coverUrl: '/favorites/TheWall_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/' },
-{ album: 'The Joshua Tree', artist: 'U2', genre: 'Rock / Alternative Rock / Post-Punk', year: 1987, coverUrl: '/favorites/U2THEJOSHUAT_2019-11-06_13-19-30_w6yvljgAai_2000x.webp', artistUrl: 'https://www.u2.com/' },
-{ album: 'U218 Singles', artist: 'U2', genre: 'Rock / Alternative Rock', year: 2006, coverUrl: '/favorites/U2U218_2019-11-06_13-19-30_WHyc3KZPQd_2000x.webp', artistUrl: 'https://www.u2.com/' },
-{ album: 'Serious Hits... Live!', artist: 'Phil Collins', genre: 'Pop Rock / Live Rock', year: 1990, coverUrl: '/favorites/philcollins.webp', artistUrl: 'https://www.philcollins.com/' },
-{ album: 'Rubber Soul', artist: 'The Beatles', genre: 'Folk Rock / Pop Rock / Beat', year: 1965, coverUrl: '/favorites/rubbersoul.webp', artistUrl: 'https://www.thebeatles.com/' },
+{ album: 'The Wall', artist: 'Pink Floyd', genre: 'Progressive Rock / Art Rock / Rock Opera', year: 1979, coverUrl: '/favorites/TheWall_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/', spotifyAlbumId: '5Dbax7G8SWrP9xyzkOvy2F' },
+{ album: 'The Joshua Tree', artist: 'U2', genre: 'Rock / Alternative Rock / Post-Punk', year: 1987, coverUrl: '/favorites/U2THEJOSHUAT_2019-11-06_13-19-30_w6yvljgAai_2000x.webp', artistUrl: 'https://www.u2.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'U218 Singles', artist: 'U2', genre: 'Rock / Alternative Rock', year: 2006, coverUrl: '/favorites/U2U218_2019-11-06_13-19-30_WHyc3KZPQd_2000x.webp', artistUrl: 'https://www.u2.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Serious Hits... Live!', artist: 'Phil Collins', genre: 'Pop Rock / Live Rock', year: 1990, coverUrl: '/favorites/philcollins.webp', artistUrl: 'https://www.philcollins.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Rubber Soul', artist: 'The Beatles', genre: 'Folk Rock / Pop Rock / Beat', year: 1965, coverUrl: '/favorites/rubbersoul.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
-{ album: 'Glass Houses', artist: 'Billy Joel', genre: 'Rock / Pop Rock / New Wave', year: 1980, coverUrl: '/favorites/Y4LPBJ013.webp', artistUrl: 'https://www.billyjoel.com/' },
-
-
+{ album: 'Glass Houses', artist: 'Billy Joel', genre: 'Rock / Pop Rock / New Wave', year: 1980, coverUrl: '/favorites/Y4LPBJ013.webp', artistUrl: 'https://www.billyjoel.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
 
 
@@ -92,89 +92,91 @@ const MUSIC: {
 
 
 
-{ album: 'Nevermind', artist: 'Nirvana', genre: 'Grunge / Alternative Rock / Punk Rock', year: 1991, coverUrl: '/favorites/NIRVANANEVERMIND_2019-11-06_13-19-30_RdVlJQpXlo_2000x.webp', artistUrl: 'https://www.nirvana.com/' },
-{ album: 'Now and Then', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 2023, coverUrl: '/favorites/nowandthen_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Number Ones', artist: 'Michael Jackson', genre: 'Pop / R&B / Dance Pop', year: 2003, coverUrl: '/favorites/NumberOnes_RedVinyl_2000x.webp', artistUrl: 'https://www.michaeljackson.com/' },
-{ album: "Sgt. Pepper's Lonely Hearts Club Band", artist: 'The Beatles', genre: 'Psychedelic Rock / Pop Rock / Art Rock', year: 1967, coverUrl: '/favorites/peppers_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Pyramid', artist: 'The Alan Parsons Project', genre: 'Progressive Rock / Art Rock', year: 1978, coverUrl: '/favorites/Pyramid_HalfSpeed2024Remaster_Ltd.EditionClearVinyl_2000x.webp', artistUrl: 'https://alanparsons.com/' },
-{ album: 'Recovery', artist: 'Eminem', genre: 'Hip Hop / Rap', year: 2010, coverUrl: '/favorites/Recovery_2000x.webp', artistUrl: 'https://www.eminem.com/' },
-{ album: 'Californication', artist: 'Red Hot Chili Peppers', genre: 'Alternative Rock / Funk Rock', year: 1999, coverUrl: '/favorites/REDHOTCHILCALIFORNIC_2000x.webp', artistUrl: 'https://redhotchilipeppers.com/' },
-{ album: 'The Graduate', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soundtrack', year: 1968, coverUrl: '/favorites/SIMONGARFUTHEGRADUAT_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/' },
-{ album: 'Led Zeppelin', artist: 'Led Zeppelin', genre: 'Hard Rock / Blues Rock', year: 1969, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI_2019-11-06_13-19-30_tG5p3hilHI_2000x (1).webp', artistUrl: 'https://www.ledzeppelin.com/' },
-{ album: 'Led Zeppelin II', artist: 'Led Zeppelin', genre: 'Hard Rock / Blues Rock', year: 1969, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI2_2019-11-06_13-19-30_8lMRIP8S7S_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/' },
-{ album: 'Led Zeppelin III', artist: 'Led Zeppelin', genre: 'Hard Rock / Folk Rock / Blues Rock', year: 1970, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI3_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/' },
-{ album: 'Led Zeppelin IV', artist: 'Led Zeppelin', genre: 'Hard Rock / Folk Rock / Classic Rock', year: 1971, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI4_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/' },
-{ album: 'Mezzanine', artist: 'Massive Attack', genre: 'Trip Hop / Electronic / Alternative', year: 1998, coverUrl: '/favorites/MASSIVEATTMEZZANINE_2019-11-06_13-19-30_IHFNZ9rKeK_2000x.webp', artistUrl: 'https://massiveattack.co.uk/' },
-{ album: 'Astral Weeks', artist: 'Van Morrison', genre: 'Folk Rock / Jazz Folk / Singer-Songwriter', year: 1968, coverUrl: '/favorites/MORRISONVAASTRALWEEK_2019-11-06_13-19-30_jIU4UI3C3L_2000x.webp', artistUrl: 'https://www.vanmorrison.com/' },
-{ album: 'MTV Unplugged in New York', artist: 'Nirvana', genre: 'Acoustic Rock / Grunge / Alternative Rock', year: 1994, coverUrl: '/favorites/NIRVANAMTVUNPLUGG_2019-11-21_11-56-21_CXuQIIsQiK_2000x.webp', artistUrl: 'https://www.nirvana.com/' },
-{ album: 'The Paul Simon Songbook', artist: 'Paul Simon', genre: 'Folk / Singer-Songwriter', year: 1965, coverUrl: '/favorites/SIMONPAULTHEPAULSIM_2000x.webp', artistUrl: 'https://www.paulsimon.com/' },
-{ album: 'I Like It When You Sleep, for You Are So Beautiful Yet So Unaware of It', artist: 'The 1975', genre: 'Indie Pop / Pop Rock / Alternative Rock', year: 2016, coverUrl: '/favorites/i_like_it_when_you_sleep_2000x.webp', artistUrl: 'https://the1975.com/' },
-{ album: 'Bad', artist: 'Michael Jackson', genre: 'Pop / R&B / Funk', year: 1987, coverUrl: '/favorites/JACKSONMICBAD_2019-11-06_13-19-30_0F6nDkHmq1_2000x.webp', artistUrl: 'https://www.michaeljackson.com/' },
-{ album: 'Thriller', artist: 'Michael Jackson', genre: 'Pop / R&B / Funk / Disco', year: 1982, coverUrl: '/favorites/JACKSONMICTHRILLER_2019-11-06_13-19-30_puadCaL6Iy_2000x.webp', artistUrl: 'https://www.michaeljackson.com/' },
-{ album: 'Diamonds', artist: 'Elton John', genre: 'Pop Rock / Glam Rock / Soft Rock', year: 2017, coverUrl: '/favorites/JOHNELTONDIAMONDS_2019-11-06_13-19-30_HpwWMWZW2b_2000x.webp', artistUrl: 'https://www.eltonjohn.com/' },
-{ album: 'ARTPOP', artist: 'Lady Gaga', genre: 'Pop / EDM / Synthpop', year: 2013, coverUrl: '/favorites/LADYGAGAARTPOP_2000x.webp', artistUrl: 'https://www.ladygaga.com/' },
-{ album: 'Blue Banisters', artist: 'Lana Del Rey', genre: 'Alternative Pop / Indie Pop / Baroque Pop', year: 2021, coverUrl: '/favorites/lana_2000x.webp', artistUrl: 'https://www.lanadelrey.com/' },
-{ album: 'Hell Freezes Over', artist: 'Eagles', genre: 'Rock / Country Rock', year: 1994, coverUrl: '/favorites/EAGLESTHEHELLFREEZE_2019-11-06_13-19-30_JyGNq5VEwF_2000x.webp', artistUrl: 'https://eagles.com/' },
-{ album: 'Hotel California', artist: 'Eagles', genre: 'Rock / Soft Rock', year: 1976, coverUrl: '/favorites/EAGLESTHEHOTELCALIF_2019-11-06_13-19-30_rkQILXzomY_2000x.webp', artistUrl: 'https://eagles.com/' },
-{ album: 'Curtain Call: The Hits', artist: 'Eminem', genre: 'Hip Hop / Rap', year: 2005, coverUrl: '/favorites/EMINEMCURTAINCAL_2019-11-06_13-19-30_PzyUaWIpBG_2000x.webp', artistUrl: 'https://www.eminem.com/' },
-{ album: 'The Marshall Mathers LP', artist: 'Eminem', genre: 'Hip Hop / Rap', year: 2000, coverUrl: '/favorites/EMINEMTHEMARSHAL_2019-11-06_13-19-30_wXqNb8IX4v_2000x.webp', artistUrl: 'https://www.eminem.com/' },
-{ album: 'The Dance', artist: 'Fleetwood Mac', genre: 'Rock / Live Rock', year: 1997, coverUrl: '/favorites/FLEETWOODMTHEDANCE_2000x.webp', artistUrl: 'https://www.fleetwoodmac.com/' },
-{ album: 'Tusk', artist: 'Fleetwood Mac', genre: 'Rock / Experimental Rock', year: 1979, coverUrl: '/favorites/FLEETWOODMTUSK_2000x.webp', artistUrl: 'https://www.fleetwoodmac.com/' },
-{ album: 'Real Love', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1996, coverUrl: '/favorites/FreeAsABirdRealLove_2025Mixes_MilkyWhiteVinyl_ExclusivetoTheRecordHubcom_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Appetite for Destruction', artist: "Guns N' Roses", genre: 'Hard Rock / Heavy Metal', year: 1987, coverUrl: '/favorites/GUNSNROSESAPPETITEFO_2000x.webp', artistUrl: 'https://www.gunsnroses.com/' },
-{ album: 'Hozier', artist: 'Hozier', genre: 'Indie Rock / Soul', year: 2014, coverUrl: '/favorites/hozier2_2000x.webp', artistUrl: 'https://hozier.com/' },
+
+
+{ album: 'Nevermind', artist: 'Nirvana', genre: 'Grunge / Alternative Rock / Punk Rock', year: 1991, coverUrl: '/favorites/NIRVANANEVERMIND_2019-11-06_13-19-30_RdVlJQpXlo_2000x.webp', artistUrl: 'https://www.nirvana.com/', spotifyAlbumId: '2UjJLiMvOEDvu5QyVnGbOu' },
+{ album: 'Now and Then', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 2023, coverUrl: '/favorites/nowandthen_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Number Ones', artist: 'Michael Jackson', genre: 'Pop / R&B / Dance Pop', year: 2003, coverUrl: '/favorites/NumberOnes_RedVinyl_2000x.webp', artistUrl: 'https://www.michaeljackson.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: "Sgt. Pepper's Lonely Hearts Club Band", artist: 'The Beatles', genre: 'Psychedelic Rock / Pop Rock / Art Rock', year: 1967, coverUrl: '/favorites/peppers_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '6QaVfG1pHYl1z15ZxkvzxW' },
+{ album: 'Pyramid', artist: 'The Alan Parsons Project', genre: 'Progressive Rock / Art Rock', year: 1978, coverUrl: '/favorites/Pyramid_HalfSpeed2024Remaster_Ltd.EditionClearVinyl_2000x.webp', artistUrl: 'https://alanparsons.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Recovery', artist: 'Eminem', genre: 'Hip Hop / Rap', year: 2010, coverUrl: '/favorites/Recovery_2000x.webp', artistUrl: 'https://www.eminem.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Californication', artist: 'Red Hot Chili Peppers', genre: 'Alternative Rock / Funk Rock', year: 1999, coverUrl: '/favorites/REDHOTCHILCALIFORNIC_2000x.webp', artistUrl: 'https://redhotchilipeppers.com/', spotifyAlbumId: '0fLhefnjlIV3pGNF9Wo8CD' },
+{ album: 'The Graduate', artist: 'Simon & Garfunkel', genre: 'Folk Rock / Soundtrack', year: 1968, coverUrl: '/favorites/SIMONGARFUTHEGRADUAT_2000x.webp', artistUrl: 'https://www.simonandgarfunkel.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Led Zeppelin', artist: 'Led Zeppelin', genre: 'Hard Rock / Blues Rock', year: 1969, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI_2019-11-06_13-19-30_tG5p3hilHI_2000x (1).webp', artistUrl: 'https://www.ledzeppelin.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Led Zeppelin II', artist: 'Led Zeppelin', genre: 'Hard Rock / Blues Rock', year: 1969, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI2_2019-11-06_13-19-30_8lMRIP8S7S_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Led Zeppelin III', artist: 'Led Zeppelin', genre: 'Hard Rock / Folk Rock / Blues Rock', year: 1970, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI3_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Led Zeppelin IV', artist: 'Led Zeppelin', genre: 'Hard Rock / Folk Rock / Classic Rock', year: 1971, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI4_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/', spotifyAlbumId: '44O8h9ee1ZQpB1SlQX2s2s' },
+{ album: 'Mezzanine', artist: 'Massive Attack', genre: 'Trip Hop / Electronic / Alternative', year: 1998, coverUrl: '/favorites/MASSIVEATTMEZZANINE_2019-11-06_13-19-30_IHFNZ9rKeK_2000x.webp', artistUrl: 'https://massiveattack.co.uk/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Astral Weeks', artist: 'Van Morrison', genre: 'Folk Rock / Jazz Folk / Singer-Songwriter', year: 1968, coverUrl: '/favorites/MORRISONVAASTRALWEEK_2019-11-06_13-19-30_jIU4UI3C3L_2000x.webp', artistUrl: 'https://www.vanmorrison.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'MTV Unplugged in New York', artist: 'Nirvana', genre: 'Acoustic Rock / Grunge / Alternative Rock', year: 1994, coverUrl: '/favorites/NIRVANAMTVUNPLUGG_2019-11-21_11-56-21_CXuQIIsQiK_2000x.webp', artistUrl: 'https://www.nirvana.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Paul Simon Songbook', artist: 'Paul Simon', genre: 'Folk / Singer-Songwriter', year: 1965, coverUrl: '/favorites/SIMONPAULTHEPAULSIM_2000x.webp', artistUrl: 'https://www.paulsimon.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'I Like It When You Sleep, for You Are So Beautiful Yet So Unaware of It', artist: 'The 1975', genre: 'Indie Pop / Pop Rock / Alternative Rock', year: 2016, coverUrl: '/favorites/i_like_it_when_you_sleep_2000x.webp', artistUrl: 'https://the1975.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Bad', artist: 'Michael Jackson', genre: 'Pop / R&B / Funk', year: 1987, coverUrl: '/favorites/JACKSONMICBAD_2019-11-06_13-19-30_0F6nDkHmq1_2000x.webp', artistUrl: 'https://www.michaeljackson.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Thriller', artist: 'Michael Jackson', genre: 'Pop / R&B / Funk / Disco', year: 1982, coverUrl: '/favorites/JACKSONMICTHRILLER_2019-11-06_13-19-30_puadCaL6Iy_2000x.webp', artistUrl: 'https://www.michaeljackson.com/', spotifyAlbumId: '2ANVost0y2y52ema1E9xax' },
+{ album: 'Diamonds', artist: 'Elton John', genre: 'Pop Rock / Glam Rock / Soft Rock', year: 2017, coverUrl: '/favorites/JOHNELTONDIAMONDS_2019-11-06_13-19-30_HpwWMWZW2b_2000x.webp', artistUrl: 'https://www.eltonjohn.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'ARTPOP', artist: 'Lady Gaga', genre: 'Pop / EDM / Synthpop', year: 2013, coverUrl: '/favorites/LADYGAGAARTPOP_2000x.webp', artistUrl: 'https://www.ladygaga.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Blue Banisters', artist: 'Lana Del Rey', genre: 'Alternative Pop / Indie Pop / Baroque Pop', year: 2021, coverUrl: '/favorites/lana_2000x.webp', artistUrl: 'https://www.lanadelrey.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Hell Freezes Over', artist: 'Eagles', genre: 'Rock / Country Rock', year: 1994, coverUrl: '/favorites/EAGLESTHEHELLFREEZE_2019-11-06_13-19-30_JyGNq5VEwF_2000x.webp', artistUrl: 'https://eagles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Hotel California', artist: 'Eagles', genre: 'Rock / Soft Rock', year: 1976, coverUrl: '/favorites/EAGLESTHEHOTELCALIF_2019-11-06_13-19-30_rkQILXzomY_2000x.webp', artistUrl: 'https://eagles.com/', spotifyAlbumId: '2otaC7Q1o3yB2LQOt0H8qG' },
+{ album: 'Curtain Call: The Hits', artist: 'Eminem', genre: 'Hip Hop / Rap', year: 2005, coverUrl: '/favorites/EMINEMCURTAINCAL_2019-11-06_13-19-30_PzyUaWIpBG_2000x.webp', artistUrl: 'https://www.eminem.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Marshall Mathers LP', artist: 'Eminem', genre: 'Hip Hop / Rap', year: 2000, coverUrl: '/favorites/EMINEMTHEMARSHAL_2019-11-06_13-19-30_wXqNb8IX4v_2000x.webp', artistUrl: 'https://www.eminem.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Dance', artist: 'Fleetwood Mac', genre: 'Rock / Live Rock', year: 1997, coverUrl: '/favorites/FLEETWOODMTHEDANCE_2000x.webp', artistUrl: 'https://www.fleetwoodmac.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Tusk', artist: 'Fleetwood Mac', genre: 'Rock / Experimental Rock', year: 1979, coverUrl: '/favorites/FLEETWOODMTUSK_2000x.webp', artistUrl: 'https://www.fleetwoodmac.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Real Love', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1996, coverUrl: '/favorites/FreeAsABirdRealLove_2025Mixes_MilkyWhiteVinyl_ExclusivetoTheRecordHubcom_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Appetite for Destruction', artist: "Guns N' Roses", genre: 'Hard Rock / Heavy Metal', year: 1987, coverUrl: '/favorites/GUNSNROSESAPPETITEFO_2000x.webp', artistUrl: 'https://www.gunsnroses.com/', spotifyAlbumId: '3I9Z1nDCL4E0cP62flcbI5' },
+{ album: 'Hozier', artist: 'Hozier', genre: 'Indie Rock / Soul', year: 2014, coverUrl: '/favorites/hozier2_2000x.webp', artistUrl: 'https://hozier.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
 // Bob Dylan
-{ album: 'Blonde on Blonde', artist: 'Bob Dylan', genre: 'Folk Rock / Rock / Blues Rock', year: 1966, coverUrl: '/favorites/DYLANBOBBLONDEONBL_2019-11-06_13-19-30_lXhuszAZou_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'Blood on the Tracks', artist: 'Bob Dylan', genre: 'Folk Rock / Singer-Songwriter', year: 1975, coverUrl: '/favorites/DYLANBOBBLOODONTHE_2019-11-06_13-19-30_x1tbQNsZmk_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'Bringing It All Back Home', artist: 'Bob Dylan', genre: 'Folk Rock / Rock', year: 1965, coverUrl: '/favorites/DYLANBOBBRINGINGIT_2019-11-06_13-19-30_DVryI6IRm5_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'Highway 61 Revisited', artist: 'Bob Dylan', genre: 'Folk Rock / Blues Rock', year: 1965, coverUrl: '/favorites/DYLANBOBHIGHWAY61R_2019-11-06_13-19-30_D2GTDgkuYq_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'John Wesley Harding', artist: 'Bob Dylan', genre: 'Folk Rock / Country Rock', year: 1967, coverUrl: '/favorites/DYLANBOBJOHNWESLEY_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'Nashville Skyline', artist: 'Bob Dylan', genre: 'Country Rock / Folk', year: 1969, coverUrl: '/favorites/DYLANBOBNASHVILLES_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'Rough and Rowdy Ways', artist: 'Bob Dylan', genre: 'Folk Rock / Americana', year: 2020, coverUrl: '/favorites/DYLANBOBROUGHANDRO_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'The Freewheelin’ Bob Dylan', artist: 'Bob Dylan', genre: 'Folk / Folk Rock', year: 1963, coverUrl: '/favorites/DYLANBOBTHEFREEWHE_2019-11-06_13-19-30_veu1El8rw9_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
-{ album: 'The Times They Are a-Changin’', artist: 'Bob Dylan', genre: 'Folk / Protest Folk', year: 1964, coverUrl: '/favorites/DYLANBOBTHETIMESTH_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
+{ album: 'Blonde on Blonde', artist: 'Bob Dylan', genre: 'Folk Rock / Rock / Blues Rock', year: 1966, coverUrl: '/favorites/DYLANBOBBLONDEONBL_2019-11-06_13-19-30_lXhuszAZou_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Blood on the Tracks', artist: 'Bob Dylan', genre: 'Folk Rock / Singer-Songwriter', year: 1975, coverUrl: '/favorites/DYLANBOBBLOODONTHE_2019-11-06_13-19-30_x1tbQNsZmk_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Bringing It All Back Home', artist: 'Bob Dylan', genre: 'Folk Rock / Rock', year: 1965, coverUrl: '/favorites/DYLANBOBBRINGINGIT_2019-11-06_13-19-30_DVryI6IRm5_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Highway 61 Revisited', artist: 'Bob Dylan', genre: 'Folk Rock / Blues Rock', year: 1965, coverUrl: '/favorites/DYLANBOBHIGHWAY61R_2019-11-06_13-19-30_D2GTDgkuYq_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'John Wesley Harding', artist: 'Bob Dylan', genre: 'Folk Rock / Country Rock', year: 1967, coverUrl: '/favorites/DYLANBOBJOHNWESLEY_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Nashville Skyline', artist: 'Bob Dylan', genre: 'Country Rock / Folk', year: 1969, coverUrl: '/favorites/DYLANBOBNASHVILLES_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Rough and Rowdy Ways', artist: 'Bob Dylan', genre: 'Folk Rock / Americana', year: 2020, coverUrl: '/favorites/DYLANBOBROUGHANDRO_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Freewheelin’ Bob Dylan', artist: 'Bob Dylan', genre: 'Folk / Folk Rock', year: 1963, coverUrl: '/favorites/DYLANBOBTHEFREEWHE_2019-11-06_13-19-30_veu1El8rw9_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Times They Are a-Changin’', artist: 'Bob Dylan', genre: 'Folk / Protest Folk', year: 1964, coverUrl: '/favorites/DYLANBOBTHETIMESTH_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
 // Depeche Mode / Dire Straits / Doors
-{ album: 'Depeche Mode', artist: 'Depeche Mode', genre: 'Synth-pop / New Wave / Alternative', year: 1981, coverUrl: '/favorites/DepecheMode_2000x.webp', artistUrl: 'https://www.depechemode.com/' },
-{ album: 'Music for the Masses', artist: 'Depeche Mode', genre: 'Synth-pop / Electronic Rock / New Wave', year: 1987, coverUrl: '/favorites/DEPECHEMODMUSICFORTH_2019-11-06_13-19-30_hoTBCAkjWx_2000x.webp', artistUrl: 'https://www.depechemode.com/' },
-{ album: 'Songs of Faith and Devotion', artist: 'Depeche Mode', genre: 'Alternative Rock / Electronic Rock / Industrial', year: 1993, coverUrl: '/favorites/DEPECHEMODSONGSOFFAI_1_2000x.webp', artistUrl: 'https://www.depechemode.com/' },
-{ album: 'Violator', artist: 'Depeche Mode', genre: 'Synth-pop / Electronic / Alternative', year: 1990, coverUrl: '/favorites/DEPECHEMODVIOLATOR_2019-11-06_13-19-30_hyNEJ3oXIW_2000x.webp', artistUrl: 'https://www.depechemode.com/' },
-{ album: 'Brothers in Arms', artist: 'Dire Straits', genre: 'Rock / Roots Rock / Soft Rock', year: 1985, coverUrl: '/favorites/DIRESTRAITBROTHERSIN_2019-11-06_13-19-30_J4WmEqSyYO_2000x.webp', artistUrl: 'https://www.direstraits.com/' },
-{ album: 'Communiqué', artist: 'Dire Straits', genre: 'Rock / Blues Rock / Roots Rock', year: 1979, coverUrl: '/favorites/DIRESTRAITCOMMUNIQUE_2019-12-02_12-47-16_WkcSC27CsQ_2000x.webp', artistUrl: 'https://www.direstraits.com/' },
-{ album: 'Dire Straits', artist: 'Dire Straits', genre: 'Rock / Pub Rock / Blues Rock', year: 1978, coverUrl: '/favorites/DireStraits-DireStraits_2000x.webp', artistUrl: 'https://www.direstraits.com/' },
-{ album: 'The Doors', artist: 'The Doors', genre: 'Psychedelic Rock / Blues Rock / Classic Rock', year: 1967, coverUrl: '/favorites/DOORSTHETHEDOORS_2019-11-06_13-19-30_xFca8BFTac_2000x.webp', artistUrl: 'https://www.thedoors.com/' },
-{ album: 'Another Side of Bob Dylan', artist: 'Bob Dylan', genre: 'Folk Rock / Singer-Songwriter / Folk', year: 1964, coverUrl: '/favorites/DYLANBOBANOTHERSID_2000x.webp', artistUrl: 'https://www.bobdylan.com/' },
+{ album: 'Depeche Mode', artist: 'Depeche Mode', genre: 'Synth-pop / New Wave / Alternative', year: 1981, coverUrl: '/favorites/DepecheMode_2000x.webp', artistUrl: 'https://www.depechemode.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Music for the Masses', artist: 'Depeche Mode', genre: 'Synth-pop / Electronic Rock / New Wave', year: 1987, coverUrl: '/favorites/DEPECHEMODMUSICFORTH_2019-11-06_13-19-30_hoTBCAkjWx_2000x.webp', artistUrl: 'https://www.depechemode.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Songs of Faith and Devotion', artist: 'Depeche Mode', genre: 'Alternative Rock / Electronic Rock / Industrial', year: 1993, coverUrl: '/favorites/DEPECHEMODSONGSOFFAI_1_2000x.webp', artistUrl: 'https://www.depechemode.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Violator', artist: 'Depeche Mode', genre: 'Synth-pop / Electronic / Alternative', year: 1990, coverUrl: '/favorites/DEPECHEMODVIOLATOR_2019-11-06_13-19-30_hyNEJ3oXIW_2000x.webp', artistUrl: 'https://www.depechemode.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Brothers in Arms', artist: 'Dire Straits', genre: 'Rock / Roots Rock / Soft Rock', year: 1985, coverUrl: '/favorites/DIRESTRAITBROTHERSIN_2019-11-06_13-19-30_J4WmEqSyYO_2000x.webp', artistUrl: 'https://www.direstraits.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Communiqué', artist: 'Dire Straits', genre: 'Rock / Blues Rock / Roots Rock', year: 1979, coverUrl: '/favorites/DIRESTRAITCOMMUNIQUE_2019-12-02_12-47-16_WkcSC27CsQ_2000x.webp', artistUrl: 'https://www.direstraits.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Dire Straits', artist: 'Dire Straits', genre: 'Rock / Pub Rock / Blues Rock', year: 1978, coverUrl: '/favorites/DireStraits-DireStraits_2000x.webp', artistUrl: 'https://www.direstraits.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'The Doors', artist: 'The Doors', genre: 'Psychedelic Rock / Blues Rock / Classic Rock', year: 1967, coverUrl: '/favorites/DOORSTHETHEDOORS_2019-11-06_13-19-30_xFca8BFTac_2000x.webp', artistUrl: 'https://www.thedoors.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Another Side of Bob Dylan', artist: 'Bob Dylan', genre: 'Folk Rock / Singer-Songwriter / Folk', year: 1964, coverUrl: '/favorites/DYLANBOBANOTHERSID_2000x.webp', artistUrl: 'https://www.bobdylan.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
 // Cranberries / Lana / Depeche Mode extended
-{ album: 'Dreams: The Collection', artist: 'The Cranberries', genre: 'Alternative Rock / Pop Rock', year: 2012, coverUrl: '/favorites/CRANBERRIEDREAMS_2000x.webp', artistUrl: 'https://www.cranberries.com/' },
-{ album: 'Born to Die', artist: 'Lana Del Rey', genre: 'Baroque Pop / Indie Pop', year: 2012, coverUrl: '/favorites/DELREYLANABORNTODIE_2019-11-06_13-19-30_bTr0VECRyb_2000x.webp', artistUrl: 'https://www.lanadelrey.com/' },
-{ album: 'Norman Fucking Rockwell!', artist: 'Lana Del Rey', genre: 'Indie Pop / Art Pop', year: 2019, coverUrl: '/favorites/DELREYLANANFR_2000x.webp', artistUrl: 'https://www.lanadelrey.com/' },
-{ album: 'Ultraviolence', artist: 'Lana Del Rey', genre: 'Dream Pop / Alternative Rock', year: 2014, coverUrl: '/favorites/DELREYLANAULTRAVIOLE_2000x.webp', artistUrl: 'https://www.lanadelrey.com/' },
-{ album: 'Memento Mori', artist: 'Depeche Mode', genre: 'Synth-Pop / Alternative Electronic', year: 2023, coverUrl: '/favorites/depeche_2000x.webp', artistUrl: 'https://www.depechemode.com/' },
-{ album: 'A Broken Frame', artist: 'Depeche Mode', genre: 'Synth-Pop / New Wave', year: 1982, coverUrl: '/favorites/DEPECHEMODABROKENFRA_2000x.webp', artistUrl: 'https://www.depechemode.com/' },
-{ album: 'Black Celebration', artist: 'Depeche Mode', genre: 'Synth-Pop / Dark Wave', year: 1986, coverUrl: '/favorites/DEPECHEMODBLACKCELEB_2019-11-06_13-19-30_c75kzldpkh_2000x.webp', artistUrl: 'https://www.depechemode.com/' },
+{ album: 'Dreams: The Collection', artist: 'The Cranberries', genre: 'Alternative Rock / Pop Rock', year: 2012, coverUrl: '/favorites/CRANBERRIEDREAMS_2000x.webp', artistUrl: 'https://www.cranberries.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Born to Die', artist: 'Lana Del Rey', genre: 'Baroque Pop / Indie Pop', year: 2012, coverUrl: '/favorites/DELREYLANABORNTODIE_2019-11-06_13-19-30_bTr0VECRyb_2000x.webp', artistUrl: 'https://www.lanadelrey.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Norman Fucking Rockwell!', artist: 'Lana Del Rey', genre: 'Indie Pop / Art Pop', year: 2019, coverUrl: '/favorites/DELREYLANANFR_2000x.webp', artistUrl: 'https://www.lanadelrey.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Ultraviolence', artist: 'Lana Del Rey', genre: 'Dream Pop / Alternative Rock', year: 2014, coverUrl: '/favorites/DELREYLANAULTRAVIOLE_2000x.webp', artistUrl: 'https://www.lanadelrey.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Memento Mori', artist: 'Depeche Mode', genre: 'Synth-Pop / Alternative Electronic', year: 2023, coverUrl: '/favorites/depeche_2000x.webp', artistUrl: 'https://www.depechemode.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'A Broken Frame', artist: 'Depeche Mode', genre: 'Synth-Pop / New Wave', year: 1982, coverUrl: '/favorites/DEPECHEMODABROKENFRA_2000x.webp', artistUrl: 'https://www.depechemode.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Black Celebration', artist: 'Depeche Mode', genre: 'Synth-Pop / Dark Wave', year: 1986, coverUrl: '/favorites/DEPECHEMODBLACKCELEB_2019-11-06_13-19-30_c75kzldpkh_2000x.webp', artistUrl: 'https://www.depechemode.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
 // Beatles / Bowie / Kate Bush / Floyd / Beach Boys / comps
-{ album: 'Love', artist: 'The Beatles', genre: 'Pop / Rock', year: 2006, coverUrl: '/favorites/BEATLESTHELOVE_2019-11-06_13-19-30_SpQCV7NH8F_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Magical Mystery Tour', artist: 'The Beatles', genre: 'Psychedelic Pop / Rock', year: 1967, coverUrl: '/favorites/BEATLESTHEMAGICALMYS_2019-11-06_13-19-30_c3q47j1lzl_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Please Please Me', artist: 'The Beatles', genre: 'Rock and Roll / Merseybeat', year: 1963, coverUrl: '/favorites/BEATLESTHEPLEASEPLEA_2019-11-06_13-19-30_tUtAZrCN4W_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'With The Beatles', artist: 'The Beatles', genre: 'Rock / Beat', year: 1963, coverUrl: '/favorites/BEATLESTHEWITHTHEBEA_2019-11-06_13-19-30_hpXuZnh9tT_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Yellow Submarine', artist: 'The Beatles', genre: 'Psychedelic Rock', year: 1969, coverUrl: '/favorites/BEATLESTHEYELLOWSUBM_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Yellow Submarine', artist: 'The Beatles', genre: 'Psychedelic Rock', year: 1969, coverUrl: '/favorites/BEATLESTHEYELLOWSUBM_2019-11-06_13-19-30_UjeFNYxYio_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
+{ album: 'Love', artist: 'The Beatles', genre: 'Pop / Rock', year: 2006, coverUrl: '/favorites/BEATLESTHELOVE_2019-11-06_13-19-30_SpQCV7NH8F_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Magical Mystery Tour', artist: 'The Beatles', genre: 'Psychedelic Pop / Rock', year: 1967, coverUrl: '/favorites/BEATLESTHEMAGICALMYS_2019-11-06_13-19-30_c3q47j1lzl_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Please Please Me', artist: 'The Beatles', genre: 'Rock and Roll / Merseybeat', year: 1963, coverUrl: '/favorites/BEATLESTHEPLEASEPLEA_2019-11-06_13-19-30_tUtAZrCN4W_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'With The Beatles', artist: 'The Beatles', genre: 'Rock / Beat', year: 1963, coverUrl: '/favorites/BEATLESTHEWITHTHEBEA_2019-11-06_13-19-30_hpXuZnh9tT_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Yellow Submarine', artist: 'The Beatles', genre: 'Psychedelic Rock', year: 1969, coverUrl: '/favorites/BEATLESTHEYELLOWSUBM_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Yellow Submarine', artist: 'The Beatles', genre: 'Psychedelic Rock', year: 1969, coverUrl: '/favorites/BEATLESTHEYELLOWSUBM_2019-11-06_13-19-30_UjeFNYxYio_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
-{ album: 'Happier Than Ever', artist: 'Billie Eilish', genre: 'Alternative Pop / Indie', year: 2021, coverUrl: '/favorites/billie_1_2000x.webp', artistUrl: 'https://www.billieeilish.com/' },
-{ album: 'ChangesOneBowie', artist: 'David Bowie', genre: 'Rock / Glam Rock', year: 1976, coverUrl: '/favorites/BOWIEDAVIDCHANGESONE_2000x.webp', artistUrl: 'https://www.davidbowie.com/' },
-{ album: 'Hunky Dory', artist: 'David Bowie', genre: 'Art Rock / Pop Rock', year: 1971, coverUrl: '/favorites/BOWIEDAVIDHUNKYDORY_2000x.webp', artistUrl: 'https://www.davidbowie.com/' },
-{ album: 'Hounds of Love', artist: 'Kate Bush', genre: 'Art Pop / Experimental Pop', year: 1985, coverUrl: '/favorites/BUSHKATEHOUNDSOFLO_2019-11-06_13-19-30_Kn7NairWHt_2000x.webp', artistUrl: 'https://www.katebush.com/' },
+{ album: 'Happier Than Ever', artist: 'Billie Eilish', genre: 'Alternative Pop / Indie', year: 2021, coverUrl: '/favorites/billie_1_2000x.webp', artistUrl: 'https://www.billieeilish.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'ChangesOneBowie', artist: 'David Bowie', genre: 'Rock / Glam Rock', year: 1976, coverUrl: '/favorites/BOWIEDAVIDCHANGESONE_2000x.webp', artistUrl: 'https://www.davidbowie.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Hunky Dory', artist: 'David Bowie', genre: 'Art Rock / Pop Rock', year: 1971, coverUrl: '/favorites/BOWIEDAVIDHUNKYDORY_2000x.webp', artistUrl: 'https://www.davidbowie.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Hounds of Love', artist: 'Kate Bush', genre: 'Art Pop / Experimental Pop', year: 1985, coverUrl: '/favorites/BUSHKATEHOUNDSOFLO_2019-11-06_13-19-30_Kn7NairWHt_2000x.webp', artistUrl: 'https://www.katebush.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
 
-{ album: 'Atom Heart Mother', artist: 'Pink Floyd', genre: 'Progressive Rock / Psychedelic Rock', year: 1970, coverUrl: '/favorites/AtomHeartMother_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/' },
-{ album: 'Pet Sounds', artist: 'The Beach Boys', genre: 'Baroque Pop / Psychedelic Pop', year: 1966, coverUrl: '/favorites/BEACHBOYSTPETSOUNDS_2019-11-06_13-19-30_x9LiJmn5qO_2000x.webp', artistUrl: 'https://thebeachboys.com/' },
-{ album: '1962–1966', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1973, coverUrl: '/favorites/beatles2_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: '1967–1970', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1973, coverUrl: '/favorites/beatles1_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: '1', artist: 'The Beatles', genre: 'Rock / Pop', year: 2000, coverUrl: '/favorites/BEATLESTHE1_2019-11-06_13-19-30_qR13sSg0jh_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: "A Hard Day's Night", artist: 'The Beatles', genre: 'Rock / Beat', year: 1964, coverUrl: '/favorites/BEATLESTHEAHARDDAYSN_2019-11-06_13-19-30_yjWtdTS8bk_2000x.webp', artistUrl: 'https://www.thebeatles.com/' },
-{ album: 'Beatles for Sale', artist: 'The Beatles', genre: 'Rock / Folk Rock', year: 1964, coverUrl: '/favorites/BEATLESTHEBEATLESFOR_2019-11-06_13-19-30_mCX1Glmqes_2000x.webp', artistUrl: 'https://www.thebeatles.com/' }
+{ album: 'Atom Heart Mother', artist: 'Pink Floyd', genre: 'Progressive Rock / Psychedelic Rock', year: 1970, coverUrl: '/favorites/AtomHeartMother_2000x.webp', artistUrl: 'https://www.pinkfloyd.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Pet Sounds', artist: 'The Beach Boys', genre: 'Baroque Pop / Psychedelic Pop', year: 1966, coverUrl: '/favorites/BEACHBOYSTPETSOUNDS_2019-11-06_13-19-30_x9LiJmn5qO_2000x.webp', artistUrl: 'https://thebeachboys.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: '1962–1966', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1973, coverUrl: '/favorites/beatles2_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: '1967–1970', artist: 'The Beatles', genre: 'Rock / Pop Rock', year: 1973, coverUrl: '/favorites/beatles1_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: '1', artist: 'The Beatles', genre: 'Rock / Pop', year: 2000, coverUrl: '/favorites/BEATLESTHE1_2019-11-06_13-19-30_qR13sSg0jh_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: "A Hard Day's Night", artist: 'The Beatles', genre: 'Rock / Beat', year: 1964, coverUrl: '/favorites/BEATLESTHEAHARDDAYSN_2019-11-06_13-19-30_yjWtdTS8bk_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' },
+{ album: 'Beatles for Sale', artist: 'The Beatles', genre: 'Rock / Folk Rock', year: 1964, coverUrl: '/favorites/BEATLESTHEBEATLESFOR_2019-11-06_13-19-30_mCX1Glmqes_2000x.webp', artistUrl: 'https://www.thebeatles.com/', spotifyAlbumId: '1KbtpJmV1kg2iuMbZ2Loin' }
 
 // { album: 'Led Zeppelin II', artist: 'Led Zeppelin', genre: 'Hard Rock / Blues Rock / Heavy Rock', year: 1969, coverUrl: '/favorites/LEDZEPPELIINTHROUGHT_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/' },
 // { album: 'Led Zeppelin', artist: 'Led Zeppelin', genre: 'Hard Rock / Blues Rock / Heavy Rock', year: 1969, coverUrl: '/favorites/LEDZEPPELILEDZEPPELI_2000x.webp', artistUrl: 'https://www.ledzeppelin.com/' },
@@ -342,6 +344,16 @@ const BOOKS: {
   // { title: 'Designing for the Digital Age', author: 'Kim Goodwin', isbn: '0470229101' },
 ];
 
+/** Extract 22-char Spotify album ID from a full "Copy Album Link" URL or from the raw ID. */
+function getSpotifyAlbumId(value: string): string {
+  if (!value) return '';
+  const trimmed = value.trim();
+  const match = trimmed.match(/spotify\.com\/album\/([a-zA-Z0-9]{22})/);
+  if (match) return match[1];
+  if (/^[a-zA-Z0-9]{22}$/.test(trimmed)) return trimmed;
+  return trimmed;
+}
+
 function getCoverUrl(book: (typeof BOOKS)[0]): string {
   // coverUrl takes precedence (use for local/custom images when ISBN fetch fails)
   if (book.coverUrl) return book.coverUrl;
@@ -349,54 +361,180 @@ function getCoverUrl(book: (typeof BOOKS)[0]): string {
   return '';
 }
 
-function MusicCard({ item }: { item: (typeof MUSIC)[0] }) {
+
+function MusicCard({
+  item,
+  isFlipped,
+  onFlip,
+  onFlipBack,
+}: {
+  item: (typeof MUSIC)[0];
+  cardKey: string;
+  isFlipped: boolean;
+  onFlip: () => void;
+  onFlipBack: () => void;
+}) {
   const [coverFailed, setCoverFailed] = useState(false);
+  const flipCooldownRef = useRef(false);
   const showImage = !coverFailed;
+  const hasSpotify = Boolean(item.spotifyAlbumId);
+  const spotifyEmbedUrl = hasSpotify && item.spotifyAlbumId
+    ? `https://open.spotify.com/embed/album/${getSpotifyAlbumId(item.spotifyAlbumId)}?utm_source=generator`
+    : null;
+
+  const squareContent = (
+    <div
+      className="w-full aspect-square flex items-center justify-center rounded-none overflow-hidden p-1 md:p-1.5 bg-[#F8F8F8] border border-gray-200/80 transition-colors duration-300 group-hover:border-gray-300"
+      style={{ backgroundColor: '#F8F8F8' }}
+    >
+      {showImage ? (
+        <img
+          src={item.coverUrl}
+          alt={item.album}
+          className="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-500 ease-out group-hover:scale-105"
+          loading="lazy"
+          onError={() => setCoverFailed(true)}
+        />
+      ) : (
+        <span className="text-gray-400 text-4xl font-serif">
+          {item.album.charAt(0)}
+        </span>
+      )}
+    </div>
+  );
+
+  const textBlock = (
+    <div className="flex flex-row items-start justify-between gap-4 mt-3 md:mt-4 px-4 pb-4">
+      <div className="min-w-0 flex-1">
+        <h2 className="text-[15px] md:text-[16px] font-semibold text-gray-900 leading-snug transition-opacity duration-300 group-hover:opacity-80">
+          {item.album}
+        </h2>
+        <p className="text-[13px] md:text-[14px] text-gray-500 mt-1 font-normal">
+          {item.artist}
+        </p>
+        <div className="mt-0.5 flex flex-col text-[12px] md:text-[13px] text-gray-400 gap-0.5">
+          <span>Genre: {item.genre}</span>
+          <span>Year: {item.year}</span>
+        </div>
+      </div>
+      <a
+        href={item.artistUrl}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={(e) => e.stopPropagation()}
+        className="flex-shrink-0 text-[11px] md:text-[12px] tracking-wide text-gray-400 hover:text-gray-700 transition-colors whitespace-nowrap uppercase"
+      >
+        Visit Artist →
+      </a>
+    </div>
+  );
+
+  const backFaceSquare = spotifyEmbedUrl ? (
+    <div className="absolute inset-0 rounded-none overflow-hidden bg-[#121212]">
+      <div className="absolute inset-0 w-full h-full">
+        <iframe
+          title={`Play ${item.album} on Spotify`}
+          src={spotifyEmbedUrl}
+          allowFullScreen
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
+          className="absolute inset-0 border-0 w-full h-full"
+        />
+      </div>
+      <button
+        type="button"
+        onClick={(e) => {
+          e.stopPropagation();
+          if (flipCooldownRef.current) return;
+          flipCooldownRef.current = true;
+          onFlipBack();
+          window.setTimeout(() => {
+            flipCooldownRef.current = false;
+          }, 650);
+        }}
+        className="absolute top-1.5 right-1.5 z-10 text-[10px] tracking-wide text-white/80 hover:text-white transition-colors uppercase cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/30 rounded px-1.5 py-0.5 bg-black/40"
+        aria-label="Back to album"
+      >
+        ← Back
+      </button>
+    </div>
+  ) : null;
+
+  if (!hasSpotify) {
+    return (
+      <div className="group flex flex-col rounded-none overflow-hidden border border-black/[0.06] bg-white shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] cursor-default min-w-0">
+        {squareContent}
+        {textBlock}
+      </div>
+    );
+  }
 
   return (
-    <div className="group flex flex-col rounded-none overflow-hidden border border-black/[0.06] bg-white shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] cursor-default">
-      {/* Square light grey box - same as books. LP/album cover inside. */}
+    <div className="group flex flex-col rounded-none overflow-hidden border border-black/[0.06] bg-white shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] min-w-0">
+      {/* Only the square flips; text block stays below */}
       <div
-        className="w-full aspect-square flex items-center justify-center rounded-none overflow-hidden p-1 md:p-1.5 bg-[#F8F8F8] border border-gray-200/80 transition-colors duration-300 group-hover:border-gray-300"
-        style={{ backgroundColor: '#F8F8F8' }}
+        className="w-full overflow-hidden"
+        style={{ perspective: '1000px', aspectRatio: '1 / 1' }}
       >
-        {showImage ? (
-          <img
-            src={item.coverUrl}
-            alt={item.album}
-            className="max-w-full max-h-full w-auto h-auto object-contain transition-transform duration-500 ease-out group-hover:scale-105"
-            loading="lazy"
-            onError={() => setCoverFailed(true)}
-          />
-        ) : (
-          <span className="text-gray-400 text-4xl font-serif">
-            {item.album.charAt(0)}
-          </span>
-        )}
-      </div>
-      {/* Album name, artist, and Visit Artist - same layout as books */}
-      <div className="flex flex-row items-start justify-between gap-4 mt-3 md:mt-4 px-4 pb-4">
-        <div className="min-w-0 flex-1">
-          <h2 className="text-[15px] md:text-[16px] font-semibold text-gray-900 leading-snug transition-opacity duration-300 group-hover:opacity-80">
-            {item.album}
-          </h2>
-          <p className="text-[13px] md:text-[14px] text-gray-500 mt-1 font-normal">
-            {item.artist}
-          </p>
-          <div className="mt-0.5 flex flex-col text-[12px] md:text-[13px] text-gray-400 gap-0.5">
-            <span>Genre: {item.genre}</span>
-            <span>Year: {item.year}</span>
+        <div
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            if (flipCooldownRef.current) return;
+            flipCooldownRef.current = true;
+            if (isFlipped) {
+              onFlipBack();
+            } else {
+              onFlip();
+            }
+            window.setTimeout(() => {
+              flipCooldownRef.current = false;
+            }, 650);
+          }}
+          onKeyDown={(e) => {
+            if (e.key !== 'Enter' && e.key !== ' ') return;
+            e.preventDefault();
+            if (flipCooldownRef.current) return;
+            flipCooldownRef.current = true;
+            if (isFlipped) onFlipBack();
+            else onFlip();
+            window.setTimeout(() => {
+              flipCooldownRef.current = false;
+            }, 650);
+          }}
+          className="relative w-full h-full cursor-pointer"
+          style={{
+            transformStyle: 'preserve-3d',
+            transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)',
+            transition: 'transform 0.6s cubic-bezier(0.4, 0, 0.2, 1)',
+          }}
+          aria-label={isFlipped ? 'Flip back to album' : `Play ${item.album} on Spotify`}
+        >
+          {/* Front: album art square only */}
+          <div
+            className="absolute inset-0 rounded-none overflow-hidden"
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+            }}
+          >
+            {squareContent}
+          </div>
+
+          {/* Back: Spotify player in same square area */}
+          <div
+            className="absolute inset-0 rounded-none overflow-hidden"
+            style={{
+              backfaceVisibility: 'hidden',
+              WebkitBackfaceVisibility: 'hidden',
+              transform: 'rotateY(180deg)',
+            }}
+          >
+            {backFaceSquare}
           </div>
         </div>
-        <a
-          href={item.artistUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-shrink-0 text-[11px] md:text-[12px] tracking-wide text-gray-400 hover:text-gray-700 transition-colors whitespace-nowrap uppercase"
-        >
-          Visit Artist →
-        </a>
       </div>
+      {textBlock}
     </div>
   );
 }
@@ -461,6 +599,8 @@ const PAGE_SIZE = 15;
 export function FavoritesPage() {
   const [musicVisible, setMusicVisible] = useState(PAGE_SIZE);
   const [booksVisible, setBooksVisible] = useState(PAGE_SIZE);
+  // Only one album can be flipped at a time; opening another closes the current one.
+  const [flippedMusicKey, setFlippedMusicKey] = useState<string | null>(null);
 
   const visibleMusic = MUSIC.slice(0, musicVisible);
   const visibleBooks = BOOKS.slice(0, booksVisible);
@@ -476,9 +616,19 @@ export function FavoritesPage() {
           Favorite music
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 items-start mb-8">
-          {visibleMusic.map((item, index) => (
-            <MusicCard key={`${item.album}-${item.artist}-${index}`} item={item} />
-          ))}
+          {visibleMusic.map((item, index) => {
+            const cardKey = `${item.album}-${item.artist}-${index}`;
+            return (
+              <MusicCard
+                key={cardKey}
+                item={item}
+                cardKey={cardKey}
+                isFlipped={flippedMusicKey === cardKey}
+                onFlip={() => setFlippedMusicKey(cardKey)}
+                onFlipBack={() => setFlippedMusicKey(null)}
+              />
+            );
+          })}
         </div>
         {hasMoreMusic && (
           <div className="flex justify-center mb-20 md:mb-24">

@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { ScrollToTop } from "./ScrollToTop";
 import { AnimateIn } from "./AnimateIn";
+import { PROJECT_ENABLED } from "./projects/projectOrder";
 
 interface HomePageProps {
   onProjectClick: (id: string) => void;
@@ -32,10 +33,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
   // ═══════════════════════════════════════════════════════════════════════════
   // PROJECT CONFIGURATION
   // ═══════════════════════════════════════════════════════════════════════════
-  // To enable/disable projects, set `enabled: true` or `enabled: false`
-  // Disabled projects will still show with animations but won't be clickable
+  // To enable/disable projects: edit PROJECT_ENABLED in src/components/projects/projectOrder.ts
+  // Disabled projects still show with animations but are not clickable (here and in Explore more).
   // ═══════════════════════════════════════════════════════════════════════════
-  
+
   const projects = [
     {
       id: "CWPC",
@@ -44,7 +45,6 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
       image: "/main_title/main_cwpc.png",
-      enabled: false, // ✅ Enabled - clickable
     },
     {
       id: "AutomotiveUX_GM",
@@ -53,7 +53,6 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "12 MINUTE READ →",
       bgColor: "#f5f5f7",
       image: "/main_title/main_gm.png",
-      enabled: true, // ✅ Enabled - clickable
     },
     {
       id: "RaseetHealth",
@@ -62,7 +61,6 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "16 MINUTE READ →",
       bgColor: "#4A90E2",
       image: "/main_title/main_raseet.png",
-      enabled: false, // ✅ Enabled - clickable
     },
     {
       id: "BMW",
@@ -71,7 +69,6 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "8 MINUTE READ →",
       bgColor: "#e8f4f8",
       image: "/main_title/main_bmw.png",
-      enabled: true, // ✅ Enabled - clickable
     },
     {
       id: "CalmiRing",
@@ -80,7 +77,6 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "10 MINUTE READ →",
       bgColor: "#f5f5f7",
       image: "/main_title/main_calmi.png",
-      enabled: true, // ✅ Enabled - clickable
     },
     {
       id: "jobgenius",
@@ -89,7 +85,6 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "9 MINUTE READ →",
       bgColor: "#f5f5f7",
       image: "/main_title/main_jobgenius.png",
-      enabled: false, // ❌ Disabled - not clickable (but still animated)
     },
     {
       id: "bound",
@@ -98,18 +93,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       readTime: "14 MINUTE READ →",
       bgColor: "#fff5f7",
       image: "/main_title/main_bound.png",
-      enabled: false, // ❌ Disabled - not clickable (but still animated)
     },
-    
-    // {
-    //   id: "WeddingBliss",
-    //   title: "Wedding Bliss - AR Planner Assistant",
-    //   company: "AR/VR DESIGN | UX DESIGN | UX RESEARCH",
-    //   readTime: "9 MINUTE READ →",
-    //   bgColor: "#f5f5f7",
-    //   image: "/main_title/main_cwpc.png",
-    //   enabled: false, // ❌ Disabled - not clickable (but still animated)
-    // },
   ];
 
   return (
@@ -152,7 +136,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-32 items-stretch">
           {projects.map((project, index) => {
             // Check if project is enabled (defaults to true if not specified)
-            const isEnabled = project.enabled !== false;
+            const isEnabled = PROJECT_ENABLED[project.id] !== false;
             const staggerKey = (['stagger-1','stagger-2','stagger-3','stagger-4','stagger-5','stagger-6','stagger-7','stagger-8','stagger-9'] as const)[Math.min(index, 8)];
             return (
             <AnimateIn key={project.id} stagger={staggerKey} rootMargin="0px 0px -80px 0px">

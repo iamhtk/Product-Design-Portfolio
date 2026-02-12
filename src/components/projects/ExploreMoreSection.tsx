@@ -1,6 +1,7 @@
 import {
   PROJECT_ORDER,
   PROJECT_TILE_MEDIA,
+  PROJECT_ENABLED,
   CALMIRING_EXTERNAL_URL,
 } from './projectOrder';
 
@@ -11,11 +12,16 @@ export interface ExploreMoreSectionProps {
 }
 
 function handleProjectNav(projectId: string, onProjectClick?: (projectId: string) => void) {
+  if (PROJECT_ENABLED[projectId] === false) return;
   if (projectId === 'CalmiRing') {
     window.open(CALMIRING_EXTERNAL_URL, '_blank');
   } else {
     onProjectClick?.(projectId);
   }
+}
+
+function isProjectEnabled(projectId: string): boolean {
+  return PROJECT_ENABLED[projectId] !== false;
 }
 
 export function ExploreMoreSection({
@@ -70,7 +76,9 @@ export function ExploreMoreSection({
                       ) ? (
                         <video
                           src={PROJECT_TILE_MEDIA[prevProject.id].image}
-                          className="w-full h-full object-cover object-left block transition-transform duration-300 ease-out group-hover:scale-105"
+                          className={`w-full h-full object-cover object-left block transition-transform duration-300 ease-out ${
+                            isProjectEnabled(prevProject.id) ? 'group-hover:scale-105' : ''
+                          }`}
                           autoPlay
                           loop
                           muted
@@ -81,7 +89,9 @@ export function ExploreMoreSection({
                         <img
                           src={PROJECT_TILE_MEDIA[prevProject.id].image}
                           alt={prevProject.title}
-                          className="w-full h-full object-cover object-left block transition-transform duration-300 ease-out group-hover:scale-105"
+                          className={`w-full h-full object-cover object-left block transition-transform duration-300 ease-out ${
+                            isProjectEnabled(prevProject.id) ? 'group-hover:scale-105' : ''
+                          }`}
                           loading="lazy"
                         />
                       ))}
@@ -89,7 +99,11 @@ export function ExploreMoreSection({
                   <span className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
                     Previous
                   </span>
-                  <span className="block w-full text-left text-[15px] md:text-[17px] text-gray-800 group-hover:opacity-80 transition-opacity duration-300 font-semibold leading-snug">
+                  <span className={`block w-full text-left text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
+                    isProjectEnabled(prevProject.id)
+                      ? 'text-gray-800 group-hover:opacity-80'
+                      : 'text-gray-500'
+                  }`}>
                     ← {prevProject.title}
                   </span>
                 </div>
@@ -117,12 +131,18 @@ export function ExploreMoreSection({
               <button
                 type="button"
                 onClick={() => handleProjectNav(nextProject.id, onProjectClick)}
-                className="p-0 m-0 border-0 bg-transparent cursor-pointer flex-shrink-0 w-[280px] group transition-transform duration-300 ease-out hover:-translate-y-1"
+                className={`p-0 m-0 border-0 bg-transparent flex-shrink-0 w-[280px] group transition-all duration-300 ease-out ${
+                  isProjectEnabled(nextProject.id)
+                    ? 'cursor-pointer hover:-translate-y-1'
+                    : 'cursor-not-allowed opacity-70'
+                }`}
                 style={{ textAlign: 'right' }}
               >
                 {/* Image: same width as card */}
                 <div
-                  className="rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out group-hover:shadow-[var(--shadow-card)]"
+                  className={`rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out ${
+                    isProjectEnabled(nextProject.id) ? 'group-hover:shadow-[var(--shadow-card)]' : ''
+                  }`}
                   style={{
                     backgroundColor:
                       PROJECT_TILE_MEDIA[nextProject.id]?.bgColor ?? '#f5f5f5',
@@ -135,7 +155,9 @@ export function ExploreMoreSection({
                     ) ? (
                       <video
                         src={PROJECT_TILE_MEDIA[nextProject.id].image}
-                        className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out group-hover:scale-105"
+                        className={`w-full h-full object-cover object-right block transition-transform duration-300 ease-out ${
+                          isProjectEnabled(nextProject.id) ? 'group-hover:scale-105' : ''
+                        }`}
                         autoPlay
                         loop
                         muted
@@ -146,7 +168,9 @@ export function ExploreMoreSection({
                       <img
                         src={PROJECT_TILE_MEDIA[nextProject.id].image}
                         alt={nextProject.title}
-                        className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out group-hover:scale-105"
+                        className={`w-full h-full object-cover object-right block transition-transform duration-300 ease-out ${
+                          isProjectEnabled(nextProject.id) ? 'group-hover:scale-105' : ''
+                        }`}
                         loading="lazy"
                       />
                     ))}
@@ -156,7 +180,11 @@ export function ExploreMoreSection({
                   <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
                     Next
                   </div>
-                  <div className="text-[15px] md:text-[17px] text-gray-800 group-hover:opacity-80 transition-opacity duration-300 font-semibold leading-snug">
+                  <div className={`text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
+                    isProjectEnabled(nextProject.id)
+                      ? 'text-gray-800 group-hover:opacity-80'
+                      : 'text-gray-500'
+                  }`}>
                     {nextProject.title} →
                   </div>
                 </div>
