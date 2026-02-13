@@ -217,6 +217,33 @@
     scroll-behavior: smooth;
   }
 
+  /* Scrollbar: hidden by default, visible only while user is scrolling (class toggled from App) */
+  html {
+    scrollbar-width: none;
+  }
+  html.scrollbar-visible {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.35) transparent;
+  }
+  html::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+  html.scrollbar-visible::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  html.scrollbar-visible::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  html.scrollbar-visible::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 5px;
+  }
+  html.scrollbar-visible::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.45);
+  }
+
   /* Premium selection and focus */
   ::selection {
     background: rgba(0, 0, 0, 0.08);
@@ -244,6 +271,21 @@
   nav.liquid-glass {
     -webkit-backdrop-filter: blur(32px) saturate(200%);
     backdrop-filter: blur(32px) saturate(200%);
+  }
+}
+
+/* Project page: offset so content (and colored header) starts exactly where nav ends */
+.project-page-offset {
+  padding-top: var(--nav-height);
+}
+
+/* Project page: content area top padding so when scrolled it sits below nav (used with no-gap header) */
+.project-content-top {
+  padding-top: calc(var(--nav-height) + 3rem);
+}
+@media (min-width: 768px) {
+  .project-content-top {
+    padding-top: calc(var(--nav-height) + 4rem);
   }
 }
 
@@ -346,6 +388,24 @@
 .animate-in-scale.in-view {
   opacity: 1;
   transform: scale(1) translateY(0);
+}
+
+/* Arrow bounce: down-chevron hint (e.g. "scroll to case study") */
+@keyframes arrow-bounce {
+  0%, 100% { transform: translateY(-4px); }
+  50% { transform: translateY(2px); }
+}
+.arrow-bounce {
+  animation: arrow-bounce 1.4s ease-in-out infinite;
+}
+
+/* Premium arrow: smooth float + subtle fade (refined “scroll down” hint) */
+@keyframes arrow-float-premium {
+  0%, 100% { transform: translateY(0); opacity: 1; }
+  50% { transform: translateY(8px); opacity: 0.78; }
+}
+.arrow-float-premium {
+  animation: arrow-float-premium 1.3s cubic-bezier(0.37, 0, 0.21, 1) infinite;
 }
 
 /* Stagger children: longer delays for a calmer, premium cascade */

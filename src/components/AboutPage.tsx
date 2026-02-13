@@ -1,6 +1,7 @@
 // import { useState } from 'react'; // for Me in a grid section
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma /* Sun, Trash2, X - for Me in a grid */ } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 import { AnimateIn } from './AnimateIn';
 
 export function AboutPage() {
@@ -37,10 +38,11 @@ export function AboutPage() {
               </p>
             </div>
             <div className="w-full min-w-0 overflow-hidden rounded-lg" style={{ maxHeight: 'min(620px, 70vh)' }}>
-              <img
+              <ImageWithFallback
                 src={"/about/more/IMG_3957.jpg"}
                 alt="Workspace"
                 className="w-full h-full object-cover"
+                priority
               />
             </div>
           </div>
@@ -54,8 +56,8 @@ export function AboutPage() {
             CURRENTLY
           </h2>
           <p className="text-[18px] leading-[1.7] text-gray-700 mb-6">
-            I'm currently a  Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>IBM</a>, where I work 
-            on consumer-facing products that reach millions of users worldwide. Before joining IBM, 
+            I'm currently a  Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>CWPC</a>, where I work 
+            on consumer-facing products that reach millions of users worldwide. Before joining CWPC, 
             I graduated from the University of Michigan's School of Information (#GoBlue💙), specializing in UX Design & Research and Human-Computer Interaction. My background in Electronics & Telecommunications gives me a unique edge in understanding and crafting interactions between people and technology.
 
           </p>
@@ -70,14 +72,14 @@ export function AboutPage() {
         {/* Images Grid */}
         <AnimateIn variant="scale" className="grid grid-cols-2 gap-6 mb-16">
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
-            <img 
+            <ImageWithFallback 
               src={"/about/more/Untitled.PNG"}
               alt="Team collaboration"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
-            <img 
+            <ImageWithFallback 
               src={"/about/more/IMG_3962.png"}
               alt="Design work"
               className="w-full h-full object-cover"
@@ -88,14 +90,14 @@ export function AboutPage() {
         {/* Images Grid */}
         <AnimateIn className="grid grid-cols-2 gap-6 mb-16">
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
-            <img 
+            <ImageWithFallback 
               src={"/about/more/Untitled2.PNG"}
               alt="Team collaboration"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
-            <img 
+            <ImageWithFallback 
               src={"/about/more/IMG_9458.jpg"}
               alt="Design work"
               className="w-full h-full object-cover"
@@ -106,7 +108,7 @@ export function AboutPage() {
         
         {/* Image 2 */}
         <AnimateIn variant="fade" className="mb-16">
-          <img 
+          <ImageWithFallback 
             src={"/about/more/IMG_9612.png"}
             alt="Presentation"
             className="w-full h-auto rounded-lg"

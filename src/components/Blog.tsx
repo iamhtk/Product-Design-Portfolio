@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
+import { ImageWithFallback } from './figma/ImageWithFallback';
 import { AnimateIn } from './AnimateIn';
 
 export function Blog() {
@@ -130,7 +131,7 @@ export function Blog() {
                 rel="noopener noreferrer"
                 className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 block cursor-pointer hover:opacity-90 transition-opacity"
               >
-                <img 
+                <ImageWithFallback 
                   src={post.image}
                   alt={post.title}
                   className="w-full h-full object-contain"

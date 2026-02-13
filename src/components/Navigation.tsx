@@ -22,7 +22,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   const links: { label: string; page: Page }[] = [
     { label: 'Work', page: 'work' },
     { label: 'Resume', page: 'resume' },
-    { label: 'Blogs', page: 'blog' },
+    { label: 'Blog', page: 'blog' },
     { label: 'Friends', page: 'friends' },
     { label: 'Favorites', page: 'favorites' },
     { label: 'About', page: 'about' },

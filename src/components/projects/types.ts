@@ -66,6 +66,10 @@ export type Project = {
   company: string;
   subtitle: string;
   headerColor: string;
+  /** Progress bar color (scroll indicator). Each project defines its own const; not from projectOrder. */
+  progressBarColor?: string;
+  /** Color for the "scroll to case study" arrow. Falls back to headerColor if not set. */
+  arrowColor?: string;
   icon?: string;
   role: string;
   team: string;

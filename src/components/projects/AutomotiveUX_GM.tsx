@@ -11,7 +11,9 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
+import { getArrowGradientColors } from './arrowGradient';
 import type { ContentBlock } from './types';
 
 /** Looping video (GIF-style): autoplay, muted, loop. Uses ref + play() for reliable autoplay. */
@@ -57,10 +59,12 @@ const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_GMProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
+  const [caseStudyVisible, setCaseStudyVisible] = useState(false);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setCaseStudyVisible(false);
   }, []);
 
   useEffect(() => {
@@ -96,7 +100,9 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
   const title = 'Automotive UX - Cadillac Escalade Design Proposal';
   const company = 'GM';
   const subtitle = 'Develop a new In-vehicle experience for the luxury car segment focusing on in-car themes.';
-  const headerColor = '#4A90E2';
+  const headerColor = '#000000';
+  const progressBarColor = '#374151';
+  const arrowColor = '#000000';
   const icon = '/gm/gm_logo.png'; // Sidebar icon (left column) - Add image/video path here
   const headerIcon = '/gm/header.png'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Product Designer';
@@ -112,7 +118,16 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
   const speedReadImpact = "The design was well-received by stakeholders and recognized for its user-centered approach, earning a spot in my portfolio and attention from the automotive design community.";
 
   const scrollToCaseStudy = () => {
-    document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+    if (!caseStudyVisible) {
+      setCaseStudyVisible(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    } else {
+      document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   // Page content: add text or image/video in the order you want. Order here = order on page.
@@ -344,7 +359,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
   };
 
   return (
-    <div className="min-h-screen bg-white" style={{ paddingTop: 'var(--nav-height)' }}>
+    <div className="min-h-screen bg-white">
       <ScrollToTop />
       
       {/* Scroll Progress Bar - fixed at top, fills as user scrolls; inline styles so it’s always visible above nav */}
@@ -368,7 +383,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
               style={{
                 height: '100%',
                 width: `${scrollProgress}%`,
-                backgroundColor: headerColor,
+                backgroundColor: progressBarColor,
                 transition: 'width 0.15s ease-out',
               }}
             />
@@ -376,7 +391,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
           document.body
         )}
 
-      {/* Header Banner - image centered and contained within hero */}
+      {/* Header Banner */}
       <div 
         className="w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden"
         style={{ backgroundColor: headerColor }}
@@ -395,7 +410,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
                   );
                 }
                 return (
-                  <img src={iconPath} alt={`${title} icon`} className={sizeClasses} />
+                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
                 );
               })()}
             </div>
@@ -531,11 +546,21 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
                 <button
                   type="button"
                   onClick={scrollToCaseStudy}
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors cursor-pointer"
                   aria-label="Scroll to case study"
+                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  <svg
+                    width={56}
+                    height={64}
+                    viewBox="0 0 32 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ display: 'block', flexShrink: 0, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.08))' }}
+                    className="arrow-float-premium"
+                  >
+                    {getArrowGradientColors(arrowColor).map((fill, i) => (
+                      <path key={i} d={`M4 ${i * 5} L28 ${i * 5} L16 ${12 + i * 5}`} fill={fill} />
+                    ))}
                   </svg>
                 </button>
               </div>
@@ -543,6 +568,8 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
           </div>
         </div>
 
+        {caseStudyVisible && (
+          <>
         {/* Main Content */}
         <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
           {blocks.map((block, index) => {
@@ -596,7 +623,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                      <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
+                      <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
               )}
             </div>
                 </div>
@@ -627,7 +654,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
             if (block.type === 'video') {
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               const containerStyle = {
-                ...(marginLeft && { marginLeft }),
+                ...(marginLeft && { marginLeft, maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)' }),
                 ...(block.maxHeight && { maxHeight: block.maxHeight, overflow: 'hidden' as const }),
               };
               const videoStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
@@ -641,7 +668,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
               const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               const containerStyle = {
-                ...(marginLeft && { marginLeft }),
+                ...(marginLeft && { marginLeft, maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)' }),
                 ...(block.maxHeight && { maxHeight: block.maxHeight, overflow: 'hidden' as const }),
               };
               const mediaStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
@@ -652,7 +679,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                    <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
+                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
               )}
             </div>
               );
@@ -684,6 +711,8 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
             </button>
           </div>
         </div>
+          </>
+        )}
       </div>
 
       {/* Footer */}

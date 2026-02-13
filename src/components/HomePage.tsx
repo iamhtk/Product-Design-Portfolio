@@ -104,13 +104,13 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
           <AnimateIn variant="up-slow" rootMargin="0px" className="mb-3">
             <h1 className="text-[28px] md:text-[36px] lg:text-[44px] font-bold text-gray-900 leading-[1.2] tracking-[-0.02em]" style={{ fontWeight: 700 }}>
-              Product Designer at IBM.
+              Product Designer at CWPC.
             </h1>
           </AnimateIn>
           <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="mb-3">
             <p className="text-[18px] md:text-[20px] lg:text-[22px] text-gray-900 leading-relaxed">
               Previously Design Engineer at{" "}
-              <span className="font-medium">CWPC, GM, Kryptonas, TUG</span><br />
+              <span className="font-medium">GM, Kryptonas, TUG, BEL</span><br />
               <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
             </p>
           </AnimateIn>

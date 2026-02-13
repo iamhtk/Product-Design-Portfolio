@@ -11,7 +11,9 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
+import { getArrowGradientColors } from './arrowGradient';
 import type { ContentBlock } from './types';
 
 const CURRENT_PROJECT_ID = 'CWPC';
@@ -26,10 +28,12 @@ const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
+  const [caseStudyVisible, setCaseStudyVisible] = useState(false);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setCaseStudyVisible(false);
   }, []);
 
   useEffect(() => {
@@ -63,6 +67,8 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
   const company = 'CWPC';
   const subtitle = 'Building a scalable design foundation for enterprise products.';
   const headerColor = '#6366F1';
+  const progressBarColor = '#4F46E5';
+  const arrowColor = '#6366F1';
   const icon = ''; // Sidebar icon (left column) - Add image/video path here
   const headerIcon = '/cwpc/header.png'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Lead Product Designer';
@@ -75,7 +81,16 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
   const speedReadImpact = 'Strudel is used across 12 product teams. Development time for new features decreased by 40%; design-to-dev handoff became seamless; products now feel like one family.';
 
   const scrollToCaseStudy = () => {
-    document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+    if (!caseStudyVisible) {
+      setCaseStudyVisible(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    } else {
+      document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   // Page content: add text or image/video in the order you want. Order here = order on page.
@@ -117,16 +132,12 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
     }
     
     return (
-      <img 
-        src={iconPath} 
-        alt={`${title} icon`}
-        className={sizeClasses}
-      />
+      <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
     );
   };
 
   return (
-    <div className="min-h-screen bg-white" style={{ paddingTop: 'var(--nav-height)' }}>
+    <div className="min-h-screen bg-white">
       <ScrollToTop />
       
       {progressBarVisible &&
@@ -149,7 +160,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
               style={{
                 height: '100%',
                 width: `${scrollProgress}%`,
-                backgroundColor: headerColor,
+                backgroundColor: progressBarColor,
                 transition: 'width 0.15s ease-out',
               }}
             />
@@ -157,7 +168,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
           document.body
         )}
 
-      {/* Header Banner - image centered and contained within hero */}
+      {/* Header Banner */}
       <div 
         className="w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden"
         style={{ backgroundColor: headerColor }}
@@ -176,7 +187,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
                   );
                 }
                 return (
-                  <img src={iconPath} alt={`${title} icon`} className={sizeClasses} />
+                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
                 );
               })()}
             </div>
@@ -193,7 +204,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
           <div className="space-y-8">
             {icon ? (
               <div className="hidden md:block" style={{ width: 48, height: 48 }}>
-                <img
+                <ImageWithFallback
                   src={icon.startsWith('/') ? icon : `/${icon}`}
                   alt={`${title} icon`}
                   style={{ width: '100%', height: '100%', objectFit: 'contain' }}
@@ -283,11 +294,21 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
                 <button
                   type="button"
                   onClick={scrollToCaseStudy}
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors cursor-pointer"
                   aria-label="Scroll to case study"
+                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  <svg
+                    width={56}
+                    height={64}
+                    viewBox="0 0 32 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ display: 'block', flexShrink: 0, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.08))' }}
+                    className="arrow-float-premium"
+                  >
+                    {getArrowGradientColors(arrowColor).map((fill, i) => (
+                      <path key={i} d={`M4 ${i * 5} L28 ${i * 5} L16 ${12 + i * 5}`} fill={fill} />
+                    ))}
                   </svg>
                 </button>
               </div>
@@ -295,6 +316,8 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
           </div>
         </div>
 
+        {caseStudyVisible && (
+          <>
         <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
           {blocks.map((block, index) => {
             if (block.type === 'text') {
@@ -344,7 +367,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
                         Your browser does not support the video tag.
                       </video>
                     ) : (
-                      <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
+                      <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
                     )}
                   </div>
                 </div>
@@ -376,7 +399,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
               const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               const containerStyle = {
-                ...(marginLeft && { marginLeft }),
+                ...(marginLeft && { marginLeft, maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)' }),
                 ...(block.maxHeight && { maxHeight: block.maxHeight, overflow: 'hidden' as const }),
               };
               const mediaStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
@@ -387,7 +410,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
                       Your browser does not support the video tag.
                     </video>
                   ) : (
-                    <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
+                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
                   )}
                 </div>
               );
@@ -419,6 +442,8 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
             </button>
           </div>
         </div>
+          </>
+        )}
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12" data-footer>

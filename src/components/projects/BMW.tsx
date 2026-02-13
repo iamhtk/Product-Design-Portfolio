@@ -9,9 +9,11 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
+import { Linkedin, Youtube, Instagram, Facebook, Turtle } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
+import { getArrowGradientColors } from './arrowGradient';
 import type { ContentBlock } from './types';
 
 const CURRENT_PROJECT_ID = 'BMW';
@@ -26,10 +28,12 @@ const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
+  const [caseStudyVisible, setCaseStudyVisible] = useState(false);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setCaseStudyVisible(false);
   }, []);
 
   useEffect(() => {
@@ -62,7 +66,10 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   const title = "Redesigning BMW's Digital Interface (iDrive)";
   const company = 'BMW';
   const subtitle = "A case study outlining my personal project as a part of my UofM curriculum to redesign the BMW vehicle's screens, aiming to improve the user experience while maintaining their minimalist aesthetic.";
-  const headerColor = '#FFB84D';
+  const headerColor = '#ffffff';
+  // #FFB84D
+  const progressBarColor = '#E5A63D';
+  const arrowColor = '#000000';
   const icon = 'bmw/logo.png'; // Sidebar icon (left column) - Add image/video path here
   const headerIcon = '/bmw/cover2.png'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Product Designer';
@@ -75,7 +82,16 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   const speedReadImpact = "A coherent iDrive 8 redesign that enhances usability and maintains BMW's design language, with clear navigation, audio, and vehicle controls for both driver and passenger.";
 
   const scrollToCaseStudy = () => {
-    document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+    if (!caseStudyVisible) {
+      setCaseStudyVisible(true);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+    } else {
+      document.getElementById('case-study-start')?.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   // Page content: add text or image/video in the order you want. Order here = order on page.
@@ -120,24 +136,27 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
     { type: 'text', header: "Default / Resting Screen", content: "During the redesign process, I developed default pages for each of the four primary screens in the BMW iDrive 8 system: vehicle controls, driver display, main unit, and sub-unit. These pages were carefully crafted to reflect an active driving scenario, such as displaying current speed on the driver display and indicating active defrosters in the vehicle controls, to provide a sense of being in the midst of a journey." },
     { type: 'text', content: "The vehicle controls and driver display were set to showcase a single, dynamic page where real-time updates occur, including changes in speed on the speedometer and vehicle alerts on the main unit. This design choice ensures that essential information is readily accessible to the driver at all times."},
     { type: 'text', content: "Meanwhile, the main unit and sub-unit were configured to display their default pages either at the start of a drive or if they haven't been interacted with since the drive began. The main unit's default page is optimized for efficiency, providing instant access to critical functions like navigation and audio playback. Similarly, the sub-unit automatically opens to the HVAC screen, enabling immediate adjustments to climate control settings. This screen layout prioritizes accessibility and ease of use, enhancing the overall driving experience for both drivers and passengers in the BMW iDrive 8 system."},
-    
-    { type: 'image', src: '/bmw/Full Display panel - Landing.png' },
-    { type: 'image', src: '/bmw/Full Display panel - Map Landing.png' },
-    { type: 'image', src: '/bmw/Full Display panel - Music Landing.png' },
-    { type: 'image', src: '/bmw/Full Display panel - Settings Landing.png' },
+    { type: 'text', header: "Default Screen", content: "" , indent: true},
+    { type: 'image', src: '/bmw/final/1.png', indent: true, indentLevel: 2},
+    { type: 'text', header: "Default Navigation", content: "", indent: true},
+    { type: 'image', src: '/bmw/final/2.png', indent: true, indentLevel: 2},
+    { type: 'text', header: "Default Music", content: "", indent: true},
+    { type: 'image', src: '/bmw/final/3.png', indent: true, indentLevel: 2},
+    { type: 'text', header: "Default Settings", content: "", indent: true},
+    { type: 'image', src: '/bmw/final/4.png', indent: true, indentLevel: 2},
 
 
     { type: 'text', header: "Head Unit Screens", content: "To showcase the functionality of the head unit's design, I focused on three primary pages within the BMW iDrive 8 system: the main navigation landing page, the navigation display while on an active route, and the layout for the audio page, using Spotify as the featured example due to its widespread popularity for music streaming." },
     { type: 'text', content: "Acknowledging the significance of music in the in-vehicle screen experience, my design ensures that users can engage with audio playback even while navigating. However, it's worth noting that the navigational pages offer limited music control compared to the comprehensive functionalities available on the dedicated audio page. Furthermore, I integrated a feature in the bottom right corner of the screen, enabling the front-seated passenger to adjust the volume or mute the audio. This decision recognizes that the driver already has access to these controls via the steering wheel, thus optimizing the interface for both driver and passenger convenience."},
     
     { type: 'text', header: "Navigation Panel", content: "" },
-    { type: 'image', src: '/bmw/Navigation Panel.png' },
+    { type: 'image', src: '/bmw/final/5.png' },
 
     { type: 'text', header: "Audio (Spotify) Panel", content: "" },
-    { type: 'image', src: '/bmw/MUSIC Panel.png' },
+    { type: 'image', src: '/bmw/final/6.png' },
 
     { type: 'text', header: "Vehicle Controls Panel", content: "" },
-    { type: 'image', src: '/bmw/Settings Panel.png' },
+    { type: 'image', src: '/bmw/final/9.png' },
 
     { type: 'text', header: "Sub Unit Screens", content: "For the sub unit's design, my focus was on crafting the vehicle settings pages for BMW's iDrive 8 system. I developed wireframes for the landing page of vehicle settings and specific pages for tire pressure and drive mode. To maintain easy access to HVAC controls, I implemented a dedicated control bar at the top of the sub unit for these functions, regardless of the current screen. Additionally, navigation controls for the sub unit are positioned at the bottom." },
     { type: 'text', content: "On the vehicle settings landing page, different setting options are arranged on the left side. To optimize space and add a visual element, I placed BMW's logo in the empty area. This strategic logo placement deviates from its usual location in the head unit, contributing to a unified brand experience within the vehicle's interface."},
@@ -185,7 +204,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   };
 
   return (
-    <div className="min-h-screen bg-white" style={{ paddingTop: 'var(--nav-height)' }}>
+    <div className="min-h-screen bg-white">
       <ScrollToTop />
       
       {progressBarVisible &&
@@ -208,7 +227,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
               style={{
                 height: '100%',
                 width: `${scrollProgress}%`,
-                backgroundColor: headerColor,
+                backgroundColor: progressBarColor,
                 transition: 'width 0.15s ease-out',
               }}
             />
@@ -216,7 +235,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
           document.body
         )}
 
-      {/* Header Banner - image centered and contained within hero */}
+      {/* Header Banner */}
       <div 
         className="w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden"
         style={{ backgroundColor: headerColor }}
@@ -235,7 +254,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
                   );
                 }
                 return (
-                  <img src={iconPath} alt={`${title} icon`} className={sizeClasses} />
+                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
                 );
               })()}
             </div>
@@ -346,11 +365,25 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
                 <button
                   type="button"
                   onClick={scrollToCaseStudy}
-                  className="flex items-center justify-center w-12 h-12 rounded-full bg-gray-200 hover:bg-gray-300 text-gray-700 transition-colors cursor-pointer"
                   aria-label="Scroll to case study"
+                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
-                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                  <svg
+                    width={56}
+                    height={64}
+                    viewBox="0 0 32 40"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    style={{ display: 'block', flexShrink: 0, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.08))' }}
+                    className="arrow-float-premium"
+                  >
+                    {getArrowGradientColors(arrowColor).map((fill, i) => (
+                      <path
+                        key={i}
+                        d={`M4 ${i * 5} L28 ${i * 5} L16 ${12 + i * 5}`}
+                        fill={fill}
+                      />
+                    ))}
                   </svg>
                 </button>
               </div>
@@ -358,6 +391,8 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
           </div>
         </div>
 
+        {caseStudyVisible && (
+          <>
         <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
           {blocks.map((block, index) => {
             if (block.type === 'text') {
@@ -411,7 +446,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                      <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
+                      <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
               )}
             </div>
             </div>
@@ -443,7 +478,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
               const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               const containerStyle = {
-                ...(marginLeft && { marginLeft }),
+                ...(marginLeft && { marginLeft, maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)' }),
                 ...(block.maxHeight && { maxHeight: block.maxHeight, overflow: 'hidden' as const }),
               };
               const mediaStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
@@ -454,7 +489,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                    <img src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
+                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
               )}
             </div>
               );
@@ -486,6 +521,8 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
             </button>
           </div>
         </div>
+          </>
+        )}
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12" data-footer>

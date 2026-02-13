@@ -5,6 +5,7 @@ import { AboutPage } from './components/AboutPage';
 import { FriendsPage } from './components/FriendsPage';
 import { ResumePage } from './components/ResumePage';
 import { projectComponents } from './components/projects';
+import { PROJECT_ENABLED } from './components/projects/projectOrder';
 import { Blog } from './components/Blog';
 import { FavoritesPage } from './components/FavoritesPage';
 
@@ -22,10 +23,10 @@ const VALID_PROJECT_IDS = Object.keys(projectComponents);
 const ROUTE_PATHS: Record<Page, string> = {
   'work': '/',
   'about': '/about-me',
-  'friends': '/network-collaborators',
+  'friends': '/friends',
   'resume': '/resume-experience',
-  'favorites': '/favorites-books-music',
-  'blog': '/design-blog-articles',
+  'favorites': '/myfavorites',
+  'blog': '/blog',
   'project': '/project', // Base path, will append project ID
 };
 
@@ -33,19 +34,22 @@ const ROUTE_PATHS: Record<Page, string> = {
 const PATH_TO_PAGE: Record<string, Page> = {
   '/': 'work',
   '/about-me': 'about',
-  '/network-collaborators': 'friends',
+  '/friends': 'friends',
   '/resume-experience': 'resume',
-  '/favorites-books-music': 'favorites',
-  '/design-blog-articles': 'blog',
+  '/myfavorites': 'favorites',
+  '/blog': 'blog',
 };
 
 function getRouteFromPath(): { page: Page; projectId: string | null } {
   const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
   
-  // Handle project routes: /project/cwpc
+  // Handle project routes: /project/cwpc — only allow enabled projects (blocks direct URL access when disabled)
   if (path.startsWith('/project/')) {
     const id = path.slice(9); // Remove '/project/'
     const projectId = VALID_PROJECT_IDS.find((p) => p.toLowerCase() === id) ?? null;
+    if (projectId === null || PROJECT_ENABLED[projectId] === false) {
+      return { page: 'work', projectId: null };
+    }
     return { page: 'project', projectId };
   }
   
@@ -95,9 +99,9 @@ function App() {
     const handlePopState = () => {
       const route = getRouteFromPath();
       setIsTransitioning(true);
-      // Always jump to top when navigating via browser back/forward
       window.scrollTo(0, 0);
       applyRoute(route);
+      replaceRoute(route.page, route.projectId);
       setTimeout(() => setIsTransitioning(false), 50);
     };
 
@@ -111,6 +115,36 @@ function App() {
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
   }, []);
+
+  // Scrollbar: show only while user is scrolling, hide after inactivity
+  useEffect(() => {
+    let hideScrollbarTimeout: ReturnType<typeof setTimeout> | null = null;
+    const INACTIVITY_MS = 1200;
+
+    const showScrollbar = () => {
+      document.documentElement.classList.add('scrollbar-visible');
+      if (hideScrollbarTimeout) clearTimeout(hideScrollbarTimeout);
+      hideScrollbarTimeout = setTimeout(() => {
+        document.documentElement.classList.remove('scrollbar-visible');
+        hideScrollbarTimeout = null;
+      }, INACTIVITY_MS);
+    };
+
+    window.addEventListener('scroll', showScrollbar, { passive: true });
+    return () => {
+      window.removeEventListener('scroll', showScrollbar);
+      if (hideScrollbarTimeout) clearTimeout(hideScrollbarTimeout);
+    };
+  }, []);
+
+  // Redirect to work and fix URL if we ever end up on a disabled project (safety net)
+  useEffect(() => {
+    if (currentPage === 'project' && selectedProjectId && PROJECT_ENABLED[selectedProjectId] === false) {
+      setCurrentPage('work');
+      setSelectedProjectId(null);
+      replaceRoute('work', null);
+    }
+  }, [currentPage, selectedProjectId]);
 
   // Scroll to top only when user navigates (not on initial mount / hot reload)
   useEffect(() => {
@@ -177,6 +211,20 @@ function App() {
         {currentPage === 'favorites' && <FavoritesPage />}
         {currentPage === 'blog' && <Blog />}
         {currentPage === 'project' && selectedProjectId && (() => {
+          if (PROJECT_ENABLED[selectedProjectId] === false) {
+            return (
+              <div className="min-h-screen pt-32 px-8 md:px-16">
+                <h1 className="text-4xl">Project not available</h1>
+                <p className="mt-4 text-gray-600">This project is not available.</p>
+                <button
+                  onClick={handleBackToWork}
+                  className="mt-4 text-blue-600 hover:underline cursor-pointer"
+                >
+                  ← Back to Homepage
+                </button>
+              </div>
+            );
+          }
           const ProjectComponent = projectComponents[selectedProjectId];
           if (!ProjectComponent) {
             return (
@@ -192,7 +240,11 @@ function App() {
               </div>
             );
           }
-          return <ProjectComponent onBack={handleBackToWork} onProjectClick={handleProjectClick} />;
+          return (
+            <div className="project-page-offset" key={selectedProjectId}>
+              <ProjectComponent onBack={handleBackToWork} onProjectClick={handleProjectClick} />
+            </div>
+          );
         })()}
       </div>
     </div>
