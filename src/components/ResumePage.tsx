@@ -63,14 +63,14 @@ export function ResumePage() {
           </h2>
 
           {/* IBM */}
-          <div className="mb-10">
+          {/* <div className="mb-10">
             <h3 className="text-[15px] text-gray-900 mb-1">
               <strong>IBM</strong>, Product Designer, AI Applications
             </h3>
             <p className="text-[13px] text-gray-500 mb-4">
               <strong>March 2026—Present</strong> — San Jose, CA
             </p>
-            {/* <ul className="space-y-3">
+            <ul className="space-y-3">
               <li className="flex gap-3">
                 <span className="text-green-600 text-[8px] mt-2">●</span>
                 <span className="text-[15px] leading-[1.7] text-gray-700">
@@ -89,8 +89,8 @@ export function ResumePage() {
                   Re-worked brand identity of successful wireframes that facilitated the design of many of 5 years
                 </span>
               </li>
-            </ul> */}
-          </div>
+            </ul>
+          </div> */}
 
           {/* TechMentee */}
           <div className="mb-10">
