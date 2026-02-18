@@ -85,7 +85,6 @@ function replaceRoute(page: Page, projectId: string | null) {
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('work');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  const [isTransitioning, setIsTransitioning] = useState(false);
   const prevNavigationRef = useRef<{ page: Page; projectId: string | null } | null>(null);
   const isInitialMount = useRef(true);
 
@@ -98,11 +97,9 @@ function App() {
 
     const handlePopState = () => {
       const route = getRouteFromPath();
-      setIsTransitioning(true);
       window.scrollTo(0, 0);
       applyRoute(route);
       replaceRoute(route.page, route.projectId);
-      setTimeout(() => setIsTransitioning(false), 50);
     };
 
     if (isInitialMount.current) {
@@ -158,52 +155,31 @@ function App() {
 
   const handleNavigate = (page: Exclude<Page, 'project'>) => {
     if (page === currentPage) return;
-    // Ensure we start at the top whenever changing sections
     window.scrollTo(0, 0);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentPage(page);
-      setSelectedProjectId(null);
-      pushRoute(page, null);
-      setTimeout(() => setIsTransitioning(false), 50);
-    }, 150);
+    setCurrentPage(page);
+    setSelectedProjectId(null);
+    pushRoute(page, null);
   };
 
   const handleProjectClick = (projectId: string) => {
-    // Jump to top when opening a project
     window.scrollTo(0, 0);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setSelectedProjectId(projectId);
-      setCurrentPage('project');
-      pushRoute('project', projectId);
-      setTimeout(() => setIsTransitioning(false), 50);
-    }, 150);
+    setSelectedProjectId(projectId);
+    setCurrentPage('project');
+    pushRoute('project', projectId);
   };
 
   const handleBackToWork = () => {
-    // Jump to top when going back to work/home
     window.scrollTo(0, 0);
-    setIsTransitioning(true);
-    setTimeout(() => {
-      setCurrentPage('work');
-      setSelectedProjectId(null);
-      pushRoute('work', null);
-      setTimeout(() => setIsTransitioning(false), 50);
-    }, 150);
+    setCurrentPage('work');
+    setSelectedProjectId(null);
+    pushRoute('work', null);
   };
 
   return (
     <div className="min-h-screen overflow-x-hidden">
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
-      
-      <div 
-        className={`page-transition ${
-          isTransitioning 
-            ? 'opacity-0 translate-y-4' 
-            : 'opacity-100 translate-y-0'
-        }`}
-      >
+
+      <div className="page-transition">
         {currentPage === 'work' && <HomePage onProjectClick={handleProjectClick} />}
         {currentPage === 'about' && <AboutPage />}
         {currentPage === 'friends' && <FriendsPage />}

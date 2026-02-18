@@ -310,14 +310,9 @@
   transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
-/* Smooth page transitions - Apple-like animations */
+/* Page container - instant swaps, no animations */
 .page-transition {
-  will-change: opacity, transform;
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-  transition:
-    opacity var(--duration-page) var(--ease-reveal),
-    transform var(--duration-page) var(--ease-reveal);
+  /* No transitions - instant page swaps */
 }
 
 /* Premium scroll-triggered animations: calmer, slightly longer */
@@ -338,32 +333,24 @@
   }
 }
 
-/* Base state: hidden, smaller motion (22px) for calmer reveals */
+/* Base state: fade only, no slide */
 .animate-in-up {
   opacity: 0;
-  transform: translateY(22px);
-  transition:
-    opacity var(--duration-in) var(--ease-premium),
-    transform var(--duration-in) var(--ease-premium);
+  transition: opacity var(--duration-in) var(--ease-premium);
 }
 
 .animate-in-up.in-view {
   opacity: 1;
-  transform: translateY(0);
 }
 
-/* Slower, calmer for heroes */
+/* Slower fade for heroes */
 .animate-in-up-slow {
   opacity: 0;
-  transform: translateY(22px);
-  transition:
-    opacity var(--duration-in-slow) var(--ease-out-smooth),
-    transform var(--duration-in-slow) var(--ease-out-smooth);
+  transition: opacity var(--duration-in-slow) var(--ease-out-smooth);
 }
 
 .animate-in-up-slow.in-view {
   opacity: 1;
-  transform: translateY(0);
 }
 
 /* Fade only (subtle) */
@@ -376,10 +363,10 @@
   opacity: 1;
 }
 
-/* Scale-in: soft scale + fade for a premium reveal */
+/* Scale-in: soft scale + fade only, no slide */
 .animate-in-scale {
   opacity: 0;
-  transform: scale(0.98) translateY(12px);
+  transform: scale(0.98);
   transition:
     opacity var(--duration-in) var(--ease-reveal),
     transform var(--duration-in) var(--ease-reveal);
@@ -387,7 +374,7 @@
 
 .animate-in-scale.in-view {
   opacity: 1;
-  transform: scale(1) translateY(0);
+  transform: scale(1);
 }
 
 /* Arrow bounce: down-chevron hint (e.g. "scroll to case study") */

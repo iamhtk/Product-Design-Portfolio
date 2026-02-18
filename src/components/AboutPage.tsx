@@ -240,21 +240,31 @@ export function AboutPage() {
           <div className="space-y-0 mb-12 md:pl-[33%]">
             {[
               { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
-              { tool: 'Protopie', category: 'Prototyping', link: 'https://protopie.io', displayLink: 'Protopie.io' },
-              { tool: 'Play', category: 'iOS Prototyping', link: 'https://createwithplay.com', displayLink: 'Createwithplay.com' },
-              { tool: 'Adobe Suite', category: 'Design Tools', link: 'https://adobe.com', displayLink: 'Adobe.com' },
-              { tool: 'Blender', category: '3D Modeling', link: 'https://blender.org', displayLink: 'Blender.org' },
+              { tool: 'FigJam', category: 'Collaboration', link: 'https://figma.com/figjam', displayLink: 'FigJam.com' },
+              { tool: 'Sketch', category: 'UI Design', link: 'https://sketch.com', displayLink: 'Sketch.com' },
+              { tool: 'Adobe Creative Suite', category: 'Design Tools', link: 'https://adobe.com', displayLink: 'Adobe.com' },
+              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
+              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
+              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
+              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
+              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
+              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
+              // { tool: 'Protopie', category: 'Prototyping', link: 'https://protopie.io', displayLink: 'Protopie.io' },
+              // { tool: 'Play', category: 'iOS Prototyping', link: 'https://createwithplay.com', displayLink: 'Createwithplay.com' },
+              // { tool: 'Adobe Suite', category: 'Design Tools', link: 'https://adobe.com', displayLink: 'Adobe.com' },
+              // { tool: 'Blender', category: '3D Modeling', link: 'https://blender.org', displayLink: 'Blender.org' },
             ].map((item, index) => (
               <a
                 key={index}
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_1.2fr_1fr_auto] gap-3 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-start md:items-center no-underline"
+                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 hidden md:block">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline truncate">{item.displayLink}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -273,11 +283,12 @@ export function AboutPage() {
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="grid grid-cols-[1fr_auto] md:grid-cols-[1fr_1.2fr_1fr_auto] gap-3 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-start md:items-center no-underline"
+                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 hidden md:block">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline truncate">{item.displayLink}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -298,10 +309,11 @@ export function AboutPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline">{item.displayLink}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -322,10 +334,11 @@ export function AboutPage() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline">{item.displayLink}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
