@@ -243,47 +243,23 @@ export function AboutPage() {
               { tool: 'FigJam', category: 'Collaboration', link: 'https://figma.com/figjam', displayLink: 'FigJam.com' },
               { tool: 'Sketch', category: 'UI Design', link: 'https://sketch.com', displayLink: 'Sketch.com' },
               { tool: 'Adobe Creative Suite', category: 'Design Tools', link: 'https://adobe.com', displayLink: 'Adobe.com' },
-              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
-              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
-              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
-              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
-              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
-              { tool: 'Figma', category: 'User Interface', link: 'https://figma.com', displayLink: 'Figma.com' },
-              // { tool: 'Protopie', category: 'Prototyping', link: 'https://protopie.io', displayLink: 'Protopie.io' },
-              // { tool: 'Play', category: 'iOS Prototyping', link: 'https://createwithplay.com', displayLink: 'Createwithplay.com' },
-              // { tool: 'Adobe Suite', category: 'Design Tools', link: 'https://adobe.com', displayLink: 'Adobe.com' },
-              // { tool: 'Blender', category: '3D Modeling', link: 'https://blender.org', displayLink: 'Blender.org' },
+              { tool: 'ProtoPie', category: 'Prototyping', link: 'https://protopie.io', displayLink: 'Protopie.io' },
+              { tool: 'Play', category: 'iOS Prototyping', link: 'https://createwithplay.com', displayLink: 'Createwithplay.com' },
+              { tool: 'Blender', category: '3D Modeling', link: 'https://blender.org', displayLink: 'Blender.org' },
+              { tool: 'Miro', category: 'Collaboration', link: 'https://miro.com', displayLink: 'Miro.com' },
+              { tool: 'Maze', category: 'User Testing', link: 'https://maze.co', displayLink: 'Maze.co' },
+              { tool: 'Useberry', category: 'User Testing', link: 'https://useberry.com', displayLink: 'Useberry.com' },
+              { tool: 'Marvel', category: 'Prototyping', link: 'https://marvelapp.com', displayLink: 'Marvelapp.com' },
+              { tool: 'InVision', category: 'Prototyping', link: 'https://invisionapp.com', displayLink: 'InVisionapp.com' },
+              { tool: 'Bezi', category: '3D Design', link: 'https://bezi.com', displayLink: 'Bezi.com' },
+              { tool: 'Unity', category: 'Interactive Development', link: 'https://unity.com', displayLink: 'Unity.com' },
             ].map((item, index) => (
               <a
                 key={index}
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
-                style={{ justifyItems: 'start' }}
-              >
-                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
-                <div className="text-gray-400">→</div>
-              </a>
-            ))}
-          </div>
-
-          {/* Tools Grid - Dev Environment */}
-          <div className="space-y-0 mb-12 md:pl-[33%]">
-            {[
-              { tool: 'Hyper Terminal', category: 'Command Line', link: 'https://hyper.is', displayLink: 'Hyper.is' },
-              { tool: 'Cursor', category: 'Code Editor', link: 'https://cursor.com', displayLink: 'Cursor.com' },
-              { tool: 'Firefox Dev', category: 'Browser', link: 'https://mozilla.org', displayLink: 'Mozilla.org' },
-              { tool: 'Xcode', category: 'Apple IDE', link: 'https://developer.apple.com', displayLink: 'Developer.apple.com' },
-            ].map((item, index) => (
-              <a
-                key={index}
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
                 <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
@@ -297,18 +273,23 @@ export function AboutPage() {
           {/* Tools Grid - Programming Languages */}
           <div className="space-y-0 mb-12 md:pl-[33%]">
             {[
-              { tool: 'HTML, CSS & JS', category: 'Programming Languages', link: 'https://developer.mozilla.org', displayLink: 'Developer.mozilla.org' },
+              { tool: 'HTML, CSS & JavaScript', category: 'Programming Languages', link: 'https://developer.mozilla.org', displayLink: 'Developer.mozilla.org' },
               { tool: 'TypeScript', category: 'Programming Language', link: 'https://typescriptlang.org', displayLink: 'Typescriptlang.org' },
+              { tool: 'React', category: 'JavaScript Framework', link: 'https://react.dev', displayLink: 'React.dev' },
+              { tool: 'Next.js', category: 'JavaScript Framework', link: 'https://nextjs.org', displayLink: 'Nextjs.org' },
               { tool: 'Vue & Nuxt', category: 'JavaScript Frameworks', link: 'https://nuxt.com', displayLink: 'Nuxt.com' },
-              { tool: 'React & Next', category: 'JavaScript Frameworks', link: 'https://nextjs.org', displayLink: 'Nextjs.org' },
-              { tool: 'Swift', category: 'Programming Language', link: 'https://developer.apple.com', displayLink: 'Developer.apple.com' },
+              { tool: 'Swift', category: 'Programming Language', link: 'https://developer.apple.com/swift', displayLink: 'Developer.apple.com' },
+              { tool: 'SQL', category: 'Database', link: 'https://postgresql.org', displayLink: 'Postgresql.org' },
+              { tool: 'Python', category: 'Programming Language', link: 'https://python.org', displayLink: 'Python.org' },
+              { tool: 'GitHub', category: 'Version Control', link: 'https://github.com', displayLink: 'Github.com' },
+              { tool: 'Xcode', category: 'Apple IDE', link: 'https://developer.apple.com/xcode', displayLink: 'Developer.apple.com' },
             ].map((item, index) => (
               <a
                 key={index}
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
                 <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
@@ -319,21 +300,26 @@ export function AboutPage() {
             ))}
           </div>
 
-          {/* Tools Grid - Productivity & Apps */}
-          <div className="space-y-0 md:pl-[33%]">
+          {/* Tools Grid - AI Tools */}
+          <div className="space-y-0 mb-12 md:pl-[33%]">
             {[
-              { tool: 'iOS, iPadOS, macOS', category: 'Apple Products', link: 'https://apple.com', displayLink: 'Apple.com' },
-              { tool: 'Raycast', category: 'Productivity Tooling', link: 'https://raycast.com', displayLink: 'Raycast.com' },
-              { tool: 'Arc Browser', category: 'Browser', link: 'https://arc.net', displayLink: 'Arc.net' },
-              { tool: 'Mullvad VPN', category: 'VPN', link: 'https://mullvad.net', displayLink: 'Mullvad.net' },
-              { tool: 'Raindrop', category: 'Bookmarking', link: 'https://raindrop.io', displayLink: 'Raindrop.io' },
+              { tool: 'ChatGPT', category: 'AI Assistant', link: 'https://chat.openai.com', displayLink: 'Chat.openai.com' },
+              { tool: 'Claude', category: 'AI Assistant', link: 'https://claude.ai', displayLink: 'Claude.ai' },
+              { tool: 'Midjourney', category: 'Image Generation', link: 'https://midjourney.com', displayLink: 'Midjourney.com' },
+              { tool: 'Runway', category: 'AI Video', link: 'https://runwayml.com', displayLink: 'Runwayml.com' },
+              { tool: 'Perplexity', category: 'AI Search', link: 'https://perplexity.ai', displayLink: 'Perplexity.ai' },
+              { tool: 'Relume', category: 'AI Web Design', link: 'https://relume.io', displayLink: 'Relume.io' },
+              { tool: 'Framer AI', category: 'AI Website Builder', link: 'https://framer.com', displayLink: 'Framer.com' },
+              { tool: 'Figma AI', category: 'AI Design', link: 'https://figma.com', displayLink: 'Figma.com' },
+              { tool: 'v0 by Vercel', category: 'AI UI Generation', link: 'https://v0.dev', displayLink: 'V0.dev' },
             ].map((item, index) => (
               <a
                 key={index}
                 href={item.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                // className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-4 md:py-5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
                 <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
@@ -343,6 +329,61 @@ export function AboutPage() {
               </a>
             ))}
           </div>
+          
+          {/* Tools Grid - Dev Environment */}
+          <div className="space-y-0 mb-12 md:pl-[33%]">
+            {[
+              { tool: 'Raycast', category: 'Productivity Tooling', link: 'https://raycast.com', displayLink: 'Raycast.com' },
+              { tool: 'Arc Browser', category: 'Browser', link: 'https://arc.net', displayLink: 'Arc.net' },
+              { tool: 'Hyper Terminal', category: 'Command Line', link: 'https://hyper.is', displayLink: 'Hyper.is' },
+              { tool: 'Cursor', category: 'Code Editor', link: 'https://cursor.sh', displayLink: 'Cursor.sh' },
+              { tool: 'Firefox Dev', category: 'Browser', link: 'https://mozilla.org/firefox/developer', displayLink: 'Mozilla.org' },
+              { tool: 'Jira', category: 'Project Management', link: 'https://jira.atlassian.com', displayLink: 'Jira.atlassian.com' },
+              { tool: 'Confluence', category: 'Documentation', link: 'https://confluence.atlassian.com', displayLink: 'Confluence.atlassian.com' },
+              { tool: 'Azure DevOps', category: 'DevOps Platform', link: 'https://azure.microsoft.com/products/devops', displayLink: 'Azure.microsoft.com' },
+              { tool: 'Raindrop', category: 'Bookmarking', link: 'https://raindrop.io', displayLink: 'Raindrop.io' },
+              { tool: 'Mullvad VPN', category: 'VPN', link: 'https://mullvad.net', displayLink: 'Mullvad.net' },
+            ].map((item, index) => (
+              <a
+                key={index}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                style={{ justifyItems: 'start' }}
+              >
+                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
+                <div className="text-gray-400">→</div>
+              </a>
+            ))}
+          </div>
+          
+          {/* Tools Grid - Productivity & Apps */}
+          <div className="space-y-0 mb-12 md:pl-[33%]">
+            {[
+              { tool: 'iOS, iPadOS, macOS', category: 'Apple Platforms', link: 'https://apple.com', displayLink: 'Apple.com' },
+              { tool: 'Microsoft Copilot', category: 'AI Productivity', link: 'https://copilot.microsoft.com', displayLink: 'Copilot.microsoft.com' },
+              { tool: 'Microsoft 365', category: 'Productivity Suite', link: 'https://microsoft.com/microsoft-365', displayLink: 'Microsoft.com' },
+              { tool: 'Fluent Design System', category: 'Design System', link: 'https://fluent.microsoft.com', displayLink: 'Fluent.microsoft.com' },
+            ].map((item, index) => (
+              <a
+                key={index}
+                href={item.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
+                style={{ justifyItems: 'start' }}
+              >
+                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
+                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
+                <div className="text-gray-400">→</div>
+              </a>
+            ))}
+          </div>
+
         </div>
 
         {/* Me in a grid - commented out for now

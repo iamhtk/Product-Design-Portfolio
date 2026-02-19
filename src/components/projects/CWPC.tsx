@@ -143,6 +143,7 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
       {progressBarVisible &&
         createPortal(
           <div
+            className="liquid-glass-progress-strip"
             style={{
               position: 'fixed',
               top: 0,
@@ -150,7 +151,6 @@ export function CWPCProject({ onBack, onProjectClick }: CWPCProjectProps) {
               right: 0,
               width: '100%',
               height: '6px',
-              backgroundColor: 'rgba(0,0,0,0.12)',
               zIndex: 9999,
               pointerEvents: 'none',
               transition: 'opacity 0.2s ease-out',

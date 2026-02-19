@@ -50,7 +50,7 @@ export function ScrollToTop() {
     <button
       type="button"
       onClick={scrollToTop}
-      className="fixed right-8 bg-gray-900 text-white p-3 rounded-full shadow-lg hover:bg-gray-700 transition-colors duration-300 ease-in-out"
+      className="liquid-glass-btn fixed right-8 text-gray-900 p-3 rounded-full transition-all duration-300 ease-in-out"
       style={{ bottom: `${bottomPosition}px`, zIndex: 9998 }}
       aria-label="Scroll to top"
     >

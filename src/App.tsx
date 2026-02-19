@@ -97,7 +97,7 @@ function App() {
 
     const handlePopState = () => {
       const route = getRouteFromPath();
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       applyRoute(route);
       replaceRoute(route.page, route.projectId);
     };
@@ -149,27 +149,27 @@ function App() {
     const isNavigation = prev !== null && (prev.page !== currentPage || prev.projectId !== selectedProjectId);
     prevNavigationRef.current = { page: currentPage, projectId: selectedProjectId };
     if (isNavigation) {
-      window.scrollTo(0, 0);
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     }
   }, [currentPage, selectedProjectId]);
 
   const handleNavigate = (page: Exclude<Page, 'project'>) => {
     if (page === currentPage) return;
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     setCurrentPage(page);
     setSelectedProjectId(null);
     pushRoute(page, null);
   };
 
   const handleProjectClick = (projectId: string) => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     setSelectedProjectId(projectId);
     setCurrentPage('project');
     pushRoute('project', projectId);
   };
 
   const handleBackToWork = () => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     setCurrentPage('work');
     setSelectedProjectId(null);
     pushRoute('work', null);

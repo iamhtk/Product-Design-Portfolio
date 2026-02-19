@@ -366,6 +366,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
       {progressBarVisible &&
         createPortal(
           <div
+            className="liquid-glass-progress-strip"
             style={{
               position: 'fixed',
               top: 0,
@@ -373,7 +374,6 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
               right: 0,
               width: '100%',
               height: '6px',
-              backgroundColor: 'rgba(0,0,0,0.12)',
               zIndex: 9999,
               pointerEvents: 'none',
               transition: 'opacity 0.2s ease-out',
@@ -396,14 +396,14 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
         className="w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden"
         style={{ backgroundColor: headerColor }}
       >
-        <div className="h-full w-full flex items-center justify-center p-4">
+        <div className="h-full w-full flex items-center justify-center p-4 min-h-0 min-w-0">
           {headerIcon ? (
-            <div className="h-full w-full flex items-center justify-center min-h-0">
+            <div className="h-full w-full flex items-center justify-center min-h-0 min-w-0">
               {(() => {
                 const iconPath = headerIcon;
                 if (!iconPath) return null;
                 const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
-                const sizeClasses = 'max-h-full max-w-full object-contain';
+                const sizeClasses = 'h-full w-auto max-h-full object-contain';
                 if (isVideo) {
                   return (
                     <video src={iconPath} className={sizeClasses} autoPlay loop muted playsInline />

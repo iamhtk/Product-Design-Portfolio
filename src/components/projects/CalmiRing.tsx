@@ -140,7 +140,7 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
       
       {progressBarVisible &&
         createPortal(
-          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, width: '100%', height: '6px', backgroundColor: 'rgba(0,0,0,0.12)', zIndex: 9999, pointerEvents: 'none', transition: 'opacity 0.2s ease-out' }}>
+          <div className="liquid-glass-progress-strip" style={{ position: 'fixed', top: 0, left: 0, right: 0, width: '100%', height: '6px', zIndex: 9999, pointerEvents: 'none', transition: 'opacity 0.2s ease-out' }}>
             <div style={{ height: '100%', width: `${scrollProgress}%`, backgroundColor: progressBarColor, transition: 'width 0.15s ease-out' }} />
           </div>,
           document.body
