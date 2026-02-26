@@ -21,7 +21,7 @@ export function AboutPage() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         
         {/* Header - unchanged */}
-        <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-20 md:pb-16">
+        <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-20 md:pb-16">
           <h1 className="text-[32px] md:text-[42px] leading-[1.2] text-gray-900">
             About Hrithik
           </h1>
@@ -70,7 +70,7 @@ export function AboutPage() {
         </AnimateIn>
 
         {/* Images Grid */}
-        <AnimateIn variant="scale" className="grid grid-cols-2 gap-6 mb-16">
+        <AnimateIn variant="up" className="grid grid-cols-2 gap-6 mb-16">
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <ImageWithFallback 
               src={"/about/more/Untitled.PNG"}
@@ -88,7 +88,7 @@ export function AboutPage() {
         </AnimateIn>
         
         {/* Images Grid */}
-        <AnimateIn className="grid grid-cols-2 gap-6 mb-16">
+        <AnimateIn variant="up" className="grid grid-cols-2 gap-6 mb-16">
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <ImageWithFallback 
               src={"/about/more/Untitled2.PNG"}
@@ -107,7 +107,7 @@ export function AboutPage() {
         </AnimateIn>
         
         {/* Image 2 */}
-        <AnimateIn variant="fade" className="mb-16">
+        <AnimateIn variant="up" className="mb-16">
           <ImageWithFallback 
             src={"/about/more/IMG_9612.png"}
             alt="Presentation"
@@ -115,7 +115,7 @@ export function AboutPage() {
           />
         </AnimateIn>
         {/* Images Grid */}
-        <AnimateIn className="grid grid-cols-2 gap-6 mb-16">
+        <AnimateIn variant="up" className="grid grid-cols-2 gap-6 mb-16">
           {/* <img 
             src={images[2]}
             alt="Team collaboration"

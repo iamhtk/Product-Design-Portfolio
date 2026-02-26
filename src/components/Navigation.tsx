@@ -100,12 +100,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay - liquid glass */}
+      {/* Mobile Menu Overlay */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-50 bg-white/75 backdrop-blur-2xl saturate-200 md:hidden">
+        <div className="fixed inset-0 z-50 bg-white md:hidden">
           <div className="flex flex-col h-full">
             {/* Mobile Menu Header */}
-            <div className="glass-panel px-8 py-5 flex items-center justify-between border-b border-gray-200/60 rounded-none">
+            <div className="px-8 py-5 flex items-center justify-between border-b border-gray-100/80 bg-white">
               <button 
                 onClick={() => handleNavigation('work')}
                 className="text-[15px] text-gray-900 cursor-pointer"

@@ -19,7 +19,7 @@ export function ResumePage() {
       <div className="max-w-[900px] mx-auto px-6 md:px-12 lg:px-16">
         
         {/* Header with Download Button */}
-        <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-12 flex items-start justify-between">
+        <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-12 flex items-start justify-between">
           <div>
             <h1 className="text-[32px] md:text-[42px] leading-[1.2] text-gray-900 mb-3">
               Hrithik Sanyal

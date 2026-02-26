@@ -49,13 +49,13 @@ export function FriendsPage() {
     <div className="pt-24 min-h-screen">
       <ScrollToTop />
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
-        <AnimateIn variant="up-slow" rootMargin="0px" className="py-12 md:py-20">
+        <AnimateIn variant="up" rootMargin="0px" className="py-12 md:py-20">
           <h1 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase mb-12 md:mb-16">
             Friends
           </h1>
         </AnimateIn>
 
-        <AnimateIn variant="fade" rootMargin="0px 0px -40px 0px" className="space-y-0">
+        <AnimateIn variant="up" rootMargin="0px 0px -40px 0px" className="space-y-0">
           {friends.map((friend) => (
             <div 
               key={friend.number}

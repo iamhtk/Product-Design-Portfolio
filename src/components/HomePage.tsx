@@ -102,19 +102,19 @@ export function HomePage({ onProjectClick }: HomePageProps) {
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
         {/* Hero Section */}
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
-          <AnimateIn variant="up-slow" rootMargin="0px" className="mb-3">
+          <AnimateIn variant="up" rootMargin="0px" className="mb-3">
             <h1 className="text-[28px] md:text-[36px] lg:text-[44px] font-bold text-gray-900 leading-[1.2] tracking-[-0.02em]" style={{ fontWeight: 700 }}>
               Product Designer at CWPC.
             </h1>
           </AnimateIn>
-          <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-1" className="mb-3">
+          <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
             <p className="text-[18px] md:text-[20px] lg:text-[22px] text-gray-900 leading-relaxed">
               Previously Design Engineer at{" "}
               <span className="font-medium">GM, Kryptonas, TUG, BEL</span><br />
               <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
             </p>
           </AnimateIn>
-          <AnimateIn variant="up-slow" rootMargin="0px" stagger="stagger-2">
+          <AnimateIn variant="up" rootMargin="0px" stagger="stagger-2">
             <p className="text-[17px] md:text-[20px] text-gray-500 max-w-[500px] leading-[1.65]">
               Curious about interfaces, intelligent systems
               and the ways in which we interact with them.
@@ -123,7 +123,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         </div>
 
         {/* Section Header */}
-        <AnimateIn variant="scale" rootMargin="0px 0px -60px 0px" className="flex items-center justify-between mb-4 mt-20 md:mt-40">
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="flex items-center justify-between mb-4 mt-20 md:mt-40">
           <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium">
             Selected Work
           </h2>
@@ -213,7 +213,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
           })}
         </div>
 
-        <AnimateIn variant="scale" rootMargin="0px 0px -80px 0px" className="mb-32">
+        <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
             <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium mb-2">
               Side Projects - Mini Apps
@@ -336,7 +336,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         </AnimateIn>
 
         {/* Recommendations Section */}
-        <AnimateIn variant="scale" rootMargin="0px 0px -80px 0px" className="mb-32">
+        <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
             <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium mb-2">
               Testimonials

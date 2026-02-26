@@ -2,9 +2,9 @@
 
 :root {
   --nav-height: 4.5rem; /* Content starts exactly below nav when using padding-top: var(--nav-height) */
-  --font-primary: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-primary: "Titillium Web", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-mono: ui-monospace, "SF Mono", "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Consolas, monospace;
-  --font-display: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Titillium Web", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --font-size: 16px;
   --page-bg: #fafafa;
   --background: #fafafa;
@@ -371,48 +371,76 @@
   }
 }
 
-/* Base state: fade only, no slide */
+/* Base state: premium lift-in (fade + soft rise + blur) */
 .animate-in-up {
   opacity: 0;
-  transition: opacity var(--duration-in) var(--ease-premium);
+  transform: translateY(18px) scale(0.99);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity var(--duration-in) var(--ease-premium),
+    transform var(--duration-in) var(--ease-premium),
+    filter var(--duration-in) var(--ease-premium);
 }
 
 .animate-in-up.in-view {
   opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
-/* Slower fade for heroes */
+/* Slower, softer lift for heroes */
 .animate-in-up-slow {
   opacity: 0;
-  transition: opacity var(--duration-in-slow) var(--ease-out-smooth);
+  transform: translateY(22px) scale(0.985);
+  filter: blur(8px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity var(--duration-in-slow) var(--ease-out-smooth),
+    transform var(--duration-in-slow) var(--ease-out-smooth),
+    filter var(--duration-in-slow) var(--ease-out-smooth);
 }
 
 .animate-in-up-slow.in-view {
   opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
-/* Fade only (subtle) */
+/* Fade variant: same premium lift but with smaller distance, used for subtle sections */
 .animate-in-fade {
   opacity: 0;
-  transition: opacity var(--duration-in) var(--ease-premium);
+  transform: translateY(12px) scale(0.99);
+  filter: blur(4px);
+  will-change: opacity, transform, filter;
+  transition:
+    opacity var(--duration-in) var(--ease-premium),
+    transform var(--duration-in) var(--ease-premium),
+    filter var(--duration-in) var(--ease-premium);
 }
 
 .animate-in-fade.in-view {
   opacity: 1;
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
-/* Scale-in: soft scale + fade only, no slide */
+/* Scale-in variant: premium lift with a touch more scale for feature blocks */
 .animate-in-scale {
   opacity: 0;
-  transform: scale(0.98);
+  transform: translateY(16px) scale(0.975);
+  filter: blur(6px);
+  will-change: opacity, transform, filter;
   transition:
     opacity var(--duration-in) var(--ease-reveal),
-    transform var(--duration-in) var(--ease-reveal);
+    transform var(--duration-in) var(--ease-reveal),
+    filter var(--duration-in) var(--ease-reveal);
 }
 
 .animate-in-scale.in-view {
   opacity: 1;
-  transform: scale(1);
+  transform: translateY(0) scale(1);
+  filter: blur(0);
 }
 
 /* Arrow bounce: down-chevron hint (e.g. "scroll to case study") */

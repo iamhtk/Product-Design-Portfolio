@@ -1,6 +1,7 @@
 import { useState, useRef } from 'react';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
+import { AnimateIn } from './AnimateIn';
 
 const MUSIC: {
   album: string;
@@ -612,21 +613,25 @@ export function FavoritesPage() {
       <ScrollToTop />
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 pt-24 pb-16">
         {/* Favorite music - same layout as Favorite books */}
-        <h2 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase mb-12 md:mb-16">
-          Favorite music
-        </h2>
+        <AnimateIn variant="up" rootMargin="0px" className="mb-12 md:mb-16">
+          <h2 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase">
+            Favorite music
+          </h2>
+        </AnimateIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 items-start mb-8">
           {visibleMusic.map((item, index) => {
             const cardKey = `${item.album}-${item.artist}-${index}`;
+            const staggerKey = (['stagger-1','stagger-2','stagger-3','stagger-4','stagger-5','stagger-6','stagger-7','stagger-8','stagger-9'] as const)[Math.min(index, 8)];
             return (
-              <MusicCard
-                key={cardKey}
-                item={item}
-                cardKey={cardKey}
-                isFlipped={flippedMusicKey === cardKey}
-                onFlip={() => setFlippedMusicKey(cardKey)}
-                onFlipBack={() => setFlippedMusicKey(null)}
-              />
+              <AnimateIn key={cardKey} variant="up" rootMargin="0px 0px -60px 0px" stagger={staggerKey}>
+                <MusicCard
+                  item={item}
+                  cardKey={cardKey}
+                  isFlipped={flippedMusicKey === cardKey}
+                  onFlip={() => setFlippedMusicKey(cardKey)}
+                  onFlipBack={() => setFlippedMusicKey(null)}
+                />
+              </AnimateIn>
             );
           })}
         </div>
@@ -644,13 +649,21 @@ export function FavoritesPage() {
         {!hasMoreMusic && MUSIC.length > PAGE_SIZE && <div className="mb-20 md:mb-24" />}
 
         {/* Favorite books */}
-        <h1 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase mb-12 md:mb-16">
-          Favorite books
-        </h1>
+        <AnimateIn variant="up" rootMargin="0px" className="mb-12 md:mb-16">
+          <h1 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase">
+            Favorite books
+          </h1>
+        </AnimateIn>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-10 lg:gap-12 items-start mb-8">
-          {visibleBooks.map((book) => (
-            <BookCard key={`${book.title}-${book.author}`} book={book} />
-          ))}
+          {visibleBooks.map((book, index) => {
+            const cardKey = `${book.title}-${book.author}-${index}`;
+            const staggerKey = (['stagger-1','stagger-2','stagger-3','stagger-4','stagger-5','stagger-6','stagger-7','stagger-8','stagger-9'] as const)[Math.min(index, 8)];
+            return (
+              <AnimateIn key={cardKey} variant="up" rootMargin="0px 0px -60px 0px" stagger={staggerKey}>
+                <BookCard book={book} />
+              </AnimateIn>
+            );
+          })}
         </div>
         {hasMoreBooks && (
           <div className="flex justify-center">
