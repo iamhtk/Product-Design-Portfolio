@@ -106,7 +106,15 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
   const icon = '/gm/gm_logo.png'; // Sidebar icon (left column) - Add image/video path here
   const headerIcon = '/gm/header.png'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Product Designer';
-  const team = 'Hrithik Sanyal, Luke Bratic, and Prof. James Rhampton';
+  const team = (
+    <>
+      <a href="https://www.linkedin.com/in/iamhtk" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 underline">Hrithik Sanyal</a>
+      {', '}
+      <a href="https://www.linkedin.com/in/lbratic" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 underline">Luke Bratic</a>
+      {', and '}
+      <a href="https://www.linkedin.com/in/jim-rampton-26a95440" target="_blank" rel="noopener noreferrer" className="text-gray-700 hover:text-gray-900 underline">Prof. James Rhampton</a>
+    </>
+  );
   const when = 'January 2024 - May 2024';
   const overview = "General Motors (GM) partnered with the University of Michigan (UofM) to facilitate students' exploration and comprehension of the design of in-vehicle infotainment (IVI) systems. As part of this collaboration, we visited GM's office in Warren, MI, where we received a comprehensive design brief and gained insight into GM's IVI design process. We learned about the specific approaches taken by various GM car teams, such as those responsible for Buick, Chevrolet, and Cadillac vehicles.";
   const overview2 = "Develop a new In-vehicle experience for the luxury car segment focusing on in-car themes.";
