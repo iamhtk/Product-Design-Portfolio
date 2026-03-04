@@ -50,7 +50,7 @@ export function FriendsPage() {
       <ScrollToTop />
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
         <AnimateIn variant="up" rootMargin="0px" className="py-12 md:py-20">
-          <h1 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase mb-12 md:mb-16">
+          <h1 className="type-overline text-gray-400 mb-12 md:mb-16">
             Friends
           </h1>
         </AnimateIn>
@@ -62,27 +62,27 @@ export function FriendsPage() {
               className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_1.5fr_1fr_auto] gap-3 md:gap-8 py-4 md:py-6 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-start min-w-0"
             >
               {/* Column 1: Number */}
-              <div className="text-[12px] md:text-[13px] text-gray-400">
+              <div className="type-caption text-gray-400">
                 {friend.number}
               </div>
               
               {/* Column 2: Name */}
-              <div className="text-[14px] md:text-[15px] text-gray-900 group-hover:underline min-w-0 break-words">
+              <div className="type-body text-gray-900 group-hover:underline min-w-0 break-words">
                 {friend.name}
               </div>
               
               {/* Column 3: Role and Company (hidden on mobile) */}
               <div className="hidden md:block">
-                <p className="text-[14px] md:text-[15px] text-gray-900">
+                <p className="type-body text-gray-900">
                   {friend.role}
                 </p>
-                <p className="text-[12px] md:text-[13px] text-gray-400">
+                <p className="type-caption text-gray-400">
                   {friend.company}
                 </p>
               </div>
               
               {/* Column 4: Website Link (hidden on mobile) */}
-              <div className="hidden md:block text-[14px] md:text-[15px] text-gray-400 group-hover:underline">
+              <div className="hidden md:block type-body text-gray-400 group-hover:underline">
                 {friend.link}
               </div>
               

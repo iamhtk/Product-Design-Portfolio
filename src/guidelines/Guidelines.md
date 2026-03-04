@@ -22,11 +22,13 @@ For example:
 # Design system guidelines
 Rules for how the AI should make generations look like your company's design system
 
+**For new case studies:** See `src/design-system/Case-Study-Design-System.md` for typography, colors, layout, content blocks, and a step-by-step checklist.
+
 Additionally, if you select a design system to use in the prompt box, you can reference
 your design system's components, tokens, variables and components.
 For example:
 
-* Use a base font-size of 14px
+* Use the design-system type scale only (type-display, type-h1, type-h2, type-h3, type-body-lg, type-body, type-caption, type-overline) — no 14px or other ad-hoc sizes
 * Date formats should always be in the format “Jun 10”
 * The bottom toolbar should only ever have a maximum of 4 items
 * Never use the floating action button with the bottom toolbar

@@ -1,0 +1,9 @@
+/* Load last: force design-system font sizes so Tailwind never wins. */
+
+/* Project card meta (company + read time) = caption 13px only */
+div.project-card-meta p,
+.project-card-meta p.type-caption,
+.project-card-meta p.leading-relaxed,
+.project-card-meta p.tracking-wide {
+  font-size: 13px !important;
+}

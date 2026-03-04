@@ -20,9 +20,9 @@ export function AboutPage() {
       <ScrollToTop />
       <div className="max-w-[1200px] mx-auto px-6 md:px-12">
         
-        {/* Header - unchanged */}
+        {/* Header */}
         <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-20 md:pb-16">
-          <h1 className="text-[32px] md:text-[42px] leading-[1.2] text-gray-900">
+          <h1 className="type-h1 text-gray-900">
             About Hrithik
           </h1>
         </AnimateIn>
@@ -31,7 +31,7 @@ export function AboutPage() {
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mt-2 mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
-              <p className="text-[18px] leading-[1.7] text-gray-700">
+              <p className="type-body-lg text-gray-700">
                 I'm a Product Designer with 5+ years of industry experience. I specialize in applying design thinking to break down complex problems and craft helpful experiences.
                 A Master's graduate in HCI/UX Design from the University of Michigan, School of Information,
                 I've been learning from and collaborating with some of the best minds on the planet.
@@ -52,19 +52,19 @@ export function AboutPage() {
 
         {/* Content Section 1 */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="text-[17px] text-gray-900 mb-4 font-medium">
+          <h2 className="type-h3 text-gray-900 mb-4">
             CURRENTLY
           </h2>
-          <p className="text-[18px] leading-[1.7] text-gray-700 mb-6">
+          <p className="type-body-lg text-gray-700 mb-6">
             I'm currently a  Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>CWPC</a>, where I work 
             on consumer-facing products that reach millions of users worldwide. Before joining CWPC, 
             I graduated from the University of Michigan's School of Information (#GoBlue💙), specializing in UX Design & Research and Human-Computer Interaction. My background in Electronics & Telecommunications gives me a unique edge in understanding and crafting interactions between people and technology.
 
           </p>
-          <p className="text-[18px] leading-[1.7] text-gray-700">
+          <p className="type-body-lg text-gray-700">
           During my school at Umich, I was a Graduate Student Instructor (GSI), where I taught SI 364: Building Data-Driven Applications under Prof. Charles Severance (Dr. Chuck!!). and SI 658: Information Architecture under Prof. Dan Klyn. These experiences have allowed me to deepen my understanding of both programming and design, as well as mentor students in these fields.
           </p>
-          <p className="text-[18px] leading-[1.7] text-gray-700">
+          <p className="type-body-lg text-gray-700">
           Outside of academia, I produce music, cook, and am learning Classical Piano. I am passionate about exploring different cuisines and enhancing my culinary skills. As a self-taught designer, I enjoy creating simple and effective solutions for complex systems and currently work as a freelancer, helping product teams build enjoyable user experiences. 
           </p>
         </AnimateIn>
@@ -181,7 +181,7 @@ export function AboutPage() {
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr_1fr] gap-8 md:gap-12">
             <div>
-              <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium">
+              <h2 className="type-overline text-gray-400">
                 Notable numbers
               </h2>
             </div>
@@ -262,9 +262,9 @@ export function AboutPage() {
                 className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
+                <div className="type-body text-gray-900 text-left">{item.tool}</div>
+                <div className="type-body text-gray-500 text-left">{item.category}</div>
+                <div className="type-body text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -292,9 +292,9 @@ export function AboutPage() {
                 className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
+                <div className="type-body text-gray-900 text-left">{item.tool}</div>
+                <div className="type-body text-gray-500 text-left">{item.category}</div>
+                <div className="type-body text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -322,9 +322,9 @@ export function AboutPage() {
                 className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
+                <div className="type-body text-gray-900 text-left">{item.tool}</div>
+                <div className="type-body text-gray-500 text-left">{item.category}</div>
+                <div className="type-body text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -352,9 +352,9 @@ export function AboutPage() {
                 className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
+                <div className="type-body text-gray-900 text-left">{item.tool}</div>
+                <div className="type-body text-gray-500 text-left">{item.category}</div>
+                <div className="type-body text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -376,9 +376,9 @@ export function AboutPage() {
                 className="grid grid-cols-[1fr_1.2fr_1fr_auto] gap-4 md:gap-8 py-2.5 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-center no-underline"
                 style={{ justifyItems: 'start' }}
               >
-                <div className="text-[14px] md:text-[15px] text-gray-900 text-left">{item.tool}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-500 text-left">{item.category}</div>
-                <div className="text-[14px] md:text-[15px] text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
+                <div className="type-body text-gray-900 text-left">{item.tool}</div>
+                <div className="type-body text-gray-500 text-left">{item.category}</div>
+                <div className="type-body text-gray-400 group-hover:underline text-left">{item.displayLink}</div>
                 <div className="text-gray-400">→</div>
               </a>
             ))}
@@ -420,7 +420,7 @@ export function AboutPage() {
                 <h3 className="text-[17px] font-semibold text-gray-900">Drop pixels here</h3>
                 <Trash2 className="w-4 h-4 text-gray-400" aria-hidden />
               </div>
-              <p className="text-[14px] text-gray-500 mb-4">Helps me build this site :)</p>
+              <p className="type-body text-gray-500 mb-4">Helps me build this site :)</p>
               <p className="text-[12px] text-gray-400 mb-3">Click each color to add a pixel:</p>
               <div className="flex gap-2 h-14 rounded-xl overflow-hidden border-2 border-gray-200">
                 <button
@@ -456,7 +456,7 @@ export function AboutPage() {
                 <h3 className="text-[17px] font-semibold text-amber-600">Reduce</h3>
                 <X className="w-4 h-4 text-amber-500 shrink-0" aria-hidden />
               </div>
-              <p className="text-[14px] text-gray-700 leading-relaxed">
+              <p className="type-body text-gray-700 leading-relaxed">
                 {reduced ? 'Less is more.' : 'Less is more through thoughtful reduction.'}
               </p>
               <p className="text-[13px] text-gray-500 mt-2">Laws of Simplicity by John Maeda.</p>

@@ -21,10 +21,10 @@ export function ResumePage() {
         {/* Header with Download Button */}
         <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="pt-20 pb-12 flex items-start justify-between">
           <div>
-            <h1 className="text-[32px] md:text-[42px] leading-[1.2] text-gray-900 mb-3">
+            <h1 className="type-h1 text-gray-900 mb-3">
               Hrithik Sanyal
             </h1>
-            <p className="text-[15px] leading-[1.7] text-gray-700 mb-2">
+            <p className="type-body text-gray-700 mb-2">
               <strong>Senior Product Designer</strong> - with 5+ years of experience. Specializing in<br />
               creating AI, AR/VR, FinTech products.<br />
               Drawing from my design and electronics engineering experience, I develop <br />
@@ -37,7 +37,7 @@ export function ResumePage() {
             download
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white text-[14px] rounded-lg hover:bg-gray-700 transition-colors"
+            className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white type-body rounded-lg hover:bg-gray-700 transition-colors"
           >
             <Download className="w-4 h-4" />
             Download PDF
@@ -50,7 +50,7 @@ export function ResumePage() {
           download
           target="_blank"
           rel="noopener noreferrer"
-          className="md:hidden w-full flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white text-[14px] rounded-lg hover:bg-gray-700 transition-colors mb-12"
+          className="md:hidden w-full flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white type-body rounded-lg hover:bg-gray-700 transition-colors mb-12"
         >
           <Download className="w-4 h-4" />
           Download PDF
@@ -58,7 +58,7 @@ export function ResumePage() {
 
         {/* EXPERIENCE Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
+          <h2 className="type-overline text-gray-400 mb-8">
             EXPERIENCE
           </h2>
 

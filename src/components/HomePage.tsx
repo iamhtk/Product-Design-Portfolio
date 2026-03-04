@@ -103,19 +103,19 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         {/* Hero Section */}
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
           <AnimateIn variant="up" rootMargin="0px" className="mb-3">
-            <h1 className="text-[28px] md:text-[36px] lg:text-[44px] font-bold text-gray-900 leading-[1.2] tracking-[-0.02em]" style={{ fontWeight: 700 }}>
+            <h1 className="type-display text-gray-900">
               Product Designer at CWPC.
             </h1>
           </AnimateIn>
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
-            <p className="text-[18px] md:text-[20px] lg:text-[22px] text-gray-900 leading-relaxed">
+            <p className="type-body-lg text-gray-900">
               Previously Design Engineer at{" "}
               <span className="font-medium">GM, Kryptonas, TUG, BEL</span><br />
               <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
             </p>
           </AnimateIn>
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-2">
-            <p className="text-[17px] md:text-[20px] text-gray-500 max-w-[500px] leading-[1.65]">
+            <p className="type-body text-gray-500 max-w-[500px]">
               Curious about interfaces, intelligent systems
               and the ways in which we interact with them.
             </p>
@@ -124,10 +124,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
 
         {/* Section Header */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="flex items-center justify-between mb-4 mt-20 md:mt-40">
-          <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium">
+          <h2 className="type-overline text-gray-400">
             Selected Work
           </h2>
-          <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium">
+          <h2 className="type-overline text-gray-400">
             Design x Engineering
           </h2>
         </AnimateIn>
@@ -151,7 +151,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                   onProjectClick(project.id);
                 }
               }}
-              className={`h-full flex flex-col rounded-xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08] ${
+              className={`h-full flex flex-col rounded-xl overflow-hidden bg-white border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08] ${
                 isEnabled 
                   ? 'cursor-pointer' 
                   : 'cursor-not-allowed'
@@ -196,14 +196,14 @@ export function HomePage({ onProjectClick }: HomePageProps) {
               </div>
 
               {/* Project Info - Flex column with read time at bottom */}
-              <div className="flex flex-col flex-1 space-y-2 px-3 pb-3">
-                <h3 className="text-[16px] md:text-[17px] text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
+              <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
                   {project.title}
                 </h3>
-                <p className="text-[13px] md:text-[14px] text-gray-500 leading-relaxed line-clamp-2">
+                <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">
                   {project.company}
                 </p>
-                <p className="text-[12px] tracking-wide text-gray-400 pt-1 mt-auto">
+                <p className="type-caption text-gray-400 pt-1 mt-auto tracking-wide">
                   {project.readTime}
                 </p>
               </div>
@@ -215,10 +215,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
 
         <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
-            <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium mb-2">
+            <h2 className="type-overline text-gray-400 mb-2">
               Side Projects - Mini Apps
             </h2>
-            <p className="text-[17px] text-gray-900">
+            <p className="type-body-lg text-gray-900">
               Small experiments & creative explorations.
             </p>
           </div>
@@ -234,10 +234,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                 />
               </div>
               <div>
-                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
+                <h3 className="type-body text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
                   LE7ELS
                 </h3>
-                <p className="text-[13px] text-gray-500">
+                <p className="type-caption text-gray-500">
                   Music Library Organizer
                 </p>
               </div>
@@ -252,10 +252,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                 />
               </div>
               <div>
-                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
+                <h3 className="type-body text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
                   Stories
                 </h3>
-                <p className="text-[13px] text-gray-500">
+                <p className="type-caption text-gray-500">
                   Design System Builder
                 </p>
               </div>

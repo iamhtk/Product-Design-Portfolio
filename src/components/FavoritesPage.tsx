@@ -407,13 +407,13 @@ function MusicCard({
   const textBlock = (
     <div className="flex flex-row items-start justify-between gap-4 mt-3 md:mt-4 px-4 pb-4">
       <div className="min-w-0 flex-1">
-        <h2 className="text-[15px] md:text-[16px] font-semibold text-gray-900 leading-snug transition-opacity duration-300 group-hover:opacity-80">
+        <h2 className="type-body text-gray-900 font-semibold leading-snug transition-opacity duration-300 group-hover:opacity-80">
           {item.album}
         </h2>
-        <p className="text-[13px] md:text-[14px] text-gray-500 mt-1 font-normal">
+        <p className="type-caption text-gray-500 mt-1 font-normal">
           {item.artist}
         </p>
-        <div className="mt-0.5 flex flex-col text-[12px] md:text-[13px] text-gray-400 gap-0.5">
+        <div className="mt-0.5 flex flex-col type-caption text-gray-400 gap-0.5">
           <span>Genre: {item.genre}</span>
           <span>Year: {item.year}</span>
         </div>
@@ -423,7 +423,7 @@ function MusicCard({
         target="_blank"
         rel="noopener noreferrer"
         onClick={(e) => e.stopPropagation()}
-        className="flex-shrink-0 text-[11px] md:text-[12px] tracking-wide text-gray-400 hover:text-gray-700 transition-colors whitespace-nowrap uppercase"
+        className="flex-shrink-0 type-caption tracking-wide text-gray-400 hover:text-gray-700 transition-colors whitespace-nowrap uppercase"
       >
         Visit Artist →
       </a>
@@ -453,7 +453,7 @@ function MusicCard({
             flipCooldownRef.current = false;
           }, 650);
         }}
-        className="absolute top-1.5 right-1.5 z-10 text-[10px] tracking-wide text-white/80 hover:text-white transition-colors uppercase cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/30 rounded px-1.5 py-0.5 bg-black/40"
+        className="absolute top-1.5 right-1.5 z-10 type-caption tracking-wide text-white/80 hover:text-white transition-colors uppercase cursor-pointer focus:outline-none focus:ring-2 focus:ring-white/30 rounded px-1.5 py-0.5 bg-black/40"
         aria-label="Back to album"
       >
         ← Back
@@ -570,13 +570,13 @@ function BookCard({ book }: { book: (typeof BOOKS)[0] }) {
       {/* Title, author, year, genre, format, and Visit Publisher */}
       <div className="flex flex-row items-start justify-between gap-4 mt-3 md:mt-4 px-4 pb-4">
         <div className="min-w-0 flex-1">
-          <h2 className="text-[15px] md:text-[16px] font-semibold text-gray-900 leading-snug transition-opacity duration-300 group-hover:opacity-80">
+          <h2 className="type-body text-gray-900 font-semibold leading-snug transition-opacity duration-300 group-hover:opacity-80">
             {book.title}
           </h2>
-          <p className="text-[13px] md:text-[14px] text-gray-500 mt-1 font-normal">
+          <p className="type-caption text-gray-500 mt-1 font-normal">
             {book.author}
           </p>
-          <div className="mt-0.5 flex flex-col text-[12px] md:text-[13px] text-gray-400 gap-0.5">
+          <div className="mt-0.5 flex flex-col type-caption text-gray-400 gap-0.5">
             {book.year != null && <span>Year: {book.year}</span>}
             {book.genre && <span>Genre: {book.genre}</span>}
             {book.format && <span>Format: {book.format}</span>}
@@ -586,7 +586,7 @@ function BookCard({ book }: { book: (typeof BOOKS)[0] }) {
           href={publisherLink}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex-shrink-0 text-[11px] md:text-[12px] tracking-wide text-gray-400 hover:text-gray-700 transition-colors whitespace-nowrap uppercase"
+          className="flex-shrink-0 type-caption tracking-wide text-gray-400 hover:text-gray-700 transition-colors whitespace-nowrap uppercase"
         >
           Visit Publisher →
         </a>
@@ -614,7 +614,7 @@ export function FavoritesPage() {
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 pt-24 pb-16">
         {/* Favorite music - same layout as Favorite books */}
         <AnimateIn variant="up" rootMargin="0px" className="mb-12 md:mb-16">
-          <h2 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase">
+          <h2 className="type-overline text-gray-400">
             Favorite music
           </h2>
         </AnimateIn>
@@ -650,7 +650,7 @@ export function FavoritesPage() {
 
         {/* Favorite books */}
         <AnimateIn variant="up" rootMargin="0px" className="mb-12 md:mb-16">
-          <h1 className="text-[13px] tracking-[0.15em] text-gray-400 uppercase">
+          <h1 className="type-overline text-gray-400">
             Favorite books
           </h1>
         </AnimateIn>

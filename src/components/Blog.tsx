@@ -70,8 +70,8 @@ export function Blog() {
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-20 md:py-32">
         {/* Header */}
         <AnimateIn variant="up" rootMargin="0px" className="mb-20 md:mb-32">
-          <h1 className="text-[32px] sm:text-[48px] md:text-[72px] mb-6 tracking-tight text-gray-900">Blogs</h1>
-          <p className="text-[15px] md:text-[16px] text-gray-600 leading-[1.8] max-w-[700px]">
+          <h1 className="type-display text-gray-900 mb-6">Blogs</h1>
+          <p className="type-body text-gray-600 max-w-[700px]">
             Recently, I began writing articles and sharing them on Medium, expressing my thoughts on miscellaneous subjects like Generative AI and UX Design.
           </p>
         </AnimateIn>
@@ -86,22 +86,22 @@ export function Blog() {
               {/* Left Column - Content */}
               <div className="space-y-6">
                 {/* Date */}
-                <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase">
+                <div className="type-overline text-gray-400">
                   {post.date}
                 </div>
 
                 {/* Title and Subtitle */}
                 <div>
-                  <h2 className="text-[32px] md:text-[42px] leading-[1.2] mb-3">
+                  <h2 className="type-h2 mb-3 text-gray-900">
                     {post.title}
                   </h2>
-                  <p className="text-[18px] md:text-[20px] text-gray-600">
+                  <p className="type-body-lg text-gray-600">
                     {post.subtitle}
                   </p>
                 </div>
 
                 {/* Description */}
-                <p className="text-[15px] md:text-[16px] text-gray-600 leading-[1.8]">
+                <p className="type-body text-gray-600">
                   {post.description}
                 </p>
 
