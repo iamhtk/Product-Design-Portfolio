@@ -34,7 +34,7 @@ export function Blog() {
       description: 'In the design of user interfaces (UI) for luxury vehicles, a significant challenge lies in creating a cross-channel UI that not only meets the expectations of luxury and personalization but also ensures that driver safety is never compromised. The primary concern is how to design a system that seamlessly integrates the vehicle’s internal controls with mobile and other device interfaces while maintaining a focus on minimizing driver distraction and cognitive load.',
       image: 'blogs/M3.png',
       link: 'https://medium.com/design-bootcamp/vice-elevating-luxury-redefining-automotive-ux-03e417868173',
-      date: 'January 2025'
+      date: 'April 18, 2024'
     },
     {
       title: 'AI and UX: Shaping the Future of Design Together',
@@ -42,7 +42,7 @@ export function Blog() {
       description: 'As we navigate the intersection of Artificial Intelligence (AI) and User Experience (UX) design, we witness a transformative fusion that redefines our digital landscape. AI, now a central element in UX design, offers unprecedented personalization, efficiency, and engagement by harnessing deep data insights and human-centered design principles. This synergy enables the creation of experiences that anticipate needs, adapt to preferences, and seamlessly integrate technology with human interaction. By leveraging AI computational power alongside the empathic touch of UX design, we can craft intuitive and emotionally resonant digital experiences. This exploration delves into five key principles guiding this integration, aiming to elevate and empower user-centric design',
       image: 'blogs/M2.png',
       link: 'https://medium.com/design-bootcamp/ai-and-ux-shaping-the-future-of-design-together-eef99a88ea8c',
-      date: 'December 2024'
+      date: 'April 10, 2024'
     },
     {
       title: 'Empowering Human Creativity: How AI Principles Can Shape the Future of UX Design Tools',
@@ -50,7 +50,7 @@ export function Blog() {
       description: 'In the realm of User Experience (UX) design, the integration of Artificial Intelligence (AI) principles can significantly enhance the effectiveness of UX tools. By aligning with these principles, designers can leverage AI to augment creativity, personalize learning paths, foster empathy, facilitate storytelling, recognize emotions, and provide adaptive assistance. Through the lens of these principles, we envision a future where AI empowers designers to unleash their creativity, facilitates personalized learning experiences, fosters empathy, enables narrative-driven design, acknowledges emotional nuances, and adapts assistance according to users’ proficiency levels and contexts. Let’s explore each principle in detail with examples and insights on how AI has influenced these perspectives.',
       image: 'blogs/M1.png',
       link: 'https://hrithiksanyal.medium.com/op-ed-1-empowering-human-creativity-how-ai-principles-can-shape-the-future-of-ux-design-tools-1fa2f12a89c5',
-      date: 'November 2024'
+      date: 'March 5, 2024'
     }
   ];
 
