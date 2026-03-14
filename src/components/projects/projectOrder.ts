@@ -27,6 +27,18 @@ export const PROJECT_ENABLED: Record<string, boolean> = {
   WeddingBliss: false,
 };
 
+/** URL slugs for project pages. Used in /project/<slug>. Omit entry to use id.toLowerCase(). */
+export const PROJECT_SLUGS: Record<string, string> = {
+  CWPC: 'cwpc',
+  AutomotiveUX_GM: 'automotive-ux-cadillac-escalade',
+  RaseetHealth: 'raseet-health',
+  BMW: 'bmw-idrive-redesign',
+  CalmiRing: 'calmiring',
+  jobgenius: 'jobgenius',
+  bound: 'bound-international-ux-audit',
+  WeddingBliss: 'wedding-bliss',
+};
+
 /** CalmiRing case study opens in external Notion link (used in Explore more section). */
 export const CALMIRING_EXTERNAL_URL = 'https://beautiful-leader-fa9.notion.site/Calmi-Ring-ad8e4dee5a794da48dda0e5ad4bdde33';
 

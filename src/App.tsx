@@ -5,7 +5,7 @@ import { AboutPage } from './components/AboutPage';
 import { FriendsPage } from './components/FriendsPage';
 import { ResumePage } from './components/ResumePage';
 import { projectComponents } from './components/projects';
-import { PROJECT_ENABLED } from './components/projects/projectOrder';
+import { PROJECT_ENABLED, PROJECT_SLUGS } from './components/projects/projectOrder';
 import { Blog } from './components/Blog';
 import { FavoritesPage } from './components/FavoritesPage';
 
@@ -79,10 +79,12 @@ const PATH_TO_PAGE: Record<string, Page> = {
 function getRouteFromPath(): { page: Page; projectId: string | null } {
   const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
   
-  // Handle project routes: /project/cwpc — only allow enabled projects (blocks direct URL access when disabled)
+  // Handle project routes: /project/<slug> — match by slug first, then by id
   if (path.startsWith('/project/')) {
-    const id = path.slice(9); // Remove '/project/'
-    const projectId = VALID_PROJECT_IDS.find((p) => p.toLowerCase() === id) ?? null;
+    const segment = path.slice(9); // Remove '/project/'
+    const bySlug = Object.entries(PROJECT_SLUGS).find(([, slug]) => slug === segment)?.[0] ?? null;
+    const byId = VALID_PROJECT_IDS.find((p) => p.toLowerCase() === segment) ?? null;
+    const projectId = bySlug ?? byId;
     if (projectId === null || PROJECT_ENABLED[projectId] === false) {
       return { page: 'work', projectId: null };
     }
@@ -101,7 +103,8 @@ function getRouteFromPath(): { page: Page; projectId: string | null } {
 
 function buildPath(page: Page, projectId: string | null): string {
   if (page === 'project' && projectId) {
-    return `/project/${projectId.toLowerCase()}`;
+    const slug = PROJECT_SLUGS[projectId] ?? projectId.toLowerCase();
+    return `/project/${slug}`;
   }
   return ROUTE_PATHS[page];
 }
