@@ -35,7 +35,9 @@ function restoreScrollIfSamePage() {
     sessionStorage.removeItem(SCROLL_RESTORE_KEY);
     if (path !== window.location.pathname || typeof y !== 'number') return;
     // Slight delay so expanded case study content is laid out before restoring scroll
-    const isProject = path.startsWith('/project/');
+    const pathNorm = path.toLowerCase().replace(/\/$/, '') || '/';
+    const segment = pathNorm === '/' ? '' : pathNorm.slice(1);
+    const isProject = path.startsWith('/project/') || (segment && !segment.includes('/') && getProjectIdFromSegment(segment) !== null);
     const delay = isProject ? 150 : 0;
     const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
     if (delay > 0) {
@@ -56,17 +58,16 @@ function restoreScrollIfSamePage() {
 // Map internal page IDs to professional URL paths
 // To change URLs, update the values here (keep keys the same)
 // ═══════════════════════════════════════════════════════════════════════════
-const ROUTE_PATHS: Record<Page, string> = {
+const ROUTE_PATHS: Record<Exclude<Page, 'project'>, string> = {
   'work': '/',
   'about': '/about-me',
   'friends': '/friends',
   'resume': '/resume-experience',
   'favorites': '/myfavorites',
   'blog': '/blog',
-  'project': '/project', // Base path, will append project ID
 };
 
-// Reverse lookup: URL path → page ID
+// Reverse lookup: URL path → page ID (only non-project pages)
 const PATH_TO_PAGE: Record<string, Page> = {
   '/': 'work',
   '/about-me': 'about',
@@ -76,37 +77,53 @@ const PATH_TO_PAGE: Record<string, Page> = {
   '/blog': 'blog',
 };
 
+/** Resolve a URL segment (no leading slash) to projectId, or null. */
+function getProjectIdFromSegment(segment: string): string | null {
+  const bySlug = Object.entries(PROJECT_SLUGS).find(([, slug]) => slug === segment)?.[0] ?? null;
+  const byId = VALID_PROJECT_IDS.find((p) => p.toLowerCase() === segment) ?? null;
+  const projectId = bySlug ?? byId;
+  if (projectId === null || PROJECT_ENABLED[projectId] === false) return null;
+  return projectId;
+}
+
 function getRouteFromPath(): { page: Page; projectId: string | null } {
   const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
   
-  // Handle project routes: /project/<slug> — match by slug first, then by id
-  if (path.startsWith('/project/')) {
-    const segment = path.slice(9); // Remove '/project/'
-    const bySlug = Object.entries(PROJECT_SLUGS).find(([, slug]) => slug === segment)?.[0] ?? null;
-    const byId = VALID_PROJECT_IDS.find((p) => p.toLowerCase() === segment) ?? null;
-    const projectId = bySlug ?? byId;
-    if (projectId === null || PROJECT_ENABLED[projectId] === false) {
-      return { page: 'work', projectId: null };
-    }
-    return { page: 'project', projectId };
-  }
-  
-  // Handle root: /
+  // Root
   if (path === '/') {
     return { page: 'work', projectId: null };
   }
   
-  // Look up page from professional URL path
-  const page = PATH_TO_PAGE[path] ?? 'work';
-  return { page, projectId: null };
+  // Known non-project page (about, blog, etc.)
+  const page = PATH_TO_PAGE[path];
+  if (page) {
+    return { page, projectId: null };
+  }
+  
+  // Legacy /project/<slug> — still supported
+  if (path.startsWith('/project/')) {
+    const segment = path.slice(9);
+    const projectId = getProjectIdFromSegment(segment);
+    if (projectId) return { page: 'project', projectId };
+    return { page: 'work', projectId: null };
+  }
+  
+  // Top-level project URL: /raseet-health (single segment)
+  const segment = path.slice(1);
+  if (segment && !segment.includes('/')) {
+    const projectId = getProjectIdFromSegment(segment);
+    if (projectId) return { page: 'project', projectId };
+  }
+  
+  return { page: 'work', projectId: null };
 }
 
 function buildPath(page: Page, projectId: string | null): string {
   if (page === 'project' && projectId) {
     const slug = PROJECT_SLUGS[projectId] ?? projectId.toLowerCase();
-    return `/project/${slug}`;
+    return `/${slug}`;
   }
-  return ROUTE_PATHS[page];
+  return ROUTE_PATHS[page as Exclude<Page, 'project'>];
 }
 
 function pushRoute(page: Page, projectId: string | null) {
