@@ -565,14 +565,14 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Wireframes', subheader: '', content: "", },
 
-{ type: 'image', src: '/bmw/Frame1.png', },
+// { type: 'image', src: '/bmw/Frame1.png', },
 
 
 { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
 
 // { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
 
-{ type: 'image', src: '/bmw/Frame1.png', },
+// { type: 'image', src: '/bmw/Frame1.png', },
 
 
 
