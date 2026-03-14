@@ -15,7 +15,51 @@ import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
 import { getArrowGradientColors } from './arrowGradient';
+import { getInitialCaseStudyVisible } from './caseStudyRestore';
+import { getHeaderIndentMargin, getListIndentMargin } from './indentHelpers';
+import { getAlignClass, getBlockAlignClass } from './alignHelpers';
 import type { ContentBlock } from './types';
+
+/** Resolve list indent level from textBullets block (supports listIndent and legacy indent/indentLevel). */
+function getTextBulletsListIndentLevel(
+  block: Extract<ContentBlock, { type: 'textBullets' }>
+): 0 | 1 | 2 {
+  if (block.listIndent !== undefined) return block.listIndent;
+  if (block.indentLevel === 2) return 2;
+  if (block.indent) return 1;
+  return 0;
+}
+
+/** Looping video (GIF-style): autoplay, muted, loop, no controls. Uses ref + play() for reliable autoplay. */
+function LoopingVideo({ src, className, style }: { src: string; className?: string; style?: React.CSSProperties }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const el = videoRef.current;
+    if (!el) return;
+    const play = () => {
+      el.muted = true;
+      el.play().catch(() => {});
+    };
+    el.addEventListener('loadeddata', play);
+    play();
+    return () => el.removeEventListener('loadeddata', play);
+  }, [src]);
+  return (
+    <video
+      ref={videoRef}
+      src={src}
+      className={className}
+      style={style}
+      loop
+      muted
+      playsInline
+      preload="auto"
+      aria-label="Looping video"
+    >
+      Your browser does not support the video tag.
+    </video>
+  );
+}
 
 const CURRENT_PROJECT_ID = 'RaseetHealth';
 
@@ -29,13 +73,8 @@ const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
-  const [caseStudyVisible, setCaseStudyVisible] = useState(false);
+  const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setCaseStudyVisible(false);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -98,104 +137,492 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
   // Page content: add text or image/video in the order you want. Order here = order on page.
   const blocks: ContentBlock[] = [
-    // DEFAULT CONTENT BLOCKS (uncomment or duplicate lines to use; comment out to hide)
-    { type: 'text', header: "User Research", content: "Before embarking on the redesign, I conducted initial research to gain a deeper understanding of the pharmacy and healthcare domain. This included studying existing platforms and reviewing user needs across pharmacists, customers, and providers." },
+    // DEFAULT CONTENT  BLOCKS
+    // { type: 'text', header: "User Research", content: "Before embarking on the redesign of the BMW iDrive 8 screens, I conducted initial research to gain a deeper understanding of the vehicle. This included studying BMW's brand styling guide and reviewing various articles on the car's development and target audience. Two particularly informative resources were:" },
+    
+    // { type: 'text', header: "Exploring iDrive 8: Part One", content: "This exploration highlighted BMW's dedication to a sophisticated and minimalist aesthetic. This design ethos not only resonates with the preferences of BMW's customer base but also reflects the company's desired image. Personally, I am drawn to this minimalist approach and aim to integrate it into my redesign efforts.", indent: true },
+    // { type: 'image', src: '/bmw/bmw1.jpg' },
 
-    { type: 'text', header: "Project Statement", content: "" },
-    { type: 'text', header: "Mission", content: "Raseet’s mission is to make quality healthcare accessible to everyone by empowering local pharmacies. By addressing stagnant revenues and low customer lifetime value for pharmacies, Raseet also aims to reduce out-of-pocket healthcare expenses for customers, ensuring trust and timely assistance. ", indent: true },
+    // { type: 'textBullets', header: "Mass Market cars", items: [
+    //   "Large center display accessible to the front passenger is a fundamental requirement.",
+    //   "Optional driver displays to provide cost-saving options for customers.",
+    //   "Emphasis on easy navigation and functionality tailored to essential features.",
+    //   "Prioritized functions are Audio, Maps, and Clean content options.",
+    // ], indent: true, indentLevel: 2 },
 
-    { type: 'text', header: "Vision", content: "To empower local pharmacists to compete with e-pharmacy giants by providing a 'Vocal for Local' platform that transforms their business into a sustainable, digitally-driven model. Raseet connects credible healthcare providers to customers via local pharmacies, creating a collaborative and mutually beneficial ecosystem. ", indent: true },
+    // { type: 'textImageRow', header: '2022, BMW i7', content: "BMW i7's Adaptive Cruise Control (ACC) interface, showcases a clear, user-friendly and intuitive interface. It allows users to customize following distances, following distance and enabling/disabling ACC and intervention thresholds making it more user-centric user-friendly for ease of interaction during driving.", src: '/bmw/bmw2.jpg' },
 
-    { type: 'textTextRow', headerLeft: 'Overview / Summary', contentLeft: "", headerRight: '', contentRight: "Raseet Health is a comprehensive platform designed to digitize local pharmacies, helping them evolve into e-commerce-ready, one-stop-shops for customers' health and wellness needs. The platform connects pharmacies, healthcare providers, and customers by offering features like electronic medical records (EMRs), inventory management, and a seamless e-commerce experience. Through Raseet, pharmacies can offer trusted healthcare and wellness services such as doctor consultations, lab tests, and health insurance, all while reducing operational inefficiencies. The platform also promotes eco-conscious practices by replacing paper bills with interactive, mobile-responsive digital bills." },
-    
-    { type: 'textBullets', header: "Target Audience", items: [
-      "Healthcare Providers: Doctors and healthcare professionals requiring secure and collaborative patient record systems.",
-      "Customers: Individuals seeking convenient, trusted, and transparent healthcare services.",
-      "Pharmacies: Small to mid-sized pharmacies looking to expand their reach and boost revenue. Owners struggling with outdated systems and limited digital presence.",
-    ]},
+    // { type: 'text', header: "Takeaways & Considerations", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", indent: true },
+    // { type: 'image', src: '/bmw/bmw6.jpeg' },
 
-    { type: 'textBullets', header: "Value Proposition", items: [
-      "Increasing Revenue for Partner Pharmacies: Attracting new customers through enhanced online presence and services.",
-      "Simplifying Health Management for Patients: Offering tools for prescription refills, health record management, and online consultations.",
-      "Enhancing Delivery and Order Fulfillment: Providing real-time tracking and streamlined logistics for superior user experience.",
-    ]},
+    // { type: 'text', header: "Screens with content blocks", content: "I began by crafting frames for each of the screens within the BMW iDrive 8 system using Figma. I opted not to redesign the small climate control screen located in the back seat, deeming it unnecessary for this project due to its simplicity. This decision was more intuitive than based on specific rationale; it felt unnecessary to alter something so straightforward." },
+    // { type: 'text', content: "Once the frames were set up, I began placing labeled content blocks within them to outline a potential layout. These placements weren't final but served as a preliminary step to visualize potential design directions. This phase was crucial for generating initial ideas and exploring how to approach the overall redesign."},
     
+    // { type: 'image', src: '/bmw/Frame1.png' },
+    // { type: 'image', src: '/bmw/center display landing page_v2png' },
+
+    // { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
+    // Intro
+    { type: 'image', src: '/raseet/cover.png' },
     
+    // { type: 'text', header: 'Project Statement', content: 'Empower local pharmacies to compete with e‑pharmacy giants by delivering a simpler, more trustworthy way to manage prescriptions, health records, and orders—across in‑store and mobile experiences.' },
+
+    { type: 'text', header: 'Project Statement', content: '' },
+
+    // Mission + Vision
+    { type: 'text', header: 'Mission', content: 'Make quality healthcare more accessible by empowering local pharmacies with a digital system that increases revenue, improves customer lifetime value, and reduces out-of-pocket cost through better access and follow-through.', indent: true },
+    { type: 'text', header: 'Vision', content: "Build a “Vocal for Local” ecosystem where credible providers, pharmacies, and customers collaborate seamlessly—turning the pharmacy into a one‑stop health and wellness hub.", indent: true },
+
+    // Summary / Overview
+    { type: 'text', header: 'Overview / Summary', content: "Raseet Health digitizes local pharmacies so they can offer modern services like refills, orders, delivery tracking, and health record access—while keeping the human trust loop that makes local pharmacies valuable. The platform is designed to work for a broad audience (all ages and tech comfort levels) and for multiple stakeholders (pharmacists, customers, and providers).", indent: true },
+
+    // Audience + Value
     
-    { type: 'text', header: "Design Process", content: "Designing Raseet Health’s digital experience required a structured yet flexible design process, rooted in Agile methodologies and Design Sprints. Our goal was to create an intuitive, scalable, and accessible pharmacy platform while balancing business goals and technical feasibility. To achieve this, I followed a user-centered iterative design approach with rapid prototyping, continuous feedback loops, and close cross-functional collaboration."},
+    { type: 'textBullets', header: 'Target Audience', items: [
+      'Pharmacies: Owners and staff who need simple tooling, minimal training overhead, and reliable day-to-day workflows.',
+      'Customers: People who want transparency, reminders, refills, and trusted support without complicated apps.',
+      'Healthcare providers: Partners who need clear coordination and secure access to relevant records and updates.',
+    ],listIndent: 1 },
     
-    { type: 'text', header: "Lean UX & Agile Approach", content: "The design process followed a dual-track Agile framework, where design and development ran in parallel to ensure continuous iteration and refinement."},
+    { type: 'textBullets', header: 'Value Proposition', items: [
+      'For pharmacies: higher retention + repeat orders via better follow-ups, reminders, and digital presence.',
+      'For customers: less friction for refills, orders, and record access; more clarity and trust.',
+      'For the ecosystem: fewer manual errors and a more consistent handoff between people and systems.',
+    ],listIndent: 1 },
+
+    // Problem
+    { type: 'text', header: 'Design Process', content: "Designing Raseet Health’s digital experience required a structured yet flexible design process, rooted in Agile methodologies and Design Sprints. Our goal was to create an intuitive, scalable, and accessible pharmacy platform while balancing business goals and technical feasibility. To achieve this, I followed a user-centered iterative design approach with rapid prototyping, continuous feedback loops, and close cross-functional collaboration" },
+   
+    { type: 'text', header: 'Lean UX & Agile Approach', content: "The design process followed a dual-track Agile framework, where design and development ran in parallel to ensure continuous iteration and refinement", indent: true },
     
-    { type: 'textBullets', header: "", items: [
+    { type: 'textBullets', header: '', items: [
       "Design Sprints: Rapid 5-day sprints to ideate, prototype, and validate concepts.",
       "Agile UX: Weekly stand-ups with the product and development teams to align design deliverables with sprint cycles.",
       "Cross-functional Collaboration: Close coordination with engineers, marketers, and business stakeholders.",
       "Data-Driven Decision-Making: A/B testing and usability research informed key iterations.",
-    ], indent: true},
-    
-    { type: 'text', header: "", content: "This framework enabled fast iterations, allowing the team to validate hypotheses early and avoid costly design changes later."},
-    { type: 'image', src: '/raseet/test5.png' },
-    
-    
-    
-    
-    
-    
+    ], indent: true, indentLevel: 2},
 
-    
-    // { type: 'textTextRow', headerLeft: 'Target Audience', contentLeft: "", headerRight: '', contentRight: "Healthcare Providers: Doctors and healthcare professionals requiring secure and collaborative patient record systems. " },
-    
-    
-    
-    { type: 'textImageRow', header: 'Raseet platform', content: "The Raseet Health interface showcases a clear, user-friendly experience for pharmacists and customers. It allows users to manage inventory, orders, and health records in one place.", src: '/raseet/example2.jpg' },
-    { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
-    { type: 'text', header: "Exploring Raseet: Part One", content: "This exploration highlighted the need for a unified platform that could serve pharmacies, healthcare providers, and customers. The design ethos focused on clarity, trust, and ease of adoption for pharmacies with limited digital experience.", indent: true },
-    { type: 'image', src: '/raseet/example1.jpg' },
-    
-    { type: 'textBullets', header: "Key requirements", items: [
-      "Large center display accessible to the front passenger is a fundamental requirement.",
-      "Optional driver displays to provide cost-saving options for customers.",
-      "Emphasis on easy navigation and functionality tailored to essential features.",
-    ], indent: true, indentLevel: 2 },
-    
-    { type: 'textImageRow', header: 'Raseet platform', content: "The Raseet Health interface showcases a clear, user-friendly experience for pharmacists and customers. It allows users to manage inventory, orders, and health records in one place.", src: '/raseet/example2.jpg' },
-    
-    { type: 'text', header: "Takeaways & Considerations", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights.", indent: true },
-    { type: 'image', src: '/raseet/example3.jpeg' },
+    { type: 'text', header: '', content: "This framework enabled fast iterations, allowing the team to validate hypotheses early and avoid costly design changes later", indent: true },
 
+    { type: 'image', src: '/raseet/6.png' },
     
+    { type: 'text', header: 'User Research', content: ""},
+    
+    { type: 'text', header: 'Background', content: "To design a solution that meets the needs of pharmacies, healthcare providers, and customers, it was essential to understand their existing workflows, pain points, and expectations. Through a mix of qualitative and quantitative research, we identified gaps in the current ecosystem and opportunities to create a more streamlined, user-friendly platform.", indent: true },
+
+    { type: 'text', header: 'Research Objectives', content: "", indent: true },
+
+    { type: 'textBullets', header: '', items: [
+      "Identify inefficiencies in pharmacy operations and customer engagement.",
+      "Understand barriers to digital adoption for pharmacies and customers.",
+      "Explore how healthcare providers and pharmacies collaborate to manage patient data and prescriptions",
+      "Data-Driven Decision-Making: A/B testing and usability research informed key iterations.",
+    ], indent: true, indentLevel: 2},
+
+    { type: 'text', header: 'Research Methodology', subheader: 'Multi-method approach', content: "We employed a multi-method research approach to gather insights from diverse stakeholders:", indent: true },
+
+    { type: 'text', header: '1.User Interviews:', subheader: 'Participants:', content: "", indent: true },
+
+    { type: 'image', src: '/raseet/final/1.png', indent: true },
+    { type: 'image', src: '/raseet/final/2.png', indent: true },
+
+    { type: 'textBullets', header: 'Process:', items: [
+      "Conducted 1-hour interviews focusing on workflows, challenges, and expectations.",
+      "Open-ended questions encouraged participants to share detailed experiences.",
+    ], headerIndent: 1, listIndent: 2},
+
+
+
+
+    { type: 'text', header: '2.Surveys:', subheader: 'Participants:', content: "", indent: true, subheaderIndent: 1 },
+
+    { type: 'image', src: '/raseet/final/3.png', indent: true },
+    { type: 'text', header: 'key insights:', content: "", indent: true, headerIndent: 1 },
+
+    { type: 'image', src: '/raseet/final/4.png', indent: true },
+
+    { type: 'text', header: '3.Contextual Inquiries:', subheader: '', content: "", indent: true },
+
+    { type: 'image', src: '/raseet/final/5.png', indent: true },
+    
+    { type: 'textBullets', header: 'Process:', items: [
+      "Shadowed pharmacy staff during inventory updates, order management, and customer interactions.",
+      "Documented pain points, bottlenecks, and opportunities for digital intervention",
+    ], headerIndent: 1, listIndent: 2},
+    
+    { type: 'image', src: '/raseet/final/6.png', indent: true },
+
+
+
+    { type: 'text', header: '4. Competitor Analysis:', subheader: '', content: "Platforms studied: Leading e-pharmacy apps in the market", indent: true },
+
+    { type: 'text', header: 'Focused on:', subheader: '', content: "", headerIndent: 1 },
+
+
+    { type: 'image', src: '/raseet/final/7.png', indent: true },
+    
+    { type: 'textBullets', header: 'Process:', items: [
+      "Shadowed pharmacy staff during inventory updates, order management, and customer interactions.",
+      "Documented pain points, bottlenecks, and opportunities for digital intervention",
+    ], headerIndent: 1, listIndent: 2},
+    
+    { type: 'image', src: '/raseet/final/8.png', indent: true },
+  
+// { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
+
+
+{ type: 'textImageRow', header: 'Tata 1 mg', subheader: '', content: "1mg is a pharmacy application that provides specialized and generic medicines along with branded medicines", items: ['Wide medicine catalog and delivery.', 'Prescription upload and refill flows.', 'Health content and lab tests.'], src: '/raseet/tata.png', itemsIndent: 1 },
+
+{ type: 'textImageRow', header: 'PharmEasy', subheader: '', content: "Pharmeasy is another famous online pharmacy & medical store offering pharmaceutical and healthcare products.", items: ['Home delivery of medicines', 'Prescription upload and refill flows.', 'Health content and lab tests.'], src: '/raseet/pharm.png', itemsIndent: 1, imageSide: 'left', },
+
+{ type: 'textImageRow', header: 'Zeno Health', subheader: '', content: "Zeno Health is a Mumbai-based pharmacy application that provides generic medicines and branded medicines.", items: ['Home delivery of medicines', 'Provides doctor consultations.'], src: '/raseet/zeno.png', itemsIndent: 1, imageSide: 'right'},
+
+{ type: 'text', header: 'To summarize all the problems….', subheader: '', content: "", align: 'center'},
+
+{ type: 'image', src: '/raseet/final/9.png'},
+
+{ type: 'image', src: '/raseet/final/10.png' },
+
+
+
+{ type: 'text', header: 'Key Findings', subheader: '1. Pharmacy Workflows Are Inefficient:', content: "", },
+
+{ type: 'image', src: '/raseet/final/11.png'},
+
+{ type: 'image', src: '/raseet/final/12.png' },
+
+
+{ type: 'text', header: '', subheader: '2. Digital Adoption Barriers for Pharmacies:', content: "", },
+
+{ type: 'image', src: '/raseet/final/13.png'},
+
+{ type: 'image', src: '/raseet/final/14.png' },
+
+
+{ type: 'text', header: '', subheader: '3. Customers Struggle With Navigation:', content: "", },
+
+{ type: 'image', src: '/raseet/final/15.png'},
+
+{ type: 'image', src: '/raseet/final/16.png' },
+
+{ type: 'text', header: '', subheader: '4. Lack of Guidance Post-Rejection:', content: "", },
+
+{ type: 'image', src: '/raseet/final/17.png'},
+
+{ type: 'image', src: '/raseet/final/18.png' },
+
+{ type: 'text', header: '', subheader: '5. Trust Issues With Digital Platforms:', content: "", },
+
+{ type: 'image', src: '/raseet/final/19.png'},
+
+{ type: 'image', src: '/raseet/final/20.png' },
+
+
+{ type: 'text', header: 'Insights at a Glance??', subheader: '', content: "", align: 'center'},
+
+{ type: 'image', src: '/raseet/final/21.png'},
+
+ 
+
+{ type: 'text', header: '', subheader: '', content: "These insights served as a valuable tool to identify opportunities for introducing a potential solution.", align: 'center'},
+
+{ type: 'text', header: 'User Persona', subheader: '', content: "", },
+
+{ type: 'video', src: '/raseet/PERSONA.mp4' },
+
+{ type: 'text', header: 'Empathy Map', subheader: '', content: "", },
+
+{ type: 'video', src: '/raseet/EM.mp4' },
+
+{ type: 'text', header: 'User Journey', subheader: '', content: "", },
+
+{ type: 'video', src: '/raseet/UJ.mp4' },
+
+
+{ type: 'text', header: 'Impact of Research', subheader: '', content: "The insights from user research directly informed the design goals and solutions for Raseet Health:", items: ['User-Centric Onboarding', 'Enhanced Navigation', 'Privacy Assurance'] },
+
+
+{ type: 'text', header: 'Product Goals: Sort Qualitative Feedback', subheader: '', content: "The success of Raseet Health depended on aligning business objectives with user needs, ensuring a seamless and scalable experience for all stakeholders. By analyzing research insights and market trends, we defined three core product goals:" },
+
+{ type: 'text', header: 'Business Goals', subheader: '', content: "", headerIndent: 1 },
+{ type: 'image', src: '/raseet/final/22.png', indent: true },
+
+{ type: 'text', header: 'User Goals', subheader: '', content: "", headerIndent: 1 },
+{ type: 'image', src: '/raseet/final/23.png', indent: true },
+
+{ type: 'text', header: 'Shared Goals (User + Business)', subheader: '', content: "", headerIndent: 1 },
+{ type: 'image', src: '/raseet/final/24.png', indent: true },
+
+
+{ type: 'text', header: '', subheader: '', content: "These goals shaped the design decisions, guiding the development of a frictionless user experience that balanced operational efficiency with user-centric healthcare services.", headerIndent: 1 },
+
+{ type: 'image', src: '/raseet/bsu.png', },
+
+////////////////////////////////////////////////////////////
+
+{ type: 'text', header: 'Solutions?', subheader: '1. Seamless Integration of Stakeholder Systems', content: "", },
+
+
+{ type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Disconnected systems for pharmacies, doctors, and customers led to inefficiencies, missed opportunities, and frustration.", headerRight: 'Solution', contentRight: "Unified Dashboards and Secure Collaboration Tools." },
+
+{ type: 'text', header: 'Features', subheader: 'Role-Based Dashboards:', content: "", },
+
+{ type: 'textBullets', header: 'Pharmacists', items: [
+  'A centralized dashboard consolidates inventory levels, order statuses, and customer data.',
+  'Real-time alerts for stock depletion and order processing streamline daily operations.',
+],listIndent: 1 },
+
+
+{ type: 'textBullets', header: 'Doctors', items: [
+  'Secure access to patient prescriptions and medical records enables informed decision-making.',
+  'Real-time updates ensure accurate and timely care for patients.',
+],listIndent: 1 },
+
+{ type: 'textBullets', header: 'Patients', items: [
+  'A personal dashboard allows users to manage prescriptions, view health records, and track orders seamlessly.',
+],listIndent: 1 },
+
+{ type: 'textTextRow', headerLeft: 'Three-way platform Integration', contentLeft: "Three way platform connect pharmacies, healthcare providers, and customers, ensuring real-time data flow and consistency.", headerRight: 'Secure Data Sharing', contentRight: "Implemented end-to-end encryption and role-based access control to safeguard sensitive data like medical records and prescriptions." },
+
+
+{ type: 'image', src: '/raseet/final/25.png', },
+
+{ type: 'image', src: '/raseet/final/26.png', },
+
+
+////////////////////////////////////////////////////////////
+
+{ type: 'text', header: '', subheader: '2. Simplifying Complex Onboarding for Pharmacies', content: "", },
+
+
+{ type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Small pharmacies struggled with the technical barriers of going digital, including setting up online catalogs and training staff.", headerRight: 'Solution', contentRight: "Automated Onboarding Workflows." },
+
+{ type: 'text', header: 'Features', subheader: 'Bulk Catalog Uploads:', content: "", },
+
+{ type: 'textBullets', header: '', items: [
+  'Pharmacies upload product catalogs via .xls files, saving time on manual data entry',
+  'The system automatically flags and corrects errors, ensuring clean data.',
+  "Example: A pharmacy with 500+ SKUs onboarded in under 30 minutes.",
+],listIndent: 1 },
+
+
+{ type: 'textTextRow', headerLeft: 'Step-by-Step Onboarding Guides', contentLeft: "Interactive walkthroughs guide pharmacy owners through system setup, from uploading inventories to customizing their storefront. Progress trackers provide visibility into onboarding milestones.", headerRight: 'Dedicated Support', contentRight: "24/7 live chat support for troubleshooting during setup. On-call assistance for pharmacies with specific needs or technical challenges." },
+
+
+{ type: 'image', src: '/raseet/final/27.png', },
+
+{ type: 'image', src: '/raseet/final/28.png', },
+
+////////////////////////////////////////////////////////////
+
+
+{ type: 'text', header: '', subheader: '3. Enhancing UX in E-Commerce', content: "", },
+
+
+{ type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Customers struggled with poor navigation, complex checkout processes, and lack of real-time updates, leading to high drop-off rates.", headerRight: 'Solution', contentRight: "Intuitive Navigation and Streamlined Checkout." },
+
+{ type: 'text', header: 'Features', subheader: 'Advanced Search and Filters:', content: "", },
+
+{ type: 'textBullets', header: '', items: [
+  'Voice-enabled search for faster discovery of products.',
+  'AI-driven recommendations based on purchase history and customer preferences.',
+  "Filters for categories, price range, and availability reduce frustration during browsing.",
+],listIndent: 1 },
+
+
+{ type: 'textTextRow', headerLeft: 'Streamlined Checkout', contentLeft: "Auto-fill forms for returning users reduce the time required to complete a purchase. Multiple payment options, including UPI, credit/debit cards, and cash on delivery, cater to diverse user needs. Example: A returning customer completed their order in under 2 minutes.", headerRight: 'Real-Time Order Tracking', contentRight: "Push notifications inform users at every stage: order confirmation, processing, dispatch, and delivery. A visual progress tracker provides transparency and reduces customer anxiety." },
+
+
+{ type: 'image', src: '/raseet/final/29.png', },
+
+{ type: 'image', src: '/raseet/final/30.png', },
+
+////////////////////////////////////////////////////////////
+
+
+
+{ type: 'text', header: 'Design Goals & Considerations', subheader: 'Information Architecture', content: "To create a seamless and efficient user experience, the information architecture was carefully designed to cater to different user roles, including pharmacists, healthcare providers, and customers. The goal was to structure the platform in a way that improves discoverability, usability, and accessibility while ensuring smooth navigation for all stakeholders.", },
+
+{ type: 'textBullets', header: 'Key Considerations', items: [
+  'Role-Specific Navigation: Tailored dashboards for pharmacies, customers, and healthcare providers to minimize cognitive load and present relevant information.',
+  'E-Commerce & Healthcare Services: A clear distinction between shopping for medications, managing prescriptions, and accessing healthcare services.',
+  "Search & Filtering: Robust search functionality and category-based navigation to enhance product and service discovery.",
+  "Support & Accessibility: Dedicated help sections, including FAQs, live chat, and feedback options, ensuring users can easily seek assistance.",
+  "Security & Privacy: Profile management with role-based access control to safeguard sensitive user and medical data.",
+],listIndent: 1 },
+
+{ type: 'textBullets', header: 'Structure Breakdown', items: [
+  'Pharmacies: Inventory management, order tracking, CRM integration, and analytics.',
+  'Healthcare Providers: Patient records, collaboration tools, and prescription management.',
+  "Customers: Dashboard for health records, shopping, and order tracking.",
+  "Global Components: Header (search, filters, profile), footer (privacy policies, support), and system notifications.",
+],listIndent: 1 },
+
+{ type: 'text', header: '', subheader: '', content: "By designing a hierarchical yet intuitive structure, we ensured that users could quickly access the most relevant features, resulting in a smoother and more efficient experience for all stakeholders.", },
+
+{ type: 'image', src: '/raseet/IA.png', },
+
+
+{ type: 'text', header: 'Task Flows', subheader: 'Scenario 1: Pharmacy staff managing stock and placing bulk orders', content: "", },
+
+{ type: 'image', src: '/raseet/3.png', },
+
+
+{ type: 'text', header: '', subheader: 'Scenario 2: Customer ordering medicines for the first time', content: "", },
+
+{ type: 'image', src: '/raseet/4.png', },
+
+{ type: 'text', header: '', subheader: 'Scenario 3: Reordering medicines for elderly patients', content: "", },
+
+{ type: 'image', src: '/raseet/5.png', },
+
+
+{ type: 'text', header: 'Feature Highlight', subheader: '', content: "", align: 'center' },
+
+{ type: 'image', src: '/raseet/final/31.png', },
+
+
+
+{ type: 'text', header: 'Impact of Solutions!!!', subheader: '', content: "", align: 'center' },
+
+{ type: 'image', src: '/raseet/final/32.png', },
+
+{ type: 'image', src: '/raseet/kpi.png', },
+
+{ type: 'text', header: 'MedScope: A Scalable & Systematic Design System', subheader: 'The Challenge', content: "As Raseet Health expanded, maintaining design consistency, efficiency, and scalability became a challenge. A fragmented UI led to inconsistencies in components, longer design cycles, and increased development overhead. The need for a unified design system became evident to streamline collaboration, reduce redundancy, and enhance the user experience across all touchpoints.", },
+
+{ type: 'textBullets', header: 'The Goal', items: [
+  'Establish a scalable design system following Atomic Design Principles.',
+  'Ensure cross-platform consistency while allowing flexibility for future expansions',
+  "Improve efficiency by reducing time spent on repetitive UI decisions.",
+  "Enable a structured decision-making process to govern component usage and modifications.",
+],listIndent: 1 },
+
+{ type: 'image', src: '/raseet/DS.png', },
+
+
+{ type: 'text', header: 'Structuring MedScope: Design System Architecture', subheader: '', content: "", },
+
+{ type: 'textBullets', header: 'MedScope was built using:', items: [
+  'Atomic Design Principles – Breaking down components into atoms, molecules, organisms, templates, and pages for modular reusability.',
+  'A Reusable Component Library – Standardizing UI elements to ensure consistency across different features.',
+  "Scalability Standards – Creating a foundation for future expansion without compromising usability.",
+],listIndent: 1 },
+
+{ type: 'textBullets', header: 'The design system encompassed:', items: [
+  'Typography & Color Systems – Ensuring accessibility and brand alignment.',
+  'Spacing & Grid Systems – Providing a structured layout framework.',
+  "Component Library – Predefined UI elements for seamless design iteration.",
+  "Interactive Patterns & States – Standardizing hover states, transitions, and user feedback mechanisms.",
+],listIndent: 1 },
+
+
+{ type: 'text', header: 'MedScope Design System Decision-Making Process: How We Built It', subheader: '', content: "A structured decision-making framework was implemented to maintain consistency and prevent design fragmentation:", },
+
+
+{ type: 'textBullets', header: '1. Assess the Need - Does a similar component exist in MedScope?', items: [
+  'Yes → Use the existing component.',
+  'No → Proceed to the next step.',
+],listIndent: 1 },
+
+{ type: 'textBullets', header: '2. Modify vs. Create - Can an existing component be adapted for this use case?', items: [
+  'Yes → Modify and document changes in the system.',
+  'No → Move to prototyping.',
+],listIndent: 1 },
+
+{ type: 'textBullets', header: '3. Prototype & Validation - If the component cannot be generalized:', items: [
+  'It is added as a one-off to the repository.',
+],listIndent: 1 },
+
+{ type: 'textBullets', header: 'If it can be standardized:', items: [
+  'It is documented and integrated into MedScope for global reuse.',
+],listIndent: 1 },
+
+{ type: 'textBullets', header: '4. Integration & Documentation - The new/updated component is', items: [
+  'Incorporated into the design system.',
+  'Guidelines and best practices are documented for seamless adoption.',
+],listIndent: 1 },
+
+
+{ type: 'image', src: '/raseet/2.png', },
+
+
+// { type: 'text', header: 'Key Outcomes & Impact', subheader: '', content: "", },
+
+// { type: 'image', src: '/bmw/Frame1.png', },
+
+
+{ type: 'text', header: 'Accessibility? Designing for an Inclusive Experience', subheader: 'The Goal', content: "Given that a significant portion of Raseet Health’s target audience includes chronic and geriatric patients, accessibility was a core consideration in the design process. The goal was to create an intuitive and frictionless experience that accommodates users with varying levels of digital literacy and physical limitations.", },
+
+{ type: 'image', src: '/raseet/access.png', },
+
+
+
+{ type: 'text', header: 'Key Outcomes & Impact', subheader: '', content: "", align: 'center' },
+
+{ type: 'image', src: '/raseet/final/32.png', },
+
+
+{ type: 'text', header: 'Wireframes', subheader: '', content: "", },
+
+{ type: 'image', src: '/bmw/Frame1.png', },
+
+
+{ type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
+
+// { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
+
+{ type: 'image', src: '/bmw/Frame1.png', },
+
+
+
+{ type: 'text', header: 'Retrospectives', subheader: '1. Empathy-Driven Design', content: "The iterative design process, grounded in user feedback, ensured that the platform met the unique needs of pharmacists, healthcare providers, and customers.", },
+
+{ type: 'image', src: '/raseet/final/33.png', },
+
+
+{ type: 'textBullets', header: '2. Importance of Simplicity', items: [
+  'Simplified workflows and intuitive interfaces reduced onboarding barriers and user frustration.',
+  'Streamlined experiences, like the improved checkout process, significantly boosted user satisfaction and engagement.',
+],listIndent: 1 },
+
+{ type: 'textBullets', header: '3. Leveraging Ecosystem Synergy', items: [
+  'Integrating tools and features within the Raseet Health ecosystem enhanced its value proposition for both users and the business.',
+  'Example: The seamless connection between inventory management and customer-facing features created a cohesive experience.',
+],listIndent: 1 },
+
+
+
+// { type: 'image', src: '/raseet/final/33.png', },
+
+
+{ type: 'text', header: 'Collaboration at Raseet Health', subheader: '', content: "At Raseet Health, collaboration was a fundamental part of the design process. As the Product/UX Designer, I worked closely with cross-functional teams, ensuring that design decisions were aligned with business goals, technical feasibility, and user needs.", },
+
+{ type: 'image', src: '/raseet/1.png', },
+
+{ type: 'text', header: 'How Collaboration Shaped the Final Product?', subheader: '', content: "", },
+
+{ type: 'image', src: '/raseet/final/34.png', },
+
+{ type: 'text', header: 'Lessons Learned?', subheader: '', content: "", },
+
+{ type: 'textTextRow', headerLeft: 'Continuous Feedback Is Key', contentLeft: "", headerRight: '', contentRight: "Regular usability testing and feedback loops were instrumental in identifying areas for improvement and driving iterative changes." },
+
+{ type: 'textTextRow', headerLeft: 'Localized Solutions Matter', contentLeft: "", headerRight: '', contentRight: "Localized onboarding guides and multilingual support helped expand adoption in diverse regions." },
+
+
+{ type: 'textTextRow', headerLeft: 'Trust Is Foundational', contentLeft: "", headerRight: '', contentRight: "Transparent communication about data privacy and security built confidence among users, addressing one of the biggest barriers to digital adoption." },
+
+{ type: 'image', src: '/raseet/7.png', },
+
+
+{ type: 'text', header: 'Closing Reflections', subheader: '', content: "The success of Raseet Health lies in its ability to empower local pharmacies, improve healthcare accessibility for customers, and foster seamless collaboration across stakeholders. By continuously iterating based on user feedback and leveraging technology to solve real-world problems, Raseet Health achieved its mission to make quality healthcare accessible and equitable.", },
+
   ];
 
   // ═══════════════════════════════════════════════════════════════════════
   // DISPLAY CODE BELOW - Don't edit unless you know what you're doing
   // ═══════════════════════════════════════════════════════════════════════
-
-  // Helper function to render icon (image or video)
-  const renderIcon = (iconPath: string, size: 'large' | 'small') => {
-    if (!iconPath) return null;
-    
-    const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
-    const sizeClasses = size === 'large' 
-      ? 'w-[120px] h-[120px] md:w-[180px] md:h-[180px] object-contain' 
-      : 'max-w-[48px] max-h-[48px] w-auto h-auto object-contain';
-    
-    if (isVideo) {
-      return (
-        <video 
-          src={iconPath} 
-          className={sizeClasses}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      );
-    }
-    
-    return (
-      <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
-    );
-  };
 
   return (
     <div className="min-h-screen bg-white">
@@ -387,27 +814,91 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
         <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
           {blocks.map((block, index) => {
             if (block.type === 'text') {
+              const contentMargin =
+                block.contentIndent !== undefined
+                  ? getHeaderIndentMargin(block.contentIndent)
+                  : block.indent
+                    ? '2.5rem'
+                    : undefined;
               return (
-                <div key={index} className="space-y-6" style={block.indent ? { marginLeft: '2.5rem' } : undefined}>
+                <div key={index} className={`space-y-6 ${getAlignClass(block.align)}`}>
                   {block.header && (
-                    <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                    <h3
+                      className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                      style={
+                        block.headerIndent !== undefined && block.headerIndent !== 0
+                          ? { marginLeft: getHeaderIndentMargin(block.headerIndent) }
+                          : undefined
+                      }
+                    >
                       {block.header}
                     </h3>
                   )}
-                  <p className="text-[18px] leading-[1.85] text-gray-700">{block.content}</p>
+                  {block.subheader && (
+                    <h3
+                      className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                      style={
+                        block.subheaderIndent !== undefined && block.subheaderIndent !== 0
+                          ? { marginLeft: getHeaderIndentMargin(block.subheaderIndent) }
+                          : undefined
+                      }
+                    >
+                      {block.subheader}
+                    </h3>
+                  )}
+                  <p
+                    className="text-[18px] leading-[1.85] text-gray-700"
+                    style={contentMargin ? { marginLeft: contentMargin } : undefined}
+                  >
+                    {block.content}
+                  </p>
+                  {block.items && block.items.length > 0 && (
+                    <ul
+                      className="list-disc text-[18px] leading-[1.85] text-gray-700 space-y-2 pl-6"
+                      style={{
+                        marginLeft: getListIndentMargin(block.itemsIndent ?? 0),
+                      }}
+                    >
+                      {block.items.map((item, i) => (
+                        <li key={i}>{item}</li>
+                      ))}
+                    </ul>
+                  )}
                 </div>
               );
             }
             if (block.type === 'textBullets') {
-              const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
+              const listIndent = getListIndentMargin(getTextBulletsListIndentLevel(block));
               return (
-                <div key={index} className="space-y-6" style={marginLeft ? { marginLeft } : undefined}>
+                <div key={index} className={`space-y-6 ${getAlignClass(block.align)}`}>
                   {block.header && (
-                    <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                    <h3
+                      className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                      style={
+                        block.headerIndent !== undefined && block.headerIndent !== 0
+                          ? { marginLeft: getHeaderIndentMargin(block.headerIndent) }
+                          : undefined
+                      }
+                    >
                       {block.header}
                     </h3>
                   )}
-                  <ul className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6" style={{ listStyleType: 'disc' }}>
+                  {block.subheader && (
+                    <h3
+                      className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                      style={
+                        block.subheaderIndent !== undefined && block.subheaderIndent !== 0
+                          ? { marginLeft: getHeaderIndentMargin(block.subheaderIndent) }
+                          : undefined
+                      }
+                    >
+                      {block.subheader}
+                    </h3>
+                  )}
+                  <ul
+                    className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6"
+                    style={{ listStyleType: 'disc', marginLeft: listIndent }}
+                  >
                     {block.items.map((item, i) => (
                       <li key={i} className="pl-1">{item}</li>
                     ))}
@@ -417,17 +908,50 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
             }
             if (block.type === 'textImageRow') {
               const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
+              const imageOnLeft = block.imageSide === 'left';
               return (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                  <div className="space-y-6">
+                  <div className={`space-y-6 ${getAlignClass(block.align)} ${imageOnLeft ? 'order-2 md:order-none md:col-start-2' : 'order-1 md:order-none md:col-start-1'}`}>
                     {block.header && (
-                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                      <h3
+                        className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                        style={
+                          block.headerIndent !== undefined && block.headerIndent !== 0
+                            ? { marginLeft: getHeaderIndentMargin(block.headerIndent) }
+                            : undefined
+                        }
+                      >
                         {block.header}
                       </h3>
                     )}
+                    {block.subheader && (
+                      <h3
+                        className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                        style={
+                          block.subheaderIndent !== undefined && block.subheaderIndent !== 0
+                            ? { marginLeft: getHeaderIndentMargin(block.subheaderIndent) }
+                            : undefined
+                        }
+                      >
+                        {block.subheader}
+                      </h3>
+                    )}
                     <p className="text-[18px] leading-[1.85] text-gray-700">{block.content}</p>
+                    {block.items && block.items.length > 0 && (
+                      <ul
+                        className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6"
+                        style={{
+                          listStyleType: 'disc',
+                          marginLeft: getListIndentMargin(block.itemsIndent),
+                        }}
+                      >
+                        {block.items.map((item, i) => (
+                          <li key={i} className="pl-1">{item}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <div className="w-full max-h-[120px] overflow-hidden rounded-lg">
+                  <div className={`w-full max-h-[120px] overflow-hidden rounded-lg ${getBlockAlignClass(block.imageAlign)} ${imageOnLeft ? 'order-1 md:order-none md:col-start-1' : 'order-2 md:order-none md:col-start-2'}`}>
                     {isVideo ? (
                       <video src={block.src} controls className="w-full h-full max-h-[120px] object-cover rounded-lg" playsInline>
                   Your browser does not support the video tag.
@@ -440,9 +964,10 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               );
             }
             if (block.type === 'textTextRow') {
+              const alignClass = getAlignClass(block.align);
               return (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                  <div className="space-y-6">
+                  <div className={`space-y-6 ${alignClass}`}>
                     {block.headerLeft && (
                       <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                         {block.headerLeft}
@@ -450,7 +975,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                     )}
                     <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
                   </div>
-                  <div className="space-y-6">
+                  <div className={`space-y-6 ${alignClass}`}>
                     {block.headerRight && (
                       <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                         {block.headerRight}
@@ -459,6 +984,19 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                     <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
                   </div>
             </div>
+              );
+            }
+            if (block.type === 'video') {
+              const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
+              const containerStyle = {
+                ...(marginLeft && { marginLeft, maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)' }),
+                ...(block.maxHeight && { maxHeight: block.maxHeight, overflow: 'hidden' as const }),
+              };
+              const videoStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
+              return (
+                <div key={index} className={`w-full flex ${block.align === 'center' ? 'justify-center' : block.align === 'right' ? 'justify-end' : 'justify-start'}`} style={containerStyle}>
+                  <LoopingVideo src={block.src} className="w-full h-auto max-w-full" style={videoStyle} />
+                </div>
               );
             }
             if (block.type === 'image') {
@@ -470,13 +1008,13 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               };
               const mediaStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
               return (
-                <div key={index} className="w-full" style={containerStyle}>
+                <div key={index} className={`w-full flex ${block.align === 'center' ? 'justify-center' : block.align === 'right' ? 'justify-end' : 'justify-start'}`} style={containerStyle}>
                   {isVideo ? (
-                    <video src={block.src} controls className="w-full h-auto" playsInline style={mediaStyle}>
+                    <video src={block.src} controls className="w-full h-auto max-w-full" playsInline style={mediaStyle}>
                   Your browser does not support the video tag.
                 </video>
               ) : (
-                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
+                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto max-w-full" style={mediaStyle} />
               )}
             </div>
               );

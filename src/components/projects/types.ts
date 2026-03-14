@@ -2,12 +2,68 @@
 
 /** One block in the page: text, image/video, or color palette. Order in array = order on page. */
 export type ContentBlock =
-  | { type: 'text'; header?: string; content: string; indent?: boolean }
-  | { type: 'textBullets'; header?: string; items: string[]; indent?: boolean; indentLevel?: 2 }
-  | { type: 'image'; src: string; indent?: boolean; indentLevel?: 2; maxHeight?: string }
-  | { type: 'video'; src: string; indent?: boolean; indentLevel?: 2; maxHeight?: string }
-  | { type: 'textImageRow'; header?: string; content: string; src: string }
-  | { type: 'textTextRow'; headerLeft?: string; contentLeft: string; headerRight?: string; contentRight: string }
+  | {
+      type: 'text';
+      header?: string;
+      subheader?: string;
+      content: string;
+      /** Optional bullet points below content */
+      items?: string[];
+      /** Align header, subheader, content, and items: left | center | right | justify */
+      align?: 'left' | 'center' | 'right' | 'justify';
+      /** Header indent: 0 = none, 1 = 2.5rem, 2 = 5rem */
+      headerIndent?: 0 | 1 | 2;
+      /** Subheader indent: 0 = none, 1 = 2.5rem, 2 = 5rem */
+      subheaderIndent?: 0 | 1 | 2;
+      /** Content indent: 0 = none, 1 = 2.5rem, 2 = 5rem */
+      contentIndent?: 0 | 1 | 2;
+      /** Items (bullet list) indent: 0 = default (1.5rem), 1 = 2.5rem, 2 = 5rem */
+      itemsIndent?: 0 | 1 | 2;
+      /** @deprecated Use contentIndent: 1 instead */
+      indent?: boolean;
+    }
+  | {
+      type: 'textBullets';
+      header?: string;
+      subheader?: string;
+      items: string[];
+      /** Align header, subheader, and items: left | center | right | justify */
+      align?: 'left' | 'center' | 'right' | 'justify';
+      /** Header indent: 0 = none, 1 = 2.5rem, 2 = 5rem */
+      headerIndent?: 0 | 1 | 2;
+      /** Subheader indent: 0 = none, 1 = 2.5rem, 2 = 5rem */
+      subheaderIndent?: 0 | 1 | 2;
+      /** Bullet list indent: 0 = default (1.5rem), 1 = 2.5rem, 2 = 5rem */
+      listIndent?: 0 | 1 | 2;
+      /** @deprecated Use listIndent: 1 instead */
+      indent?: boolean;
+      /** @deprecated Use listIndent: 2 instead */
+      indentLevel?: 2;
+    }
+  | { type: 'image'; src: string; /** Align image: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string }
+  | { type: 'video'; src: string; /** Align video: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string }
+  | {
+      type: 'textImageRow';
+      header?: string;
+      subheader?: string;
+      content: string;
+      /** Optional bullet points below content */
+      items?: string[];
+      src: string;
+      /** Layout: 'right' = text left / image right (default), 'left' = image left / text right */
+      imageSide?: 'left' | 'right';
+      /** Align text column (header, subheader, content, items): left | center | right | justify */
+      align?: 'left' | 'center' | 'right' | 'justify';
+      /** Align image: left | center | right (within its column) */
+      imageAlign?: 'left' | 'center' | 'right';
+      /** Header indent: 0 = none, 1 = 2.5rem, 2 = 5rem */
+      headerIndent?: 0 | 1 | 2;
+      /** Subheader indent: 0 = none, 1 = 2.5rem, 2 = 5rem */
+      subheaderIndent?: 0 | 1 | 2;
+      /** Items (bullet list) indent: 0 = default (1.5rem), 1 = 2.5rem, 2 = 5rem */
+      itemsIndent?: 0 | 1 | 2;
+    }
+  | { type: 'textTextRow'; headerLeft?: string; contentLeft: string; headerRight?: string; contentRight: string; /** Align both columns: left | center | right | justify */ align?: 'left' | 'center' | 'right' | 'justify' }
   | { type: 'colors'; colors: string[] };
 
 export type ProjectSection = {

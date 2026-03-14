@@ -14,6 +14,9 @@ import { ScrollToTop } from '../ScrollToTop';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { AdjacentProjects } from './AdjacentProjects';
 import { getArrowGradientColors } from './arrowGradient';
+import { getInitialCaseStudyVisible } from './caseStudyRestore';
+import { getHeaderIndentMargin, getListIndentMargin } from './indentHelpers';
+import { getAlignClass, getBlockAlignClass } from './alignHelpers';
 import type { ContentBlock } from './types';
 
 const CURRENT_PROJECT_ID = 'bound';
@@ -28,13 +31,8 @@ const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
-  const [caseStudyVisible, setCaseStudyVisible] = useState(false);
+  const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    setCaseStudyVisible(false);
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -300,10 +298,15 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
           {blocks.map((block, index) => {
             if (block.type === 'text') {
               return (
-                <div key={index} className="space-y-6" style={block.indent ? { marginLeft: '2.5rem' } : undefined}>
+                <div key={index} className={`space-y-6 ${getAlignClass(block.align)}`} style={block.indent ? { marginLeft: '2.5rem' } : undefined}>
                   {block.header && (
                     <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                       {block.header}
+                    </h3>
+                  )}
+                  {block.subheader && (
+                    <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                      {block.subheader}
                     </h3>
                   )}
                   <p className="text-[18px] leading-[1.85] text-gray-700">{block.content}</p>
@@ -313,10 +316,22 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
             if (block.type === 'textBullets') {
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               return (
-                <div key={index} className="space-y-6" style={marginLeft ? { marginLeft } : undefined}>
+                <div key={index} className={`space-y-6 ${getAlignClass(block.align)}`} style={marginLeft ? { marginLeft } : undefined}>
                   {block.header && (
                     <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                       {block.header}
+                    </h3>
+                  )}
+                  {block.subheader && (
+                    <h3
+                      className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                      style={
+                        block.subheaderIndent !== undefined && block.subheaderIndent !== 0
+                          ? { marginLeft: getHeaderIndentMargin(block.subheaderIndent) }
+                          : undefined
+                      }
+                    >
+                      {block.subheader}
                     </h3>
                   )}
                   <ul className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6" style={{ listStyleType: 'disc' }}>
@@ -329,17 +344,47 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
             }
             if (block.type === 'textImageRow') {
               const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
+              const imageOnLeft = block.imageSide === 'left';
               return (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                  <div className="space-y-6">
+                  <div className={`space-y-6 ${getAlignClass(block.align)} ${imageOnLeft ? 'order-2 md:order-none md:col-start-2' : 'order-1 md:order-none md:col-start-1'}`}>
                     {block.header && (
-                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                      <h3
+                        className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                        style={
+                          block.headerIndent !== undefined && block.headerIndent !== 0
+                            ? { marginLeft: getHeaderIndentMargin(block.headerIndent) }
+                            : undefined
+                        }
+                      >
                         {block.header}
                       </h3>
                     )}
+                    {block.subheader && (
+                      <h3
+                        className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                        style={
+                          block.subheaderIndent !== undefined && block.subheaderIndent !== 0
+                            ? { marginLeft: getHeaderIndentMargin(block.subheaderIndent) }
+                            : undefined
+                        }
+                      >
+                        {block.subheader}
+                      </h3>
+                    )}
                     <p className="text-[18px] leading-[1.85] text-gray-700">{block.content}</p>
+                    {block.items && block.items.length > 0 && (
+                      <ul
+                        className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6"
+                        style={{ listStyleType: 'disc', marginLeft: getListIndentMargin(block.itemsIndent) }}
+                      >
+                        {block.items.map((item, i) => (
+                          <li key={i} className="pl-1">{item}</li>
+                        ))}
+                      </ul>
+                    )}
                   </div>
-                  <div className="w-full max-h-[120px] overflow-hidden rounded-lg">
+                  <div className={`w-full max-h-[120px] overflow-hidden rounded-lg ${getBlockAlignClass(block.imageAlign)} ${imageOnLeft ? 'order-1 md:order-none md:col-start-1' : 'order-2 md:order-none md:col-start-2'}`}>
                     {isVideo ? (
                       <video src={block.src} controls className="w-full h-full max-h-[120px] object-cover rounded-lg" playsInline>
                         Your browser does not support the video tag.
@@ -352,9 +397,10 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
               );
             }
             if (block.type === 'textTextRow') {
+              const alignClass = getAlignClass(block.align);
               return (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                  <div className="space-y-6">
+                  <div className={`space-y-6 ${alignClass}`}>
                     {block.headerLeft && (
                       <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                         {block.headerLeft}
@@ -362,7 +408,7 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
                     )}
                     <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
                   </div>
-                  <div className="space-y-6">
+                  <div className={`space-y-6 ${alignClass}`}>
                     {block.headerRight && (
                       <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
                         {block.headerRight}
@@ -382,13 +428,13 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
               };
               const mediaStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
               return (
-                <div key={index} className="w-full" style={containerStyle}>
+                <div key={index} className={`w-full flex ${block.align === 'center' ? 'justify-center' : block.align === 'right' ? 'justify-end' : 'justify-start'}`} style={containerStyle}>
                   {isVideo ? (
-                    <video src={block.src} controls className="w-full h-auto" playsInline style={mediaStyle}>
+                    <video src={block.src} controls className="w-full h-auto max-w-full" playsInline style={mediaStyle}>
                       Your browser does not support the video tag.
                     </video>
                   ) : (
-                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto" style={mediaStyle} />
+                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto max-w-full" style={mediaStyle} />
                   )}
                 </div>
               );

@@ -19,7 +19,7 @@ export const PROJECT_ORDER: { id: string; title: string }[] = [
 export const PROJECT_ENABLED: Record<string, boolean> = {
   CWPC: false,
   AutomotiveUX_GM: true,
-  RaseetHealth: false,
+  RaseetHealth: true,
   BMW: true,
   CalmiRing: true,
   jobgenius: false,

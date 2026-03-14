@@ -14,6 +14,42 @@ type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'pr
 const VALID_PAGES: Exclude<Page, 'project'>[] = ['work', 'about', 'friends', 'resume', 'favorites', 'blog'];
 const VALID_PROJECT_IDS = Object.keys(projectComponents);
 
+const SCROLL_RESTORE_KEY = 'portfolio_scroll_restore';
+
+function saveScrollForRestore() {
+  try {
+    sessionStorage.setItem(
+      SCROLL_RESTORE_KEY,
+      JSON.stringify({ path: window.location.pathname, y: window.scrollY })
+    );
+  } catch {
+    // ignore
+  }
+}
+
+function restoreScrollIfSamePage() {
+  try {
+    const raw = sessionStorage.getItem(SCROLL_RESTORE_KEY);
+    if (!raw) return;
+    const { path, y } = JSON.parse(raw) as { path: string; y: number };
+    sessionStorage.removeItem(SCROLL_RESTORE_KEY);
+    if (path !== window.location.pathname || typeof y !== 'number') return;
+    // Slight delay so expanded case study content is laid out before restoring scroll
+    const isProject = path.startsWith('/project/');
+    const delay = isProject ? 150 : 0;
+    const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
+    if (delay > 0) {
+      setTimeout(() => {
+        requestAnimationFrame(() => requestAnimationFrame(restore));
+      }, delay);
+    } else {
+      requestAnimationFrame(() => requestAnimationFrame(restore));
+    }
+  } catch {
+    // ignore
+  }
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // ROUTE MAPPING - Professional URL paths
 // ═══════════════════════════════════════════════════════════════════════════
@@ -82,11 +118,36 @@ function replaceRoute(page: Page, projectId: string | null) {
   window.history.replaceState({ page, projectId }, '', url);
 }
 
+export const EXPAND_CASE_STUDY_PREFIX = 'portfolio_expand_case_study_';
+
 function App() {
   const [currentPage, setCurrentPage] = useState<Page>('work');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const prevNavigationRef = useRef<{ page: Page; projectId: string | null } | null>(null);
   const isInitialMount = useRef(true);
+  const didRestoreScroll = useRef(false);
+
+  // When we're about to render a project and we have scroll-restore data (reload after edit),
+  // tell the project to start with case study expanded so scroll restore lands in the right place.
+  if (typeof window !== 'undefined' && currentPage === 'project' && selectedProjectId) {
+    try {
+      const raw = sessionStorage.getItem(SCROLL_RESTORE_KEY);
+      if (raw) {
+        const { path } = JSON.parse(raw) as { path: string };
+        if (path === window.location.pathname) {
+          sessionStorage.setItem(EXPAND_CASE_STUDY_PREFIX + path, '1');
+        }
+      }
+    } catch {
+      // ignore
+    }
+  }
+
+  // Save scroll position before full page unload (e.g. HMR full reload) so we can restore
+  useEffect(() => {
+    window.addEventListener('beforeunload', saveScrollForRestore);
+    return () => window.removeEventListener('beforeunload', saveScrollForRestore);
+  }, []);
 
   // Sync state from URL on load and when user uses back/forward (or swipe)
   useEffect(() => {
@@ -141,6 +202,13 @@ function App() {
       setSelectedProjectId(null);
       replaceRoute('work', null);
     }
+  }, [currentPage, selectedProjectId]);
+
+  // Restore scroll position after full-page reload (e.g. after editing a file) on any page
+  useEffect(() => {
+    if (didRestoreScroll.current) return;
+    didRestoreScroll.current = true;
+    restoreScrollIfSamePage();
   }, [currentPage, selectedProjectId]);
 
   // Scroll to top only when user navigates (not on initial mount / hot reload)

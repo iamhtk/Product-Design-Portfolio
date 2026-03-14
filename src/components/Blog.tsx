@@ -8,10 +8,6 @@ export function Blog() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
-  useEffect(() => {
     const handleScroll = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
