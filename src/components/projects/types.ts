@@ -62,6 +62,10 @@ export type ContentBlock =
       subheaderIndent?: 0 | 1 | 2;
       /** Items (bullet list) indent: 0 = default (1.5rem), 1 = 2.5rem, 2 = 5rem */
       itemsIndent?: 0 | 1 | 2;
+      /** Max height for the image (e.g. '640px') */
+      maxHeight?: string;
+      /** Max width for the image (e.g. '640px') */
+      maxWidth?: string;
     }
   | { type: 'textTextRow'; headerLeft?: string; contentLeft: string; headerRight?: string; contentRight: string; /** Align both columns: left | center | right | justify */ align?: 'left' | 'center' | 'right' | 'justify' }
   | { type: 'colors'; colors: string[] };

@@ -163,7 +163,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
     // { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
     // Intro
-    { type: 'image', src: '/raseet/cover.png' },
+    { type: 'image', src: '/raseet/cover.png', maxHeight: '800px' },
     
     // { type: 'text', header: 'Project Statement', content: 'Empower local pharmacies to compete with e‑pharmacy giants by delivering a simpler, more trustworthy way to manage prescriptions, health records, and orders—across in‑store and mobile experiences.' },
 
@@ -204,7 +204,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
     { type: 'text', header: '', content: "This framework enabled fast iterations, allowing the team to validate hypotheses early and avoid costly design changes later", indent: true },
 
-    { type: 'image', src: '/raseet/6.png' },
+    { type: 'image', src: '/raseet/6.png', maxHeight: '600px' },
     
     { type: 'text', header: 'User Research', content: ""},
     
@@ -266,20 +266,20 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
       "Documented pain points, bottlenecks, and opportunities for digital intervention",
     ], headerIndent: 1, listIndent: 2},
     
-    { type: 'image', src: '/raseet/final/8.png', indent: true },
+    { type: 'image', src: '/raseet/final/8.png', maxHeight: '300px', indent: true },
   
 // { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
 
 
-{ type: 'textImageRow', header: 'Tata 1 mg', subheader: '', content: "1mg is a pharmacy application that provides specialized and generic medicines along with branded medicines", items: ['Wide medicine catalog and delivery.', 'Prescription upload and refill flows.', 'Health content and lab tests.'], src: '/raseet/tata.png', itemsIndent: 1 },
+{ type: 'textImageRow', header: 'Tata 1 mg', subheader: '', content: "1mg is a pharmacy application that provides specialized and generic medicines along with branded medicines", items: ['Wide medicine catalog and delivery.', 'Prescription upload and refill flows.', 'Health content and lab tests.'], src: '/raseet/tata.png', itemsIndent: 1, maxHeight: '400px', maxWidth: '400px' },
 
-{ type: 'textImageRow', header: 'PharmEasy', subheader: '', content: "Pharmeasy is another famous online pharmacy & medical store offering pharmaceutical and healthcare products.", items: ['Home delivery of medicines', 'Prescription upload and refill flows.', 'Health content and lab tests.'], src: '/raseet/pharm.png', itemsIndent: 1, imageSide: 'left', },
+{ type: 'textImageRow', header: 'PharmEasy', subheader: '', content: "Pharmeasy is another famous online pharmacy & medical store offering pharmaceutical and healthcare products.", items: ['Home delivery of medicines', 'Prescription upload and refill flows.', 'Health content and lab tests.'], src: '/raseet/pharm.png', itemsIndent: 1, imageSide: 'left', maxHeight: '400px', maxWidth: '400px' },
 
-{ type: 'textImageRow', header: 'Zeno Health', subheader: '', content: "Zeno Health is a Mumbai-based pharmacy application that provides generic medicines and branded medicines.", items: ['Home delivery of medicines', 'Provides doctor consultations.'], src: '/raseet/zeno.png', itemsIndent: 1, imageSide: 'right'},
+{ type: 'textImageRow', header: 'Zeno Health', subheader: '', content: "Zeno Health is a Mumbai-based pharmacy application that provides generic medicines and branded medicines.", items: ['Home delivery of medicines', 'Provides doctor consultations.'], src: '/raseet/zeno.png', itemsIndent: 1, imageSide: 'right', maxHeight: '400px', maxWidth: '400px' },
 
 { type: 'text', header: 'To summarize all the problems….', subheader: '', content: "", align: 'center'},
 
-{ type: 'image', src: '/raseet/final/9.png'},
+{ type: 'image', src: '/raseet/final/9.png', },
 
 { type: 'image', src: '/raseet/final/10.png' },
 
@@ -328,15 +328,15 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'User Persona', subheader: '', content: "", },
 
-{ type: 'video', src: '/raseet/PERSONA.mp4' },
+{ type: 'video', src: '/raseet/PERSONA.mp4', maxHeight: '500px' },
 
 { type: 'text', header: 'Empathy Map', subheader: '', content: "", },
 
-{ type: 'video', src: '/raseet/EM.mp4' },
+{ type: 'video', src: '/raseet/EM.mp4', maxHeight: '500px' },
 
 { type: 'text', header: 'User Journey', subheader: '', content: "", },
 
-{ type: 'video', src: '/raseet/UJ.mp4' },
+{ type: 'video', src: '/raseet/UJ.mp4', maxHeight: '500px' },
 
 
 { type: 'text', header: 'Impact of Research', subheader: '', content: "The insights from user research directly informed the design goals and solutions for Raseet Health:", items: ['User-Centric Onboarding', 'Enhanced Navigation', 'Privacy Assurance'] },
@@ -356,7 +356,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: '', subheader: '', content: "These goals shaped the design decisions, guiding the development of a frictionless user experience that balanced operational efficiency with user-centric healthcare services.", headerIndent: 1 },
 
-{ type: 'image', src: '/raseet/bsu.png', },
+{ type: 'image', src: '/raseet/bsu.png', maxHeight: '400px'},
 
 ////////////////////////////////////////////////////////////
 
@@ -465,16 +465,16 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Task Flows', subheader: 'Scenario 1: Pharmacy staff managing stock and placing bulk orders', content: "", },
 
-{ type: 'image', src: '/raseet/3.png', },
+{ type: 'image', src: '/raseet/3.png', maxHeight: '500px'},
 
 
 { type: 'text', header: '', subheader: 'Scenario 2: Customer ordering medicines for the first time', content: "", },
 
-{ type: 'image', src: '/raseet/4.png', },
+{ type: 'image', src: '/raseet/4.png', maxHeight: '500px'},
 
 { type: 'text', header: '', subheader: 'Scenario 3: Reordering medicines for elderly patients', content: "", },
 
-{ type: 'image', src: '/raseet/5.png', },
+{ type: 'image', src: '/raseet/5.png', maxHeight: '500px'},
 
 
 { type: 'text', header: 'Feature Highlight', subheader: '', content: "", align: 'center' },
@@ -487,7 +487,10 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'image', src: '/raseet/final/32.png', },
 
-{ type: 'image', src: '/raseet/kpi.png', },
+// { type: 'text', header: '', subheader: '', content: "", align: 'center' },
+
+
+{ type: 'image', src: '/raseet/kpi.png', maxHeight: '640px' },
 
 { type: 'text', header: 'MedScope: A Scalable & Systematic Design System', subheader: 'The Challenge', content: "As Raseet Health expanded, maintaining design consistency, efficiency, and scalability became a challenge. A fragmented UI led to inconsistencies in components, longer design cycles, and increased development overhead. The need for a unified design system became evident to streamline collaboration, reduce redundancy, and enhance the user experience across all touchpoints.", },
 
@@ -554,7 +557,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Accessibility? Designing for an Inclusive Experience', subheader: 'The Goal', content: "Given that a significant portion of Raseet Health’s target audience includes chronic and geriatric patients, accessibility was a core consideration in the design process. The goal was to create an intuitive and frictionless experience that accommodates users with varying levels of digital literacy and physical limitations.", },
 
-{ type: 'image', src: '/raseet/access.png', },
+{ type: 'image', src: '/raseet/access.png', maxHeight: '500px' },
 
 
 
@@ -565,14 +568,19 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Wireframes', subheader: '', content: "", },
 
-// { type: 'image', src: '/bmw/Frame1.png', },
+{ type: 'image', src: '/raseet/ui/lil.png', maxHeight: '500px' },
 
 
 { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
 
 // { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
 
-// { type: 'image', src: '/bmw/Frame1.png', },
+
+{ type: 'image', src: '/raseet/ui/onboarding_1.png', maxHeight: '700px' },
+{ type: 'image', src: '/raseet/ui/sign_1.png', maxHeight: '700px' },
+{ type: 'image', src: '/raseet/ui/home_1.png', maxHeight: '700px' },
+{ type: 'image', src: '/raseet/ui/cart_1.png', maxHeight: '500px' },
+{ type: 'image', src: '/raseet/ui/support_1.png', maxHeight: '700px' },
 
 
 
@@ -598,7 +606,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Collaboration at Raseet Health', subheader: '', content: "At Raseet Health, collaboration was a fundamental part of the design process. As the Product/UX Designer, I worked closely with cross-functional teams, ensuring that design decisions were aligned with business goals, technical feasibility, and user needs.", },
 
-{ type: 'image', src: '/raseet/1.png', },
+{ type: 'image', src: '/raseet/1.png', maxHeight: '640px' },
 
 { type: 'text', header: 'How Collaboration Shaped the Final Product?', subheader: '', content: "", },
 
@@ -613,7 +621,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'textTextRow', headerLeft: 'Trust Is Foundational', contentLeft: "", headerRight: '', contentRight: "Transparent communication about data privacy and security built confidence among users, addressing one of the biggest barriers to digital adoption." },
 
-{ type: 'image', src: '/raseet/7.png', },
+{ type: 'image', src: '/raseet/7.png', maxHeight: '640px' },
 
 
 { type: 'text', header: 'Closing Reflections', subheader: '', content: "The success of Raseet Health lies in its ability to empower local pharmacies, improve healthcare accessibility for customers, and foster seamless collaboration across stakeholders. By continuously iterating based on user feedback and leveraging technology to solve real-world problems, Raseet Health achieved its mission to make quality healthcare accessible and equitable.", },
@@ -909,57 +917,70 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
             if (block.type === 'textImageRow') {
               const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
               const imageOnLeft = block.imageSide === 'left';
+              const textCol = (
+                <div key={`${index}-text`} className={`space-y-6 ${getAlignClass(block.align)}`}>
+                  {block.header && (
+                    <h3
+                      className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                      style={
+                        block.headerIndent !== undefined && block.headerIndent !== 0
+                          ? { marginLeft: getHeaderIndentMargin(block.headerIndent) }
+                          : undefined
+                      }
+                    >
+                      {block.header}
+                    </h3>
+                  )}
+                  {block.subheader && (
+                    <h3
+                      className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
+                      style={
+                        block.subheaderIndent !== undefined && block.subheaderIndent !== 0
+                          ? { marginLeft: getHeaderIndentMargin(block.subheaderIndent) }
+                          : undefined
+                      }
+                    >
+                      {block.subheader}
+                    </h3>
+                  )}
+                  <p className="text-[18px] leading-[1.85] text-gray-700">{block.content}</p>
+                  {block.items && block.items.length > 0 && (
+                    <ul
+                      className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6"
+                      style={{
+                        listStyleType: 'disc',
+                        marginLeft: getListIndentMargin(block.itemsIndent),
+                      }}
+                    >
+                      {block.items.map((item, i) => (
+                        <li key={i} className="pl-1">{item}</li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              );
+              const imageContainerStyle = {
+                ...(block.maxHeight ? { maxHeight: block.maxHeight } : { maxHeight: '120px' }),
+                ...(block.maxWidth && { maxWidth: block.maxWidth }),
+              };
+              const imageMediaStyle = {
+                ...(block.maxHeight ? { maxHeight: block.maxHeight } : { maxHeight: '120px' }),
+                ...(block.maxWidth && { maxWidth: block.maxWidth }),
+              };
+              const imageCol = (
+                <div key={`${index}-img`} className={`w-full overflow-hidden rounded-lg ${getBlockAlignClass(block.imageAlign)}`} style={imageContainerStyle}>
+                  {isVideo ? (
+                    <video src={block.src} controls className="w-full h-full max-w-full object-contain rounded-lg" playsInline style={imageMediaStyle}>
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-w-full object-contain rounded-lg" style={imageMediaStyle} />
+                  )}
+                </div>
+              );
               return (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                  <div className={`space-y-6 ${getAlignClass(block.align)} ${imageOnLeft ? 'order-2 md:order-none md:col-start-2' : 'order-1 md:order-none md:col-start-1'}`}>
-                    {block.header && (
-                      <h3
-                        className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
-                        style={
-                          block.headerIndent !== undefined && block.headerIndent !== 0
-                            ? { marginLeft: getHeaderIndentMargin(block.headerIndent) }
-                            : undefined
-                        }
-                      >
-                        {block.header}
-                      </h3>
-                    )}
-                    {block.subheader && (
-                      <h3
-                        className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium"
-                        style={
-                          block.subheaderIndent !== undefined && block.subheaderIndent !== 0
-                            ? { marginLeft: getHeaderIndentMargin(block.subheaderIndent) }
-                            : undefined
-                        }
-                      >
-                        {block.subheader}
-                      </h3>
-                    )}
-                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.content}</p>
-                    {block.items && block.items.length > 0 && (
-                      <ul
-                        className="space-y-2 text-[18px] leading-[1.85] text-gray-700 pl-6"
-                        style={{
-                          listStyleType: 'disc',
-                          marginLeft: getListIndentMargin(block.itemsIndent),
-                        }}
-                      >
-                        {block.items.map((item, i) => (
-                          <li key={i} className="pl-1">{item}</li>
-                        ))}
-                      </ul>
-                    )}
-                  </div>
-                  <div className={`w-full max-h-[120px] overflow-hidden rounded-lg ${getBlockAlignClass(block.imageAlign)} ${imageOnLeft ? 'order-1 md:order-none md:col-start-1' : 'order-2 md:order-none md:col-start-2'}`}>
-                    {isVideo ? (
-                      <video src={block.src} controls className="w-full h-full max-h-[120px] object-cover rounded-lg" playsInline>
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                      <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
-              )}
-            </div>
+                  {imageOnLeft ? [imageCol, textCol] : [textCol, imageCol]}
                 </div>
               );
             }
