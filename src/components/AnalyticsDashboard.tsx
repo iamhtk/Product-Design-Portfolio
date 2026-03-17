@@ -37,6 +37,9 @@ export function AnalyticsDashboard() {
       try {
         setLoading(true);
         setError(null);
+        // Debug: confirm fetch is being reached
+        // eslint-disable-next-line no-console
+        console.log('fetching analytics...', { range });
         const res = await fetch(`/api/analytics/summary?range=${range}`);
         if (!res.ok) {
           throw new Error(`Request failed with status ${res.status}`);
