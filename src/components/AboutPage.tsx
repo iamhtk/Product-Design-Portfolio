@@ -8,12 +8,12 @@ export function AboutPage() {
   // const [pixelCount, setPixelCount] = useState(248);
   // const [reduced, setReduced] = useState(false);
 
-  const images = [
-    'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
-    'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80',
-    'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
-    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80'
-  ];
+  // const images = [
+  //   'https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80',
+  //   'https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=800&q=80',
+  //   'https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80',
+  //   'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80'
+  // ];
 
   return (
     <div className="min-h-screen pt-20">
@@ -52,11 +52,11 @@ export function AboutPage() {
 
         {/* Content Section 1 */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="type-h3 text-gray-900 mb-4">
+          <h2 className="type-overline text-gray-400 mb-4">
             CURRENTLY
           </h2>
           <p className="type-body-lg text-gray-700 mb-6">
-            I'm currently a  Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>CWPC</a>, where I work 
+            I'm currently a Product Designer at <a href="#" onClick={(e) => e.preventDefault()} className="text-gray-900 underline" aria-hidden>CWPC</a>, where I work 
             on consumer-facing products that reach millions of users worldwide. Before joining CWPC, 
             I graduated from the University of Michigan's School of Information (#GoBlue💙), specializing in UX Design & Research and Human-Computer Interaction. My background in Electronics & Telecommunications gives me a unique edge in understanding and crafting interactions between people and technology.
 
@@ -74,14 +74,14 @@ export function AboutPage() {
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <ImageWithFallback 
               src={"/about/more/Untitled.PNG"}
-              alt="Team collaboration"
+              alt="Workshop with CWPC team"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <ImageWithFallback 
               src={"/about/more/IMG_3962.png"}
-              alt="Design work"
+              alt="Design critique session"
               className="w-full h-full object-cover"
             />
           </div>
@@ -92,14 +92,14 @@ export function AboutPage() {
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <ImageWithFallback 
               src={"/about/more/Untitled2.PNG"}
-              alt="Team collaboration"
+              alt="Whiteboard exploration of product flows"
               className="w-full h-full object-cover"
             />
           </div>
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <ImageWithFallback 
               src={"/about/more/IMG_9458.jpg"}
-              alt="Design work"
+              alt="Presenting design work to stakeholders"
               className="w-full h-full object-cover"
             />
           </div>
@@ -114,18 +114,12 @@ export function AboutPage() {
             className="w-full h-auto rounded-lg"
           />
         </AnimateIn>
-        {/* Images Grid */}
+        {/* Images Grid (placeholder for future content) */}
         <AnimateIn variant="up" className="grid grid-cols-2 gap-6 mb-16">
-          {/* <img 
-            src={images[2]}
-            alt="Team collaboration"
-            className="w-full h-auto rounded-lg"
-          />
-          <img 
-            src={images[3]}
-            alt="Design work"
-            className="w-full h-auto rounded-lg"
-          /> */}
+          <div className="w-full h-[200px] rounded-lg bg-gray-50 border border-dashed border-gray-200 flex items-center justify-center text-[13px] text-gray-400">
+            More stories and photos coming soon.
+          </div>
+          <div className="hidden md:block" />
         </AnimateIn>
         
         {/* Content Section 2 */}

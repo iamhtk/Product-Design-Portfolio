@@ -132,7 +132,7 @@ export function ResumePage() {
           {/* UofM-GSI */}
           <div className="mb-10">
             <h3 className="text-[15px] text-gray-900 mb-1">
-              <strong>University of Michigan</strong>, Graudate Student Instructor (GSI)<br />SI 364 – Building Data-Driven Applications
+              <strong>University of Michigan</strong>, Graduate Student Instructor (GSI)<br />SI 364 – Building Data-Driven Applications
             </h3>
             <p className="text-[13px] text-gray-500 mb-4">
               <strong>August 2023—May 2024</strong> — Ann Arbor, MI
@@ -194,7 +194,7 @@ export function ResumePage() {
           {/* UofM-GSI */}
           <div className="mb-10">
             <h3 className="text-[15px] text-gray-900 mb-1">
-              <strong>University of Michigan</strong>, Graudate Student Instructor (GSI)<br />SI 658 – Information Architecture
+              <strong>University of Michigan</strong>, Graduate Student Instructor (GSI)<br />SI 658 – Information Architecture
             </h3>
             <p className="text-[13px] text-gray-500 mb-4">
               <strong>January 2023—May 2023</strong> — Ann Arbor, MI
@@ -350,7 +350,7 @@ export function ResumePage() {
 
         {/* EDUCATION Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
+          <h2 className="type-overline text-gray-400 mb-8">
             EDUCATION
           </h2>
 
@@ -379,7 +379,7 @@ export function ResumePage() {
 
         {/* TEACHING EXPERIENCE Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
+          <h2 className="type-overline text-gray-400 mb-8">
             TEACHING EXPERIENCE
           </h2>
 
@@ -430,7 +430,7 @@ export function ResumePage() {
 
         {/* SKILLS Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
+          <h2 className="type-overline text-gray-400 mb-8">
             SKILLS
           </h2>
 
@@ -475,7 +475,7 @@ export function ResumePage() {
 
         {/* RESEARCH EXPERIENCE Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
+          <h2 className="type-overline text-gray-400 mb-8">
             RESEARCH EXPERIENCE
           </h2>
 
@@ -541,7 +541,7 @@ export function ResumePage() {
 
         {/* CERTIFICATIONS Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="mb-16">
-          <h2 className="text-[11px] tracking-wide text-gray-400 mb-8">
+          <h2 className="type-overline text-gray-400 mb-8">
             CERTIFICATIONS
           </h2>
 
@@ -603,7 +603,13 @@ export function ResumePage() {
               </a>
             </div>
             <div>
-              <a href="chrome-extension://efaidnbmnnnibpcajpcglclefindmkaj/https://www.datacamp.com/statement-of-accomplishment/course/d2001e314eec951aebd134c8ece8491fc9a804ba?raw=1" target="_blank" rel="noopener noreferrer" onClick={handleCertClick} className="text-[15px] leading-[1.7] text-gray-700 hover:text-blue-600 transition-colors block cursor-pointer">
+              <a
+                href="https://www.datacamp.com/statement-of-accomplishment/course/d2001e314eec951aebd134c8ece8491fc9a804ba"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={handleCertClick}
+                className="text-[15px] leading-[1.7] text-gray-700 hover:text-blue-600 transition-colors block cursor-pointer"
+              >
                 • <strong>DataCamp: Introduction to Python</strong>
               </a>
             </div>

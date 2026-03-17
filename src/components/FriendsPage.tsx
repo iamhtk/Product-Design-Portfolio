@@ -66,9 +66,12 @@ export function FriendsPage() {
 
         <AnimateIn variant="up" rootMargin="0px 0px -40px 0px" className="space-y-0">
           {friends.map((friend) => (
-            <div 
+            <a
               key={friend.number}
-              className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_1.5fr_1fr_auto] gap-3 md:gap-8 py-4 md:py-6 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-start min-w-0"
+              href={friend.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="grid grid-cols-[auto_1fr_auto] md:grid-cols-[auto_1fr_1.5fr_1fr_auto] gap-3 md:gap-8 py-4 md:py-6 border-b border-gray-200 hover:bg-gray-50 transition-colors group cursor-pointer items-start min-w-0 no-underline"
             >
               {/* Column 1: Number */}
               <div className="type-caption text-gray-400">
@@ -95,11 +98,12 @@ export function FriendsPage() {
                 {friend.link}
               </div>
               
-              {/* Column 5: Arrow */}
-              <div className="text-gray-400">
-                →
+              {/* Column 5: Action hint */}
+              <div className="type-caption text-gray-400 group-hover:text-gray-600 md:text-right">
+                <span>View profile</span>
+                <span className="ml-1" aria-hidden>→</span>
               </div>
-            </div>
+            </a>
           ))}
         </AnimateIn>
       </div>

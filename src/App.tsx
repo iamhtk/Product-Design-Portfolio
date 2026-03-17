@@ -8,10 +8,11 @@ import { projectComponents } from './components/projects';
 import { PROJECT_ENABLED, PROJECT_SLUGS } from './components/projects/projectOrder';
 import { Blog } from './components/Blog';
 import { FavoritesPage } from './components/FavoritesPage';
+import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 
-type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'project';
+type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'analytics' | 'project';
 
-const VALID_PAGES: Exclude<Page, 'project'>[] = ['work', 'about', 'friends', 'resume', 'favorites', 'blog'];
+const VALID_PAGES: Exclude<Page, 'project'>[] = ['work', 'about', 'friends', 'resume', 'favorites', 'blog', 'analytics'];
 const VALID_PROJECT_IDS = Object.keys(projectComponents);
 
 const SCROLL_RESTORE_KEY = 'portfolio_scroll_restore';
@@ -65,6 +66,7 @@ const ROUTE_PATHS: Record<Exclude<Page, 'project'>, string> = {
   'resume': '/resume-experience',
   'favorites': '/myfavorites',
   'blog': '/blog',
+  'analytics': '/analytics',
 };
 
 // Reverse lookup: URL path → page ID (only non-project pages)
@@ -75,6 +77,7 @@ const PATH_TO_PAGE: Record<string, Page> = {
   '/resume-experience': 'resume',
   '/myfavorites': 'favorites',
   '/blog': 'blog',
+  '/analytics': 'analytics',
 };
 
 /** Resolve a URL segment (no leading slash) to projectId, or null. */
@@ -274,33 +277,44 @@ function App() {
         {currentPage === 'resume' && <ResumePage />}
         {currentPage === 'favorites' && <FavoritesPage />}
         {currentPage === 'blog' && <Blog />}
+        {currentPage === 'analytics' && <AnalyticsDashboard />}
         {currentPage === 'project' && selectedProjectId && (() => {
           if (PROJECT_ENABLED[selectedProjectId] === false) {
             return (
-              <div className="min-h-screen pt-32 px-8 md:px-16">
-                <h1 className="text-4xl">Project not available</h1>
-                <p className="mt-4 text-gray-600">This project is not available.</p>
-                <button
-                  onClick={handleBackToWork}
-                  className="mt-4 text-blue-600 hover:underline cursor-pointer"
-                >
-                  ← Back to Homepage
-                </button>
+              <div className="min-h-screen pt-32 px-6 md:px-12">
+                <div className="max-w-[600px]">
+                  <h2 className="type-overline text-gray-400 mb-3">Work</h2>
+                  <h1 className="type-h1 text-gray-900 mb-3">Project not available</h1>
+                  <p className="type-body text-gray-600 mb-6">
+                    This project is currently not available to view.
+                  </p>
+                  <button
+                    onClick={handleBackToWork}
+                    className="type-body text-gray-700 hover:text-gray-900 underline cursor-pointer"
+                  >
+                    ← Back to Work
+                  </button>
+                </div>
               </div>
             );
           }
           const ProjectComponent = projectComponents[selectedProjectId];
           if (!ProjectComponent) {
             return (
-              <div className="min-h-screen pt-32 px-8 md:px-16">
-                <h1 className="text-4xl">Project not found</h1>
-                <p className="mt-4 text-gray-600">Project "{selectedProjectId}" is not available yet.</p>
-                <button 
-                  onClick={handleBackToWork}
-                  className="mt-4 text-blue-600 hover:underline cursor-pointer"
-                >
-                  ← Back to Homepage
-                </button>
+              <div className="min-h-screen pt-32 px-6 md:px-12">
+                <div className="max-w-[600px]">
+                  <h2 className="type-overline text-gray-400 mb-3">Work</h2>
+                  <h1 className="type-h1 text-gray-900 mb-3">Project not found</h1>
+                  <p className="type-body text-gray-600 mb-6">
+                    Project "{selectedProjectId}" is not available yet.
+                  </p>
+                  <button 
+                    onClick={handleBackToWork}
+                    className="type-body text-gray-700 hover:text-gray-900 underline cursor-pointer"
+                  >
+                    ← Back to Work
+                  </button>
+                </div>
               </div>
             );
           }

@@ -165,9 +165,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     // Intro
     { type: 'image', src: '/raseet/cover.png', maxHeight: '800px' },
     
-    // { type: 'text', header: 'Project Statement', content: 'Empower local pharmacies to compete with e‑pharmacy giants by delivering a simpler, more trustworthy way to manage prescriptions, health records, and orders—across in‑store and mobile experiences.' },
-
-    { type: 'text', header: 'Project Statement', content: '' },
+    { type: 'text', header: 'Project Statement', content: 'Empower local pharmacies to compete with e‑pharmacy giants by delivering a simpler, more trustworthy way to manage prescriptions, health records, and orders—across in‑store and mobile experiences.' },
 
     // Mission + Vision
     { type: 'text', header: 'Mission', content: 'Make quality healthcare more accessible by empowering local pharmacies with a digital system that increases revenue, improves customer lifetime value, and reduces out-of-pocket cost through better access and follow-through.', indent: true },
@@ -206,11 +204,11 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
     { type: 'image', src: '/raseet/6.png', maxHeight: '600px' },
     
-    { type: 'text', header: 'User Research', content: ""},
+    { type: 'text', header: 'User Research', content: 'To ground the product in real-world needs, I conducted interviews, surveys, contextual inquiries, and competitor analysis across pharmacists, patients, and providers.'},
     
     { type: 'text', header: 'Background', content: "To design a solution that meets the needs of pharmacies, healthcare providers, and customers, it was essential to understand their existing workflows, pain points, and expectations. Through a mix of qualitative and quantitative research, we identified gaps in the current ecosystem and opportunities to create a more streamlined, user-friendly platform.", indent: true },
 
-    { type: 'text', header: 'Research Objectives', content: "", indent: true },
+    { type: 'text', header: 'Research Objectives', content: 'Clarify where existing pharmacy workflows break down, why digital tools are underused, and how we can design a platform that feels trustworthy and simple for all stakeholders.', indent: true },
 
     { type: 'textBullets', header: '', items: [
       "Identify inefficiencies in pharmacy operations and customer engagement.",
@@ -326,15 +324,15 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: '', subheader: '', content: "These insights served as a valuable tool to identify opportunities for introducing a potential solution.", align: 'center'},
 
-{ type: 'text', header: 'User Persona', subheader: '', content: "", },
+{ type: 'text', header: 'User Persona', subheader: '', content: 'A primary persona captures the needs of a pharmacy owner balancing walk‑in traffic, digital orders, and coordination with doctors and patients.', },
 
 { type: 'video', src: '/raseet/PERSONA.mp4', maxHeight: '500px' },
 
-{ type: 'text', header: 'Empathy Map', subheader: '', content: "", },
+{ type: 'text', header: 'Empathy Map', subheader: '', content: 'The empathy map helped align the team on what pharmacies and patients say, think, feel, and do across the medication journey.', },
 
 { type: 'video', src: '/raseet/EM.mp4', maxHeight: '500px' },
 
-{ type: 'text', header: 'User Journey', subheader: '', content: "", },
+{ type: 'text', header: 'User Journey', subheader: '', content: 'End‑to‑end journeys highlighted moments of confusion, drop‑offs, and trust gaps in ordering, refilling, and tracking medicines.', },
 
 { type: 'video', src: '/raseet/UJ.mp4', maxHeight: '500px' },
 
@@ -344,13 +342,13 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Product Goals: Sort Qualitative Feedback', subheader: '', content: "The success of Raseet Health depended on aligning business objectives with user needs, ensuring a seamless and scalable experience for all stakeholders. By analyzing research insights and market trends, we defined three core product goals:" },
 
-{ type: 'text', header: 'Business Goals', subheader: '', content: "", headerIndent: 1 },
+{ type: 'text', header: 'Business Goals', subheader: '', content: 'Increase repeat orders, improve inventory turns, and grow lifetime value without overwhelming small pharmacy teams.', headerIndent: 1 },
 { type: 'image', src: '/raseet/final/22.png', indent: true },
 
-{ type: 'text', header: 'User Goals', subheader: '', content: "", headerIndent: 1 },
+{ type: 'text', header: 'User Goals', subheader: '', content: 'Make it effortless for customers and caregivers to manage prescriptions, understand status, and trust digital channels.', headerIndent: 1 },
 { type: 'image', src: '/raseet/final/23.png', indent: true },
 
-{ type: 'text', header: 'Shared Goals (User + Business)', subheader: '', content: "", headerIndent: 1 },
+{ type: 'text', header: 'Shared Goals (User + Business)', subheader: '', content: 'Design flows that are sustainable for pharmacy operations and genuinely useful for patients—so better care also drives better business.', headerIndent: 1 },
 { type: 'image', src: '/raseet/final/24.png', indent: true },
 
 
@@ -360,12 +358,12 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 ////////////////////////////////////////////////////////////
 
-{ type: 'text', header: 'Solutions?', subheader: '1. Seamless Integration of Stakeholder Systems', content: "", },
+{ type: 'text', header: 'Solutions', subheader: '1. Seamless integration of stakeholder systems', content: 'A three‑sided platform connects pharmacies, healthcare providers, and customers so information flows reliably instead of being trapped in silos.', },
 
 
 { type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Disconnected systems for pharmacies, doctors, and customers led to inefficiencies, missed opportunities, and frustration.", headerRight: 'Solution', contentRight: "Unified Dashboards and Secure Collaboration Tools." },
 
-{ type: 'text', header: 'Features', subheader: 'Role-Based Dashboards:', content: "", },
+{ type: 'text', header: 'Features', subheader: 'Role-based dashboards', content: 'Each role sees only what they need to act with confidence, reducing clutter and cognitive load.', },
 
 { type: 'textBullets', header: 'Pharmacists', items: [
   'A centralized dashboard consolidates inventory levels, order statuses, and customer data.',
@@ -392,12 +390,12 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 ////////////////////////////////////////////////////////////
 
-{ type: 'text', header: '', subheader: '2. Simplifying Complex Onboarding for Pharmacies', content: "", },
+{ type: 'text', header: '', subheader: '2. Simplifying complex onboarding for pharmacies', content: 'Onboarding flows are broken into guided steps so non‑technical teams can go digital without feeling overwhelmed.', },
 
 
 { type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Small pharmacies struggled with the technical barriers of going digital, including setting up online catalogs and training staff.", headerRight: 'Solution', contentRight: "Automated Onboarding Workflows." },
 
-{ type: 'text', header: 'Features', subheader: 'Bulk Catalog Uploads:', content: "", },
+{ type: 'text', header: 'Features', subheader: 'Bulk catalog uploads', content: 'Pharmacies can upload existing catalogs instead of re‑entering data, dramatically reducing setup time.', },
 
 { type: 'textBullets', header: '', items: [
   'Pharmacies upload product catalogs via .xls files, saving time on manual data entry',
@@ -416,12 +414,12 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 ////////////////////////////////////////////////////////////
 
 
-{ type: 'text', header: '', subheader: '3. Enhancing UX in E-Commerce', content: "", },
+{ type: 'text', header: '', subheader: '3. Enhancing UX in e‑commerce', content: 'We redesigned navigation, search, and checkout to reduce friction and increase completed orders.', },
 
 
 { type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Customers struggled with poor navigation, complex checkout processes, and lack of real-time updates, leading to high drop-off rates.", headerRight: 'Solution', contentRight: "Intuitive Navigation and Streamlined Checkout." },
 
-{ type: 'text', header: 'Features', subheader: 'Advanced Search and Filters:', content: "", },
+{ type: 'text', header: 'Features', subheader: 'Advanced search and filters', content: 'Search supports natural queries and filters that match how people actually shop for medicines and health products.', },
 
 { type: 'textBullets', header: '', items: [
   'Voice-enabled search for faster discovery of products.',
@@ -477,13 +475,13 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 { type: 'image', src: '/raseet/5.png', maxHeight: '500px'},
 
 
-{ type: 'text', header: 'Feature Highlight', subheader: '', content: "", align: 'center' },
+{ type: 'text', header: 'Feature Highlight', subheader: '', content: 'Bringing the most critical pharmacy, provider, and customer actions into a single, easy-to-scan experience reduces cognitive load and speeds up everyday tasks.', align: 'center' },
 
 { type: 'image', src: '/raseet/final/31.png', },
 
 
 
-{ type: 'text', header: 'Impact of Solutions!!!', subheader: '', content: "", align: 'center' },
+{ type: 'text', header: 'Impact of Solutions', subheader: '', content: '', align: 'center' },
 
 { type: 'image', src: '/raseet/final/32.png', },
 
@@ -555,7 +553,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 // { type: 'image', src: '/bmw/Frame1.png', },
 
 
-{ type: 'text', header: 'Accessibility? Designing for an Inclusive Experience', subheader: 'The Goal', content: "Given that a significant portion of Raseet Health’s target audience includes chronic and geriatric patients, accessibility was a core consideration in the design process. The goal was to create an intuitive and frictionless experience that accommodates users with varying levels of digital literacy and physical limitations.", },
+{ type: 'text', header: 'Accessibility: Designing for an inclusive experience', subheader: 'The goal', content: "Given that a significant portion of Raseet Health’s target audience includes chronic and geriatric patients, accessibility was a core consideration in the design process. The goal was to create an intuitive and frictionless experience that accommodates users with varying levels of digital literacy and physical limitations.", },
 
 { type: 'image', src: '/raseet/access.png', maxHeight: '500px' },
 
@@ -566,12 +564,12 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 { type: 'image', src: '/raseet/final/32.png', },
 
 
-{ type: 'text', header: 'Wireframes', subheader: '', content: "", },
+{ type: 'text', header: 'Wireframes', subheader: '', content: 'Early wireframes explored multiple layout options for onboarding, home, and cart flows before we committed to high‑fidelity designs.', },
 
 { type: 'image', src: '/raseet/ui/lil.png', maxHeight: '500px' },
 
 
-{ type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
+{ type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity aligned with the brand’s values of trust, clarity, and accessibility. I studied competitors and drew from a curated reference library to balance familiarity with differentiation.", },
 
 // { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
 
@@ -608,11 +606,11 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'image', src: '/raseet/1.png', maxHeight: '640px' },
 
-{ type: 'text', header: 'How Collaboration Shaped the Final Product?', subheader: '', content: "", },
+{ type: 'text', header: 'How collaboration shaped the final product', subheader: '', content: 'Regular touchpoints with founders, engineers, pharmacists, and support teams ensured that each iteration reflected both user insight and operational reality.', },
 
 { type: 'image', src: '/raseet/final/34.png', },
 
-{ type: 'text', header: 'Lessons Learned?', subheader: '', content: "", },
+{ type: 'text', header: 'Lessons learned', subheader: '', content: 'Designing in healthcare means designing for trust, patience, and clarity. Small details—like copy, empty states, and recovery paths—have outsized impact on whether people feel safe using the product.', },
 
 { type: 'textTextRow', headerLeft: 'Continuous Feedback Is Key', contentLeft: "", headerRight: '', contentRight: "Regular usability testing and feedback loops were instrumental in identifying areas for improvement and driving iterative changes." },
 
@@ -735,7 +733,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
             <button 
               onClick={onBack}
-              className="text-[16px] text-gray-500 hover:text-gray-900 transition-colors hidden md:block cursor-pointer"
+              className="text-[15px] text-gray-500 hover:text-gray-900 transition-colors hidden md:block cursor-pointer"
             >
               ← Back to Work
             </button>
@@ -747,7 +745,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                 onClick={onBack}
                 className="text-[15px] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
               >
-                ← Back to Homepage
+                ← Back to Work
               </button>
             </div>
 
@@ -790,8 +788,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                 </div>
               </div>
               <div className="space-y-4 pt-4 flex flex-col items-center text-center">
-                <p className="text-[18px] leading-[1.85] text-gray-700">Got more time? :)</p>
-                <p className="text-[16px] leading-relaxed text-gray-500">Click the arrow to read the entire case study</p>
+                <p className="text-[18px] leading-[1.85] text-gray-700">Have more time?</p>
+                <p className="text-[16px] leading-relaxed text-gray-500">Click the arrow to read the entire case study.</p>
                 <button
                   type="button"
                   onClick={scrollToCaseStudy}
@@ -1061,7 +1059,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
           <div className="md:hidden pt-8">
             <button 
               onClick={onBack}
-              className="text-[13px] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
+              className="text-[15px] text-gray-500 hover:text-gray-900 transition-colors cursor-pointer"
             >
               ← Back to Work
             </button>

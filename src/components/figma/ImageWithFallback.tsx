@@ -10,9 +10,11 @@ export interface ImageWithFallbackProps extends React.ImgHTMLAttributes<HTMLImag
 
 export function ImageWithFallback(props: ImageWithFallbackProps) {
   const [didError, setDidError] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   const handleError = () => {
     setDidError(true)
+    setLoading(false)
   }
 
   const { src, alt, style, className, priority, ...rest } = props
@@ -21,16 +23,40 @@ export function ImageWithFallback(props: ImageWithFallbackProps) {
     ? { loading: 'eager' as const, decoding: 'async' as const, fetchPriority: 'high' as const }
     : { loading: 'lazy' as const, decoding: 'async' as const }
 
-  return didError ? (
-    <div
-      className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
-      style={style}
-    >
-      <div className="flex items-center justify-center w-full h-full">
-        <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} />
+  if (didError) {
+    return (
+      <div
+        className={`inline-block bg-gray-100 text-center align-middle ${className ?? ''}`}
+        style={style}
+      >
+        <div className="flex items-center justify-center w-full h-full">
+          <img src={ERROR_IMG_SRC} alt="Error loading image" {...rest} data-original-url={src} />
+        </div>
       </div>
-    </div>
-  ) : (
+    )
+  }
+
+  // While loading, show a very light skeleton behind the image, but preserve caller classes/styles.
+  if (loading) {
+    return (
+      <div className={`relative inline-block ${className ?? ''}`} style={style}>
+        <div className="absolute inset-0 animate-pulse bg-gray-100" aria-hidden />
+        <img
+          src={src}
+          alt={alt ?? ''}
+          className={className}
+          style={style}
+          {...loadingProps}
+          {...rest}
+          onError={handleError}
+          onLoad={() => setLoading(false)}
+        />
+      </div>
+    )
+  }
+
+  // After load, render a plain image so layout and classes are exactly what callers expect.
+  return (
     <img
       src={src}
       alt={alt ?? ''}

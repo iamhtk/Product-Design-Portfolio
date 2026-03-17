@@ -10,6 +10,7 @@ import { useState } from "react";
 import { ScrollToTop } from "./ScrollToTop";
 import { AnimateIn } from "./AnimateIn";
 import { PROJECT_ENABLED } from "./projects/projectOrder";
+import { ImageWithFallback } from "./figma/ImageWithFallback";
 
 interface HomePageProps {
   onProjectClick: (id: string) => void;
@@ -184,11 +185,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                         aria-label={project.title}
                       />
                     ) : (
-                      <img
+                      <ImageWithFallback
                         src={project.image}
                         alt={project.title}
                         className={mediaClass}
-                        loading="lazy"
                       />
                     );
                   })()
@@ -227,7 +227,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
             <a href="#" onClick={(e) => e.preventDefault()} className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4" aria-hidden>
             <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
 
-                <img
+                <ImageWithFallback
                   src="miniapps/AVICII-FOREVER-ARTWORK-CLEAN_2.webp"
                   alt="LE7ELS"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
@@ -245,7 +245,7 @@ export function HomePage({ onProjectClick }: HomePageProps) {
 
             <a href="https://stories.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
               <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
-                <img
+                <ImageWithFallback
                   src="miniapps/avicii-stories-wallpaper-upscaled-3840-1900-v0-t0cxcu66a9of1.webp"
                   alt="Stories"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
@@ -315,20 +315,25 @@ export function HomePage({ onProjectClick }: HomePageProps) {
               </div>
             </a> */}
 
-            <a href="https://www.mathematical-sequence-generator.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
+            <a
+              href="https://www.mathematical-sequence-generator.hrithiksanyal.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4"
+            >
               <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
-                <img
+                <ImageWithFallback
                   src="miniapps/f3.png"
-                  alt="Project Six"
+                  alt="Mathematical Sequence Generator"
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                 />
               </div>
               <div>
-                <h3 className="text-[15px] text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
-                Mathematical Sequence Generator
+                <h3 className="type-body text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
+                  Mathematical Sequence Generator
                 </h3>
-                <p className="text-[13px] text-gray-500">
-                Generate and customize FizzBuzz, Fibonacci sequences, and their combinations
+                <p className="type-caption text-gray-500">
+                  Generate and customize FizzBuzz, Fibonacci sequences, and their combinations
                 </p>
               </div>
             </a>
@@ -338,10 +343,10 @@ export function HomePage({ onProjectClick }: HomePageProps) {
         {/* Recommendations Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
-            <h2 className="text-[11px] tracking-[0.22em] text-gray-400 uppercase font-medium mb-2">
+            <h2 className="type-overline text-gray-400 mb-2">
               Testimonials
             </h2>
-            <p className="text-[17px] text-gray-900">
+            <p className="type-body-lg text-gray-900">
               What people say about me
             </p>
           </div>

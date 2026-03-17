@@ -55,18 +55,19 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-5 flex flex-row flex-nowrap items-center justify-between gap-4 min-w-0">
           <button 
             onClick={() => handleNavigation('work')}
-            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-1 px-0.5 cursor-pointer"
+            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-2 px-1 cursor-pointer"
           >
             Hrithik Sanyal
           </button>
           
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:flex-shrink-0 items-center gap-6 md:gap-8">
+          <div className="hidden md:flex md:flex-shrink-0 items-center gap-6 md:gap-8" role="navigation" aria-label="Main">
             {links.map((link) => (
               <button
                 key={link.page}
                 onClick={() => onNavigate(link.page)}
-                className="relative group focus-ring rounded py-1 px-0.5 cursor-pointer"
+                className="relative group focus-ring rounded py-2 px-1 cursor-pointer"
+                aria-current={currentPage === link.page ? 'page' : undefined}
               >
                 <span className={`text-[15px] transition-colors duration-300 ${
                   currentPage === link.page 
@@ -83,7 +84,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             ))}
             <a
               href="mailto:sanyalhrithik@gmail.com"
-              className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 ease-out focus-ring rounded py-1 px-0.5"
+              className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 ease-out focus-ring rounded py-2 px-1"
             >
               Email
             </a>
@@ -124,7 +125,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             {/* Mobile Menu Content */}
             <div className="flex-1 flex flex-col justify-between px-8 py-12">
               {/* Navigation Links */}
-              <nav className="space-y-6">
+              <nav className="space-y-6" aria-label="Main">
                 {links.map((link) => (
                   <button
                     key={link.page}
@@ -134,6 +135,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                         ? 'text-gray-900' 
                         : 'text-gray-400'
                     }`}
+                    aria-current={currentPage === link.page ? 'page' : undefined}
                   >
                     {link.label}
                     {/* Mobile indicator - small dot */}
