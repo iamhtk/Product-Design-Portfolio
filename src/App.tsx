@@ -91,14 +91,21 @@ function getProjectIdFromSegment(segment: string): string | null {
 
 function getRouteFromPath(): { page: Page; projectId: string | null } {
   const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
+  // Debug: trace routing
+  // eslint-disable-next-line no-console
+  console.log('getRouteFromPath - path:', path);
   
   // Root
   if (path === '/') {
+    // eslint-disable-next-line no-console
+    console.log('getRouteFromPath - resolved root → work');
     return { page: 'work', projectId: null };
   }
   
   // Known non-project page (about, blog, etc.)
   const page = PATH_TO_PAGE[path];
+  // eslint-disable-next-line no-console
+  console.log('getRouteFromPath - PATH_TO_PAGE lookup:', page);
   if (page) {
     return { page, projectId: null };
   }
@@ -107,6 +114,8 @@ function getRouteFromPath(): { page: Page; projectId: string | null } {
   if (path.startsWith('/project/')) {
     const segment = path.slice(9);
     const projectId = getProjectIdFromSegment(segment);
+    // eslint-disable-next-line no-console
+    console.log('getRouteFromPath - legacy project segment:', segment, '→', projectId);
     if (projectId) return { page: 'project', projectId };
     return { page: 'work', projectId: null };
   }
@@ -115,9 +124,13 @@ function getRouteFromPath(): { page: Page; projectId: string | null } {
   const segment = path.slice(1);
   if (segment && !segment.includes('/')) {
     const projectId = getProjectIdFromSegment(segment);
+    // eslint-disable-next-line no-console
+    console.log('getRouteFromPath - top-level segment:', segment, '→', projectId);
     if (projectId) return { page: 'project', projectId };
   }
   
+  // eslint-disable-next-line no-console
+  console.log('getRouteFromPath - fallback → work');
   return { page: 'work', projectId: null };
 }
 
