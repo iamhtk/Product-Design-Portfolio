@@ -4550,10 +4550,14 @@ export function EmberDesignSystemProject({
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-16 w-full min-w-0 box-border">
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 md:gap-16 min-w-0">
           <div className="space-y-8 min-w-0">
-              <div className="block">
-              <svg className="w-[48px] h-[48px]" viewBox="0 0 24 24" fill="#A1A1AA">
-                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
-                </svg>
+              <div className="block shrink-0" style={{ width: 48, height: 48 }}>
+                <img
+                  src="/cwpc/cwpc-logo.png"
+                  alt="Catastrophic Wildfire Prevention Consortium"
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left center' }}
+                  loading="eager"
+                  decoding="async"
+                />
               </div>
 
             <div className="space-y-8">
