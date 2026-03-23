@@ -3582,7 +3582,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}
             >
               <a
-                href="https://cwpc-design-system.pages.dev/docs"
+                href="https://ember.cwpc.hrithiksanyal.com/docs"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -3598,7 +3598,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 Open Ember Docs →
               </a>
               <a
-                href="https://www.figma.com/design/2bE1dja5Ul5JrXGhvBgE23"
+                href="#"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
