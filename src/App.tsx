@@ -12,7 +12,6 @@ import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 
 type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'analytics' | 'project';
 
-const VALID_PAGES: Exclude<Page, 'project'>[] = ['work', 'about', 'friends', 'resume', 'favorites', 'blog', 'analytics'];
 const VALID_PROJECT_IDS = Object.keys(projectComponents);
 
 const SCROLL_RESTORE_KEY = 'portfolio_scroll_restore';

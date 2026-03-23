@@ -67,12 +67,11 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
   const headerColor = '#635BFF';
   const progressBarColor = '#4F46E5';
   const arrowColor = '#635BFF';
-  const icon = ''; // Sidebar icon (left column) - Add image/video path here
-  const headerIcon = ''; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
+  const icon: string = ''; // Sidebar icon (left column) - Add image/video path here
+  const headerIcon: string = ''; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Senior Product Designer';
   const team = 'Alex Rivera, Jordan Lee, Priya Patel';
   const when = '2023';
-  const overview = 'Redesigning Stripe\'s analytics dashboard to help businesses understand their financial data at a glance. The challenge was presenting complex data in an intuitive, actionable way.';
   const speedReadChallenge = 'Redesigning Stripe\'s analytics dashboard so businesses can understand financial data at a glance; presenting complex data in an intuitive, actionable way.';
   const speedReadProcess = 'Interviews with 100+ businesses; question-first IA (How much am I making? Where is it from? What trends?); flexible component library scaling across Stripe\'s suite.';
   const speedReadTakeaways = 'Users need quick answers to specific questions, not just comprehensive reports; consistency at scale with contextually relevant patterns.';
@@ -104,33 +103,6 @@ export function CalmiRingProject({ onBack, onProjectClick }: CalmiRingProjectPro
   // ═══════════════════════════════════════════════════════════════════════
   // DISPLAY CODE BELOW - Don't edit unless you know what you're doing
   // ═══════════════════════════════════════════════════════════════════════
-
-  // Helper function to render icon (image or video)
-  const renderIcon = (iconPath: string, size: 'large' | 'small') => {
-    if (!iconPath) return null;
-    
-    const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
-    const sizeClasses = size === 'large' 
-      ? 'w-[120px] h-[120px] md:w-[180px] md:h-[180px] object-contain' 
-      : 'max-w-[48px] max-h-[48px] w-auto h-auto object-contain';
-    
-    if (isVideo) {
-      return (
-        <video 
-          src={iconPath} 
-          className={sizeClasses}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      );
-    }
-    
-    return (
-      <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
-    );
-  };
 
   return (
     <div className="min-h-screen bg-white">

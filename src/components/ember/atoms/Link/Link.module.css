@@ -1,0 +1,47 @@
+.root {
+  font-weight: var(--font-weight-regular);
+  text-decoration: none;
+  transition: color var(--duration-link) ease;
+}
+
+.variantDefault {
+  color: var(--color-information-default);
+}
+
+.variantDefault:hover:not(.disabled) {
+  color: var(--color-information-hover);
+}
+
+.variantPrimary {
+  color: var(--text-primary-default);
+}
+
+.variantPrimary:hover:not(.disabled) {
+  color: var(--text-primary-hover);
+}
+
+.underlineAlways {
+  text-decoration: underline;
+  text-underline-offset: var(--space-100);
+}
+
+.underlineHover:hover:not(.disabled) {
+  text-decoration: underline;
+  text-underline-offset: var(--space-100);
+}
+
+.underlineNever,
+.underlineNever:hover {
+  text-decoration: none;
+}
+
+.disabled {
+  color: var(--color-disabled-default);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.root:not(.disabled):focus-visible {
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-50);
+}

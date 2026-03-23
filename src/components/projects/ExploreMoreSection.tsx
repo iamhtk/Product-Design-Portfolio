@@ -9,6 +9,8 @@ export interface ExploreMoreSectionProps {
   currentProjectId: string;
   onBack: () => void;
   onProjectClick?: (projectId: string) => void;
+  /** Prev/next project titles (e.g. `#ffffff` on dark case studies). Default dark for light pages. */
+  projectTitleColor?: string;
 }
 
 function handleProjectNav(projectId: string, onProjectClick?: (projectId: string) => void) {
@@ -28,7 +30,10 @@ export function ExploreMoreSection({
   currentProjectId,
   onBack,
   onProjectClick,
+  projectTitleColor,
 }: ExploreMoreSectionProps) {
+  const titleEnabledColor = projectTitleColor ?? '#111827';
+  const titleDisabledColor = projectTitleColor ? 'rgba(255,255,255,0.45)' : undefined;
   const index = PROJECT_ORDER.findIndex((p) => p.id === currentProjectId);
   const calmiRing = PROJECT_ORDER.find((p) => p.id === 'CalmiRing')!;
   const prevProject =
@@ -99,11 +104,16 @@ export function ExploreMoreSection({
                   <span className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
                     Previous
                   </span>
-                  <span className={`block w-full text-left text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
-                    isProjectEnabled(prevProject.id)
-                      ? 'text-gray-800 group-hover:opacity-80'
-                      : 'text-gray-500'
-                  }`}>
+                  <span
+                    className={`block w-full text-left text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
+                      isProjectEnabled(prevProject.id) ? 'group-hover:opacity-80' : ''
+                    } ${!isProjectEnabled(prevProject.id) && !projectTitleColor ? 'text-gray-500' : ''}`}
+                    style={{
+                      color: isProjectEnabled(prevProject.id)
+                        ? titleEnabledColor
+                        : titleDisabledColor,
+                    }}
+                  >
                     ← {prevProject.title}
                   </span>
                 </div>
@@ -180,11 +190,16 @@ export function ExploreMoreSection({
                   <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
                     Next
                   </div>
-                  <div className={`text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
-                    isProjectEnabled(nextProject.id)
-                      ? 'text-gray-800 group-hover:opacity-80'
-                      : 'text-gray-500'
-                  }`}>
+                  <div
+                    className={`text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
+                      isProjectEnabled(nextProject.id) ? 'group-hover:opacity-80' : ''
+                    } ${!isProjectEnabled(nextProject.id) && !projectTitleColor ? 'text-gray-500' : ''}`}
+                    style={{
+                      color: isProjectEnabled(nextProject.id)
+                        ? titleEnabledColor
+                        : titleDisabledColor,
+                    }}
+                  >
                     {nextProject.title} →
                   </div>
                 </div>

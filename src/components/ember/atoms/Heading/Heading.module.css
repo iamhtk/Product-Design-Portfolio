@@ -1,0 +1,81 @@
+.heading {
+  margin: var(--space-0);
+  font-family: var(--font-family-headings);
+  line-height: var(--line-height-headings);
+}
+
+.level1 {
+  font-size: var(--font-size-h1);
+}
+
+.level2 {
+  font-size: var(--font-size-h2);
+}
+
+.level3 {
+  font-size: var(--font-size-h3);
+}
+
+.level4 {
+  font-size: var(--font-size-h4);
+}
+
+.level5 {
+  font-size: var(--font-size-h5);
+}
+
+.level6 {
+  font-size: var(--font-size-h6);
+}
+
+.colorPrimary {
+  color: var(--color-primary-default);
+}
+
+.colorSecondary {
+  color: var(--text-default-body);
+}
+
+.colorTertiary {
+  color: var(--color-tertiary-default);
+}
+
+.colorDefault {
+  color: var(--text-default-headings);
+}
+
+.colorInfo {
+  color: var(--color-information-default);
+}
+
+.colorSuccess {
+  color: var(--color-success-default);
+}
+
+.weightRegular {
+  font-weight: var(--font-weight-regular);
+}
+
+.weightMedium {
+  font-weight: var(--font-weight-medium);
+}
+
+.weightSemibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.weightBold {
+  font-weight: var(--font-weight-bold);
+}
+
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}

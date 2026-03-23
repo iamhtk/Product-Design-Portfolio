@@ -1,0 +1,73 @@
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.spinner {
+  box-sizing: border-box;
+  flex-shrink: 0;
+  border-radius: var(--border-radius-pill);
+  border-style: solid;
+  border-top-color: transparent;
+  animation: loader-spin var(--duration-loader-spin) linear infinite;
+}
+
+.sizeSm {
+  width: var(--space-600);
+  height: var(--space-600);
+  border-width: var(--border-width-loader-sm);
+}
+
+.sizeMd {
+  width: var(--space-1000);
+  height: var(--space-1000);
+  border-width: var(--border-width-md);
+}
+
+.sizeLg {
+  width: var(--space-1400);
+  height: var(--space-1400);
+  border-width: var(--border-width-loader-lg);
+}
+
+.variantPrimary {
+  border-right-color: var(--color-primary-default);
+  border-bottom-color: var(--color-primary-default);
+  border-left-color: var(--color-primary-default);
+}
+
+.variantSuccess {
+  border-right-color: var(--color-success-default);
+  border-bottom-color: var(--color-success-default);
+  border-left-color: var(--color-success-default);
+}
+
+.variantInfo {
+  border-right-color: var(--color-information-default);
+  border-bottom-color: var(--color-information-default);
+  border-left-color: var(--color-information-default);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: var(--border-width-xs);
+  height: var(--border-width-xs);
+  margin: calc(-1 * var(--border-width-xs));
+  padding: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+}
+
+@keyframes loader-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}

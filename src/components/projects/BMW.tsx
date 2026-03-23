@@ -9,7 +9,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Linkedin, Youtube, Instagram, Facebook, Turtle } from 'lucide-react';
+import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
@@ -73,7 +73,6 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   const role = 'Product Designer';
   const team = 'Hrithik Sanyal, and Prof. James Rhampton';
   const when = 'January 2024 - May 2024';
-  const overview = "In this personal project, I overhauled the screens in a BMW equipped with iDrive 8, inspired by my admiration for BMW and a keen interest in vehicle screen design. The journey started with thorough research and sketches of the BMW's exterior, leading to the development of wireframes for the interior screens. The final redesign prioritizes clarity and functionality, ensuring an enhanced user experience.";
   const speedReadChallenge = "The goal was to redesign BMW's iDrive 8 interface to enhance usability while preserving its minimalist aesthetic. Key challenges included improving information hierarchy, ensuring seamless navigation, and balancing aesthetics with functional clarity.";
   const speedReadProcess = "I conducted research, studied BMW's brand guide, sketched exterior and interior views, and developed wireframes for the four main interfaces—vehicle controls, driver display, main unit, and sub-unit.";
   const speedReadTakeaways = "Prioritizing layout and interaction in wireframes before color; designing default and dynamic screens that reflect real driving scenarios; balancing consistency with flexibility for future updates.";
@@ -169,37 +168,6 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   // ═══════════════════════════════════════════════════════════════════════
   // DISPLAY CODE BELOW - Don't edit unless you know what you're doing
   // ═══════════════════════════════════════════════════════════════════════
-
-  // Helper function to render icon (image or video)
-  const renderIcon = (iconPath: string, size: 'large' | 'small') => {
-    if (!iconPath) return null;
-    
-    const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
-    const sizeClasses = size === 'large' 
-      ? 'w-[120px] h-[120px] md:w-[180px] md:h-[180px] object-contain' 
-      : 'max-w-[48px] max-h-[48px] w-auto h-auto object-contain';
-    
-    if (isVideo) {
-      return (
-        <video 
-          src={iconPath} 
-          className={sizeClasses}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      );
-    }
-    
-    return (
-      <img 
-        src={iconPath} 
-        alt={`${title} icon`}
-        className={sizeClasses}
-      />
-    );
-  };
 
   return (
     <div className="min-h-screen bg-white">

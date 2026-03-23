@@ -1,0 +1,129 @@
+.root {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-100);
+  font-family: var(--font-family-body);
+  transition: transform var(--duration-link) ease;
+}
+
+button.root {
+  margin: var(--space-0);
+  padding: var(--space-0);
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+button.root:focus {
+  outline: none;
+}
+
+button.root:focus-visible {
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-100);
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover .pin {
+  transform: rotate(-45deg) scale(var(--scale-mappin-hover));
+}
+
+.pinWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-100);
+}
+
+.pin {
+  position: relative;
+  flex-shrink: 0;
+  transform: rotate(-45deg);
+  transform-origin: center center;
+  border-radius: 50% 50% 50% 0;
+  transition: transform var(--duration-link) ease,
+    box-shadow var(--duration-link) ease;
+}
+
+.sizeSm {
+  width: var(--space-600);
+  height: var(--space-600);
+}
+
+.sizeMd {
+  width: var(--space-900);
+  height: var(--space-900);
+}
+
+.sizeLg {
+  width: var(--space-1200);
+  height: var(--space-1200);
+}
+
+.colorPrimary {
+  --pin-color: var(--color-primary-default);
+  background-color: var(--pin-color);
+}
+
+.colorSuccess {
+  --pin-color: var(--color-success-default);
+  background-color: var(--pin-color);
+}
+
+.colorError {
+  --pin-color: var(--color-error-default);
+  background-color: var(--pin-color);
+}
+
+.colorInfo {
+  --pin-color: var(--color-information-default);
+  background-color: var(--pin-color);
+}
+
+.colorWarning {
+  --pin-color: var(--color-warning-default);
+  background-color: var(--pin-color);
+}
+
+.dot {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 40%;
+  height: 40%;
+  background-color: var(--color-neutral-white);
+  border-radius: var(--border-radius-pill);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.active .pin {
+  transform: rotate(-45deg) scale(var(--scale-mappin-active));
+  box-shadow: 0 var(--space-100) var(--space-400) color-mix(
+    in srgb,
+    var(--pin-color) 55%,
+    transparent
+  );
+}
+
+.active.interactive:hover .pin {
+  transform: rotate(-45deg) scale(var(--scale-mappin-active));
+}
+
+.label {
+  max-width: var(--width-modal-sm);
+  padding: var(--space-100) var(--space-300);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  color: var(--color-neutral-white);
+  text-align: center;
+  background-color: var(--color-mappin-label-bg);
+  border-radius: var(--border-radius-pill);
+}

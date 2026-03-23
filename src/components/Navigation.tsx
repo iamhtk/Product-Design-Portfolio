@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 
-type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog';
+type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'analytics';
 
 interface NavigationProps {
   currentPage: Page | 'project';

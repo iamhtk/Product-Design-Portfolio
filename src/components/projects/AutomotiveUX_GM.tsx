@@ -114,9 +114,6 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
     </>
   );
   const when = 'January 2024 - May 2024';
-  const overview = "General Motors (GM) partnered with the University of Michigan (UofM) to facilitate students' exploration and comprehension of the design of in-vehicle infotainment (IVI) systems. As part of this collaboration, we visited GM's office in Warren, MI, where we received a comprehensive design brief and gained insight into GM's IVI design process. We learned about the specific approaches taken by various GM car teams, such as those responsible for Buick, Chevrolet, and Cadillac vehicles.";
-  const overview2 = "Develop a new In-vehicle experience for the luxury car segment focusing on in-car themes.";
-
   // Speed Read / Gist (2x2 grid in right column)
   const speedReadChallenge = "In 2024, I redesigned the Cadillac Escalade's UX, focusing on integrating personalized AI and augmented HUD features. The goal was to enhance in-car interactions with advanced technology while maintaining a safe and luxurious experience.";
   const speedReadProcess = "I led user research, designed wireframes, and iterated through three phases: low-fidelity sketches, high-fidelity prototypes, and usability testing. Using Figma, I ensured AI personalization and HCM principles were central to the design, balancing safety and innovation.";
@@ -332,37 +329,6 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
   // ═══════════════════════════════════════════════════════════════════════
   // DISPLAY CODE BELOW - Don't edit unless you know what you're doing
   // ═══════════════════════════════════════════════════════════════════════
-
-  // Helper function to render icon (image or video)
-  const renderIcon = (iconPath: string, size: 'large' | 'small') => {
-    if (!iconPath) return null;
-    
-    const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
-    const sizeClasses = size === 'large' 
-      ? 'w-[120px] h-[120px] md:w-[180px] md:h-[180px] object-contain' 
-      : 'max-w-[48px] max-h-[48px] w-auto h-auto object-contain';
-    
-    if (isVideo) {
-      return (
-        <video 
-          src={iconPath} 
-          className={sizeClasses}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      );
-    }
-    
-    return (
-      <img 
-        src={iconPath} 
-        alt={`${title} icon`}
-        className={sizeClasses}
-      />
-    );
-  };
 
   return (
     <div className="min-h-screen bg-white">

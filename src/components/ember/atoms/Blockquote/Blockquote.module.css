@@ -1,0 +1,49 @@
+.root {
+  margin: var(--space-0);
+  padding: var(--space-500) var(--space-600);
+  border-left: var(--border-width-md) solid var(--blockquote-accent);
+  border-radius: var(--border-radius-none) var(--border-radius-md) var(--border-radius-md)
+    var(--border-radius-none);
+  background: var(--blockquote-bg);
+}
+
+.variantDefault {
+  --blockquote-accent: var(--color-neutral-60);
+  --blockquote-bg: color-mix(in srgb, var(--color-neutral-60) 5%, transparent);
+}
+
+.variantPrimary {
+  --blockquote-accent: var(--color-primary-default);
+  --blockquote-bg: color-mix(in srgb, var(--color-primary-default) 5%, transparent);
+}
+
+.variantSuccess {
+  --blockquote-accent: var(--color-success-default);
+  --blockquote-bg: color-mix(in srgb, var(--color-success-default) 5%, transparent);
+}
+
+.variantInfo {
+  --blockquote-accent: var(--color-information-default);
+  --blockquote-bg: color-mix(in srgb, var(--color-information-default) 5%, transparent);
+}
+
+.quote {
+  margin: var(--space-0);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-lg);
+  font-weight: var(--font-weight-regular);
+  font-style: italic;
+  line-height: var(--line-height-body);
+  color: var(--text-default-body);
+}
+
+.citation {
+  display: block;
+  margin-top: var(--space-300);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-style: normal;
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-default-caption);
+}

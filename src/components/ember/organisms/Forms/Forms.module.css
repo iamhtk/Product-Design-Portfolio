@@ -1,0 +1,80 @@
+.formTitle {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-forms-title);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-headings);
+  color: var(--color-primary-default);
+}
+
+.description {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-xl);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--color-neutral-925);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1000);
+}
+
+.checkboxSection {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+}
+
+.checkboxLabel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-200);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-default-headings);
+  cursor: pointer;
+}
+
+.checkboxInput {
+  width: var(--space-500);
+  height: var(--space-500);
+  flex-shrink: 0;
+  accent-color: var(--color-primary-default);
+}
+
+.buttonRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1000);
+}
+
+.footerText {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  color: var(--text-default-headings);
+}
+
+.footerLink {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  color: var(--color-information-default);
+  text-decoration: underline;
+  text-underline-offset: var(--space-100);
+}
+
+.footerLink:hover {
+  color: var(--color-information-hover);
+}

@@ -1,0 +1,101 @@
+.root {
+  box-sizing: border-box;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--color-neutral-900);
+  border-width: var(--border-width-sm);
+  border-style: solid;
+  border-color: var(--color-neutral-450);
+  border-radius: var(--space-400);
+  max-height: var(--size-accordion-collapsed-height);
+  transition: max-height var(--duration-accordion) ease;
+}
+
+.expanded {
+  max-height: var(--size-accordion-expanded-max);
+}
+
+.header {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0;
+  padding: 0 var(--space-1000);
+  min-height: var(--size-accordion-collapsed-height);
+  font: inherit;
+  font-family: var(--font-family-body);
+  color: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+.header:focus-visible {
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-50);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-body-xl);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-default-headings);
+}
+
+.icon {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-1000);
+  height: var(--space-1000);
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-primary-default);
+  transition: transform var(--duration-accordion) ease;
+}
+
+.iconOpen {
+  transform: rotate(45deg);
+}
+
+.plus {
+  position: relative;
+  width: var(--space-400);
+  height: var(--space-400);
+}
+
+.plus::before,
+.plus::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: var(--color-neutral-white);
+  border-radius: var(--border-radius-xs);
+  transform: translate(-50%, -50%);
+}
+
+.plus::before {
+  width: var(--space-400);
+  height: var(--border-width-sm);
+}
+
+.plus::after {
+  width: var(--border-width-sm);
+  height: var(--space-400);
+}
+
+.body {
+  margin: 0;
+  padding: var(--space-0) var(--space-1000) var(--space-1000);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-default-headings);
+  line-height: var(--line-height-body);
+}

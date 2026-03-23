@@ -1,0 +1,194 @@
+.root {
+  width: 100%;
+  font-family: var(--font-family-body);
+}
+
+.list {
+  margin: var(--space-0);
+  padding: var(--space-0);
+  list-style: none;
+  width: 100%;
+}
+
+.listHorizontal {
+  display: flex;
+  flex-direction: row;
+}
+
+.listHorizontal > li {
+  display: flex;
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+/* ----- horizontal ----- */
+.horizontal {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.stepCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.track {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.segment {
+  flex: 1 1 0;
+  min-width: var(--space-100);
+  height: var(--border-width-xs);
+  align-self: center;
+}
+
+.segmentSpacer {
+  flex: 1 1 0;
+  min-width: var(--space-100);
+  height: var(--border-width-xs);
+  align-self: center;
+  background-color: transparent;
+}
+
+.segmentNeutral {
+  background-color: var(--color-surface-progress-track);
+}
+
+.segmentPrimary {
+  background-color: var(--color-primary-default);
+}
+
+.segmentSuccess {
+  background-color: var(--color-success-default);
+}
+
+.circle {
+  box-sizing: border-box;
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-800);
+  height: var(--space-800);
+  border-radius: var(--border-radius-pill);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+}
+
+.circleComplete {
+  background-color: var(--color-success-default);
+  color: var(--text-on-color-body);
+}
+
+.circleCurrent {
+  background-color: var(--color-primary-default);
+  color: var(--text-on-color-body);
+}
+
+.circleUpcoming {
+  background-color: transparent;
+  border: var(--border-width-sm) solid var(--color-divider-strong);
+  color: var(--text-default-caption);
+}
+
+.check {
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-bold);
+  line-height: 1;
+}
+
+.textBlock {
+  margin-top: var(--space-300);
+  max-width: 100%;
+  min-width: 0;
+  text-align: center;
+  overflow-wrap: break-word;
+}
+
+.label {
+  margin: var(--space-0);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  overflow-wrap: break-word;
+}
+
+.labelComplete {
+  color: var(--text-default-caption);
+}
+
+.labelCurrent {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-default-headings);
+}
+
+.labelUpcoming {
+  color: var(--text-default-caption);
+}
+
+.description {
+  margin: var(--space-0);
+  margin-top: var(--space-100);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-default-caption);
+  overflow-wrap: break-word;
+}
+
+/* ----- vertical ----- */
+.vertical {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-0);
+  width: 100%;
+}
+
+.vertical .list > li {
+  display: flex;
+  width: 100%;
+}
+
+.vStep {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: var(--space-400);
+}
+
+.vLeft {
+  display: flex;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
+  width: var(--space-800);
+}
+
+.vLine {
+  width: var(--border-width-xs);
+  min-height: var(--space-1000);
+  margin-top: var(--space-100);
+}
+
+.vText {
+  flex: 1 1 auto;
+  padding-bottom: var(--space-600);
+}
+
+.vertical .textBlock {
+  margin-top: var(--space-0);
+  text-align: left;
+}
+
+.vertical .description {
+  margin-top: var(--space-100);
+}

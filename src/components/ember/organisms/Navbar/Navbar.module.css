@@ -1,0 +1,117 @@
+.root {
+  position: sticky;
+  top: var(--space-0);
+  z-index: var(--z-index-navbar-sticky);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: var(--size-navbar-height);
+  min-height: var(--size-navbar-height);
+  padding: var(--space-0) var(--space-1600);
+  font-family: var(--font-family-body);
+  background-color: var(--color-neutral-black);
+  border-top-width: var(--border-width-sm);
+  border-top-style: solid;
+  border-top-color: var(--color-information-default);
+  border-bottom-width: var(--border-width-sm);
+  border-bottom-style: solid;
+  border-bottom-color: var(--color-primary-default);
+}
+
+/* In docs / portfolio embeds: avoid sticking over the host site header */
+.rootStatic {
+  position: relative;
+  top: auto;
+  z-index: 0;
+}
+
+.logoLink {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  height: 100%;
+  text-decoration: none;
+}
+
+.logoLink:focus {
+  outline: none;
+}
+
+.logoLink:focus-visible {
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-50);
+}
+
+.logoImage {
+  display: block;
+  width: var(--width-navbar-logo);
+  height: var(--size-navbar-height);
+  object-fit: contain;
+  object-position: left center;
+}
+
+.logoText {
+  margin: var(--space-0);
+  font-size: var(--font-size-h4);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-headings);
+  color: var(--color-tertiary-default);
+}
+
+.nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-300);
+  padding: var(--space-400) var(--space-0);
+}
+
+.link {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--space-100);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-default-body);
+  text-decoration: none;
+  transition: color var(--duration-link) ease;
+}
+
+.link:hover {
+  color: var(--color-primary-default);
+}
+
+.link:focus {
+  outline: none;
+}
+
+.link:focus-visible {
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-50);
+}
+
+.linkActive {
+  color: var(--color-tertiary-default);
+}
+
+.linkActive:hover {
+  color: var(--color-primary-default);
+}
+
+.linkLabel {
+  display: inline;
+}
+
+.dropdownMark {
+  display: inline-block;
+  font-size: var(--font-size-body-sm);
+  line-height: 1;
+}

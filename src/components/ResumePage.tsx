@@ -3,7 +3,8 @@ import { ScrollToTop } from './ScrollToTop';
 import { AnimateIn } from './AnimateIn';
 
 // Set your resume PDF URL here (e.g. "/resume.pdf" if file is in public folder, or a full URL)
-const RESUME_PDF_URL = '/resume.pdf';
+const RESUME_PDF_URL =
+  'https://drive.google.com/file/d/17T5MrPLpxk9qviueThkuLv0GGXuuQdg-/view';
 
 export function ResumePage() {
   const handleCertClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -33,7 +34,7 @@ export function ResumePage() {
             </p>
           </div>
           <a
-            href={"https://drive.google.com/file/d/17T5MrPLpxk9qviueThkuLv0GGXuuQdg-/view"}
+            href={RESUME_PDF_URL}
             download
             target="_blank"
             rel="noopener noreferrer"
@@ -46,7 +47,7 @@ export function ResumePage() {
 
         {/* Mobile Download Button */}
         <a
-          href={"https://drive.google.com/file/d/17T5MrPLpxk9qviueThkuLv0GGXuuQdg-/view"}
+          href={RESUME_PDF_URL}
           download
           target="_blank"
           rel="noopener noreferrer"

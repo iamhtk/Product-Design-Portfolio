@@ -1,0 +1,103 @@
+.root {
+  margin: var(--space-0);
+  font-family: var(--font-family-body);
+  line-height: var(--line-height-body);
+}
+
+.variantBodyXl {
+  font-size: var(--font-size-body-xl);
+}
+
+.variantBodyLg {
+  font-size: var(--font-size-body-lg);
+}
+
+.variantBodyMd {
+  font-size: var(--font-size-body-md);
+}
+
+.variantBodySm {
+  font-size: var(--font-size-body-sm);
+}
+
+.variantBodyXs {
+  font-size: var(--font-size-body-2xs);
+}
+
+.variantCaption {
+  font-size: var(--font-size-body-xs);
+}
+
+.variantLabel {
+  font-size: var(--font-size-body-sm);
+}
+
+.colorDefault {
+  color: var(--text-default-body);
+}
+
+.colorCaption {
+  color: var(--text-default-caption);
+}
+
+.colorPlaceholder {
+  color: var(--text-default-placeholder);
+}
+
+.colorPrimary {
+  color: var(--color-primary-default);
+}
+
+.colorSuccess {
+  color: var(--color-success-default);
+}
+
+.colorError {
+  color: var(--color-error-default);
+}
+
+.colorWarning {
+  color: var(--color-warning-default);
+}
+
+.colorInfo {
+  color: var(--color-information-default);
+}
+
+.colorDisabled {
+  color: var(--color-disabled-default);
+}
+
+.weightRegular {
+  font-weight: var(--font-weight-regular);
+}
+
+.weightMedium {
+  font-weight: var(--font-weight-medium);
+}
+
+.weightSemibold {
+  font-weight: var(--font-weight-semibold);
+}
+
+.weightBold {
+  font-weight: var(--font-weight-bold);
+}
+
+.alignLeft {
+  text-align: left;
+}
+
+.alignCenter {
+  text-align: center;
+}
+
+.alignRight {
+  text-align: right;
+}
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

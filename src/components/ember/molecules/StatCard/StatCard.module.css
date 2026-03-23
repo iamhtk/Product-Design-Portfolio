@@ -1,0 +1,130 @@
+.root {
+  position: relative;
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+  padding: var(--space-800);
+  background-color: var(--color-neutral-900);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-card-glow);
+  font-family: var(--font-family-body);
+}
+
+.iconSlot {
+  position: absolute;
+  top: var(--space-800);
+  right: var(--space-800);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--space-1000);
+  height: var(--space-1000);
+}
+
+.valueRow {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: var(--space-200);
+}
+
+.value {
+  margin: var(--space-0);
+  font-size: var(--font-size-h2);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-headings);
+}
+
+.variantPrimary .value {
+  color: var(--color-primary-default);
+}
+
+.variantSuccess .value {
+  color: var(--color-success-default);
+}
+
+.variantInfo .value {
+  color: var(--color-information-default);
+}
+
+.variantWarning .value {
+  color: var(--color-warning-default);
+}
+
+.variantPrimary .iconSlot {
+  color: var(--color-primary-default);
+}
+
+.variantSuccess .iconSlot {
+  color: var(--color-success-default);
+}
+
+.variantInfo .iconSlot {
+  color: var(--color-information-default);
+}
+
+.variantWarning .iconSlot {
+  color: var(--color-warning-default);
+}
+
+.trend {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: var(--space-100);
+}
+
+.trendArrow {
+  font-size: var(--font-size-body-md);
+  line-height: 1;
+}
+
+.trendUp {
+  color: var(--color-success-default);
+}
+
+.trendDown {
+  color: var(--color-error-default);
+}
+
+.trendNeutral {
+  color: var(--text-default-caption);
+}
+
+.trendValue {
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+}
+
+.trendUp .trendValue {
+  color: var(--color-success-default);
+}
+
+.trendDown .trendValue {
+  color: var(--color-error-default);
+}
+
+.trendNeutral .trendValue {
+  color: var(--text-default-caption);
+}
+
+.label {
+  margin: var(--space-0);
+  margin-top: var(--space-200);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-default-caption);
+  overflow-wrap: break-word;
+}
+
+.description {
+  margin: var(--space-0);
+  margin-top: var(--space-300);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-default-caption);
+}

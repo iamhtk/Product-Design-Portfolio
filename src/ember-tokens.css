@@ -1,0 +1,471 @@
+/* ============================================================
+   CWPC Design System — CSS Custom Properties
+   Source of truth for all React components.
+   DO NOT hardcode any value that exists here.
+   ============================================================ */
+
+:root {
+
+  /* ----------------------------------------------------------
+     BRAND COLORS — Orange (Primary)
+  ---------------------------------------------------------- */
+  --color-orange-50:      #FFF0E6;
+  --color-orange-100:     #FFD0B0;
+  --color-orange-200:     #FFB98A;
+  --color-orange-300:     #FF9955;
+  --color-orange-400:     #FF8534;
+  --color-orange-default: #FF6701;
+  --color-orange-600:     #E85E01;
+  --color-orange-700:     #B54901;
+  --color-orange-800:     #8C3901;
+  --color-orange-900:     #6B2B00;
+
+  /* ----------------------------------------------------------
+     BRAND COLORS — Yellow (Secondary)
+  ---------------------------------------------------------- */
+  --color-yellow-50:      #FFF7E7;
+  --color-yellow-100:     #FFE5B4;
+  --color-yellow-200:     #FFD990;
+  --color-yellow-300:     #FFC75D;
+  --color-yellow-400:     #FFBD3D;
+  --color-yellow-default: #FFB020;
+  --color-yellow-600:     #E89D0C;
+  --color-yellow-700:     #B57A09;
+  --color-yellow-800:     #8C5F07;
+  --color-yellow-900:     #6B4805;
+
+  /* ----------------------------------------------------------
+     ALIAS COLORS — Primary (maps to orange)
+  ---------------------------------------------------------- */
+  --color-primary-50:      var(--color-orange-50);
+  --color-primary-100:     var(--color-orange-100);
+  --color-primary-200:     var(--color-orange-200);
+  --color-primary-300:     var(--color-orange-300);
+  --color-primary-400:     var(--color-orange-400);
+  --color-primary-default: var(--color-orange-default);
+  --color-primary-600:     var(--color-orange-600);
+  --color-primary-700:     var(--color-orange-700);
+  --color-primary-800:     var(--color-orange-800);
+  --color-primary-900:     var(--color-orange-900);
+
+  /* ----------------------------------------------------------
+     ALIAS COLORS — Secondary Blue
+  ---------------------------------------------------------- */
+  --color-secondary-blue-50:      #E7F1FF;
+  --color-secondary-blue-100:     #C0D9FF;
+  --color-secondary-blue-200:     #94BFFF;
+  --color-secondary-blue-300:     #6AA5FF;
+  --color-secondary-blue-400:     #4D95FF;
+  --color-secondary-blue-default: #1A78FF;
+  --color-secondary-blue-600:     #1067E8;
+  --color-secondary-blue-700:     #0050B5;
+  --color-secondary-blue-800:     #003D8C;
+  --color-secondary-blue-900:     #002D6B;
+
+  /* ----------------------------------------------------------
+     NEUTRAL
+  ---------------------------------------------------------- */
+  --color-neutral-white:  #FFFFFF;
+  --color-neutral-black:  #000000;
+  --color-neutral-50:     #C4C4C4;
+  --color-neutral-60:     #B6B6B6;
+  --color-neutral-90:     #8D8D8D;
+  --color-neutral-100:    #9B9B9B;
+  --color-neutral-200:    #717171;
+  --color-neutral-450:    #484848;
+  --color-neutral-925:    #F6F6F6;
+  --color-neutral-900:    #121212;
+
+  /* Page / shell surfaces (docs & marketing) */
+  --color-surface-page-dark:  #1B1B1F;
+  --color-surface-page-light: var(--color-neutral-925);
+
+  /* ----------------------------------------------------------
+     SEMANTIC — Text
+  ---------------------------------------------------------- */
+  --text-default-headings:     #FFFFFF;
+  --text-default-body:         #FFFFFF;
+  --text-default-caption:      #B6B6B6;
+  --text-default-placeholder:  #C4C4C4;
+
+  --text-on-color-headings:    #000000;
+  --text-on-color-body:        #000000;
+  --text-on-color-caption:     #B6B6B6;
+  --text-on-color-placeholder: #C4C4C4;
+
+  --text-primary-default:      #FF6701;
+  --text-primary-hover:        #FF8534;
+
+  /* ----------------------------------------------------------
+     SEMANTIC — Interactive
+  ---------------------------------------------------------- */
+  --color-interactive-primary:         #FF6701;
+  --color-interactive-primary-default: var(--color-interactive-primary);
+  --color-interactive-primary-hover:   #FF8534;
+  --color-interactive-primary-active:  #E85E01;
+  --color-interactive-primary-subtle:  #FFF0E6;
+
+  --color-interactive-secondary:       #1A78FF;
+  --color-interactive-secondary-hover: #4D95FF;
+
+  /* ----------------------------------------------------------
+     SEMANTIC — Status
+  ---------------------------------------------------------- */
+  --color-success-default: #65A637;
+  --color-success-hover:   #98C379;
+  --color-success-subtle:  #EEF6E8;
+
+  --color-warning-default: #FFB020;
+  --color-warning-hover:   #FFBD3D;
+  --color-warning-subtle:  #FFF7E7;
+  --color-warning-600:     #E89D0C;
+
+  --color-error-default:        #FF270D;
+  --color-error-hover:          #FF523D;
+  --color-error-focus:          #FF270D;
+  --color-error-on-color:       #FF270D;
+  --color-error-on-color-hover: #991708;
+
+  --color-information-default: #0D72FF;
+  --color-information-hover:   #5DA1FF;
+  --color-information-subtle:  #E7F1FF;
+
+  --color-tertiary-default: #FFAC0D;
+  --color-tertiary-hover:   #FFBD3D;
+
+
+  --color-disabled-default: #8D8D8D;
+  --text-disabled-default:  var(--color-disabled-default);
+  --color-disabled-subtle:  var(--color-neutral-50);
+  --color-disabled-strong:  #9B9B9B;
+  --color-disabled-heavy:   #717171;
+  --color-disabled-surface: #E0E0E0;
+
+  /* ----------------------------------------------------------
+     BORDER WIDTH
+  ---------------------------------------------------------- */
+  --border-width-none: 0px;
+  --border-width-xs:   1px;
+  --border-width-sm:   2px;
+  --border-width-md:   4px;
+  --border-width-lg:   8px;
+
+  /* ----------------------------------------------------------
+     EFFECTS — Component
+  ---------------------------------------------------------- */
+  --shadow-button-pressed-inset: inset -1px -5px 4px rgba(0, 0, 0, 0.6);
+  --shadow-card-glow:            0 0 10px rgba(255, 255, 255, 0.33);
+  --outline-offset-focus:        var(--border-width-md);
+
+  /* ----------------------------------------------------------
+     LAYOUT — Component sizes
+  ---------------------------------------------------------- */
+  --size-card-default-width:       647px;
+  --size-card-hero-image-height:   381px;
+  --size-accordion-collapsed-height: 103px;
+  --size-accordion-expanded-max:   1200px;
+  --duration-accordion:            0.3s;
+  --duration-switch:               0.2s;
+  --duration-link:               0.15s;
+  --duration-loader-spin:        0.8s;
+  --border-width-loader-sm:      3px;
+  --border-width-loader-lg:      5px;
+  --size-switch-track-height:     22px;
+  --size-textarea-min-height:     120px;
+  --size-badge-dot:               6px;
+  --size-progress-circle-sm:      60px;
+  --size-progress-circle-md:      100px;
+  --size-progress-circle-lg:      140px;
+
+  /* Semi-transparent surfaces (progress tracks, table rows) */
+  --color-surface-progress-track: rgba(255, 255, 255, 0.15);
+  --color-table-row-divider:      rgba(255, 255, 255, 0.08);
+  --color-table-row-hover:        rgba(255, 103, 1, 0.05);
+  --color-table-row-striped:      rgba(255, 255, 255, 0.03);
+
+  --border-width-menu-active:     3px;
+  --stroke-progress-circle-md:    6px;
+
+  --duration-progress-bar-width:    0.6s;
+  --duration-progress-circle-offset: 0.8s;
+
+  /* Shell / overlay / marketing chrome */
+  --size-navbar-height:           88px;
+  --width-navbar-logo:            166px;
+  --border-width-marketing-accent: 3px;
+  --color-banner-wildfire-start:  #1a0a00;
+  --color-banner-wildfire-mid:    #3d1a00;
+  --width-banner-content-max:     700px;
+  --width-banner-description-max: 580px;
+  --size-secondary-nav-height:    56px;
+  --z-index-navbar-sticky:        100;
+  --z-index-sticky-bar:           100;
+  --width-design-system-main:     1200px;
+  --z-index-modal-backdrop:       200;
+  --z-index-modal:                210;
+  --z-index-tooltip:              300;
+  --color-footer-divider:         rgba(255, 255, 255, 0.1);
+  --color-backdrop-overlay:       rgba(0, 0, 0, 0.7);
+  --shadow-modal-elevated:        0 0 40px rgba(0, 0, 0, 0.8);
+  --width-modal-sm:               400px;
+  --width-modal-md:               600px;
+  --width-modal-lg:               800px;
+  --color-tooltip-surface:        #1a1a1a;
+  --color-tooltip-border:         rgba(255, 255, 255, 0.12);
+  --color-alert-surface-success:  rgba(101, 166, 55, 0.1);
+  --color-alert-surface-error:    rgba(255, 39, 13, 0.1);
+  --color-alert-surface-warning:  rgba(255, 176, 32, 0.1);
+  --color-alert-surface-info:     rgba(13, 114, 255, 0.1);
+  --duration-tooltip-opacity:     0.15s;
+  --duration-alert-dismiss:       0.2s;
+
+  /* Dropdown, popovers, toasts */
+  --color-dropdown-surface:         #1e1e1e;
+  --shadow-popover-elevated:        0 var(--space-200) var(--space-600) rgba(0, 0, 0, 0.4);
+  --z-index-dropdown:               150;
+  --size-dropdown-max-height:       240px;
+  --color-option-hover-overlay:     rgba(255, 103, 1, 0.08);
+  --color-option-selected-overlay:  rgba(255, 103, 1, 0.12);
+
+  /* Dividers */
+  --color-divider-default:          rgba(255, 255, 255, 0.1);
+  --color-divider-subtle:           rgba(255, 255, 255, 0.05);
+  --color-divider-strong:           rgba(255, 255, 255, 0.2);
+  --letter-spacing-uppercase-wide:  0.08em;
+
+  /* Skeleton */
+  --color-skeleton-base:            rgba(255, 255, 255, 0.08);
+  --color-skeleton-shimmer-mid:     rgba(255, 255, 255, 0.15);
+  --duration-skeleton-shimmer:      1.5s;
+  --size-skeleton-rect-height:      120px;
+  --size-skeleton-card-height:      200px;
+
+  /* Avatar */
+  --size-avatar-xl:                 80px;
+  --size-avatar-status-dot:         10px;
+  --size-social-button-xs:          var(--space-700);
+  --margin-avatar-group-overlap:    calc(-1 * var(--space-450));
+
+  /* Molecules — SearchBar / FileUpload */
+  --size-search-bar-height-lg:      52px;
+  --color-file-upload-row-bg:       color-mix(in srgb, var(--color-neutral-white) 4%, transparent);
+  --color-empty-state-icon-tint:    color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+
+  /* FilterBar / DatePicker */
+  --color-filter-chip-border:       var(--color-surface-progress-track);
+  --shadow-datepicker-popover:      0 var(--space-200) var(--space-600) rgba(0, 0, 0, 0.4);
+  --color-calendar-day-hover:       color-mix(in srgb, var(--color-primary-default) 10%, transparent);
+  --width-datepicker-popover:       var(--width-toast-min);
+
+  /* Banner */
+  --size-banner-default-height:     525px;
+  --gradient-banner-overlay:        linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0.7)
+  );
+  --gradient-banner-fallback-bg:    linear-gradient(
+    135deg,
+    var(--color-primary-800),
+    var(--color-neutral-900)
+  );
+  --gradient-banner-wildfire:       linear-gradient(
+    135deg,
+    var(--color-banner-wildfire-start) 0%,
+    var(--color-banner-wildfire-mid) 30%,
+    var(--color-primary-900) 60%,
+    var(--color-neutral-900) 100%
+  );
+  --gradient-banner-hero-overlay:   linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.3) 60%,
+    rgba(0, 0, 0, 0.1) 100%
+  );
+  --shadow-banner-title:            0 var(--space-50) var(--space-800) rgba(0, 0, 0, 0.5);
+
+  /* Panel */
+  --width-panel-default:            320px;
+  --shadow-panel-from-left:         var(--space-200) var(--space-0) var(--space-800) rgba(0, 0, 0, 0.6);
+  --shadow-panel-from-right:        calc(-1 * var(--space-200)) var(--space-0) var(--space-800) rgba(0, 0, 0, 0.6);
+  --color-backdrop-panel:           rgba(0, 0, 0, 0.5);
+  --duration-panel-slide:           0.3s;
+  --z-index-panel-backdrop:         199;
+  --z-index-panel:                  200;
+
+  /* VideoPlayer */
+  --gradient-video-controls:      linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+  --color-video-play-surface:       color-mix(in srgb, var(--color-primary-default) 90%, transparent);
+  --size-video-control-icon:        var(--space-500);
+  --size-video-play-button:         var(--space-1000);
+
+  /* Toast */
+  --z-index-toast:                  400;
+  --width-toast-min:                280px;
+  --width-toast-max:                380px;
+  --offset-toast-edge:              var(--space-400);
+  --duration-toast-motion:          var(--duration-link);
+
+  /* ----------------------------------------------------------
+     BORDER RADIUS
+  ---------------------------------------------------------- */
+  --border-radius-none: 0px;
+  --border-radius-xs:   1px;
+  --border-radius-sm:   2px;
+  --border-radius-md:   4px;
+  --border-radius-lg:   8px;
+  --border-radius-pill: 50px;
+
+  /* ----------------------------------------------------------
+     SPACING SCALE
+  ---------------------------------------------------------- */
+  --space-0:    0px;
+  --space-25:   1px;
+  --space-50:   2px;
+  --space-100:  4px;
+  --space-200:  8px;
+  --space-300:  12px;
+  --space-400:  16px;
+  --space-450:  10px;
+  --space-500:  20px;
+  --space-600:  24px;
+  --space-700:  28px;
+  --space-800:  32px;
+  --space-900:  36px;
+  --space-1000: 40px;
+  --space-1100: 44px;
+  --space-1200: 48px;
+  --space-1300: 56px;
+  --space-1400: 64px;
+  --space-1500: 72px;
+  --space-1600: 96px;
+  --space-1700: 128px;
+  --space-1800: 256px;
+  --space-1900: 512px;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — Font Family
+  ---------------------------------------------------------- */
+  --font-family-body: 'Work Sans', sans-serif;
+  --font-family-headings: 'Work Sans', sans-serif;
+  --font-family-code: 'Courier New', Courier, monospace;
+
+  /* Compact body (forms hint / tight UI text) */
+  --font-size-body-2xs: 11.1px;
+
+  /* Code & rating atoms */
+  --color-code-block-surface:     #111111;
+  --color-code-inline-bg:         rgba(255, 255, 255, 0.08);
+  --padding-code-inline-x:        6px;
+  --color-rating-star-empty:      rgba(255, 255, 255, 0.2);
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — Font Size (Desktop 1440px)
+  ---------------------------------------------------------- */
+  --font-size-h1:      47.8px;
+  --font-size-h2:      39.8px;
+  --font-size-h3:      33.2px;
+  --font-size-h4:      27.6px;
+  --font-size-h5:      23.0px;
+  --font-size-h6:      19.2px;
+  --font-size-body-xl: 20px;
+  --font-size-body-lg: 18px;
+  --font-size-body-md: 16px;
+  --font-size-body-sm: 14px;
+  --font-size-body-xs: 12px;
+  --font-size-forms-title: 40px;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — Line Height
+  ---------------------------------------------------------- */
+  --line-height-headings: 130%;
+  --line-height-body:     150%;
+
+  /* ----------------------------------------------------------
+     TYPOGRAPHY — Font Weight
+  ---------------------------------------------------------- */
+  --font-weight-light:      300;
+  --font-weight-regular:    400;
+  --font-weight-medium:     500;
+  --font-weight-semibold:   600;
+  --font-weight-bold:       700;
+  --font-weight-extrabold:  800;
+  --font-weight-black:      900;
+
+  /* ----------------------------------------------------------
+     BREAKPOINTS
+  ---------------------------------------------------------- */
+  --breakpoint-desktop: 1440px;
+  --breakpoint-grid-md: 768px;
+  --breakpoint-grid-lg: 1024px;
+
+  /* ScrollToTop */
+  --size-scroll-to-top-button:      var(--space-1100);
+  --font-size-scroll-to-top-arrow: var(--space-500);
+  --offset-scroll-to-top-edge:      var(--space-400);
+  --offset-scroll-to-top-bottom:    80px;
+  --threshold-scroll-to-top:      300px;
+  --shadow-scroll-to-top:           0 var(--space-100) var(--space-300) rgba(0, 0, 0, 0.3);
+  --duration-scroll-to-top:         0.2s;
+  --scale-scroll-to-top-hidden:     0.8;
+  --scale-scroll-to-top-hover:      1.05;
+  --z-index-scroll-to-top:          150;
+
+  /* StickyBar */
+  --color-sticky-bar-bg:            color-mix(
+    in srgb,
+    var(--color-neutral-black) 90%,
+    transparent
+  );
+  --blur-sticky-bar:                10px;
+
+  /* Error / success full-page */
+  --font-size-error-code-display:   120px;
+  --width-content-readable:         480px;
+  --duration-success-icon-pop:      0.55s;
+
+  /* Image, List, MapPin, ContextMenu, Popover */
+  --color-image-error-surface:           var(--color-neutral-450);
+  --color-list-row-hover:                color-mix(
+    in srgb,
+    var(--color-neutral-white) 4%,
+    transparent
+  );
+  --color-context-menu-item-hover:       color-mix(
+    in srgb,
+    var(--color-neutral-white) 6%,
+    transparent
+  );
+  --color-context-menu-destructive-hover: rgba(255, 39, 13, 0.08);
+  --padding-context-menu-item-y:         var(--space-450);
+  --width-context-menu-min:              180px;
+  --width-popover-default:               var(--width-toast-min);
+  --color-mappin-label-bg:               rgba(0, 0, 0, 0.7);
+  --z-index-popover:                     210;
+  --scale-mappin-hover:                  1.1;
+  --scale-mappin-active:                 1.2;
+  --size-popover-arrow:                  var(--space-200);
+  --shadow-overlay-floating:             0 var(--space-200) var(--space-600) rgba(0, 0, 0, 0.4);
+
+  /* ProfileCard, VideoCard, NotificationBar, RegistrationModal, SubscribeWidget */
+  --shadow-profile-card:                0 0 10px rgba(255, 255, 255, 0.1);
+  --width-profile-card-compact:         500px;
+  --width-profile-card-full:            700px;
+  --width-company-logo-max:             80px;
+  --size-linkedin-badge:                var(--space-500);
+  --size-avatar-presenter:              var(--space-700);
+  --color-video-play-overlay:         color-mix(
+    in srgb,
+    var(--color-primary-default) 90%,
+    transparent
+  );
+  --color-duration-badge-bg:           var(--color-mappin-label-bg);
+  --size-notification-bar-height:       var(--space-1000);
+  --z-index-notification-bar:          110;
+  --shadow-registration-modal:         0 var(--space-200) var(--space-800) rgba(0, 0, 0, 0.2);
+  --color-modal-light-close:           #333333;
+  --color-border-input-light:          #cccccc;
+  --color-surface-subscribe-input-light: #f5f5f5;
+  --color-notification-error-text:     var(--text-default-headings);
+
+}

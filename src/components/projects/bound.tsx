@@ -67,12 +67,11 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
   const headerColor = '#FF6B9D';
   const progressBarColor = '#E85A8A';
   const arrowColor = '#FF6B9D';
-  const icon = ''; // Sidebar icon (left column) - Add image/video path here
-  const headerIcon = ''; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
+  const icon: string = ''; // Sidebar icon (left column) - Add image/video path here
+  const headerIcon: string = ''; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Design Intern';
   const team = 'Nina Patel, Chris Anderson, Jamie Liu';
   const when = 'Summer 2022';
-  const overview = 'Gfycat is a platform for discovering and sharing short video clips and GIFs. I worked on improving the mobile browsing experience and search functionality.';
   const speedReadChallenge = 'Making GIF and short-video discovery more intuitive and personalized on Gfycat; improving mobile browsing and search.';
   const speedReadProcess = 'Mobile-first redesign for touch and vertical scrolling; smart categorization and trending sections; context-aware suggestions.';
   const speedReadTakeaways = 'Designing for discovery when users don\'t know exactly what they want; balancing mobile and desktop; measuring engagement.';
@@ -104,33 +103,6 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
   // ═══════════════════════════════════════════════════════════════════════
   // DISPLAY CODE BELOW - Don't edit unless you know what you're doing
   // ═══════════════════════════════════════════════════════════════════════
-
-  // Helper function to render icon (image or video)
-  const renderIcon = (iconPath: string, size: 'large' | 'small') => {
-    if (!iconPath) return null;
-    
-    const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
-    const sizeClasses = size === 'large' 
-      ? 'w-[120px] h-[120px] md:w-[180px] md:h-[180px] object-contain' 
-      : 'max-w-[48px] max-h-[48px] w-auto h-auto object-contain';
-    
-    if (isVideo) {
-      return (
-        <video 
-          src={iconPath} 
-          className={sizeClasses}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      );
-    }
-    
-    return (
-      <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
-    );
-  };
 
   return (
     <div className="min-h-screen bg-white">

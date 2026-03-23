@@ -1,3 +1,5 @@
+@import './ember-tokens.css';
+
 /*! tailwindcss v4.1.3 | MIT License | https://tailwindcss.com */
 
 /* System font stack: SF Pro (Apple), Segoe UI (Windows), Roboto (Android), system fallbacks */
@@ -1999,4 +2001,135 @@ html {
   syntax: "*";
   inherits: false;
   initial-value: 1;
+}
+
+/*
+ * CWPC grids: minmax(0, 1fr) lets tracks shrink below content intrinsic min-width
+ * (default 1fr = minmax(auto, 1fr) and overflows nested flex/grid children).
+ */
+.cwpc-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+.cwpc-grid-3 {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+.cwpc-grid-4 {
+  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.cwpc-grid-2 > *,
+.cwpc-grid-3 > *,
+.cwpc-grid-4 > * {
+  min-width: 0;
+}
+
+.cwpc-molecule-demo {
+  box-sizing: border-box;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.cwpc-pagination-scroll {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 4px;
+}
+
+/* CWPC case study mobile responsiveness */
+@media (max-width: 768px) {
+  .cwpc-grid-3 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .cwpc-grid-2 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .cwpc-grid-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  }
+
+  .cwpc-molecule-demo {
+    padding: 16px 14px !important;
+  }
+
+  .cwpc-tabbar-demo-header {
+    padding-left: 14px !important;
+    padding-right: 14px !important;
+  }
+
+  .cwpc-tabbar-demo-panel {
+    padding: 16px 14px !important;
+  }
+  .cwpc-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cwpc-token-pipeline {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .cwpc-token-pipeline .arrow {
+    transform: rotate(90deg);
+  }
+  .cwpc-section-block {
+    margin-bottom: 56px !important;
+    padding-top: 8px !important;
+  }
+  .cwpc-section-divider {
+    margin-bottom: 48px !important;
+  }
+  .cwpc-live-showcase {
+    padding: 24px 16px !important;
+    border-radius: 14px !important;
+  }
+  .cwpc-case-study-inner pre {
+    box-sizing: border-box;
+    max-width: 100%;
+    font-size: 12px;
+    padding: 16px !important;
+  }
+  .cwpc-impact-quote {
+    padding: 28px 20px !important;
+  }
+  .cwpc-principle-card {
+    padding: 24px 20px !important;
+  }
+  .cwpc-button-group-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+
+  .cwpc-demo-surface {
+    padding: 18px 14px !important;
+  }
+
+  .cwpc-stepper-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 6px;
+    margin-inline: -4px;
+    padding-inline: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cwpc-grid-4 {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .cwpc-case-study-inner .cwpc-demo-surface {
+    padding: 16px 12px !important;
+  }
+
+  .cwpc-case-study-inner .cwpc-molecule-demo {
+    padding: 14px 12px !important;
+  }
+}
+
+/* Prevent media and embeds from forcing horizontal scroll inside the case study */
+.cwpc-case-study-inner img,
+.cwpc-case-study-inner video {
+  max-width: 100%;
+  height: auto;
 }

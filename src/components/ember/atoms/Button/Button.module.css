@@ -1,0 +1,138 @@
+.root {
+  --btn-accent: var(--color-primary-default);
+  --btn-accent-hover: var(--color-interactive-primary-hover);
+  --btn-accent-active: var(--color-interactive-primary-active);
+  --btn-ring: var(--color-primary-default);
+
+  position: relative;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-450);
+  margin: 0;
+  padding: var(--space-400) var(--space-600);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-headings);
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--border-radius-pill);
+  border-style: solid;
+  cursor: pointer;
+  appearance: none;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-h6);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-headings);
+}
+
+.root:focus {
+  outline: none;
+}
+
+.schemeSuccess {
+  --btn-accent: var(--color-success-default);
+  --btn-accent-hover: var(--color-success-hover);
+  --btn-accent-active: color-mix(in srgb, var(--color-success-default) 82%, var(--color-neutral-black));
+  --btn-ring: var(--color-success-default);
+}
+
+.schemeInformation {
+  --btn-accent: var(--color-information-default);
+  --btn-accent-hover: var(--color-information-hover);
+  --btn-accent-active: color-mix(in srgb, var(--color-information-default) 82%, var(--color-neutral-black));
+  --btn-ring: var(--color-information-default);
+}
+
+.iconSlot {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--font-size-body-xl);
+  height: var(--font-size-body-xl);
+}
+
+.iconSlot > * {
+  width: 100%;
+  height: 100%;
+}
+
+.label {
+  white-space: nowrap;
+}
+
+/* —— Type: default (filled) —— */
+.typeDefault {
+  background-color: var(--btn-accent);
+  color: var(--text-on-color-body);
+  border-width: var(--border-width-xs);
+  border-color: var(--btn-accent-hover);
+}
+
+.typeDefault.interactive:hover:not(:disabled),
+.typeDefault.forceHover:not(:disabled) {
+  background-color: var(--btn-accent-hover);
+}
+
+.typeDefault.interactive:active:not(:disabled),
+.typeDefault.forcePressed:not(:disabled) {
+  background-color: var(--btn-accent-active);
+  box-shadow: var(--shadow-button-pressed-inset);
+}
+
+/* —— Type: outlined —— */
+.typeOutlined {
+  background-color: var(--color-neutral-white);
+  color: var(--btn-accent);
+  border-width: var(--border-width-xs);
+  border-color: var(--btn-accent);
+}
+
+.typeOutlined.interactive:hover:not(:disabled),
+.typeOutlined.forceHover:not(:disabled),
+.typeOutlined.interactive:active:not(:disabled),
+.typeOutlined.forcePressed:not(:disabled) {
+  border-color: var(--btn-accent-hover);
+}
+
+/* —— Type: transparent —— */
+.typeTransparent {
+  background-color: transparent;
+  color: var(--btn-accent);
+  border-width: var(--border-width-xs);
+  border-color: transparent;
+}
+
+.typeTransparent.interactive:hover:not(:disabled),
+.typeTransparent.forceHover:not(:disabled),
+.typeTransparent.interactive:active:not(:disabled),
+.typeTransparent.forcePressed:not(:disabled) {
+  border-color: var(--btn-accent-hover);
+}
+
+.typeTransparent.interactive:focus-visible:not(:disabled),
+.typeTransparent.forceFocus:not(:disabled) {
+  border-color: var(--btn-accent);
+}
+
+/* —— Focus ring (all types) —— */
+.interactive:focus-visible:not(:disabled),
+.forceFocus:not(:disabled) {
+  outline: var(--border-width-sm) solid var(--btn-ring);
+  outline-offset: var(--outline-offset-focus);
+}
+
+/* —— Disabled —— */
+.root:disabled {
+  background-color: var(--color-disabled-surface);
+  border-color: var(--color-disabled-default);
+  border-width: var(--border-width-xs);
+  border-style: solid;
+  color: var(--color-disabled-default);
+  cursor: not-allowed;
+  box-shadow: none;
+  outline: none;
+}

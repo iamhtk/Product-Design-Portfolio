@@ -1,0 +1,86 @@
+.root {
+  box-sizing: border-box;
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-200);
+  max-width: 100%;
+  padding: var(--space-50) var(--space-300);
+  border-width: var(--border-width-xs);
+  border-style: solid;
+  border-radius: var(--border-radius-pill);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-body);
+  transition: background-color var(--duration-link) ease;
+}
+
+.variantDefault {
+  background-color: var(--color-interactive-primary-subtle);
+  border-color: var(--color-primary-default);
+  color: var(--text-primary-default);
+}
+
+.variantDefault:hover:not(.disabled) {
+  background-color: color-mix(
+    in srgb,
+    var(--color-interactive-primary-subtle) 88%,
+    var(--color-neutral-black)
+  );
+}
+
+.variantPrimary {
+  background-color: var(--color-primary-default);
+  border-color: var(--color-primary-default);
+  color: var(--text-on-color-body);
+}
+
+.variantPrimary:hover:not(.disabled) {
+  background-color: color-mix(
+    in srgb,
+    var(--color-primary-default) 90%,
+    var(--color-neutral-black)
+  );
+}
+
+.variantSuccess {
+  background-color: var(--color-success-subtle);
+  border-color: var(--color-success-default);
+  color: var(--color-success-default);
+}
+
+.variantSuccess:hover:not(.disabled) {
+  background-color: color-mix(
+    in srgb,
+    var(--color-success-subtle) 88%,
+    var(--color-neutral-black)
+  );
+}
+
+.remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--font-size-body-md);
+  height: var(--font-size-body-md);
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  line-height: 1;
+  color: inherit;
+  cursor: pointer;
+  background: none;
+  border: none;
+}
+
+.remove:focus-visible {
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-50);
+}
+
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+  pointer-events: none;
+}

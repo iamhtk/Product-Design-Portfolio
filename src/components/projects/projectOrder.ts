@@ -17,7 +17,7 @@ export const PROJECT_ORDER: { id: string; title: string }[] = [
 // Set to true = clickable; false = tile still visible but not clickable.
 // ═══════════════════════════════════════════════════════════════════════════
 export const PROJECT_ENABLED: Record<string, boolean> = {
-  CWPC: false,
+  CWPC: true,
   AutomotiveUX_GM: true,
   RaseetHealth: true,
   BMW: true,

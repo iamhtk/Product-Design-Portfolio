@@ -1,0 +1,101 @@
+.root {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-200);
+  width: 100%;
+  padding: var(--space-200) var(--space-300);
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: var(--text-on-color-body);
+  background-color: var(--color-neutral-white);
+  border-width: var(--border-width-xs);
+  border-style: solid;
+  border-color: var(--color-disabled-subtle);
+  border-radius: var(--border-radius-md);
+}
+
+.root:focus-within {
+  outline: none;
+}
+
+.iconSlot {
+  display: inline-flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: var(--font-size-body-xl);
+  height: var(--font-size-body-xl);
+  color: inherit;
+}
+
+.iconSlot > * {
+  width: 100%;
+  height: 100%;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-md);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+  color: inherit;
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-on-color-placeholder);
+}
+
+.input:disabled {
+  cursor: not-allowed;
+}
+
+/* Hover (interactive only) */
+.interactive:hover:not(:focus-within) {
+  background-color: var(--color-primary-100);
+  border-color: var(--color-primary-default);
+}
+
+.forceHover {
+  background-color: var(--color-primary-100);
+  border-color: var(--color-primary-default);
+}
+
+/* Focus ring on wrapper */
+.interactive:focus-within,
+.forceFocus {
+  background-color: var(--color-neutral-white);
+  border-color: var(--color-disabled-subtle);
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-50);
+}
+
+.statusError {
+  border-color: var(--color-error-default);
+}
+
+.statusError.forceFocus,
+.statusError:focus-within {
+  border-color: var(--color-error-default);
+}
+
+.statusDisabled {
+  background-color: var(--color-disabled-surface);
+  border-color: var(--color-disabled-heavy);
+  color: var(--color-disabled-default);
+  cursor: not-allowed;
+}
+
+.statusDisabled .input::placeholder {
+  color: var(--color-disabled-default);
+}

@@ -1,0 +1,73 @@
+.root {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-100);
+}
+
+.stars {
+  display: inline-flex;
+  gap: var(--space-100);
+  margin: var(--space-0);
+  padding: var(--space-0);
+  list-style: none;
+}
+
+.starBtn {
+  margin: var(--space-0);
+  padding: var(--space-0);
+  border: none;
+  background: none;
+  font: inherit;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.starBtn:focus {
+  outline: none;
+}
+
+.starBtn:focus-visible {
+  outline: var(--border-width-sm) solid var(--color-primary-default);
+  outline-offset: var(--space-100);
+  border-radius: var(--border-radius-sm);
+}
+
+.starBtn:disabled {
+  cursor: default;
+}
+
+.star {
+  display: block;
+}
+
+.sizeSm .star {
+  font-size: var(--space-400);
+}
+
+.sizeMd .star {
+  font-size: var(--space-600);
+}
+
+.sizeLg .star {
+  font-size: var(--space-800);
+}
+
+.filled {
+  color: var(--color-tertiary-default);
+}
+
+.filledHover {
+  color: var(--color-warning-hover);
+}
+
+.empty {
+  color: var(--color-rating-star-empty);
+}
+
+.valueLabel {
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-xs);
+  color: var(--text-default-caption);
+  white-space: nowrap;
+}

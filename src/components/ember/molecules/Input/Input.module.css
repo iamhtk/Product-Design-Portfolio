@@ -1,0 +1,26 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+.hint,
+.error {
+  margin: 0;
+  font-family: var(--font-family-body);
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-body);
+}
+
+.hint {
+  color: var(--text-default-caption);
+}
+
+.error {
+  color: var(--color-error-default);
+}

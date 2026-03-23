@@ -67,12 +67,11 @@ export function WeddingBlissProject({ onBack, onProjectClick }: WeddingBlissProj
   const headerColor = '#A2C4E0';
   const progressBarColor = '#7BA8C9';
   const arrowColor = '#A2C4E0';
-  const icon = ''; // Sidebar icon (left column) - Add image/video path here
-  const headerIcon = ''; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
+  const icon: string = ''; // Sidebar icon (left column) - Add image/video path here
+  const headerIcon: string = ''; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Product Design Intern';
   const team = 'Rachel Kim, Tom Chen, Sarah Zhang';
   const when = 'Summer 2024';
-  const overview = 'During my internship at Apple, I contributed to product design explorations for a confidential project. This work involved collaborating with engineers, designers, and HCI researchers.';
   const speedReadChallenge = 'Contributing to product design explorations for a confidential project at Apple.';
   const speedReadProcess = 'Collaborating with engineers, designers, and HCI researchers; daily stand-ups, design critiques, and prototyping sessions; experimentation and learning encouraged.';
   const speedReadTakeaways = 'Learning Apple\'s design process; working with cross-functional teams; contributing to products used by millions.';
@@ -104,33 +103,6 @@ export function WeddingBlissProject({ onBack, onProjectClick }: WeddingBlissProj
   // ═══════════════════════════════════════════════════════════════════════
   // DISPLAY CODE BELOW - Don't edit unless you know what you're doing
   // ═══════════════════════════════════════════════════════════════════════
-
-  // Helper function to render icon (image or video)
-  const renderIcon = (iconPath: string, size: 'large' | 'small') => {
-    if (!iconPath) return null;
-    
-    const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
-    const sizeClasses = size === 'large' 
-      ? 'w-[120px] h-[120px] md:w-[180px] md:h-[180px] object-contain' 
-      : 'max-w-[48px] max-h-[48px] w-auto h-auto object-contain';
-    
-    if (isVideo) {
-      return (
-        <video 
-          src={iconPath} 
-          className={sizeClasses}
-          autoPlay
-          loop
-          muted
-          playsInline
-        />
-      );
-    }
-    
-    return (
-      <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
-    );
-  };
 
   return (
     <div className="min-h-screen bg-white">

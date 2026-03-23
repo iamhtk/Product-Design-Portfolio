@@ -1,0 +1,82 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-200);
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  font-family: var(--font-family-body);
+}
+
+.label {
+  font-size: var(--font-size-body-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-default-body);
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-300);
+  min-width: 0;
+}
+
+.track {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  background-color: var(--color-surface-progress-track);
+  border-radius: var(--border-radius-pill);
+}
+
+.trackSm {
+  height: var(--space-100);
+}
+
+.trackMd {
+  height: var(--space-200);
+}
+
+.trackLg {
+  height: var(--space-300);
+}
+
+.fill {
+  height: 100%;
+  border-radius: var(--border-radius-pill);
+  width: 0;
+}
+
+.fillAnimated {
+  transition: width var(--duration-progress-bar-width) ease-in-out;
+}
+
+.variantPrimary {
+  background-color: var(--color-primary-default);
+}
+
+.variantSuccess {
+  background-color: var(--color-success-default);
+}
+
+.variantWarning {
+  background-color: var(--color-warning-default);
+}
+
+.variantError {
+  background-color: var(--color-error-default);
+}
+
+.variantInfo {
+  background-color: var(--color-information-default);
+}
+
+.valueText {
+  flex-shrink: 0;
+  font-size: var(--font-size-body-xs);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-default-caption);
+}
