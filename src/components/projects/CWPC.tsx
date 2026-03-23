@@ -3593,9 +3593,36 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   fontSize: '14px',
                   fontWeight: 700,
                   textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  boxSizing: 'border-box',
                 }}
               >
                 Open Ember Docs →
+              </a>
+              <a
+                href="https://ember.cwpc.hrithiksanyal.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: '12px 28px',
+                  background: 'transparent',
+                  color: '#F5F5F7',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '50px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  boxSizing: 'border-box',
+                }}
+              >
+                View Component Showcase →
               </a>
               <a
                 href="#"
@@ -3610,6 +3637,11 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   fontSize: '14px',
                   fontWeight: 600,
                   textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  boxSizing: 'border-box',
                 }}
               >
                 View Figma File
@@ -4242,6 +4274,55 @@ import { Card } from './components/ember/organisms/Card/Card'
             </div>
           ))}
         </div>
+        <div
+          style={{
+            display: 'flex',
+            gap: '16px',
+            flexWrap: 'wrap',
+            marginBottom: '24px',
+          }}
+        >
+          <a
+            href="https://ember.cwpc.hrithiksanyal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '10px 20px',
+              borderRadius: '8px',
+              background: 'rgba(255,103,1,0.1)',
+              border: '1px solid rgba(255,103,1,0.25)',
+              color: '#FF6701',
+              fontSize: '13px',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
+          >
+            🔥 Live Component Showcase
+          </a>
+          <a
+            href="https://ember-docs.cwpc.hrithiksanyal.com/docs"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: '8px',
+              padding: '10px 20px',
+              borderRadius: '8px',
+              background: 'rgba(101,166,55,0.1)',
+              border: '1px solid rgba(101,166,55,0.25)',
+              color: '#65A637',
+              fontSize: '13px',
+              fontWeight: 600,
+              textDecoration: 'none',
+            }}
+          >
+            📖 Ember Docs Site
+          </a>
+        </div>
         <p style={bodyText}>
           Beyond the numbers, Ember changed how CWPC builds. Designers no longer debate which
           button to use. Developers no longer guess at spacing values. New features start from
@@ -4576,6 +4657,48 @@ export function EmberDesignSystemProject({
               <div>
                 <div style={metaLabelStyle}>When</div>
                 <div style={metaValueStyle}>{when}</div>
+              </div>
+              <div>
+                <div
+                  style={{
+                    fontSize: '11px',
+                    color: '#71717A',
+                    textTransform: 'uppercase',
+                    letterSpacing: '0.08em',
+                    marginBottom: '6px',
+                    fontWeight: 600,
+                  }}
+                >
+                  Live Sites
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <a
+                    href="https://ember.cwpc.hrithiksanyal.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: '14px',
+                      color: '#FF6701',
+                      textDecoration: 'none',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Component Showcase ↗
+                  </a>
+                  <a
+                    href="https://ember-docs.cwpc.hrithiksanyal.com/docs"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: '14px',
+                      color: '#FF6701',
+                      textDecoration: 'none',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Ember Docs ↗
+                  </a>
+                </div>
               </div>
             </div>
 
