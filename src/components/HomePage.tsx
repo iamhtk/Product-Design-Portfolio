@@ -41,8 +41,8 @@ export function HomePage({ onProjectClick }: HomePageProps) {
   const projects = [
     {
       id: "CWPC",
-      title: "CWPC: Unifying Interfaces for Speed and Consistency",
-      company: "DESIGN SYSTEM | DOCUMENTATION | UX DESIGN & RESEARCH | ACCESSIBILITY",
+      title: "CWPC: Ember Design System",
+      company: "DESIGN SYSTEM | REACT + TYPESCRIPT | 68 COMPONENTS | DOCUMENTATION",
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
       image: "/main_title/main_cwpc.png",
