@@ -3625,6 +3625,28 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 View Component Showcase →
               </a>
               <a
+                href="https://prism-cwpc-storybook.pages.dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  padding: '12px 28px',
+                  background: 'transparent',
+                  color: '#F5F5F7',
+                  border: '1px solid rgba(255,255,255,0.2)',
+                  borderRadius: '50px',
+                  fontSize: '14px',
+                  fontWeight: 600,
+                  textDecoration: 'none',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  flexShrink: 0,
+                  boxSizing: 'border-box',
+                }}
+              >
+                View Storybook →
+              </a>
+              <a
                 href="#"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -4718,6 +4740,19 @@ export function EmberDesignSystemProject({
                     }}
                   >
                     Prism Docs ↗
+                  </a>
+                  <a
+                    href="https://prism-cwpc-storybook.pages.dev/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    style={{
+                      fontSize: '14px',
+                      color: '#FF6701',
+                      textDecoration: 'none',
+                      fontWeight: 600,
+                    }}
+                  >
+                    Storybook ↗
                   </a>
                 </div>
               </div>
