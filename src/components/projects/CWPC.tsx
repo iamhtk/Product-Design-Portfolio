@@ -1,20 +1,20 @@
 import React, { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
-import { Button } from '../ember/atoms/Button/Button';
-import { Badge } from '../ember/atoms/Badge/Badge';
-import { Avatar } from '../ember/atoms/Avatar/Avatar';
-import { Rating } from '../ember/atoms/Rating/Rating';
-import { Loader } from '../ember/atoms/Loader/Loader';
-import { Input } from '../ember/molecules/Input/Input';
-import { ProgressBar } from '../ember/molecules/ProgressBar/ProgressBar';
-import { TabBar } from '../ember/molecules/TabBar/TabBar';
-import { Stepper } from '../ember/molecules/Stepper/Stepper';
-import { StatCard } from '../ember/molecules/StatCard/StatCard';
-import { Card } from '../ember/organisms/Card/Card';
-import { AccordionItem } from '../ember/organisms/AccordionItem/AccordionItem';
-import { Alert } from '../ember/organisms/Alert/Alert';
-import { Navbar } from '../ember/organisms/Navbar/Navbar';
+import { Button } from '../prism/atoms/Button/Button';
+import { Badge } from '../prism/atoms/Badge/Badge';
+import { Avatar } from '../prism/atoms/Avatar/Avatar';
+import { Rating } from '../prism/atoms/Rating/Rating';
+import { Loader } from '../prism/atoms/Loader/Loader';
+import { Input } from '../prism/molecules/Input/Input';
+import { ProgressBar } from '../prism/molecules/ProgressBar/ProgressBar';
+import { TabBar } from '../prism/molecules/TabBar/TabBar';
+import { Stepper } from '../prism/molecules/Stepper/Stepper';
+import { StatCard } from '../prism/molecules/StatCard/StatCard';
+import { Card } from '../prism/organisms/Card/Card';
+import { AccordionItem } from '../prism/organisms/AccordionItem/AccordionItem';
+import { Alert } from '../prism/organisms/Alert/Alert';
+import { Navbar } from '../prism/organisms/Navbar/Navbar';
 import { ScrollToTop } from '../ScrollToTop';
 import { ExploreMoreSection } from './ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
@@ -777,7 +777,7 @@ function StepperDemo() {
     { label: 'Atoms', description: '17 base components' },
     { label: 'Molecules', description: '26 composite components' },
     { label: 'Organisms', description: '20 page patterns' },
-    { label: 'Ember Docs', description: 'Interactive documentation' },
+    { label: 'Prism Docs', description: 'Interactive documentation' },
   ];
   return (
     <div
@@ -1454,7 +1454,7 @@ function CaseStudyContent() {
         </p>
         <p style={{ ...bodyText, marginTop: '20px' }}>
           That&apos;s not a hypothetical. That&apos;s what poor design costs in this domain. I built
-          Ember because emergency tools have zero tolerance for confusion — and the existing CWPC
+          Prism because emergency tools have zero tolerance for confusion — and the existing CWPC
           product was full of it.
         </p>
       </div>
@@ -1479,7 +1479,7 @@ function CaseStudyContent() {
             {
               number: '01',
               title: 'Accessibility is not a feature',
-              body: 'WCAG AA compliance is the floor, not the ceiling. If a component fails contrast, keyboard nav, or ARIA requirements, it does not exist in Ember. Emergency tools serve people in crisis — this is non-negotiable.',
+              body: 'WCAG AA compliance is the floor, not the ceiling. If a component fails contrast, keyboard nav, or ARIA requirements, it does not exist in Prism. Emergency tools serve people in crisis — this is non-negotiable.',
               color: '#FF6701',
               icon: '♿',
             },
@@ -1493,7 +1493,7 @@ function CaseStudyContent() {
             {
               number: '03',
               title: 'Documentation is the product',
-              body: "A component library without documentation is just code. Ember ships every component with interactive controls, usage guidelines, Do's and Don'ts, and accessibility notes. The docs site IS the design system.",
+              body: "A component library without documentation is just code. Prism ships every component with interactive controls, usage guidelines, Do's and Don'ts, and accessibility notes. The docs site IS the design system.",
               color: '#65A637',
               icon: '📖',
             },
@@ -1770,7 +1770,7 @@ function CaseStudyContent() {
             FIGMA AUDIT: BEFORE STATE
           </p>
           <E.PlaceholderImage
-            label="UI Audit: Before Ember"
+            label="UI Audit: Before Prism"
             height="280px"
             note="Replace with: Screenshot from Figma showing 5 inconsistent button styles found across CWPC products"
           />
@@ -1834,7 +1834,7 @@ function CaseStudyContent() {
               },
               {
                 date: '2025 Q4',
-                title: '✨ Ember Docs Site',
+                title: '✨ Prism Docs Site',
                 points: ['Storybook-style docs', 'Interactive controls', '68 components live'],
                 highlight: 'The system ships',
                 color: '#FF6701',
@@ -2709,7 +2709,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
         </p>
         <h2 style={sectionHeading}>The raw materials</h2>
         <p style={bodyText}>
-          17 atoms form the foundation of Ember. Each fully documented with interactive controls,
+          17 atoms form the foundation of Prism. Each fully documented with interactive controls,
           all states, code examples, props, Do&apos;s and Don&apos;ts, and accessibility notes.
         </p>
         <div
@@ -3418,7 +3418,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
         </p>
         <h2 style={sectionHeading}>Components without docs are just code</h2>
         <p style={bodyText}>
-          I built Ember: a full Storybook-style documentation site. Every component has
+          I built Prism: a full Storybook-style documentation site. Every component has
           interactive controls, per-variant code, props table, Do&apos;s and Don&apos;ts, and
           accessibility notes.
         </p>
@@ -3502,10 +3502,10 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 marginBottom: '12px',
               }}
             >
-              EMBER DOCS: INTRODUCTION
+              PRISM DOCS: INTRODUCTION
             </p>
             <E.PlaceholderImage
-              label="Ember Docs Introduction Page"
+              label="Prism Docs Introduction Page"
               height="220px"
               note="Replace with: Screenshot of localhost:5179/docs Introduction page"
             />
@@ -3521,10 +3521,10 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 marginBottom: '12px',
               }}
             >
-              EMBER DOCS: BUTTON PAGE
+              PRISM DOCS: BUTTON PAGE
             </p>
             <E.PlaceholderImage
-              label="Ember Button Docs with Controls"
+              label="Prism Button Docs with Controls"
               height="220px"
               note="Replace with: Screenshot of localhost:5179/docs/atoms/button with controls visible"
             />
@@ -3559,7 +3559,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 marginBottom: '16px',
               }}
             >
-              EXPLORE EMBER
+              EXPLORE PRISM
             </div>
             <div
               style={{
@@ -3582,7 +3582,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}
             >
               <a
-                href="https://ember.cwpc.hrithiksanyal.com/docs"
+                href="https://prism.cwpc.hrithiksanyal.com/docs"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -3600,10 +3600,10 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   boxSizing: 'border-box',
                 }}
               >
-                Open Ember Docs →
+                Open Prism Docs →
               </a>
               <a
-                href="https://ember.cwpc.hrithiksanyal.com"
+                href="https://prism.cwpc.hrithiksanyal.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{
@@ -3658,7 +3658,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
         </p>
         <h2 style={sectionHeading}>Designing for the person in the smoke</h2>
         <p style={bodyText}>
-          WCAG AA compliance is the baseline below which no Ember component ships. Emergency tools
+          WCAG AA compliance is the baseline below which no Prism component ships. Emergency tools
           must work for elderly residents, keyboard users, and anyone making critical decisions
           under pressure.
         </p>
@@ -3913,7 +3913,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
           <E.PlaceholderImage
             label="Accessibility Before / After Comparison"
             height="200px"
-            note="Replace with: Side-by-side showing old CWPC element (2.8:1 FAIL) vs new Ember version (4.8:1 PASS)"
+            note="Replace with: Side-by-side showing old CWPC element (2.8:1 FAIL) vs new Prism version (4.8:1 PASS)"
           />
         </div>
         <div className="cwpc-grid-4" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
@@ -4039,7 +4039,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
         >
           <div style={{ background: '#2D2D2D', padding: '8px 16px' }}>
             <span style={{ fontSize: '11px', color: '#71717A', fontFamily: 'monospace' }}>
-              tsx: using Ember in production
+              tsx — using Prism components in your project
             </span>
           </div>
           <pre
@@ -4052,13 +4052,34 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               lineHeight: 1.8,
               overflowX: 'auto',
             }}
-          >{`import { Button } from './components/ember/atoms/Button/Button'
-import { Input } from './components/ember/molecules/Input/Input'
-import { Card } from './components/ember/organisms/Card/Card'
+          >{`import { Button } from './components/prism/atoms/Button/Button'
+import { Input } from './components/prism/molecules/Input/Input'
+import { Card } from './components/prism/organisms/Card/Card'
 
 <Button label="Download Scorecard" type="default" colorScheme="information" />
 <Input label="Email address" type="email" required hint="We'll send your scorecard here" />
 <Card title="Community Wildfire Resilience" variant="highlighted" />`}</pre>
+          <p
+            style={{
+              fontSize: '12px',
+              color: '#71717A',
+              marginTop: '8px',
+              fontStyle: 'italic',
+            }}
+          >
+            Note: The{' '}
+            <code
+              style={{
+                background: 'rgba(255,255,255,0.08)',
+                padding: '1px 6px',
+                borderRadius: '4px',
+                fontSize: '11px',
+              }}
+            >
+              prism/
+            </code>{' '}
+            folder contains all Prism Design System components
+          </p>
         </div>
         <div style={{ marginBottom: '32px' }}>
           <p
@@ -4086,7 +4107,7 @@ import { Card } from './components/ember/organisms/Card/Card'
           {[
             {
               step: '01',
-              q: 'Does a similar component exist in Ember?',
+              q: 'Does a similar component exist in Prism?',
               yes: 'Use the existing component',
               no: 'Continue to next step',
             },
@@ -4099,7 +4120,7 @@ import { Card } from './components/ember/organisms/Card/Card'
             {
               step: '03',
               q: 'Is this pattern reusable across products?',
-              yes: 'Build it + add to Ember',
+              yes: 'Build it + add to Prism',
               no: 'Build as one-off, review later',
             },
           ].map((item, i) => (
@@ -4180,7 +4201,7 @@ import { Card } from './components/ember/organisms/Card/Card'
           <span style={sectionLabelAccent} />
           IMPACT
         </p>
-        <h2 style={sectionHeading}>What Ember delivered</h2>
+        <h2 style={sectionHeading}>What Prism delivered</h2>
         <div
           className="cwpc-grid-4"
           style={{
@@ -4283,7 +4304,7 @@ import { Card } from './components/ember/organisms/Card/Card'
           }}
         >
           <a
-            href="https://ember.cwpc.hrithiksanyal.com"
+            href="https://prism.cwpc.hrithiksanyal.com"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -4303,7 +4324,7 @@ import { Card } from './components/ember/organisms/Card/Card'
             🔥 Live Component Showcase
           </a>
           <a
-            href="https://ember-docs.cwpc.hrithiksanyal.com/docs"
+            href="https://prism-docs.cwpc.hrithiksanyal.com/docs"
             target="_blank"
             rel="noopener noreferrer"
             style={{
@@ -4320,11 +4341,11 @@ import { Card } from './components/ember/organisms/Card/Card'
               textDecoration: 'none',
             }}
           >
-            📖 Ember Docs Site
+            📖 Prism Docs Site
           </a>
         </div>
         <p style={bodyText}>
-          Beyond the numbers, Ember changed how CWPC builds. Designers no longer debate which
+          Beyond the numbers, Prism changed how CWPC builds. Designers no longer debate which
           button to use. Developers no longer guess at spacing values. New features start from
           68 production-ready components. Every screen now works for elderly residents, keyboard
           users, and anyone who needs it most.
@@ -4368,7 +4389,7 @@ import { Card } from './components/ember/organisms/Card/Card'
                 maxWidth: 'min(680px, 100%)',
               }}
             >
-              Building Ember changed how I think about design. Every decision had downstream
+              Building Prism changed how I think about design. Every decision had downstream
               consequences. I learned to design for every screen that will ever exist — not just the
               one in front of me.
             </p>
@@ -4379,7 +4400,7 @@ import { Card } from './components/ember/organisms/Card/Card'
                   Hrithik Sanyal
                 </div>
                 <div style={{ fontSize: '12px', color: '#71717A' }}>
-                  Product Designer, Ember Design System
+                  Product Designer, Prism Design System
                 </div>
               </div>
             </div>
@@ -4403,7 +4424,7 @@ import { Card } from './components/ember/organisms/Card/Card'
             {
               emoji: '📝',
               title: 'Documentation is half the product',
-              body: "Beautiful components that no one understands are useless. The props tables, Do's and Don'ts, accessibility notes. These are what make Ember a system rather than a component library.",
+              body: "Beautiful components that no one understands are useless. The props tables, Do's and Don'ts, accessibility notes. These are what make Prism a system rather than a component library.",
             },
             {
               emoji: '🔁',
@@ -4451,14 +4472,14 @@ import { Card } from './components/ember/organisms/Card/Card'
         </div>
         <div style={{ marginTop: '32px' }}>
           <h3 style={{ fontSize: '18px', fontWeight: 600, color: '#F5F5F7', marginBottom: '16px' }}>
-            What&apos;s next for Ember
+            What&apos;s next for Prism
           </h3>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {[
               'Publish as an npm package so CWPC developers can install and import directly',
               'Add dark mode support: the token architecture is already ready for it',
               'Build Figma Code Connect so Figma components link directly to their code counterparts',
-              'Add automated accessibility testing to the Ember docs site',
+              'Add automated accessibility testing to the Prism docs site',
             ].map((line, i) => (
               <div
                 key={i}
@@ -4497,7 +4518,7 @@ export function EmberDesignSystemProject({
   const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  const title = 'Ember Design System';
+  const title = 'Prism Design System';
   const company = 'Catastrophic Wildfire Prevention Consortium';
   const subtitle =
     'A production-ready React + TypeScript design system with 68 documented components, 100+ tokens, and a Storybook-style docs site for CWPC emergency tools.';
@@ -4511,7 +4532,7 @@ export function EmberDesignSystemProject({
   const speedReadChallenge =
     'CWPC had no shared design language. Five different button styles across three platforms. Forty-seven raw color values with no naming system. Zero accessibility standards. Emergency tools that people depend on during wildfires were failing the communities they were built to serve.';
   const speedReadProcess =
-    "I audited every existing CWPC UI pattern, extracted design tokens from Figma, and built the system bottom-up using Atomic Design principles: 17 atoms first, then 26 molecules, then 20 organisms. I wrote the component library in React with TypeScript and CSS custom properties, then built Ember: a full Storybook-style documentation site with interactive controls, per-component code examples, Do's and Don'ts, and accessibility guidelines.";
+    "I audited every existing CWPC UI pattern, extracted design tokens from Figma, and built the system bottom-up using Atomic Design principles: 17 atoms first, then 26 molecules, then 20 organisms. I wrote the component library in React with TypeScript and CSS custom properties, then built Prism: a full Storybook-style documentation site with interactive controls, per-component code examples, Do's and Don'ts, and accessibility guidelines.";
   const speedReadTakeaways =
     "Building a design system alone taught me that the hardest part isn't the components: it's the decisions. Every token name, every prop interface, every state has downstream consequences. I learned to think in systems, not screens. Documentation is not an afterthought: it is half the product.";
   const speedReadImpact =
@@ -4673,7 +4694,7 @@ export function EmberDesignSystemProject({
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
                   <a
-                    href="https://ember.cwpc.hrithiksanyal.com"
+                    href="https://prism.cwpc.hrithiksanyal.com"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
@@ -4686,7 +4707,7 @@ export function EmberDesignSystemProject({
                     Component Showcase ↗
                   </a>
                   <a
-                    href="https://ember-docs.cwpc.hrithiksanyal.com/docs"
+                    href="https://prism-docs.cwpc.hrithiksanyal.com/docs"
                     target="_blank"
                     rel="noopener noreferrer"
                     style={{
@@ -4696,7 +4717,7 @@ export function EmberDesignSystemProject({
                       fontWeight: 600,
                     }}
                   >
-                    Ember Docs ↗
+                    Prism Docs ↗
                   </a>
                 </div>
               </div>

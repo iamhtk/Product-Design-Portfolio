@@ -1,20 +1,20 @@
 import { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
-import { Button } from '../components/ember/atoms/Button/Button';
-import { Badge } from '../components/ember/atoms/Badge/Badge';
-import { Avatar } from '../components/ember/atoms/Avatar/Avatar';
-import { Rating } from '../components/ember/atoms/Rating/Rating';
-import { Loader } from '../components/ember/atoms/Loader/Loader';
-import { Input } from '../components/ember/molecules/Input/Input';
-import { ProgressBar } from '../components/ember/molecules/ProgressBar/ProgressBar';
-import { TabBar } from '../components/ember/molecules/TabBar/TabBar';
-import { Stepper } from '../components/ember/molecules/Stepper/Stepper';
-import { StatCard } from '../components/ember/molecules/StatCard/StatCard';
-import { Card } from '../components/ember/organisms/Card/Card';
-import { AccordionItem } from '../components/ember/organisms/AccordionItem/AccordionItem';
-import { Alert } from '../components/ember/organisms/Alert/Alert';
-import { Navbar } from '../components/ember/organisms/Navbar/Navbar';
+import { Button } from '../components/prism/atoms/Button/Button';
+import { Badge } from '../components/prism/atoms/Badge/Badge';
+import { Avatar } from '../components/prism/atoms/Avatar/Avatar';
+import { Rating } from '../components/prism/atoms/Rating/Rating';
+import { Loader } from '../components/prism/atoms/Loader/Loader';
+import { Input } from '../components/prism/molecules/Input/Input';
+import { ProgressBar } from '../components/prism/molecules/ProgressBar/ProgressBar';
+import { TabBar } from '../components/prism/molecules/TabBar/TabBar';
+import { Stepper } from '../components/prism/molecules/Stepper/Stepper';
+import { StatCard } from '../components/prism/molecules/StatCard/StatCard';
+import { Card } from '../components/prism/organisms/Card/Card';
+import { AccordionItem } from '../components/prism/organisms/AccordionItem/AccordionItem';
+import { Alert } from '../components/prism/organisms/Alert/Alert';
+import { Navbar } from '../components/prism/organisms/Navbar/Navbar';
 import { ScrollToTop } from '../components/ScrollToTop';
 import { ExploreMoreSection } from '../components/projects/ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from '../components/projects/projectConfig';
@@ -2141,9 +2141,9 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               lineHeight: 1.8,
               overflowX: 'auto',
             }}
-          >{`import { Button } from './components/ember/atoms/Button/Button'
-import { Input } from './components/ember/molecules/Input/Input'
-import { Card } from './components/ember/organisms/Card/Card'
+          >{`import { Button } from './components/prism/atoms/Button/Button'
+import { Input } from './components/prism/molecules/Input/Input'
+import { Card } from './components/prism/organisms/Card/Card'
 
 <Button label="Download Scorecard" type="default" colorScheme="information" />
 <Input label="Email address" type="email" required hint="We'll send your scorecard here" />
