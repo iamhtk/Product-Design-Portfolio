@@ -29,7 +29,7 @@ export const PROJECT_ENABLED: Record<string, boolean> = {
 
 /** URL slugs for project pages. Used in /project/<slug>. Omit entry to use id.toLowerCase(). */
 export const PROJECT_SLUGS: Record<string, string> = {
-  CWPC: 'cwpc',
+  CWPC: 'cwpc-prism-design-system',
   AutomotiveUX_GM: 'automotive-ux-cadillac-escalade',
   RaseetHealth: 'raseet-health',
   BMW: 'bmw-idrive-redesign',
