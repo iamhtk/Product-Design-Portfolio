@@ -9,11 +9,10 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
+import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
-import { getArrowGradientColors } from './arrowGradient';
 import { getInitialCaseStudyVisible } from './caseStudyRestore';
 import { getHeaderIndentMargin, getListIndentMargin } from './indentHelpers';
 import { getAlignClass, getBlockAlignClass } from './alignHelpers';
@@ -522,17 +521,43 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
                   className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
                   <svg
-                    width={56}
-                    height={64}
-                    viewBox="0 0 32 40"
+                    width={44}
+                    height={52}
+                    viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
-                    style={{ display: 'block', flexShrink: 0, filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.08))' }}
+                    style={{
+                      display: 'block',
+                      flexShrink: 0,
+                      color: arrowColor,
+                      filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.08))',
+                    }}
                     className="arrow-float-premium"
                   >
-                    {getArrowGradientColors(arrowColor).map((fill, i) => (
-                      <path key={i} d={`M4 ${i * 5} L28 ${i * 5} L16 ${12 + i * 5}`} fill={fill} />
-                    ))}
+                    <path
+                      d="M7 6l5 5 5-5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.45"
+                    />
+                    <path
+                      d="M7 10l5 5 5-5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.7"
+                    />
+                    <path
+                      d="M7 14l5 5 5-5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="1"
+                    />
                   </svg>
                 </button>
               </div>
@@ -540,7 +565,7 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
           </div>
         </div>
 
-        {caseStudyVisible && (
+        {caseStudyVisible ? (
           <>
         {/* Main Content */}
         <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
@@ -732,6 +757,12 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
           </div>
         </div>
           </>
+        ) : (
+          <ExploreMoreSection
+            currentProjectId={CURRENT_PROJECT_ID}
+            onBack={onBack}
+            onProjectClick={onProjectClick}
+          />
         )}
       </div>
 
@@ -748,6 +779,12 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
           </div>
           
           <div className="flex items-center gap-3 md:gap-5">
+            <a href="https://www.figma.com/@iamhtk" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors" aria-label="Figma">
+              <Figma className="w-[18px] h-[18px]" />
+            </a>
+            <a href="https://github.com/iamhtk" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors" aria-label="GitHub">
+              <Github className="w-[18px] h-[18px]" />
+            </a>
             <a href="https://www.linkedin.com/in/iamhtk" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors" aria-label="LinkedIn">
               <Linkedin className="w-[18px] h-[18px]" />
             </a>

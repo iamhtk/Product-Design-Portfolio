@@ -1,6 +1,6 @@
 import React, { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react';
 import { createPortal } from 'react-dom';
-import { Linkedin, Youtube, Instagram, Facebook } from 'lucide-react';
+import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { Button } from '../prism/atoms/Button/Button';
 import { Badge } from '../prism/atoms/Badge/Badge';
 import { Avatar } from '../prism/atoms/Avatar/Avatar';
@@ -18,20 +18,10 @@ import { Navbar } from '../prism/organisms/Navbar/Navbar';
 import { ScrollToTop } from '../ScrollToTop';
 import { ExploreMoreSection } from './ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
-import { getArrowGradientColors } from './arrowGradient';
 import { getInitialCaseStudyVisible } from './caseStudyRestore';
 
 /** Must match `PROJECT_ORDER` in projectOrder.ts so ExploreMoreSection prev/next resolves. */
 const CURRENT_PROJECT_ID = 'CWPC';
-
-const HEADER_SQUARE_COLORS = [
-  '#FF6701',
-  '#65A637',
-  '#0D72FF',
-  '#FFAC0D',
-  '#FF270D',
-  '#8D8D8D',
-] as const;
 
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 
@@ -1416,7 +1406,7 @@ function CaseStudyContent() {
   const bodyText: CSSProperties = {
     fontSize: 'clamp(16px, 2.2vw, 18px)',
     lineHeight: 1.85,
-    color: '#A1A1AA',
+    color: '#F5F5F7',
     maxWidth: 'min(720px, 100%)',
   };
 
@@ -2457,7 +2447,11 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
           </div>
           <div
             className="cwpc-grid-3"
-            style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
+              gap: '24px',
+            }}
           >
             {[
               {
@@ -2525,7 +2519,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                         style={{
                           width: '36px',
                           height: '36px',
-                          borderRadius: '50%',
+                          borderRadius: '8px',
                           background: color.hex,
                           border: '1px solid rgba(255,255,255,0.08)',
                           flexShrink: 0,
@@ -4546,7 +4540,7 @@ export function EmberDesignSystemProject({
     'A production-ready React + TypeScript design system with 68 documented components, 100+ tokens, and a Storybook-style docs site for CWPC emergency tools.';
   const role =
     'End-to-end Design Systems, Component Development, React + TypeScript, Documentation';
-  const team = 'Solo Designer + Developer';
+  const team = 'Lead Product Designer';
   const when = '2025 – 2026';
   const progressBarColor = '#FF6701';
   const arrowColor = '#FF6701';
@@ -4597,21 +4591,21 @@ export function EmberDesignSystemProject({
   };
 
   const metaLabelStyle: CSSProperties = {
-    color: '#71717A',
+    color: '#F5F5F7',
     textTransform: 'uppercase',
     letterSpacing: '0.05em',
     marginBottom: '8px',
     fontSize: '11px',
   };
   const metaValueStyle: CSSProperties = {
-    color: '#A1A1AA',
+    color: '#F5F5F7',
     fontSize: '18px',
     lineHeight: 1.6,
     wordBreak: 'break-word',
     overflowWrap: 'break-word',
   };
-  const speedReadMuted: CSSProperties = { color: '#71717A' };
-  const speedReadBody: CSSProperties = { color: '#A1A1AA' };
+  const speedReadMuted: CSSProperties = { color: '#F5F5F7' };
+  const speedReadBody: CSSProperties = { color: '#F5F5F7' };
 
   return (
     <div className="min-h-screen w-full min-w-0 overflow-x-clip" style={{ background: '#1B1B1F' }}>
@@ -4647,28 +4641,18 @@ export function EmberDesignSystemProject({
           )
         : null}
 
-      <div 
-        className="w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden"
+      <div
+        className="w-full h-[300px] md:h-[500px] relative overflow-hidden"
         style={{ background: '#1B1B1F' }}
       >
-        <div
-          className="h-full w-full flex flex-wrap content-center justify-center gap-2 p-6"
-          style={{ alignContent: 'center' }}
-        >
-          {Array.from({ length: 60 }, (_, i) => (
-            <div
-              key={i}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 6,
-                background: HEADER_SQUARE_COLORS[i % HEADER_SQUARE_COLORS.length],
-                opacity: 0.7,
-                flexShrink: 0,
-              }}
-            />
-          ))}
-        </div>
+        {/* Paste your header image src path here (must be served from `public/`). */}
+        <img
+          src="/cwpc/Group 15.png"
+          alt="CWPC header"
+          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+          loading="eager"
+          decoding="async"
+        />
       </div>
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-16 w-full min-w-0 box-border">
@@ -4705,7 +4689,7 @@ export function EmberDesignSystemProject({
                 <div
                   style={{
                     fontSize: '11px',
-                    color: '#71717A',
+                    color: '#F5F5F7',
                     textTransform: 'uppercase',
                     letterSpacing: '0.08em',
                     marginBottom: '6px',
@@ -4782,19 +4766,22 @@ export function EmberDesignSystemProject({
 
             <div className="space-y-6">
               <h1
-                className="text-[clamp(2rem,7vw,4.5rem)] md:text-[64px] lg:text-[72px] leading-[1.1] font-bold tracking-tight break-words"
+                className="text-[48px] md:text-[64px] lg:text-[72px] leading-[1.1] font-bold tracking-tight"
                 style={{ color: '#F5F5F7' }}
               >
                 {title}
               </h1>
               <p
-                className="text-[clamp(1.05rem,3.5vw,1.875rem)] md:text-[28px] lg:text-[30px] leading-relaxed font-medium break-words"
-                style={{ color: '#A1A1AA' }}
+                className="text-[26px] md:text-[28px] lg:text-[30px] leading-relaxed font-medium"
+                style={{ color: '#F5F5F7' }}
               >
                 {subtitle}
               </p>
               {SHOW_PROJECT_OVERVIEW && overview ? (
-                <p className="text-[18px] md:text-[20px] leading-[1.8]" style={{ color: '#A1A1AA' }}>
+                <p
+                  className="text-[18px] md:text-[20px] leading-[1.8]"
+                  style={{ color: '#F5F5F7' }}
+                >
                   {overview}
                 </p>
               ) : null}
@@ -4850,7 +4837,7 @@ export function EmberDesignSystemProject({
                 <p className="text-[18px] leading-[1.85]" style={speedReadBody}>
                   Have more time?
                 </p>
-                <p className="text-[16px] leading-relaxed" style={{ color: '#71717A' }}>
+                <p className="text-[16px] leading-relaxed" style={{ color: '#F5F5F7' }}>
                   Click the arrow to read the entire case study.
                 </p>
                 <button
@@ -4860,21 +4847,43 @@ export function EmberDesignSystemProject({
                   className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
                   <svg
-                    width={56}
-                    height={64}
-                    viewBox="0 0 32 40"
+                    width={44}
+                    height={52}
+                    viewBox="0 0 24 24"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
                     style={{
                       display: 'block',
                       flexShrink: 0,
-                      filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.25))',
+                      color: arrowColor,
+                      filter: 'drop-shadow(0 2px 8px rgba(0,0,0,0.18))',
                     }}
                     className="arrow-float-premium"
                   >
-                    {getArrowGradientColors(arrowColor).map((fill, i) => (
-                      <path key={i} d={`M4 ${i * 5} L28 ${i * 5} L16 ${12 + i * 5}`} fill={fill} />
-                    ))}
+                    <path
+                      d="M7 6l5 5 5-5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.45"
+                    />
+                    <path
+                      d="M7 10l5 5 5-5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="0.7"
+                    />
+                    <path
+                      d="M7 14l5 5 5-5"
+                      stroke="currentColor"
+                      strokeWidth="2.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      opacity="1"
+                    />
                   </svg>
                 </button>
               </div>
@@ -4906,18 +4915,34 @@ export function EmberDesignSystemProject({
                 />
               </div>
               <div className="md:hidden pt-8">
-            <button 
+                <button
                   type="button"
-              onClick={onBack}
+                  onClick={onBack}
                   className="text-[15px] transition-colors cursor-pointer"
                   style={{ color: '#71717A' }}
-            >
-              ← Back to Work
-            </button>
-          </div>
-        </div>
+                >
+                  ← Back to Work
+                </button>
+              </div>
+            </div>
           </>
-        ) : null}
+        ) : (
+          <div style={{ marginTop: '80px' }}>
+            <div
+              style={{
+                height: '80px',
+                background: 'linear-gradient(to bottom, #1B1B1F, rgba(27,27,31,0))',
+                marginBottom: '-40px',
+              }}
+            />
+            <ExploreMoreSection
+              currentProjectId={CURRENT_PROJECT_ID}
+              onBack={onBack}
+              onProjectClick={onProjectClick}
+              projectTitleColor="#ffffff"
+            />
+          </div>
+        )}
       </div>
 
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12" data-footer>
@@ -4927,6 +4952,26 @@ export function EmberDesignSystemProject({
             <span>© 2026</span>
           </div>
           <div className="flex items-center gap-3 md:gap-5">
+            <a
+              href="https://www.figma.com/@iamhtk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors"
+              style={{ color: '#71717A' }}
+              aria-label="Figma"
+            >
+              <Figma className="w-[18px] h-[18px]" />
+            </a>
+            <a
+              href="https://github.com/iamhtk"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="transition-colors"
+              style={{ color: '#71717A' }}
+              aria-label="GitHub"
+            >
+              <Github className="w-[18px] h-[18px]" />
+            </a>
             <a
               href="https://www.linkedin.com/in/iamhtk"
               target="_blank"
