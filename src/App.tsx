@@ -694,6 +694,7 @@ import { PROJECT_ENABLED, PROJECT_SLUGS } from './components/projects/projectOrd
 import { Blog } from './components/Blog';
 import { FavoritesPage } from './components/FavoritesPage';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
+import { DesignSystemPage } from './components/DesignSystemPage';
 import {
   trackPageView,
   trackProjectOpen,
@@ -706,7 +707,16 @@ import {
 
 ReactGA.initialize('G-T6YVTT985T');
 
-type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'analytics' | 'project';
+type Page =
+  | 'work'
+  | 'about'
+  | 'friends'
+  | 'resume'
+  | 'favorites'
+  | 'blog'
+  | 'analytics'
+  | 'design-system'
+  | 'project';
 
 const VALID_PROJECT_IDS = Object.keys(projectComponents);
 const SCROLL_RESTORE_KEY = 'portfolio_scroll_restore';
@@ -750,6 +760,7 @@ const ROUTE_PATHS: Record<Exclude<Page, 'project'>, string> = {
   favorites: '/myfavorites',
   blog: '/blog',
   analytics: '/analytics',
+  'design-system': '/design-system',
 };
 
 const PATH_TO_PAGE: Record<string, Page> = {
@@ -760,6 +771,7 @@ const PATH_TO_PAGE: Record<string, Page> = {
   '/myfavorites': 'favorites',
   '/blog': 'blog',
   '/analytics': 'analytics',
+  '/design-system': 'design-system',
 };
 
 function getProjectIdFromSegment(segment: string): string | null {
@@ -980,7 +992,12 @@ function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
 
       <div className="page-transition">
-        {currentPage === 'work' && <HomePage onProjectClick={handleProjectClick} />}
+        {currentPage === 'work' && (
+          <HomePage onProjectClick={handleProjectClick} onNavigate={handleNavigate} />
+        )}
+        {currentPage === 'design-system' && (
+          <DesignSystemPage onNavigate={handleNavigate} currentPage={currentPage} />
+        )}
         {currentPage === 'about' && <AboutPage />}
         {currentPage === 'friends' && <FriendsPage />}
         {currentPage === 'resume' && <ResumePage />}

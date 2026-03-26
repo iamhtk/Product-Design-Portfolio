@@ -7,7 +7,15 @@ import {
   trackMobileMenuOpen,
 } from '../services/analytics';
 
-type Page = 'work' | 'about' | 'friends' | 'resume' | 'favorites' | 'blog' | 'analytics';
+type Page =
+  | 'work'
+  | 'about'
+  | 'friends'
+  | 'resume'
+  | 'favorites'
+  | 'blog'
+  | 'analytics'
+  | 'design-system';
 
 interface NavigationProps {
   currentPage: Page | 'project';
@@ -59,6 +67,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
     });
   };
 
+  const linkIsActive = (page: Page) => {
+    if (currentPage === page) return true;
+    if (page === 'work' && currentPage === 'project') return true;
+    return false;
+  };
+
   return (
     <>
       <nav
@@ -82,18 +96,18 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 type="button"
                 onClick={() => handleNavigation(link.page)}
                 className="relative group focus-ring rounded py-2 px-1 cursor-pointer"
-                aria-current={currentPage === link.page ? 'page' : undefined}
+                aria-current={linkIsActive(link.page) ? 'page' : undefined}
               >
                 <span
                   className={`text-[15px] transition-colors duration-300 ${
-                    currentPage === link.page
+                    linkIsActive(link.page)
                       ? 'text-gray-900 font-medium'
                       : 'text-gray-500 hover:text-gray-900'
                   }`}
                 >
                   {link.label}
                 </span>
-                {currentPage === link.page && (
+                {linkIsActive(link.page) && (
                   <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gray-900 rounded-full transition-all duration-200 ease-out" />
                 )}
               </button>
@@ -150,12 +164,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                     type="button"
                     onClick={() => handleNavigation(link.page)}
                     className={`block text-[20px] text-left relative cursor-pointer ${
-                      currentPage === link.page ? 'text-gray-900' : 'text-gray-400'
+                      linkIsActive(link.page) ? 'text-gray-900' : 'text-gray-400'
                     }`}
-                    aria-current={currentPage === link.page ? 'page' : undefined}
+                    aria-current={linkIsActive(link.page) ? 'page' : undefined}
                   >
                     {link.label}
-                    {currentPage === link.page && (
+                    {linkIsActive(link.page) && (
                       <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-gray-900 rounded-full" />
                     )}
                   </button>

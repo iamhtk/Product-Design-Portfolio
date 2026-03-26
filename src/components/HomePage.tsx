@@ -12,11 +12,22 @@ import { AnimateIn } from "./AnimateIn";
 import { PROJECT_ENABLED } from "./projects/projectOrder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
 
+type HomeNavigatePage =
+  | "work"
+  | "about"
+  | "friends"
+  | "resume"
+  | "favorites"
+  | "blog"
+  | "analytics"
+  | "design-system";
+
 interface HomePageProps {
   onProjectClick: (id: string) => void;
+  onNavigate: (page: HomeNavigatePage) => void;
 }
 
-export function HomePage({ onProjectClick }: HomePageProps) {
+export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
   const [expandedRecommendations, setExpandedRecommendations] = useState<Set<number>>(new Set());
 
   const toggleRecommendation = (index: number) => {
@@ -337,6 +348,25 @@ export function HomePage({ onProjectClick }: HomePageProps) {
                 </p>
               </div>
             </a>
+
+            <button
+              type="button"
+              onClick={() => onNavigate("design-system")}
+              className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4 text-left w-full bg-transparent"
+            >
+              <div
+                className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]"
+                style={{ aspectRatio: "4 / 3" }}
+              />
+              <div>
+                <h3 className="type-body text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
+                  Portfolio Design System
+                </h3>
+                <p className="type-caption text-gray-500">
+                  Design tokens, components, and the system behind this site.
+                </p>
+              </div>
+            </button>
           </div>
         </AnimateIn>
 

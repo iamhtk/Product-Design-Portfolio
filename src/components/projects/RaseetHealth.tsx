@@ -60,6 +60,90 @@ function LoopingVideo({ src, className, style }: { src: string; className?: stri
   );
 }
 
+function SyncedLoopingVideoRow({
+  videos,
+  columnsClassName,
+}: {
+  videos: { src: string; style?: React.CSSProperties }[];
+  columnsClassName: string;
+}) {
+  const playbackTimeRef = useRef<Record<string, number>>({});
+  const refs = useRef<(HTMLVideoElement | null)[]>([]);
+  useEffect(() => {
+    refs.current = refs.current.slice(0, videos.length);
+    const elements = refs.current.filter(Boolean) as HTMLVideoElement[];
+    if (elements.length === 0) return;
+
+    const loaded = new Set<number>();
+    const tryStartTogether = () => {
+      if (loaded.size !== videos.length) return;
+      elements.forEach((el, idx) => {
+        const saved = playbackTimeRef.current[videos[idx].src];
+        if (typeof saved === 'number' && Number.isFinite(saved) && saved > 0) {
+          try {
+            el.currentTime = saved;
+          } catch {
+            // ignore seek errors before metadata is ready
+          }
+        }
+        el.muted = true;
+      });
+      elements.forEach((el) => {
+        el.play().catch(() => {});
+      });
+    };
+
+    const handlers = elements.map((el, idx) => {
+      const onLoaded = () => {
+        loaded.add(idx);
+        tryStartTogether();
+      };
+      const onTimeUpdate = () => {
+        playbackTimeRef.current[videos[idx].src] = el.currentTime || 0;
+      };
+      el.addEventListener('loadeddata', onLoaded);
+      el.addEventListener('timeupdate', onTimeUpdate);
+      if (el.readyState >= 2) {
+        loaded.add(idx);
+      }
+      return { el, onLoaded, onTimeUpdate };
+    });
+
+    tryStartTogether();
+
+    return () => {
+      handlers.forEach(({ el, onLoaded, onTimeUpdate }) => {
+        el.removeEventListener('loadeddata', onLoaded);
+        el.removeEventListener('timeupdate', onTimeUpdate);
+      });
+    };
+  }, [videos, videos.length]);
+
+  return (
+    <div className={columnsClassName}>
+      {videos.map((video, index) => (
+        <div key={`${video.src}-${index}`} className="w-full flex justify-start">
+          <video
+            ref={(el) => {
+              refs.current[index] = el;
+            }}
+            src={video.src}
+            className="w-full h-auto max-w-full"
+            style={video.style}
+            loop
+            muted
+            playsInline
+            preload="auto"
+            aria-label="Looping video"
+          >
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      ))}
+    </div>
+  );
+}
+
 const CURRENT_PROJECT_ID = 'RaseetHealth';
 
 interface RaseetHealthProjectProps {
@@ -565,7 +649,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Wireframes', subheader: '', content: 'Early wireframes explored multiple layout options for onboarding, home, and cart flows before we committed to high‑fidelity designs.', },
 
-{ type: 'image', src: '/raseet/ui/lil.png', maxHeight: '500px' },
+{ type: 'image', src: '/raseet/vids/Frame.png', maxHeight: '500px'},
+// { type: 'image', src: '/raseet/vids/img-1.png', maxHeight: '500px',group: 'row'  },
 
 
 { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity aligned with the brand’s values of trust, clarity, and accessibility. I studied competitors and drew from a curated reference library to balance familiarity with differentiation.", },
@@ -573,12 +658,21 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 // { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
 
 
-{ type: 'image', src: '/raseet/ui/onboarding_1.png', maxHeight: '700px' },
-{ type: 'image', src: '/raseet/ui/sign_1.png', maxHeight: '700px' },
-{ type: 'image', src: '/raseet/ui/home_1.png', maxHeight: '700px' },
-{ type: 'image', src: '/raseet/ui/cart_1.png', maxHeight: '500px' },
-{ type: 'image', src: '/raseet/ui/support_1.png', maxHeight: '700px' },
+// { type: 'image', src: '/raseet/ui/onboarding_1.png', maxHeight: '700px' },
+// { type: 'image', src: '/raseet/ui/sign_1.png', maxHeight: '700px' },
+// { type: 'image', src: '/raseet/ui/home_1.png', maxHeight: '700px' },
+// { type: 'image', src: '/raseet/ui/cart_1.png', maxHeight: '500px' },
+// { type: 'image', src: '/raseet/ui/support_1.png', maxHeight: '700px' },
 
+
+    { type: 'video', src: '/raseet/vids/onboarding-1.mov', maxHeight: '400px', group: 'row' },
+    { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'row' },
+    { type: 'video', src: '/raseet/vids/homepage-nav.mov', maxHeight: '640px', group: 'row' },
+    { type: 'video', src: '/raseet/vids/homepage-features.mov', maxHeight: '640px', group: 'row' },
+    { type: 'video', src: '/raseet/vids/search.mov', maxHeight: '500px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/order-cart.mov', maxHeight: '500px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/profile.mov', maxHeight: '500px', group: 'row3' },
+   
 
 
 { type: 'text', header: 'Retrospectives', subheader: '1. Empathy-Driven Design', content: "The iterative design process, grounded in user feedback, ensured that the platform met the unique needs of pharmacists, healthcare providers, and customers.", },
@@ -843,7 +937,10 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
         {caseStudyVisible ? (
           <>
         <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
-          {blocks.map((block, index) => {
+          {(() => {
+            const skipped = new Set<number>();
+            return blocks.map((block, index) => {
+            if (skipped.has(index)) return null;
             if (block.type === 'text') {
               const contentMargin =
                 block.contentIndent !== undefined
@@ -1031,6 +1128,50 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               );
             }
             if (block.type === 'video') {
+              if (block.group === 'row3') {
+                const second = blocks[index + 1];
+                const third = blocks[index + 2];
+                const hasRowThree =
+                  second && second.type === 'video' && second.group === 'row3' &&
+                  third && third.type === 'video' && third.group === 'row3';
+                if (hasRowThree) {
+                  skipped.add(index + 1);
+                  skipped.add(index + 2);
+                  const styleOne = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
+                  const styleTwo = second.maxHeight ? { maxHeight: second.maxHeight, objectFit: 'contain' as const } : undefined;
+                  const styleThree = third.maxHeight ? { maxHeight: third.maxHeight, objectFit: 'contain' as const } : undefined;
+                  return (
+                    <SyncedLoopingVideoRow
+                      key={index}
+                      columnsClassName="grid grid-cols-1 md:grid-cols-3 gap-6 items-start"
+                      videos={[
+                        { src: block.src, style: styleOne },
+                        { src: second.src, style: styleTwo },
+                        { src: third.src, style: styleThree },
+                      ]}
+                    />
+                  );
+                }
+              }
+              if (block.group === 'row') {
+                const next = blocks[index + 1];
+                const nextIsRowVideo = next && next.type === 'video' && next.group === 'row';
+                if (nextIsRowVideo) {
+                  skipped.add(index + 1);
+                  const videoStyle = block.maxHeight ? { maxHeight: block.maxHeight, objectFit: 'contain' as const } : undefined;
+                  const nextVideoStyle = next.maxHeight ? { maxHeight: next.maxHeight, objectFit: 'contain' as const } : undefined;
+                  return (
+                    <SyncedLoopingVideoRow
+                      key={index}
+                      columnsClassName="grid grid-cols-1 md:grid-cols-2 gap-6 items-start"
+                      videos={[
+                        { src: block.src, style: videoStyle },
+                        { src: next.src, style: nextVideoStyle },
+                      ]}
+                    />
+                  );
+                }
+              }
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               const containerStyle = {
                 ...(marginLeft && { marginLeft, maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)' }),
@@ -1044,6 +1185,34 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               );
             }
             if (block.type === 'image') {
+              if (block.group === 'row') {
+                const next = blocks[index + 1];
+                const nextIsRowImage = next && next.type === 'image' && next.group === 'row';
+                if (nextIsRowImage) {
+                  skipped.add(index + 1);
+                  const sharedHeight = block.maxHeight ?? next.maxHeight ?? '500px';
+                  return (
+                    <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                      <div className="w-full flex justify-start">
+                        <ImageWithFallback
+                          src={block.src}
+                          alt={`${title} - ${index + 1}`}
+                          className="w-full max-w-full object-contain"
+                          style={{ height: sharedHeight }}
+                        />
+                      </div>
+                      <div className="w-full flex justify-start">
+                        <ImageWithFallback
+                          src={next.src}
+                          alt={`${title} - ${index + 2}`}
+                          className="w-full max-w-full object-contain"
+                          style={{ height: sharedHeight }}
+                        />
+                      </div>
+                    </div>
+                  );
+                }
+              }
               const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               const containerStyle = {
@@ -1073,7 +1242,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               );
             }
             return null;
-          })}
+          });
+          })()}
 
           <ExploreMoreSection
             currentProjectId={CURRENT_PROJECT_ID}

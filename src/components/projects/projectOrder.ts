@@ -1,9 +1,12 @@
+import { designTokens } from '../../lib/designTokens';
+
 /** Homepage project order (id + title). Used for prev/next navigation at end of case studies. */
 export const PROJECT_ORDER: { id: string; title: string }[] = [
   { id: 'CWPC', title: 'CWPC: Unifying Interfaces for Speed and Consistency' },
   { id: 'AutomotiveUX_GM', title: "Automotive UX - Cadillac Escalade Design Proposal" },
   { id: 'RaseetHealth', title: 'Raseet Health: Empowering Local Pharmacies' },
   { id: 'BMW', title: "Redesigning BMW's Digital Interface" },
+  { id: 'PortfolioDesignSystem', title: 'Portfolio Design System' },
   { id: 'CalmiRing', title: 'CalmiRing' },
   { id: 'jobgenius', title: 'JobGenius' },
   { id: 'bound', title: 'Bound International UX Audit: Identifying and Solving Key Usability Issues' },
@@ -21,6 +24,7 @@ export const PROJECT_ENABLED: Record<string, boolean> = {
   AutomotiveUX_GM: true,
   RaseetHealth: true,
   BMW: true,
+  PortfolioDesignSystem: true,
   CalmiRing: true,
   jobgenius: false,
   bound: false,
@@ -33,6 +37,7 @@ export const PROJECT_SLUGS: Record<string, string> = {
   AutomotiveUX_GM: 'automotive-ux-cadillac-escalade',
   RaseetHealth: 'raseet-health',
   BMW: 'bmw-idrive-redesign',
+  PortfolioDesignSystem: 'portfolio-design-system',
   CalmiRing: 'calmiring',
   jobgenius: 'jobgenius',
   bound: 'bound-international-ux-audit',
@@ -48,6 +53,10 @@ export const PROJECT_TILE_MEDIA: Record<string, { image: string; bgColor: string
   AutomotiveUX_GM: { image: '/main_title/main_gm.png', bgColor: '#f5f5f7' },
   RaseetHealth: { image: '/main_title/main_raseet.png', bgColor: '#4A90E2' },
   BMW: { image: '/main_title/main_bmw.png', bgColor: '#e8f4f8' },
+  PortfolioDesignSystem: {
+    image: '/miniapps/f3.png',
+    bgColor: designTokens.colors.imagePlaceholder,
+  },
   CalmiRing: { image: '/main_title/main_calmi.png', bgColor: '#f5f5f7' },
   jobgenius: { image: '/main_title/main_jobgenius.png', bgColor: '#f5f5f7' },
   bound: { image: '/main_title/main_bound.png', bgColor: '#fff5f7' },

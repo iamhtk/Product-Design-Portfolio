@@ -7,6 +7,7 @@ import { BMWProject } from './BMW';
 import { CalmiRingProject } from './CalmiRing';
 import { BoundProject } from './bound';
 import { WeddingBlissProject } from './WeddingBliss';
+import { PortfolioDesignSystemProject } from './PortfolioDesignSystem';
 
 export { PROJECT_ORDER } from './projectOrder';
 
@@ -23,4 +24,5 @@ export const projectComponents: Record<string, React.ComponentType<ProjectCompon
   CalmiRing: CalmiRingProject,
   bound: BoundProject,
   WeddingBliss: WeddingBlissProject,
+  PortfolioDesignSystem: PortfolioDesignSystemProject,
 };

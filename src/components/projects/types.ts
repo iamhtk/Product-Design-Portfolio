@@ -40,8 +40,8 @@ export type ContentBlock =
       /** @deprecated Use listIndent: 2 instead */
       indentLevel?: 2;
     }
-  | { type: 'image'; src: string; /** Align image: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string }
-  | { type: 'video'; src: string; /** Align video: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string }
+  | { type: 'image'; src: string; /** Align image: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string; /** Optional grouping for row rendering */ group?: 'row' | 'row3' }
+  | { type: 'video'; src: string; /** Align video: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string; /** Optional grouping for row rendering */ group?: 'row' | 'row3' }
   | {
       type: 'textImageRow';
       header?: string;
