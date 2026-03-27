@@ -248,7 +248,9 @@ function SyncedLoopingVideoMosaic({
 
 const CURRENT_PROJECT_ID = 'RaseetHealth';
 const RASEET_WEBSITE_URL = 'https://raseet.com';
-const RASEET_FIGMA_URL = 'https://www.figma.com/design/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-2&t=uKJzq6JLv20dS19v-1';
+const RASEET_FIGMA_MOBILE_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=4628-357&p=f&viewport=369%2C429%2C0.02&t=kg6GHaKkbVY0NcZZ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4628%3A13344&page-id=4628%3A264&show-proto-sidebar=1&hide-ui=1';
+const RASEET_FIGMA_PARTNER_DASHBOARD_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-4394&p=f&viewport=60%2C472%2C0.09&t=eQG2dOI3a4xSIRlo-1&scaling=scale-down&content-scaling=fixed&page-id=6602%3A2&starting-point-node-id=6602%3A4394&hide-ui=1';
+const RASEET_FIGMA_HCP_DASHBOARD_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-4&viewport=-2691%2C197%2C0.41&t=mL1Fml7UK3LEasph-1&scaling=scale-down&content-scaling=fixed&page-id=6602%3A3&hide-ui=1';
 const RASEET_IMPACT_STATS = [
   { value: '120+', label: 'Pharmacies onboarded', end: 120, prefix: '', suffix: '+' },
   { value: '5 States', label: 'Geographical Reach', end: 5, prefix: '', suffix: ' States' },
@@ -473,7 +475,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     { type: 'video', src: '/raseet/vids/PP-demo.mov', maxHeight: '400px', group: 'row3' }, // ipad screen 1
     { type: 'video', src: '/raseet/vids/HP-demo.mp4', maxHeight: '400px', group: 'row3' }, // ipad screen 2
     { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'row3' }, // iphone screen 2
-    { type: 'externalLink', label: 'View in Figma ↗', href: RASEET_FIGMA_URL, variant: 'button' },
+    { type: 'externalLink', label: 'View Mobile App Prototype ↗', href: RASEET_FIGMA_MOBILE_URL, variant: 'button' },
     
     { type: 'text', header: 'Project Statement', content: 'Empower local pharmacies to compete with e‑pharmacy giants by delivering a simpler, more trustworthy way to manage prescriptions, health records, and orders—across in‑store and mobile experiences.' },
 
@@ -687,10 +689,12 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   'Secure access to patient prescriptions and medical records enables informed decision-making.',
   'Real-time updates ensure accurate and timely care for patients.',
 ],listIndent: 1 },
+{ type: 'externalLink', label: 'Healthcare Provider Dashboard ↗', href: RASEET_FIGMA_HCP_DASHBOARD_URL, variant: 'inline' },
 
 { type: 'textBullets', header: 'Patients', items: [
   'A personal dashboard allows users to manage prescriptions, view health records, and track orders seamlessly.',
 ],listIndent: 1 },
+{ type: 'externalLink', label: 'Partner Pharmacy Dashboard ↗', href: RASEET_FIGMA_PARTNER_DASHBOARD_URL, variant: 'inline' },
 
 { type: 'textTextRow', headerLeft: 'Three-way platform Integration', contentLeft: "Three way platform connect pharmacies, healthcare providers, and customers, ensuring real-time data flow and consistency.", headerRight: 'Secure Data Sharing', contentRight: "Implemented end-to-end encryption and role-based access control to safeguard sensitive data like medical records and prescriptions." },
 
@@ -878,7 +882,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 
 { type: 'text', header: 'Wireframes', subheader: '', content: 'Early wireframes explored multiple layout options for onboarding, home, and cart flows before we committed to high‑fidelity designs.', },
-{ type: 'externalLink', label: 'Explore Figma File ↗', href: RASEET_FIGMA_URL, variant: 'inline' },
+{ type: 'externalLink', label: 'Explore Figma File ↗', href: RASEET_FIGMA_MOBILE_URL, variant: 'inline' },
 
 { type: 'image', src: '/raseet/vids/Frame.png', maxHeight: '500px'},
 // { type: 'image', src: '/raseet/vids/img-1.png', maxHeight: '500px',group: 'row'  },
@@ -1163,12 +1167,30 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                     <span className="raseet-sidebar-link-arrow">↗</span>
                   </a>
                   <a
-                    href={RASEET_FIGMA_URL}
+                    href={RASEET_FIGMA_MOBILE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="raseet-sidebar-link"
                   >
-                    <span className="raseet-sidebar-link-label">Figma Prototype</span>
+                    <span className="raseet-sidebar-link-label">Mobile App Prototype</span>
+                    <span className="raseet-sidebar-link-arrow">↗</span>
+                  </a>
+                  <a
+                    href={RASEET_FIGMA_PARTNER_DASHBOARD_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="raseet-sidebar-link"
+                  >
+                    <span className="raseet-sidebar-link-label">Partner Pharmacy Dashboard</span>
+                    <span className="raseet-sidebar-link-arrow">↗</span>
+                  </a>
+                  <a
+                    href={RASEET_FIGMA_HCP_DASHBOARD_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="raseet-sidebar-link"
+                  >
+                    <span className="raseet-sidebar-link-label">Healthcare Provider Dashboard</span>
                     <span className="raseet-sidebar-link-arrow">↗</span>
                   </a>
                 </div>
