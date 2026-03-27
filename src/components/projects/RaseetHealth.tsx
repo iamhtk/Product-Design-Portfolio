@@ -380,6 +380,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   );
 
   useEffect(() => {
+    if (!caseStudyVisible) return;
     const node = impactStatsRef.current;
     if (!node) return;
     const observer = new IntersectionObserver(
@@ -393,7 +394,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     );
     observer.observe(node);
     return () => observer.disconnect();
-  }, []);
+  }, [caseStudyVisible]);
 
   // ═══════════════════════════════════════════════════════════════════════
   // EDIT YOUR PROJECT CONTENT BELOW
