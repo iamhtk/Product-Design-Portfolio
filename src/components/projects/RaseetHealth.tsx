@@ -469,7 +469,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     
   
     { type: 'video', src: '/raseet/vids/PP-demo.mov', maxHeight: '400px', group: 'row3' }, // ipad screen 1
-    { type: 'video', src: '/raseet/vids/HP-demo.mov', maxHeight: '400px', group: 'row3' }, // ipad screen 2
+    { type: 'video', src: '/raseet/vids/HP-demo.mp4', maxHeight: '400px', group: 'row3' }, // ipad screen 2
     { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'row3' }, // iphone screen 2
     { type: 'externalLink', label: 'View in Figma ↗', href: RASEET_FIGMA_URL, variant: 'button' },
     
