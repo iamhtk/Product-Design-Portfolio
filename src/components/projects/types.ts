@@ -70,7 +70,8 @@ export type ContentBlock =
   | { type: 'textTextRow'; headerLeft?: string; contentLeft: string; headerRight?: string; contentRight: string; /** Align both columns: left | center | right | justify */ align?: 'left' | 'center' | 'right' | 'justify' }
   | { type: 'colors'; colors: string[] }
   | { type: 'imageCaption'; src: string; caption: string; maxHeight?: string }
-  | { type: 'externalLink'; label: string; href: string; variant?: 'button' | 'inline'; align?: 'left' | 'center' | 'right' };
+  | { type: 'externalLink'; label: string; href: string; variant?: 'button' | 'inline'; align?: 'left' | 'center' | 'right' }
+  | { type: 'impactStatsInline' };
 
 export type ProjectSection = {
   header?: string; // Optional - leave empty if you don't want a header

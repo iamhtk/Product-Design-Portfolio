@@ -356,9 +356,12 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
         ))}
       </div>
       <div className="md:hidden">
-        <div className="grid grid-cols-2 gap-x-6 gap-y-8">
-          {RASEET_IMPACT_STATS.slice(0, 4).map((stat, index) => (
-            <div key={stat.label} className="text-center">
+        <div className="raseet-impact-mobile-grid">
+          {RASEET_IMPACT_STATS.map((stat, index) => (
+            <div
+              key={stat.label}
+              className={`raseet-impact-mobile-item ${index === 4 ? 'raseet-impact-mobile-item-last' : ''}`}
+            >
               <p className="raseet-impact-stat-value">
                 {stat.prefix}
                 {formatImpactCount(impactStatCounts[index])}
@@ -367,16 +370,6 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               <p className="raseet-impact-stat-label">{stat.label}</p>
             </div>
           ))}
-        </div>
-        <div className="flex justify-center mt-8">
-          <div className="text-center">
-            <p className="raseet-impact-stat-value">
-              {RASEET_IMPACT_STATS[4].prefix}
-              {formatImpactCount(impactStatCounts[4])}
-              {RASEET_IMPACT_STATS[4].suffix}
-            </p>
-            <p className="raseet-impact-stat-label">{RASEET_IMPACT_STATS[4].label}</p>
-          </div>
         </div>
       </div>
     </div>
@@ -805,7 +798,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 
 { type: 'image', src: '/raseet/kpi.png', maxHeight: '640px' },
-{ type: 'imageCaption', src: '/raseet/raseet-stats.png', caption: 'Social proof — 120+ Pharmacies, 5 States, Rs. 5Cr+ Revenue, 100,000+ Digital Bills, 21,000+ End-Customers.' },
+{ type: 'impactStatsInline' },
 
 { type: 'text', header: 'MedScope: A Scalable & Systematic Design System', subheader: 'The Challenge', content: "As Raseet Health expanded, maintaining design consistency, efficiency, and scalability became a challenge. A fragmented UI led to inconsistencies in components, longer design cycles, and increased development overhead. The need for a unified design system became evident to streamline collaboration, reduce redundancy, and enhance the user experience across all touchpoints.", },
 
@@ -900,10 +893,10 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 // { type: 'image', src: '/raseet/ui/support_1.png', maxHeight: '700px' },
 
 
-    { type: 'video', src: '/raseet/vids/onboarding-1.mov', maxHeight: '400px', group: 'row' },
-    { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'row' },
-    { type: 'video', src: '/raseet/vids/homepage-nav.mov', maxHeight: '640px', group: 'row' },
-    { type: 'video', src: '/raseet/vids/homepage-features.mov', maxHeight: '640px', group: 'row' },
+    // { type: 'video', src: '/raseet/vids/onboarding-1.mov', maxHeight: '400px', group: 'row' },
+    { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/homepage-nav.mov', maxHeight: '640px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/homepage-features.mov', maxHeight: '640px', group: 'row3' },
     { type: 'video', src: '/raseet/vids/search.mov', maxHeight: '500px', group: 'row3' },
     { type: 'video', src: '/raseet/vids/order-cart.mov', maxHeight: '500px', group: 'row3' },
     { type: 'video', src: '/raseet/vids/profile.mov', maxHeight: '500px', group: 'row3' },
@@ -1005,6 +998,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
           gap: 0.35rem;
           color: #1A6B8A;
           font-size: 15px;
+          font-weight: 700;
           line-height: 1.5;
           transition: color 0.2s ease;
           text-decoration: none;
@@ -1014,6 +1008,22 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
           text-underline-offset: 2px;
           text-decoration-color: rgba(26, 107, 138, 0.45);
           transition: text-decoration-color 0.2s ease;
+        }
+        .raseet-inline-link {
+          color: #1A6B8A;
+          font-size: 15px;
+          font-weight: 700;
+          text-decoration: underline;
+          text-underline-offset: 2px;
+          text-decoration-color: rgba(26, 107, 138, 0.45);
+          transition: color 0.2s ease, text-decoration-color 0.2s ease;
+        }
+        .raseet-inline-link:hover {
+          color: #155A74;
+          text-decoration-color: rgba(21, 90, 116, 0.95);
+        }
+        .raseet-inline-link:active {
+          color: #124E65;
         }
         .raseet-sidebar-link-arrow {
           transition: transform 0.2s ease;
@@ -1056,6 +1066,41 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
           line-height: 1.45;
           margin-top: 0.35rem;
         }
+        @media (max-width: 768px) {
+          .raseet-impact-mobile-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+          }
+          .raseet-impact-mobile-item {
+            text-align: center;
+            padding: 16px;
+          }
+          .raseet-impact-mobile-item-last {
+            grid-column: 1 / -1;
+            text-align: center;
+          }
+          #case-study-start div:has(> div > video[src*='/raseet/vids/']) {
+            gap: 16px !important;
+            align-items: center !important;
+            height: auto !important;
+          }
+          #case-study-start div:has(> div > video[src*='/raseet/vids/']) > div {
+            width: auto !important;
+            max-width: 100% !important;
+            justify-content: center !important;
+          }
+          #case-study-start video[src*='/raseet/vids/'] {
+            max-height: 300px !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+          }
+          #case-study-start video[src*='PP-demo'],
+          #case-study-start video[src*='HP-demo'] {
+            max-height: 200px !important;
+          }
+        }
       `}</style>
       <ScrollToTop />
       
@@ -1089,8 +1134,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
       {/* Header Banner */}
       <div 
-        className="w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: headerColor }}
+        className="w-full flex items-center justify-center overflow-hidden"
+        style={{ height: 'clamp(300px, 42vw, 500px)', backgroundColor: headerColor }}
       >
         <div className="h-full w-full flex items-center justify-center p-4">
           {headerIcon ? (
@@ -1598,6 +1643,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               if (block.group === 'row3') {
                 const second = blocks[index + 1];
                 const third = blocks[index + 2];
+                const previous = blocks[index - 1];
+                const isConsecutiveRowThree = previous && previous.type === 'video' && previous.group === 'row3';
                 const hasRowThree =
                   second && second.type === 'video' && second.group === 'row3' &&
                   third && third.type === 'video' && third.group === 'row3';
@@ -1607,7 +1654,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                   return (
                     <SyncedLoopingVideoRow
                       key={index}
-                      columnsClassName="flex flex-col md:flex-row md:flex-nowrap gap-6 md:h-[500px] md:items-center"
+                      columnsClassName={`flex flex-col md:flex-row md:flex-nowrap gap-6 md:h-[500px] md:items-center justify-center md:justify-center ${isConsecutiveRowThree ? 'mt-12 md:mt-20' : ''}`}
                       itemClassName="h-full flex justify-center items-center"
                       videoClassName="h-full w-auto"
                       videos={[
@@ -1723,7 +1770,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                       href={block.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-4 py-2 border border-black text-gray-900 text-[14px] font-medium hover:bg-black hover:text-white transition-colors"
+                      className="inline-flex items-center justify-center px-4 py-2 border border-[#1A6B8A] text-[#1A6B8A] text-[14px] font-bold hover:bg-[#1A6B8A] hover:text-white transition-colors"
                     >
                       {block.label}
                     </a>
@@ -1736,10 +1783,37 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                     href={block.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[15px] text-gray-700 hover:text-gray-900 underline"
+                    className="raseet-inline-link"
                   >
                     {block.label}
                   </a>
+                </div>
+              );
+            }
+            if (block.type === 'impactStatsInline') {
+              return (
+                <div key={index} className="raseet-impact-stats is-visible">
+                  <div className="hidden md:flex items-start justify-between gap-6">
+                    {RASEET_IMPACT_STATS.map((stat) => (
+                      <div key={stat.label} className="text-center flex-1 min-w-0">
+                        <p className="raseet-impact-stat-value">{stat.value}</p>
+                        <p className="raseet-impact-stat-label">{stat.label}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="md:hidden">
+                    <div className="raseet-impact-mobile-grid">
+                      {RASEET_IMPACT_STATS.map((stat, index) => (
+                        <div
+                          key={stat.label}
+                          className={`raseet-impact-mobile-item ${index === 4 ? 'raseet-impact-mobile-item-last' : ''}`}
+                        >
+                          <p className="raseet-impact-stat-value">{stat.value}</p>
+                          <p className="raseet-impact-stat-label">{stat.label}</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               );
             }

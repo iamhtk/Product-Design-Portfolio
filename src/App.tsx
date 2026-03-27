@@ -721,37 +721,6 @@ type Page =
 const VALID_PROJECT_IDS = Object.keys(projectComponents);
 const SCROLL_RESTORE_KEY = 'portfolio_scroll_restore';
 
-function saveScrollForRestore() {
-  try {
-    sessionStorage.setItem(
-      SCROLL_RESTORE_KEY,
-      JSON.stringify({ path: window.location.pathname, y: window.scrollY })
-    );
-  } catch { /* ignore */ }
-}
-
-function restoreScrollIfSamePage() {
-  try {
-    const raw = sessionStorage.getItem(SCROLL_RESTORE_KEY);
-    if (!raw) return;
-    const { path, y } = JSON.parse(raw) as { path: string; y: number };
-    sessionStorage.removeItem(SCROLL_RESTORE_KEY);
-    if (path !== window.location.pathname || typeof y !== 'number') return;
-    const pathNorm = path.toLowerCase().replace(/\/$/, '') || '/';
-    const segment = pathNorm === '/' ? '' : pathNorm.slice(1);
-    const isProject =
-      path.startsWith('/project/') ||
-      (segment && !segment.includes('/') && getProjectIdFromSegment(segment) !== null);
-    const delay = isProject ? 150 : 0;
-    const restore = () => window.scrollTo({ top: y, left: 0, behavior: 'instant' });
-    if (delay > 0) {
-      setTimeout(() => requestAnimationFrame(() => requestAnimationFrame(restore)), delay);
-    } else {
-      requestAnimationFrame(() => requestAnimationFrame(restore));
-    }
-  } catch { /* ignore */ }
-}
-
 const ROUTE_PATHS: Record<Exclude<Page, 'project'>, string> = {
   work: '/',
   about: '/about-me',
@@ -843,11 +812,6 @@ function App() {
   }
 
   useEffect(() => {
-    window.addEventListener('beforeunload', saveScrollForRestore);
-    return () => window.removeEventListener('beforeunload', saveScrollForRestore);
-  }, []);
-
-  useEffect(() => {
     const applyRoute = (route: { page: Page; projectId: string | null }) => {
       setCurrentPage(route.page);
       setSelectedProjectId(route.projectId);
@@ -896,7 +860,8 @@ function App() {
   useEffect(() => {
     if (didRestoreScroll.current) return;
     didRestoreScroll.current = true;
-    restoreScrollIfSamePage();
+    // On full reload / hard refresh, always start from top.
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
   }, [currentPage, selectedProjectId]);
 
   useEffect(() => {

@@ -4642,8 +4642,8 @@ export function EmberDesignSystemProject({
         : null}
 
       <div
-        className="w-full h-[300px] md:h-[500px] relative overflow-hidden"
-        style={{ background: '#1B1B1F' }}
+        className="w-full relative overflow-hidden"
+        style={{ height: 'clamp(300px, 42vw, 500px)', background: '#1B1B1F' }}
       >
         {/* Paste your header image src path here (must be served from `public/`). */}
         <img

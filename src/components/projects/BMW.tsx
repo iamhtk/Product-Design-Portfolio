@@ -202,8 +202,8 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
 
       {/* Header Banner */}
       <div 
-        className="w-full h-[300px] md:h-[500px] flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: headerColor }}
+        className="w-full flex items-center justify-center overflow-hidden"
+        style={{ height: 'clamp(300px, 42vw, 500px)', backgroundColor: headerColor }}
       >
         <div className="h-full w-full flex items-center justify-center p-4">
           {headerIcon ? (
