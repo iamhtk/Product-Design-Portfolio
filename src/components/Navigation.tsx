@@ -126,7 +126,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           <button
             type="button"
             onClick={toggleMobileMenu}
-            className="md:hidden text-gray-900 p-2 cursor-pointer"
+            className="md:hidden text-gray-900 p-3 min-h-[44px] min-w-[44px] cursor-pointer"
             aria-label="Toggle menu"
             aria-expanded={mobileMenuOpen}
           >
@@ -149,7 +149,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
-                className="text-gray-900 p-2 cursor-pointer"
+                className="text-gray-900 p-3 min-h-[44px] min-w-[44px] cursor-pointer"
                 aria-label="Close menu"
               >
                 <X className="w-6 h-6" />

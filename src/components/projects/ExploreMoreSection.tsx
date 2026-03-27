@@ -141,7 +141,7 @@ export function ExploreMoreSection({
               <button
                 type="button"
                 onClick={() => handleProjectNav(nextProject.id, onProjectClick)}
-                className={`p-0 m-0 border-0 bg-transparent flex-shrink-0 w-[280px] group transition-all duration-300 ease-out ${
+                className={`p-0 m-0 border-0 bg-transparent w-full max-w-[280px] group transition-all duration-300 ease-out ${
                   isProjectEnabled(nextProject.id)
                     ? 'cursor-pointer hover:-translate-y-1'
                     : 'cursor-not-allowed opacity-70'

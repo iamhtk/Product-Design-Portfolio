@@ -233,7 +233,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 md:gap-16">
-          <div className="space-y-8">
+          <div className="space-y-8 order-2 md:order-none">
             {icon ? (
               <div className="block" style={{ width: 48, height: 48 }}>
                 <img
@@ -277,7 +277,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
             </button>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-16 order-1 md:order-none">
             <div className="md:hidden">
               <button 
                 onClick={onBack}
@@ -331,7 +331,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
                   type="button"
                   onClick={scrollToCaseStudy}
                   aria-label="Scroll to case study"
-                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
+                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 min-h-[44px] min-w-[44px] transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
                   <svg
                     width={44}
@@ -380,7 +380,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
 
         {caseStudyVisible ? (
           <>
-        <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
+        <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)', overflowX: 'hidden' }}>
           {blocks.map((block, index) => {
             if (block.type === 'text') {
               return (
@@ -474,13 +474,13 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
                       </ul>
                     )}
                   </div>
-                  <div className={`w-full max-h-[120px] overflow-hidden rounded-lg ${getBlockAlignClass(block.imageAlign)} ${imageOnLeft ? 'order-1 md:order-none md:col-start-1' : 'order-2 md:order-none md:col-start-2'}`}>
+                  <div className={`w-full max-h-[400px] overflow-hidden rounded-lg ${getBlockAlignClass(block.imageAlign)} ${imageOnLeft ? 'order-1 md:order-none md:col-start-1' : 'order-2 md:order-none md:col-start-2'}`}>
                     {isVideo ? (
-                      <video src={block.src} controls className="w-full h-full max-h-[120px] object-cover rounded-lg" playsInline>
-                  Your browser does not support the video tag.
-                </video>
-              ) : (
-                      <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[120px] object-cover rounded-lg" />
+                      <video src={block.src} controls className="w-full h-full max-h-[400px] object-cover rounded-lg" playsInline>
+                        Your browser does not support the video tag.
+                      </video>
+                    ) : (
+                      <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-h-[400px] object-cover rounded-lg" />
               )}
             </div>
             </div>

@@ -2438,6 +2438,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
 --space-400: 16px;
 --font-size-body-md: 16px;
 --border-radius-pill: 50px;`}</pre>
+          <p style={{ fontSize: '11px', color: '#71717A', marginTop: '4px' }}>← Scroll to see more →</p>
         </div>
         <div style={{ marginBottom: '40px' }}>
           <div
@@ -2895,6 +2896,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
             </tbody>
           </table>
         </div>
+        <p style={{ fontSize: '11px', color: '#71717A', marginTop: '4px' }}>← Scroll to see more →</p>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
           <div className="cwpc-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '24px' }}>
             <div
@@ -3361,6 +3363,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               activeHref="/"
             />
           </div>
+          <p style={{ fontSize: '11px', color: '#71717A', marginTop: '4px' }}>← Scroll to see more →</p>
         </div>
         <div
           className="cwpc-grid-2"
@@ -3913,6 +3916,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
             </div>
           </div>
         </div>
+        <p style={{ fontSize: '11px', color: '#71717A', marginTop: '4px' }}>← Scroll to see more →</p>
         <div style={{ marginBottom: '32px' }}>
           <p
             style={{
@@ -4075,6 +4079,7 @@ import { Card } from './components/prism/organisms/Card/Card'
 <Button label="Download Scorecard" type="default" colorScheme="information" />
 <Input label="Email address" type="email" required hint="We'll send your scorecard here" />
 <Card title="Community Wildfire Resilience" variant="highlighted" />`}</pre>
+          <p style={{ fontSize: '11px', color: '#71717A', marginTop: '4px' }}>← Scroll to see more →</p>
           <p
             style={{
               fontSize: '12px',
@@ -4657,7 +4662,7 @@ export function EmberDesignSystemProject({
 
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 md:px-12 py-12 md:py-16 w-full min-w-0 box-border">
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 md:gap-16 min-w-0">
-          <div className="space-y-8 min-w-0">
+          <div className="space-y-8 min-w-0 order-2 md:order-none">
               <div className="block shrink-0" style={{ width: 48, height: 48 }}>
                 <img
                   src="/cwpc/cwpc-logo.png"
@@ -4752,7 +4757,7 @@ export function EmberDesignSystemProject({
             </button>
           </div>
 
-          <div className="space-y-16 min-w-0 max-w-full">
+          <div className="space-y-16 min-w-0 max-w-full order-1 md:order-none">
             <div className="md:hidden">
               <button 
                 type="button"
@@ -4844,7 +4849,7 @@ export function EmberDesignSystemProject({
                   type="button"
                   onClick={scrollToCaseStudy}
                   aria-label="Scroll to case study"
-                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
+                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 min-h-[44px] min-w-[44px] transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
                   <svg
                     width={44}
@@ -4896,7 +4901,7 @@ export function EmberDesignSystemProject({
             <div
               id="case-study-start"
               className="cwpc-case-study space-y-16 mt-16 w-full min-w-0 max-w-full overflow-x-clip"
-              style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}
+              style={{ scrollMarginTop: 'var(--nav-height, 80px)', overflowX: 'hidden' }}
             >
               <CaseStudyContent />
               <div style={{ marginTop: '80px' }}>

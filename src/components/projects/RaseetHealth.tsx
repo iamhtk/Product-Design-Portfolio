@@ -18,6 +18,7 @@ import { getInitialCaseStudyVisible } from './caseStudyRestore';
 import { getHeaderIndentMargin, getListIndentMargin } from './indentHelpers';
 import { getAlignClass, getBlockAlignClass } from './alignHelpers';
 import type { ContentBlock } from './types';
+import { renderRaseetFinalImage } from './raseetNativeImageBlocks';
 
 /** Resolve list indent level from textBullets block (supports listIndent and legacy indent/indentLevel). */
 function getTextBulletsListIndentLevel(
@@ -29,32 +30,111 @@ function getTextBulletsListIndentLevel(
   return 0;
 }
 
-/** Looping video (GIF-style): autoplay, muted, loop, no controls. Uses ref + play() for reliable autoplay. */
-function LoopingVideo({ src, className, style }: { src: string; className?: string; style?: React.CSSProperties }) {
-  const videoRef = useRef<HTMLVideoElement>(null);
+// Convert raseet device sources to mp4 only (to match browser reliability).
+function normalizeRaseetVidsSrc(src: string): string {
+  if (!src.includes('/raseet/vids/')) return src;
+  if (src.endsWith('.webm')) return `${src.slice(0, -5)}.mp4`;
+  return src;
+}
+
+// Shared mobile flag to apply maxWidth/height auto only on <=768px.
+let _mobileMql: MediaQueryList | null = null;
+let _mobileValue = false;
+const _mobileListeners = new Set<(v: boolean) => void>();
+function ensureMobileQuery() {
+  if (typeof window === 'undefined') return;
+  if (_mobileMql) return;
+
+  _mobileMql = window.matchMedia('(max-width: 768px)');
+  _mobileValue = _mobileMql.matches;
+
+  const handler = () => {
+    _mobileValue = _mobileMql?.matches ?? false;
+    _mobileListeners.forEach((fn) => fn(_mobileValue));
+  };
+
+  if (typeof _mobileMql.addEventListener === 'function') {
+    _mobileMql.addEventListener('change', handler);
+  } else {
+    // Safari fallback.
+    // eslint-disable-next-line deprecation/deprecation
+    _mobileMql.addListener(handler);
+  }
+}
+
+function useIsMobile(): boolean {
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
+    ensureMobileQuery();
+    setIsMobile(_mobileValue);
+
+    const fn = (v: boolean) => setIsMobile(v);
+    _mobileListeners.add(fn);
+    return () => {
+      _mobileListeners.delete(fn);
+    };
+  }, []);
+
+  return isMobile;
+}
+
+/** Looping video: IO triggers load/play once; then loops without pause-on-scroll. */
+function LoopingVideo({
+  src,
+  className,
+  style,
+}: {
+  src: string;
+  className?: string;
+  style?: React.CSSProperties;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const startedRef = useRef(false);
+  const normalizedSrc = normalizeRaseetVidsSrc(src);
+  const isMobile = useIsMobile();
+
+  useEffect(() => {
+    startedRef.current = false;
     const el = videoRef.current;
     if (!el) return;
-    const play = () => {
-      el.muted = true;
-      el.play().catch(() => {});
+
+    let obs: IntersectionObserver | null = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || startedRef.current) return;
+        startedRef.current = true;
+        el.muted = true;
+        if (el.readyState < 2) el.load();
+        el.play().catch(() => {});
+        obs?.disconnect();
+        obs = null;
+      },
+      { threshold: 0.01, rootMargin: '300px' }
+    );
+    obs.observe(el);
+    return () => {
+      obs?.disconnect();
     };
-    el.addEventListener('loadeddata', play);
-    play();
-    return () => el.removeEventListener('loadeddata', play);
-  }, [src]);
+  }, [normalizedSrc]);
+
+  const mobileInlineStyle: React.CSSProperties | undefined = isMobile
+    ? { maxWidth: '100%', height: 'auto' }
+    : undefined;
+
   return (
     <video
       ref={videoRef}
-      src={src}
+      src={normalizedSrc}
       className={className}
-      style={style}
-      loop
+      style={mobileInlineStyle ? { ...style, ...mobileInlineStyle } : style}
+      autoPlay
       muted
+      loop
       playsInline
-      preload="auto"
+      preload="none"
       aria-label="Looping video"
     >
+      <source src={normalizedSrc} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   );
@@ -71,25 +151,21 @@ function SyncedLoopingVideoRow({
   itemClassName?: string;
   videoClassName?: string;
 }) {
-  const playbackTimeRef = useRef<Record<string, number>>({});
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hasTriggeredRef = useRef(false);
+  const isMobile = useIsMobile();
   useEffect(() => {
+    hasTriggeredRef.current = false;
     refs.current = refs.current.slice(0, videos.length);
     const elements = refs.current.filter(Boolean) as HTMLVideoElement[];
     if (elements.length === 0) return;
 
     const loaded = new Set<number>();
     const tryStartTogether = () => {
+      if (!hasTriggeredRef.current) return;
       if (loaded.size !== videos.length) return;
-      elements.forEach((el, idx) => {
-        const saved = playbackTimeRef.current[videos[idx].src];
-        if (typeof saved === 'number' && Number.isFinite(saved) && saved > 0) {
-          try {
-            el.currentTime = saved;
-          } catch {
-            // ignore seek errors before metadata is ready
-          }
-        }
+      elements.forEach((el) => {
         el.muted = true;
       });
       elements.forEach((el) => {
@@ -102,44 +178,66 @@ function SyncedLoopingVideoRow({
         loaded.add(idx);
         tryStartTogether();
       };
-      const onTimeUpdate = () => {
-        playbackTimeRef.current[videos[idx].src] = el.currentTime || 0;
-      };
       el.addEventListener('loadeddata', onLoaded);
-      el.addEventListener('timeupdate', onTimeUpdate);
       if (el.readyState >= 2) {
         loaded.add(idx);
       }
-      return { el, onLoaded, onTimeUpdate };
+      return { el, onLoaded };
     });
 
-    tryStartTogether();
+    const node = containerRef.current;
+    if (!node) {
+      return () => {
+        handlers.forEach(({ el, onLoaded }) => {
+          el.removeEventListener('loadeddata', onLoaded);
+        });
+      };
+    }
+
+    let obs: IntersectionObserver | null = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasTriggeredRef.current) return;
+        hasTriggeredRef.current = true;
+        elements.forEach((el) => {
+          if (el.readyState < 2) el.load();
+        });
+        tryStartTogether();
+        obs?.disconnect();
+        obs = null;
+      },
+      { threshold: 0.01, rootMargin: '300px' }
+    );
+    obs.observe(node);
 
     return () => {
-      handlers.forEach(({ el, onLoaded, onTimeUpdate }) => {
+      obs?.disconnect();
+      handlers.forEach(({ el, onLoaded }) => {
         el.removeEventListener('loadeddata', onLoaded);
-        el.removeEventListener('timeupdate', onTimeUpdate);
       });
     };
   }, [videos, videos.length]);
 
   return (
-    <div className={columnsClassName}>
+    <div ref={containerRef} className={columnsClassName}>
       {videos.map((video, index) => (
         <div key={`${video.src}-${index}`} className={itemClassName ?? 'w-full flex justify-start'}>
           <video
             ref={(el) => {
               refs.current[index] = el;
             }}
-            src={video.src}
+            src={normalizeRaseetVidsSrc(video.src)}
             className={videoClassName ?? 'w-full h-auto max-w-full'}
-            style={video.style}
+            style={
+              isMobile ? { ...video.style, maxWidth: '100%', height: 'auto' } : video.style
+            }
             loop
             muted
             playsInline
-            preload="auto"
+            autoPlay
+            preload="none"
             aria-label="Looping video"
           >
+            <source src={normalizeRaseetVidsSrc(video.src)} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>
@@ -148,6 +246,16 @@ function SyncedLoopingVideoRow({
   );
 }
 
+/** Row3 triplets where all videos are under /raseet/vids/ and none are iPad demos — uniform iPhone grid; skip per-video maxHeight so row md:h-[500px] controls height. */
+function isRaseetIphoneOnlyRow3Triplet(a: { src: string }, b: { src: string }, c: { src: string }) {
+  const paths = [a.src, b.src, c.src];
+  return (
+    paths.every((p) => p.includes('/raseet/vids/')) &&
+    !paths.some((p) => p.includes('PP-demo') || p.includes('HP-demo'))
+  );
+}
+
+/*
 function SyncedLoopingVideoMosaic({
   iphoneVideos,
   ipadVideos,
@@ -156,26 +264,22 @@ function SyncedLoopingVideoMosaic({
   ipadVideos: { src: string; style?: React.CSSProperties }[];
 }) {
   const videos = [...iphoneVideos, ...ipadVideos];
-  const playbackTimeRef = useRef<Record<string, number>>({});
   const refs = useRef<(HTMLVideoElement | null)[]>([]);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const hasTriggeredRef = useRef(false);
+  const isMobile = useIsMobile();
 
   useEffect(() => {
+    hasTriggeredRef.current = false;
     refs.current = refs.current.slice(0, videos.length);
     const elements = refs.current.filter(Boolean) as HTMLVideoElement[];
     if (elements.length === 0) return;
 
     const loaded = new Set<number>();
     const tryStartTogether = () => {
+      if (!hasTriggeredRef.current) return;
       if (loaded.size !== videos.length) return;
-      elements.forEach((el, idx) => {
-        const saved = playbackTimeRef.current[videos[idx].src];
-        if (typeof saved === 'number' && Number.isFinite(saved) && saved > 0) {
-          try {
-            el.currentTime = saved;
-          } catch {
-            // ignore seek errors before metadata is ready
-          }
-        }
+      elements.forEach((el) => {
         el.muted = true;
       });
       elements.forEach((el) => {
@@ -188,21 +292,39 @@ function SyncedLoopingVideoMosaic({
         loaded.add(idx);
         tryStartTogether();
       };
-      const onTimeUpdate = () => {
-        playbackTimeRef.current[videos[idx].src] = el.currentTime || 0;
-      };
       el.addEventListener('loadeddata', onLoaded);
-      el.addEventListener('timeupdate', onTimeUpdate);
       if (el.readyState >= 2) loaded.add(idx);
-      return { el, onLoaded, onTimeUpdate };
+      return { el, onLoaded };
     });
 
-    tryStartTogether();
+    const node = containerRef.current;
+    if (!node) {
+      return () => {
+        handlers.forEach(({ el, onLoaded }) => {
+          el.removeEventListener('loadeddata', onLoaded);
+        });
+      };
+    }
+
+    let obs: IntersectionObserver | null = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting || hasTriggeredRef.current) return;
+        hasTriggeredRef.current = true;
+        elements.forEach((el) => {
+          if (el.readyState < 2) el.load();
+        });
+        tryStartTogether();
+        obs?.disconnect();
+        obs = null;
+      },
+      { threshold: 0.01, rootMargin: '300px' }
+    );
+    obs.observe(node);
 
     return () => {
-      handlers.forEach(({ el, onLoaded, onTimeUpdate }) => {
+      obs?.disconnect();
+      handlers.forEach(({ el, onLoaded }) => {
         el.removeEventListener('loadeddata', onLoaded);
-        el.removeEventListener('timeupdate', onTimeUpdate);
       });
     };
   }, [videos, videos.length]);
@@ -213,21 +335,23 @@ function SyncedLoopingVideoMosaic({
       ref={(el) => {
         refs.current[idx] = el;
       }}
-      src={video.src}
+      src={normalizeRaseetVidsSrc(video.src)}
       className="w-full h-auto max-w-full"
-      style={video.style}
+      style={isMobile ? { ...video.style, maxWidth: '100%', height: 'auto' } : video.style}
       loop
       muted
       playsInline
-      preload="auto"
+      autoPlay
+      preload="none"
       aria-label="Looping video"
     >
+      <source src={normalizeRaseetVidsSrc(video.src)} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   );
 
   return (
-    <div className="flex flex-col md:flex-row gap-6 items-start md:items-center">
+    <div ref={containerRef} className="flex flex-col md:flex-row gap-6 items-start md:items-center">
       <div className="flex flex-col gap-6 flex-1 min-w-0">
         {ipadVideos.map((video, idx) => (
           <div key={`ipad-${video.src}-${idx}`} className="w-full flex justify-start">
@@ -245,6 +369,7 @@ function SyncedLoopingVideoMosaic({
     </div>
   );
 }
+*/
 
 const CURRENT_PROJECT_ID = 'RaseetHealth';
 const RASEET_WEBSITE_URL = 'https://raseet.com';
@@ -259,6 +384,105 @@ const RASEET_IMPACT_STATS = [
   { value: '21,000+', label: 'End-Customers Connected', end: 21000, prefix: '', suffix: '+' },
 ] as const;
 
+function formatImpactCount(value: number) {
+  return value.toLocaleString('en-US');
+}
+
+function RaseetImpactStatsAnimatedBlock({ className }: { className?: string }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+  const [counts, setCounts] = useState<number[]>(() => RASEET_IMPACT_STATS.map(() => 0));
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(([entry]) => setInView(entry.isIntersecting), {
+      threshold: 0.3,
+    });
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const frameIds: (number | undefined)[] = [];
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+    const durationMs = 1200;
+
+    if (!inView) {
+      setCounts(RASEET_IMPACT_STATS.map(() => 0));
+      return () => {
+        frameIds.forEach((id) => id && cancelAnimationFrame(id));
+        timeouts.forEach((t) => clearTimeout(t));
+      };
+    }
+
+    setCounts(RASEET_IMPACT_STATS.map(() => 0));
+
+    RASEET_IMPACT_STATS.forEach((stat, index) => {
+      const timeout = setTimeout(() => {
+        const start = performance.now();
+        const animate = (now: number) => {
+          const progress = Math.min((now - start) / durationMs, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          const nextValue = Math.round(stat.end * eased);
+          setCounts((prev) => {
+            const clone = [...prev];
+            clone[index] = nextValue;
+            return clone;
+          });
+          if (progress < 1) {
+            frameIds[index] = requestAnimationFrame(animate);
+          }
+        };
+        frameIds[index] = requestAnimationFrame(animate);
+      }, index * 100);
+      timeouts.push(timeout);
+    });
+
+    return () => {
+      frameIds.forEach((id) => id && cancelAnimationFrame(id));
+      timeouts.forEach((t) => clearTimeout(t));
+    };
+  }, [inView]);
+
+  return (
+    <div
+      ref={ref}
+      className={`raseet-impact-stats${inView ? ' is-visible' : ''}${className ? ` ${className}` : ''}`}
+    >
+      <div className="hidden md:flex items-start justify-between gap-6">
+        {RASEET_IMPACT_STATS.map((stat, index) => (
+          <div key={stat.label} className="text-center flex-1 min-w-0">
+            <p className="raseet-impact-stat-value">
+              {stat.prefix}
+              {formatImpactCount(counts[index])}
+              {stat.suffix}
+            </p>
+            <p className="raseet-impact-stat-label">{stat.label}</p>
+          </div>
+        ))}
+      </div>
+      <div className="md:hidden">
+        <div className="raseet-impact-mobile-grid">
+          {RASEET_IMPACT_STATS.map((stat, index) => (
+            <div
+              key={stat.label}
+              className={`raseet-impact-mobile-item ${index === 4 ? 'raseet-impact-mobile-item-last' : ''}`}
+            >
+              <p className="raseet-impact-stat-value">
+                {stat.prefix}
+                {formatImpactCount(counts[index])}
+                {stat.suffix}
+              </p>
+              <p className="raseet-impact-stat-label">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 interface RaseetHealthProjectProps {
   onBack: () => void;
   onProjectClick?: (projectId: string) => void;
@@ -270,12 +494,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
   const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
-  const [impactStatsVisible, setImpactStatsVisible] = useState(false);
-  const [impactStatCounts, setImpactStatCounts] = useState<number[]>(() =>
-    RASEET_IMPACT_STATS.map((stat) => stat.end)
-  );
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
-  const impactStatsRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -300,98 +519,6 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     };
   }, []);
 
-  useEffect(() => {
-    if (!impactStatsVisible) return;
-    setImpactStatCounts(RASEET_IMPACT_STATS.map(() => 0));
-    const frameIds: number[] = [];
-    const timeouts: ReturnType<typeof setTimeout>[] = [];
-    const durationMs = 1200;
-
-    RASEET_IMPACT_STATS.forEach((stat, index) => {
-      const timeout = setTimeout(() => {
-        const start = performance.now();
-        const animate = (now: number) => {
-          const progress = Math.min((now - start) / durationMs, 1);
-          const eased = 1 - Math.pow(1 - progress, 3);
-          const nextValue = Math.round(stat.end * eased);
-          setImpactStatCounts((prev) => {
-            const clone = [...prev];
-            clone[index] = nextValue;
-            return clone;
-          });
-          if (progress < 1) {
-            frameIds[index] = requestAnimationFrame(animate);
-          }
-        };
-        frameIds[index] = requestAnimationFrame(animate);
-      }, index * 100);
-      timeouts.push(timeout);
-    });
-
-    return () => {
-      frameIds.forEach((id) => {
-        if (id) cancelAnimationFrame(id);
-      });
-      timeouts.forEach((id) => clearTimeout(id));
-    };
-  }, [impactStatsVisible]);
-
-  const formatImpactCount = (value: number) => value.toLocaleString('en-US');
-
-  const renderImpactStatsSection = () => (
-    <div
-      ref={impactStatsRef}
-      className={`raseet-impact-stats ${impactStatsVisible ? 'is-visible' : ''}`}
-    >
-      <div className="hidden md:flex items-start justify-between gap-6">
-        {RASEET_IMPACT_STATS.map((stat, index) => (
-          <div key={stat.label} className="text-center flex-1 min-w-0">
-            <p className="raseet-impact-stat-value">
-              {stat.prefix}
-              {formatImpactCount(impactStatCounts[index])}
-              {stat.suffix}
-            </p>
-            <p className="raseet-impact-stat-label">{stat.label}</p>
-          </div>
-        ))}
-      </div>
-      <div className="md:hidden">
-        <div className="raseet-impact-mobile-grid">
-          {RASEET_IMPACT_STATS.map((stat, index) => (
-            <div
-              key={stat.label}
-              className={`raseet-impact-mobile-item ${index === 4 ? 'raseet-impact-mobile-item-last' : ''}`}
-            >
-              <p className="raseet-impact-stat-value">
-                {stat.prefix}
-                {formatImpactCount(impactStatCounts[index])}
-                {stat.suffix}
-              </p>
-              <p className="raseet-impact-stat-label">{stat.label}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  );
-
-  useEffect(() => {
-    if (!caseStudyVisible) return;
-    const node = impactStatsRef.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setImpactStatsVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.2, rootMargin: '0px 0px -10% 0px' }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, [caseStudyVisible]);
-
   // ═══════════════════════════════════════════════════════════════════════
   // EDIT YOUR PROJECT CONTENT BELOW
   // ═══════════════════════════════════════════════════════════════════════
@@ -399,9 +526,9 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   const title = 'Raseet Health';
   const company = 'Raseet Health';
   const subtitle = 'An intuitive platform for pharmacies, catering to users of all ages and tech levels, with a focus on a broad audience.';
-  const headerColor = '#50C878';
-  const progressBarColor = '#3DB368';
-  const arrowColor = '#50C878';
+  const headerColor = '#1A6B8A';
+  const progressBarColor = '#1A6B8A';
+  const arrowColor = '#1A6B8A';
   const icon = 'raseet/raseet_logo2.png'; // Sidebar icon (left column) - Add image/video path here
   const headerIcon = '/raseet/test5.png'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'UX Research, End to end Product Design, UX/UI Design, Design Systems';
@@ -457,17 +584,17 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     // { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
     // Intro
     // { type: 'image', src: '/raseet/cover.png', maxHeight: '800px' },
-    // { type: 'video', src: '/raseet/vids/onboarding-1.mov', maxHeight: '400px', group: 'mosaic4' },  // iphone screen 1
+    // { type: 'video', src: '/raseet/vids/onboarding-1.mp4', maxHeight: '400px', group: 'mosaic4' },  // iphone screen 1
   
-    // { type: 'video', src: '/raseet/vids/PP-demo.mov', maxHeight: '400px', group: 'mosaic4' }, // ipad screen 1
-    // { type: 'video', src: '/raseet/vids/HP-demo.mov', maxHeight: '400px', group: 'mosaic4' }, // ipad screen 2
-    // { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'mosaic4' }, // iphone screen 2
+    // { type: 'video', src: '/raseet/vids/PP-demo.mp4', maxHeight: '400px', group: 'mosaic4' }, // ipad screen 1
+    // { type: 'video', src: '/raseet/vids/HP-demo.mp4', maxHeight: '400px', group: 'mosaic4' }, // ipad screen 2
+    // { type: 'video', src: '/raseet/vids/onboarding-2.mp4', maxHeight: '400px', group: 'mosaic4' }, // iphone screen 2
     // { type: 'externalLink', label: 'View in Figma ↗', href: RASEET_FIGMA_URL, variant: 'button' },
     
   
-    { type: 'video', src: '/raseet/vids/PP-demo.mov', maxHeight: '400px', group: 'row3' }, // ipad screen 1
-    { type: 'video', src: '/raseet/vids/HP-demo.mp4', maxHeight: '400px', group: 'row3' }, // ipad screen 2
-    { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'row3' }, // iphone screen 2
+    { type: 'video', src: '/raseet/vids/2/PP-demo.mp4', maxHeight: '400px', group: 'row3' }, // ipad screen 1
+    { type: 'video', src: '/raseet/vids/2/HP-demo.mp4', maxHeight: '400px', group: 'row3' }, // ipad screen 2
+    { type: 'video', src: '/raseet/vids/2/onboarding-2.mp4', maxHeight: '400px', group: 'row3' }, // iphone screen 2
     { type: 'externalLink', label: 'View Mobile App Prototype ↗', href: RASEET_FIGMA_MOBILE_URL, variant: 'button' },
     
     { type: 'text', header: 'Project Statement', content: 'Empower local pharmacies to compete with e‑pharmacy giants by delivering a simpler, more trustworthy way to manage prescriptions, health records, and orders—across in‑store and mobile experiences.' },
@@ -528,8 +655,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
     { type: 'text', header: '1.User Interviews:', subheader: 'Participants:', content: "", indent: true },
 
-    { type: 'image', src: '/raseet/final/1.png', indent: true },
-    { type: 'image', src: '/raseet/final/2.png', indent: true },
+    { type: 'image', src: '/raseet/final/1.png', indent: true, maxHeight: '200px'  },
+    { type: 'image', src: '/raseet/final/2.png', indent: true, maxHeight: '150px'  },
 
     { type: 'textBullets', header: 'Process:', items: [
       "Conducted 1-hour interviews focusing on workflows, challenges, and expectations.",
@@ -682,11 +809,16 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   'Secure access to patient prescriptions and medical records enables informed decision-making.',
   'Real-time updates ensure accurate and timely care for patients.',
 ],listIndent: 1 },
+
+{ type: 'video', src: '/raseet/vids/2/HP-demo.mp4', maxHeight: '500px', group: 'row3' },
 { type: 'externalLink', label: 'Healthcare Provider Dashboard ↗', href: RASEET_FIGMA_HCP_DASHBOARD_URL, variant: 'inline' },
 
 { type: 'textBullets', header: 'Patients', items: [
   'A personal dashboard allows users to manage prescriptions, view health records, and track orders seamlessly.',
 ],listIndent: 1 },
+
+{ type: 'video', src: '/raseet/vids/2/PP-demo.mp4', maxHeight: '500px', group: 'row3' },
+
 { type: 'externalLink', label: 'Partner Pharmacy Dashboard ↗', href: RASEET_FIGMA_PARTNER_DASHBOARD_URL, variant: 'inline' },
 
 { type: 'textTextRow', headerLeft: 'Three-way platform Integration', contentLeft: "Three way platform connect pharmacies, healthcare providers, and customers, ensuring real-time data flow and consistency.", headerRight: 'Secure Data Sharing', contentRight: "Implemented end-to-end encryption and role-based access control to safeguard sensitive data like medical records and prescriptions." },
@@ -893,13 +1025,13 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 // { type: 'image', src: '/raseet/ui/support_1.png', maxHeight: '700px' },
 
 
-    // { type: 'video', src: '/raseet/vids/onboarding-1.mov', maxHeight: '400px', group: 'row' },
-    { type: 'video', src: '/raseet/vids/onboarding-2.mov', maxHeight: '400px', group: 'row3' },
-    { type: 'video', src: '/raseet/vids/homepage-nav.mov', maxHeight: '640px', group: 'row3' },
-    { type: 'video', src: '/raseet/vids/homepage-features.mov', maxHeight: '640px', group: 'row3' },
-    { type: 'video', src: '/raseet/vids/search.mov', maxHeight: '500px', group: 'row3' },
-    { type: 'video', src: '/raseet/vids/order-cart.mov', maxHeight: '500px', group: 'row3' },
-    { type: 'video', src: '/raseet/vids/profile.mov', maxHeight: '500px', group: 'row3' },
+    // { type: 'video', src: '/raseet/vids/onboarding-1.mp4', maxHeight: '400px', group: 'row' },
+    { type: 'video', src: '/raseet/vids/2/onboarding-2.mp4', maxHeight: '400px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/2/homepage-nav.mp4', maxHeight: '640px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/2/homepage-features.mp4', maxHeight: '640px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/2/search.mp4', maxHeight: '500px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/2/order-cart.mp4', maxHeight: '500px', group: 'row3' },
+    { type: 'video', src: '/raseet/vids/2/profile.mp4', maxHeight: '500px', group: 'row3' },
    
 
 
@@ -952,7 +1084,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   // ═══════════════════════════════════════════════════════════════════════
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white" style={{ overflowX: 'hidden' }}>
       <style>{`
         .raseet-hero-cta {
           display: inline-flex;
@@ -1100,6 +1232,20 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
           #case-study-start video[src*='HP-demo'] {
             max-height: 200px !important;
           }
+          #case-study-start video[src*='PERSONA'],
+          #case-study-start video[src*='/raseet/EM'],
+          #case-study-start video[src*='/raseet/UJ'] {
+            max-height: 400px !important;
+            width: auto !important;
+            height: auto !important;
+            max-width: 100% !important;
+          }
+        }
+        video {
+          -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+          backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
         }
       `}</style>
       <ScrollToTop />
@@ -1143,11 +1289,11 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               {(() => {
                 const iconPath = headerIcon;
                 if (!iconPath) return null;
-                const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm') || iconPath.endsWith('.mov');
+                const isVideo = iconPath.endsWith('.mp4') || iconPath.endsWith('.webm');
                 const sizeClasses = 'max-h-full max-w-full object-contain';
                 if (isVideo) {
                   return (
-                    <video src={iconPath} className={sizeClasses} autoPlay loop muted playsInline />
+                    <LoopingVideo src={iconPath} className={sizeClasses} />
                   );
                 }
                 return (
@@ -1165,7 +1311,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 md:gap-16">
-          <div className="space-y-8">
+          <div className="space-y-8 order-2 md:order-none">
             {icon ? (
               <div className="block" style={{ width: 48, height: 48 }}>
                 <ImageWithFallback
@@ -1250,7 +1396,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
             </button>
           </div>
 
-          <div className="space-y-16">
+          <div className="space-y-16 order-1 md:order-none">
             <div className="md:hidden">
               <button 
                 onClick={onBack}
@@ -1316,7 +1462,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                   type="button"
                   onClick={scrollToCaseStudy}
                   aria-label="Scroll to case study"
-                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
+                  className="group block cursor-pointer border-0 bg-transparent p-0 mt-8 min-h-[44px] min-w-[44px] transition-transform duration-300 ease-out hover:scale-105 focus:outline-none focus:ring-0"
                 >
                   <svg
                     width={44}
@@ -1381,7 +1527,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               if (block.header === 'Project Statement') {
                 return (
                   <div key={index} className="space-y-16">
-                    {renderImpactStatsSection()}
+                    <RaseetImpactStatsAnimatedBlock />
                     <div className={`space-y-6 ${getAlignClass(block.align)}`}>
                       {block.header && (
                         <h3
@@ -1516,7 +1662,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               );
             }
             if (block.type === 'textImageRow') {
-              const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
+              const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm');
               const imageOnLeft = block.imageSide === 'left';
               const textCol = (
                 <div key={`${index}-text`} className={`space-y-6 ${getAlignClass(block.align)}`}>
@@ -1571,9 +1717,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               const imageCol = (
                 <div key={`${index}-img`} className={`w-full overflow-hidden rounded-lg ${getBlockAlignClass(block.imageAlign)}`} style={imageContainerStyle}>
                   {isVideo ? (
-                    <video src={block.src} controls className="w-full h-full max-w-full object-contain rounded-lg" playsInline style={imageMediaStyle}>
-                      Your browser does not support the video tag.
-                    </video>
+                    <LoopingVideo src={block.src} className="w-full h-full max-w-full object-contain rounded-lg" style={imageMediaStyle} />
                   ) : (
                     <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-full max-w-full object-contain rounded-lg" style={imageMediaStyle} />
                   )}
@@ -1587,29 +1731,50 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
             }
             if (block.type === 'textTextRow') {
               const alignClass = getAlignClass(block.align);
+              const headerLeft = block.headerLeft ?? '';
+              const headerRight = block.headerRight ?? '';
+              const leftBothEmpty = !headerLeft.trim() && !block.contentLeft.trim();
+              const rightBothEmpty = !headerRight.trim() && !block.contentRight.trim();
+              const hideLeftOnMobile = !block.contentLeft.trim();
+              const hideRightOnMobile = !block.contentRight.trim();
+              const onlyRightColumn = leftBothEmpty && !rightBothEmpty;
+              const onlyLeftColumn = rightBothEmpty && !leftBothEmpty;
+
               return (
                 <div key={index} className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-start">
-                  <div className={`space-y-6 ${alignClass}`}>
-                    {block.headerLeft && (
-                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
-                        {block.headerLeft}
-                      </h3>
-                    )}
-                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
-                  </div>
-                  <div className={`space-y-6 ${alignClass}`}>
-                    {block.headerRight && (
-                      <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
-                        {block.headerRight}
-                </h3>
-              )}
-                    <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
-                  </div>
-            </div>
+                  {!leftBothEmpty && (
+                    <div
+                      className={`space-y-6 ${alignClass} ${hideLeftOnMobile ? 'hidden md:block' : ''} ${onlyLeftColumn ? 'md:col-span-2' : ''}`}
+                    >
+                      {headerLeft ? (
+                        <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                          {headerLeft}
+                        </h3>
+                      ) : null}
+                      {block.contentLeft ? (
+                        <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentLeft}</p>
+                      ) : null}
+                    </div>
+                  )}
+                  {!rightBothEmpty && (
+                    <div
+                      className={`space-y-6 ${alignClass} ${hideRightOnMobile ? 'hidden md:block' : ''} ${onlyRightColumn ? 'md:col-span-2' : ''}`}
+                    >
+                      {headerRight ? (
+                        <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                          {headerRight}
+                        </h3>
+                      ) : null}
+                      {block.contentRight ? (
+                        <p className="text-[18px] leading-[1.85] text-gray-700">{block.contentRight}</p>
+                      ) : null}
+                    </div>
+                  )}
+                </div>
               );
             }
             if (block.type === 'video') {
-              if (block.group === 'mosaic4') {
+              /* if (block.group === 'mosaic4') {
                 const second = blocks[index + 1];
                 const third = blocks[index + 2];
                 const fourth = blocks[index + 3];
@@ -1639,7 +1804,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                     />
                   );
                 }
-              }
+              } */
               if (block.group === 'row3') {
                 const second = blocks[index + 1];
                 const third = blocks[index + 2];
@@ -1651,6 +1816,13 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                 if (hasRowThree) {
                   skipped.add(index + 1);
                   skipped.add(index + 2);
+                  const iphoneOnlyRow3 = isRaseetIphoneOnlyRow3Triplet(block, second, third);
+                  const row3VideoStyle = (b: typeof block) =>
+                    iphoneOnlyRow3
+                      ? undefined
+                      : b.maxHeight
+                        ? { maxHeight: b.maxHeight, objectFit: 'contain' as const }
+                        : undefined;
                   return (
                     <SyncedLoopingVideoRow
                       key={index}
@@ -1658,9 +1830,9 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                       itemClassName="h-full flex justify-center items-center"
                       videoClassName="h-full w-auto"
                       videos={[
-                        { src: block.src },
-                        { src: second.src },
-                        { src: third.src },
+                        { src: block.src, style: row3VideoStyle(block) },
+                        { src: second.src, style: row3VideoStyle(second) },
+                        { src: third.src, style: row3VideoStyle(third) },
                       ]}
                     />
                   );
@@ -1698,6 +1870,26 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               );
             }
             if (block.type === 'image') {
+              const raseetNative = renderRaseetFinalImage(block.src);
+              if (raseetNative) {
+                const marginLeft =
+                  block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
+                const containerStyle = {
+                  ...(marginLeft && {
+                    marginLeft,
+                    maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)',
+                  }),
+                };
+                return (
+                  <div
+                    key={index}
+                    className={`w-full flex ${block.align === 'center' ? 'justify-center' : block.align === 'right' ? 'justify-end' : 'justify-start'}`}
+                    style={containerStyle}
+                  >
+                    <div className="w-full max-w-full">{raseetNative}</div>
+                  </div>
+                );
+              }
               if (block.group === 'row') {
                 const next = blocks[index + 1];
                 const nextIsRowImage = next && next.type === 'image' && next.group === 'row';
@@ -1726,7 +1918,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                   );
                 }
               }
-              const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm') || block.src.endsWith('.mov');
+              const isVideo = block.src.endsWith('.mp4') || block.src.endsWith('.webm');
               const marginLeft = block.indentLevel === 2 ? '5rem' : block.indent ? '2.5rem' : undefined;
               const containerStyle = {
                 ...(marginLeft && { marginLeft, maxWidth: marginLeft === '5rem' ? 'calc(100% - 5rem)' : 'calc(100% - 2.5rem)' }),
@@ -1736,9 +1928,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               return (
                 <div key={index} className={`w-full flex ${block.align === 'center' ? 'justify-center' : block.align === 'right' ? 'justify-end' : 'justify-start'}`} style={containerStyle}>
                   {isVideo ? (
-                    <video src={block.src} controls className="w-full h-auto max-w-full" playsInline style={mediaStyle}>
-                  Your browser does not support the video tag.
-                </video>
+                    <LoopingVideo src={block.src} className="w-full h-auto max-w-full" style={mediaStyle} />
               ) : (
                     <ImageWithFallback src={block.src} alt={`${title} - ${index + 1}`} className="w-full h-auto max-w-full" style={mediaStyle} />
               )}
@@ -1770,7 +1960,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                       href={block.href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center justify-center px-4 py-2 border border-[#1A6B8A] text-[#1A6B8A] text-[14px] font-bold hover:bg-[#1A6B8A] hover:text-white transition-colors"
+                      className="inline-flex items-center justify-center px-4 py-3 border border-[#1A6B8A] text-[#1A6B8A] text-[14px] font-bold hover:bg-[#1A6B8A] hover:text-white transition-colors"
                     >
                       {block.label}
                     </a>
@@ -1791,31 +1981,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               );
             }
             if (block.type === 'impactStatsInline') {
-              return (
-                <div key={index} className="raseet-impact-stats is-visible">
-                  <div className="hidden md:flex items-start justify-between gap-6">
-                    {RASEET_IMPACT_STATS.map((stat) => (
-                      <div key={stat.label} className="text-center flex-1 min-w-0">
-                        <p className="raseet-impact-stat-value">{stat.value}</p>
-                        <p className="raseet-impact-stat-label">{stat.label}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="md:hidden">
-                    <div className="raseet-impact-mobile-grid">
-                      {RASEET_IMPACT_STATS.map((stat, index) => (
-                        <div
-                          key={stat.label}
-                          className={`raseet-impact-mobile-item ${index === 4 ? 'raseet-impact-mobile-item-last' : ''}`}
-                        >
-                          <p className="raseet-impact-stat-value">{stat.value}</p>
-                          <p className="raseet-impact-stat-label">{stat.label}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              );
+              return <RaseetImpactStatsAnimatedBlock key={index} />;
             }
             if (block.type === 'colors') {
               return (
