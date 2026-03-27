@@ -270,7 +270,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
   const [impactStatsVisible, setImpactStatsVisible] = useState(false);
   const [impactStatCounts, setImpactStatCounts] = useState<number[]>(() =>
-    RASEET_IMPACT_STATS.map(() => 0)
+    RASEET_IMPACT_STATS.map((stat) => stat.end)
   );
   const hideBarTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const impactStatsRef = useRef<HTMLDivElement | null>(null);
@@ -300,6 +300,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
   useEffect(() => {
     if (!impactStatsVisible) return;
+    setImpactStatCounts(RASEET_IMPACT_STATS.map(() => 0));
     const frameIds: number[] = [];
     const timeouts: ReturnType<typeof setTimeout>[] = [];
     const durationMs = 1200;
@@ -1026,18 +1027,18 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
           color: #124E65;
         }
         .raseet-impact-stats {
+          position: relative;
+          left: 50%;
+          transform: translateX(-50%);
           width: 100vw;
-          margin-left: calc(-50vw + 50%);
           padding: 48px clamp(40px, 5vw, 72px);
           border-top: 1px solid rgba(26, 107, 138, 0.35);
           border-bottom: 1px solid rgba(26, 107, 138, 0.35);
-          opacity: 0;
-          transform: translateY(10px);
-          transition: opacity 0.5s ease, transform 0.5s ease;
+          opacity: 1;
+          transition: opacity 0.5s ease;
         }
         .raseet-impact-stats.is-visible {
           opacity: 1;
-          transform: translateY(0);
         }
         .raseet-impact-stat-value {
           color: #1A6B8A;
