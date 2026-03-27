@@ -40,8 +40,8 @@ export type ContentBlock =
       /** @deprecated Use listIndent: 2 instead */
       indentLevel?: 2;
     }
-  | { type: 'image'; src: string; /** Align image: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string; /** Optional grouping for row rendering */ group?: 'row' | 'row3' }
-  | { type: 'video'; src: string; /** Align video: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string; /** Optional grouping for row rendering */ group?: 'row' | 'row3' }
+  | { type: 'image'; src: string; /** Align image: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string; /** Optional grouping for row rendering */ group?: 'row' | 'row3' | 'mosaic4' }
+  | { type: 'video'; src: string; /** Align video: left | center | right */ align?: 'left' | 'center' | 'right' | 'justify'; indent?: boolean; indentLevel?: 2; maxHeight?: string; /** Optional grouping for row rendering */ group?: 'row' | 'row3' | 'mosaic4' }
   | {
       type: 'textImageRow';
       header?: string;
@@ -68,7 +68,9 @@ export type ContentBlock =
       maxWidth?: string;
     }
   | { type: 'textTextRow'; headerLeft?: string; contentLeft: string; headerRight?: string; contentRight: string; /** Align both columns: left | center | right | justify */ align?: 'left' | 'center' | 'right' | 'justify' }
-  | { type: 'colors'; colors: string[] };
+  | { type: 'colors'; colors: string[] }
+  | { type: 'imageCaption'; src: string; caption: string; maxHeight?: string }
+  | { type: 'externalLink'; label: string; href: string; variant?: 'button' | 'inline'; align?: 'left' | 'center' | 'right' };
 
 export type ProjectSection = {
   header?: string; // Optional - leave empty if you don't want a header
