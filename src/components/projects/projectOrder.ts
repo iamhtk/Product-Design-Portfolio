@@ -6,7 +6,6 @@ export const PROJECT_ORDER: { id: string; title: string }[] = [
   { id: 'AutomotiveUX_GM', title: "Automotive UX - Cadillac Escalade Design Proposal" },
   { id: 'RaseetHealth', title: 'Raseet Health: Empowering Local Pharmacies' },
   { id: 'BMW', title: "Redesigning BMW's Digital Interface" },
-  { id: 'PortfolioDesignSystem', title: 'Portfolio Design System' },
   { id: 'CalmiRing', title: 'CalmiRing' },
   { id: 'jobgenius', title: 'JobGenius' },
   { id: 'bound', title: 'Bound International UX Audit: Identifying and Solving Key Usability Issues' },

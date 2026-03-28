@@ -14,8 +14,7 @@ type Page =
   | 'resume'
   | 'favorites'
   | 'blog'
-  | 'analytics'
-  | 'design-system';
+  | 'analytics';
 
 interface NavigationProps {
   currentPage: Page | 'project';

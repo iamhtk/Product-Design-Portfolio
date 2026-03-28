@@ -694,7 +694,6 @@ import { PROJECT_ENABLED, PROJECT_SLUGS } from './components/projects/projectOrd
 import { Blog } from './components/Blog';
 import { FavoritesPage } from './components/FavoritesPage';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
-import { DesignSystemPage } from './components/DesignSystemPage';
 import {
   trackPageView,
   trackProjectOpen,
@@ -715,7 +714,6 @@ type Page =
   | 'favorites'
   | 'blog'
   | 'analytics'
-  | 'design-system'
   | 'project';
 
 const VALID_PROJECT_IDS = Object.keys(projectComponents);
@@ -729,7 +727,6 @@ const ROUTE_PATHS: Record<Exclude<Page, 'project'>, string> = {
   favorites: '/myfavorites',
   blog: '/blog',
   analytics: '/analytics',
-  'design-system': '/design-system',
 };
 
 const PATH_TO_PAGE: Record<string, Page> = {
@@ -740,7 +737,6 @@ const PATH_TO_PAGE: Record<string, Page> = {
   '/myfavorites': 'favorites',
   '/blog': 'blog',
   '/analytics': 'analytics',
-  '/design-system': 'design-system',
 };
 
 function getProjectIdFromSegment(segment: string): string | null {
@@ -959,9 +955,6 @@ function App() {
       <div className="page-transition">
         {currentPage === 'work' && (
           <HomePage onProjectClick={handleProjectClick} onNavigate={handleNavigate} />
-        )}
-        {currentPage === 'design-system' && (
-          <DesignSystemPage onNavigate={handleNavigate} currentPage={currentPage} />
         )}
         {currentPage === 'about' && <AboutPage />}
         {currentPage === 'friends' && <FriendsPage />}

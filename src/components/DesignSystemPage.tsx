@@ -21,8 +21,7 @@ type NavigatePage =
   | 'resume'
   | 'favorites'
   | 'blog'
-  | 'analytics'
-  | 'design-system';
+  | 'analytics';
 
 export interface DesignSystemPageProps {
   onNavigate: (page: NavigatePage) => void;
