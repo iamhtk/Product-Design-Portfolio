@@ -29,7 +29,7 @@ export const Blockquote = ({
     <blockquote className={rootClass}>
       <div className={styles.quote}>{children}</div>
       {cite ? (
-        <footer className={styles.citation}>— {cite}</footer>
+        <footer className={styles.citation}>{cite}</footer>
       ) : null}
     </blockquote>
   );

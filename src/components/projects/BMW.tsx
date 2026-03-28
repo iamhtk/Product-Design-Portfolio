@@ -73,7 +73,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   const team = 'Hrithik Sanyal, and Prof. James Rhampton';
   const when = 'January 2024 - May 2024';
   const speedReadChallenge = "The goal was to redesign BMW's iDrive 8 interface to enhance usability while preserving its minimalist aesthetic. Key challenges included improving information hierarchy, ensuring seamless navigation, and balancing aesthetics with functional clarity.";
-  const speedReadProcess = "I conducted research, studied BMW's brand guide, sketched exterior and interior views, and developed wireframes for the four main interfaces—vehicle controls, driver display, main unit, and sub-unit.";
+  const speedReadProcess = "I conducted research, studied BMW's brand guide, sketched exterior and interior views, and developed wireframes for the four main interfaces, vehicle controls, driver display, main unit, and sub-unit.";
   const speedReadTakeaways = "Prioritizing layout and interaction in wireframes before color; designing default and dynamic screens that reflect real driving scenarios; balancing consistency with flexibility for future updates.";
   const speedReadImpact = "A coherent iDrive 8 redesign that enhances usability and maintains BMW's design language, with clear navigation, audio, and vehicle controls for both driver and passenger.";
 

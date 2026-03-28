@@ -71,7 +71,15 @@ export type ContentBlock =
   | { type: 'colors'; colors: string[] }
   | { type: 'imageCaption'; src: string; caption: string; maxHeight?: string }
   | { type: 'externalLink'; label: string; href: string; variant?: 'button' | 'inline'; align?: 'left' | 'center' | 'right' }
-  | { type: 'impactStatsInline' };
+  | { type: 'impactStatsInline' }
+  /** Native JSX: design-decisions grid + metrics strip (replaces legacy access.png). Raseet Health only. */
+  | { type: 'raseetAccessibilitySection' }
+  /** Native SVG Venn (replaces bsu.png). Raseet Health only. */
+  | { type: 'goalsVenn' }
+  /** Key design decisions grid. Raseet Health only. */
+  | { type: 'keyDesignDecisions' }
+  /** Before vs after flow comparisons. Raseet Health only. */
+  | { type: 'beforeAfter' };
 
 export type ProjectSection = {
   header?: string; // Optional - leave empty if you don't want a header

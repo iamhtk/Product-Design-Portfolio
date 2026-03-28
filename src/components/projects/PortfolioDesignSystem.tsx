@@ -198,7 +198,7 @@ export function PortfolioDesignSystemProject({
       </div>
 
       <div style={pageShell}>
-        {/* Section 1 — Case study header */}
+        {/* Section 1, Case study header */}
         <header style={{ marginBottom: sectionGap }}>
           <div style={{ marginBottom: dt.spacing.md }}>
             <button
@@ -238,23 +238,23 @@ export function PortfolioDesignSystemProject({
           </p>
         </header>
 
-        {/* Section 2 — Overview */}
+        {/* Section 2, Overview */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-6`}>OVERVIEW</h2>
           <div className="space-y-6">
             <p className="type-body text-gray-700">
               Most portfolios are assembled. This one was architected. Before a single line of code was written, I
-              built a design system in Figma — tokens, type scales, component rules — and used it as the contract
+              built a design system in Figma, tokens, type scales, component rules, and used it as the contract
               between design and code.
             </p>
             <p className="type-body text-gray-700">
-              This page is that system, made visible. Every component you see here is live — pulled directly from the
+              This page is that system, made visible. Every component you see here is live, pulled directly from the
               site&apos;s own component library. The font is Titillium Web. The values are real.
             </p>
           </div>
         </section>
 
-        {/* Section 3 — Process */}
+        {/* Section 3, Process */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>PROCESS</h2>
           <div className="grid grid-cols-1 md:grid-cols-3" style={{ gap: wide ? dt.spacing['2xl'] : dt.spacing.xl }}>
@@ -270,7 +270,7 @@ export function PortfolioDesignSystemProject({
                   className="type-overline text-gray-400 mb-3"
                   style={{ letterSpacing: dt.typography.scale.sectionLabel.letterSpacing }}
                 >
-                  #{step.n} — {step.title}
+                  #{step.n}, {step.title}
                 </p>
                 <p className="type-body text-gray-700">{step.body}</p>
               </div>
@@ -278,7 +278,7 @@ export function PortfolioDesignSystemProject({
           </div>
         </section>
 
-        {/* Section 4 — Color */}
+        {/* Section 4, Color */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>COLOR</h2>
           <div
@@ -309,7 +309,7 @@ export function PortfolioDesignSystemProject({
           </div>
         </section>
 
-        {/* Section 5 — Typography */}
+        {/* Section 5, Typography */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>TYPOGRAPHY</h2>
           <div>
@@ -356,7 +356,7 @@ export function PortfolioDesignSystemProject({
           </div>
         </section>
 
-        {/* Section 6 — Spacing */}
+        {/* Section 6, Spacing */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>SPACING</h2>
           <div className="flex flex-col" style={{ gap: dt.spacing.md }}>
@@ -387,7 +387,7 @@ export function PortfolioDesignSystemProject({
           </div>
         </section>
 
-        {/* Section 7 — Border radius */}
+        {/* Section 7, Border radius */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>BORDER RADIUS</h2>
           <div className="flex flex-row flex-wrap" style={{ gap: dt.spacing.xl }}>
@@ -416,7 +416,7 @@ export function PortfolioDesignSystemProject({
           </div>
         </section>
 
-        {/* Section 8 — Components */}
+        {/* Section 8, Components */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>COMPONENTS</h2>
           <div className="grid grid-cols-1 md:grid-cols-2" style={{ gap: dt.spacing['2xl'] }}>
@@ -501,7 +501,7 @@ export function PortfolioDesignSystemProject({
                   <p className="type-body-lg text-gray-600">A short line about tokens, Figma, and shipping the portfolio itself.</p>
                 </div>
                 <p className="type-body text-gray-600">
-                  Tokens stay in sync when design and code share one vocabulary — fewer surprises when the next page ships.
+                  Tokens stay in sync when design and code share one vocabulary, fewer surprises when the next page ships.
                 </p>
                 <span className="inline-flex items-center text-[15px] text-gray-900 group cursor-default">
                   <span>Read on Medium</span>
@@ -549,7 +549,7 @@ export function PortfolioDesignSystemProject({
           </div>
         </section>
 
-        {/* Section 9 — Figma */}
+        {/* Section 9, Figma */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>FIGMA</h2>
           <div style={figmaCard} className="text-center">
@@ -579,14 +579,14 @@ export function PortfolioDesignSystemProject({
           </div>
         </section>
 
-        {/* Section 10 — Built with Cursor */}
+        {/* Section 10, Built with Cursor */}
         <section style={{ marginBottom: sectionGap }}>
           <h2 className={`${sectionLabelClass()} mb-8`}>BUILT WITH CURSOR</h2>
           <div className="flex flex-col" style={{ gap: dt.spacing['2xl'] }}>
             <div>
               <p className={`${sectionLabelClass()} mb-3`}>PROMPT 01</p>
               <pre style={codeBlock}>
-                {`"Audit the codebase and extract all design tokens into src/lib/designTokens.ts. Map colors to semantic role names. Font is Titillium Web. Do not invent values — only use what exists in the codebase."`}
+                {`"Audit the codebase and extract all design tokens into src/lib/designTokens.ts. Map colors to semantic role names. Font is Titillium Web. Do not invent values, only use what exists in the codebase."`}
               </pre>
             </div>
             <div>

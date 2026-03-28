@@ -700,17 +700,16 @@ const FINAL_RENDERERS: Record<string, () => ReactNode> = {
   '8.png': Final8,
   '9.png': Final9,
   '10.png': Final10,
-  // Replaced by consolidated Key Findings text + RaseetHealth blocks, native renderers retained for reference
-  // '11.png': Final11,
-  // '12.png': Final12,
-  // '13.png': Final13,
-  // '14.png': Final14,
-  // '15.png': Final15,
-  // '16.png': Final16,
-  // '17.png': Final17,
-  // '18.png': Final18,
-  // '19.png': Final19,
-  // '20.png': Final20,
+  '11.png': Final11,
+  '12.png': Final12,
+  '13.png': Final13,
+  '14.png': Final14,
+  '15.png': Final15,
+  '16.png': Final16,
+  '17.png': Final17,
+  '18.png': Final18,
+  '19.png': Final19,
+  '20.png': Final20,
   '21.png': Final21,
   '22.png': Final22,
   '23.png': Final23,
@@ -723,26 +722,9 @@ const FINAL_RENDERERS: Record<string, () => ReactNode> = {
   '30.png': Final30,
   '31.png': Final31,
   '32.png': Final32,
-  // '33.png': Final33,
-  // '34.png': Final34,
+  '33.png': Final33,
+  '34.png': Final34,
 };
-
-void (
-  [
-    Final11,
-    Final12,
-    Final13,
-    Final14,
-    Final15,
-    Final16,
-    Final17,
-    Final18,
-    Final19,
-    Final20,
-    Final33,
-    Final34,
-  ] as const
-);
 
 /**
  * Returns native HTML replacement for `/raseet/final/N.png` when available.

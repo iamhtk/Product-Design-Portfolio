@@ -1444,7 +1444,7 @@ function CaseStudyContent() {
         </p>
         <p style={{ ...bodyText, marginTop: '20px' }}>
           That&apos;s not a hypothetical. That&apos;s what poor design costs in this domain. I built
-          Prism because emergency tools have zero tolerance for confusion — and the existing CWPC
+          Prism because emergency tools have zero tolerance for confusion, and the existing CWPC
           product was full of it.
         </p>
       </div>
@@ -1469,14 +1469,14 @@ function CaseStudyContent() {
             {
               number: '01',
               title: 'Accessibility is not a feature',
-              body: 'WCAG AA compliance is the floor, not the ceiling. If a component fails contrast, keyboard nav, or ARIA requirements, it does not exist in Prism. Emergency tools serve people in crisis — this is non-negotiable.',
+              body: 'WCAG AA compliance is the floor, not the ceiling. If a component fails contrast, keyboard nav, or ARIA requirements, it does not exist in Prism. Emergency tools serve people in crisis, this is non-negotiable.',
               color: '#FF6701',
               icon: '♿',
             },
             {
               number: '02',
               title: 'Tokens before everything',
-              body: 'No hardcoded values. Ever. Every color, every spacing unit, every border radius is a named token. This is what makes the system maintainable — one change propagates everywhere instantly.',
+              body: 'No hardcoded values. Ever. Every color, every spacing unit, every border radius is a named token. This is what makes the system maintainable, one change propagates everywhere instantly.',
               color: '#0D72FF',
               icon: '🔗',
             },
@@ -1803,21 +1803,21 @@ function CaseStudyContent() {
               },
               {
                 date: '2025 Q2',
-                title: '⚛️ Atoms — 17 components',
+                title: '⚛️ Atoms, 17 components',
                 points: ['Button, Label, Field', 'Badge, Avatar, Rating', 'All states documented'],
                 highlight: 'Smallest pieces first',
                 color: '#FF6701',
               },
               {
                 date: '2025 Q2',
-                title: '🧬 Molecules — 26 components',
+                title: '🧬 Molecules, 26 components',
                 points: ['Input, Checkbox, Switch', 'ProgressBar, TabBar', 'All interactive'],
                 highlight: 'Atoms working together',
                 color: '#0D72FF',
               },
               {
                 date: '2025 Q3',
-                title: '🏛️ Organisms — 20 components',
+                title: '🏛️ Organisms, 20 components',
                 points: ['Navbar, Card, Forms', 'Modal, Toast, Alert', 'Full page patterns'],
                 highlight: 'Complete UI sections',
                 color: '#65A637',
@@ -2072,7 +2072,7 @@ function CaseStudyContent() {
         <p style={bodyText}>
           I could have started building components immediately. Instead I spent the first week
           asking one question: what is the smallest possible piece? Atomic Design gave me the
-          answer. Start with atoms — things that cannot be broken down further. Then combine them.
+          answer. Start with atoms, things that cannot be broken down further. Then combine them.
           This sounds obvious until you realize most design systems skip this step and end up with
           200 components that share nothing in common.
         </p>
@@ -2211,7 +2211,7 @@ function CaseStudyContent() {
                 marginBottom: '8px',
               }}
             >
-              LIVE COMPONENTS — ACTUALLY RUNNING IN CODE
+              LIVE COMPONENTS, ACTUALLY RUNNING IN CODE
             </p>
             <p style={{ fontSize: '15px', color: '#71717A', margin: 0 }}>
               The same principle at three levels of complexity, stacked so each layer has room to
@@ -2252,7 +2252,7 @@ function CaseStudyContent() {
                 >
                   Atom
                 </span>
-                <span style={{ fontSize: '11px', color: '#71717A' }}>— no dependencies</span>
+                <span style={{ fontSize: '11px', color: '#71717A' }}> no dependencies</span>
               </div>
               <div
                 className="cwpc-demo-surface"
@@ -2272,7 +2272,7 @@ function CaseStudyContent() {
                 <E.Button label="Dismiss" type="transparent" colorScheme="primary" />
               </div>
               <p style={{ fontSize: '12px', color: '#71717A', marginTop: '10px', lineHeight: 1.5 }}>
-                Button atom — standalone, renders with no parent dependencies
+                Button atom, standalone, renders with no parent dependencies
               </p>
             </div>
 
@@ -2300,7 +2300,7 @@ function CaseStudyContent() {
                 >
                   Molecule
                 </span>
-                <span style={{ fontSize: '11px', color: '#71717A' }}>— atoms combined</span>
+                <span style={{ fontSize: '11px', color: '#71717A' }}> atoms combined</span>
               </div>
               <div
                 className="cwpc-demo-surface"
@@ -2319,7 +2319,7 @@ function CaseStudyContent() {
                 />
               </div>
               <p style={{ fontSize: '12px', color: '#71717A', marginTop: '10px', lineHeight: 1.5 }}>
-                Input molecule — Label atom + Field atom + hint Text atom
+                Input molecule, Label atom + Field atom + hint Text atom
               </p>
             </div>
 
@@ -2347,7 +2347,7 @@ function CaseStudyContent() {
                 >
                   Organism
                 </span>
-                <span style={{ fontSize: '11px', color: '#71717A' }}>— complete section</span>
+                <span style={{ fontSize: '11px', color: '#71717A' }}> complete section</span>
               </div>
               <div
                 className="cwpc-demo-surface"
@@ -2377,7 +2377,7 @@ function CaseStudyContent() {
                 </E.Card>
               </div>
               <p style={{ fontSize: '12px', color: '#71717A', marginTop: '10px', lineHeight: 1.5 }}>
-                Card organism — built from Button atoms + Text atoms
+                Card organism, built from Button atoms + Text atoms
               </p>
             </div>
           </div>
@@ -2918,7 +2918,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   letterSpacing: '0.06em',
                 }}
               >
-                Badge — 6 semantic variants
+                Badge, 6 semantic variants
               </p>
               <p style={{ fontSize: '12px', color: '#71717A', marginBottom: '12px' }}>Medium</p>
               <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '16px' }}>
@@ -2953,7 +2953,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   letterSpacing: '0.06em',
                 }}
               >
-                Avatar — 5 sizes + status indicators
+                Avatar, 5 sizes + status indicators
               </p>
               <p style={{ fontSize: '12px', color: '#71717A', marginBottom: '12px' }}>Sizes</p>
               <div
@@ -3001,7 +3001,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   letterSpacing: '0.06em',
                 }}
               >
-                Loader — pure CSS animation
+                Loader, pure CSS animation
               </p>
               <div
                 style={{
@@ -3064,7 +3064,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   letterSpacing: '0.06em',
                 }}
               >
-                Heading — 4 levels
+                Heading, 4 levels
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
                 {[
@@ -3790,7 +3790,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.06em',
               }}
             >
-              Keyboard shortcuts — all documented
+              Keyboard shortcuts, all documented
             </p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
               {[
@@ -3866,7 +3866,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.06em',
               }}
             >
-              ARIA implementation — actual code
+              ARIA implementation, actual code
             </p>
             <div
               style={{
@@ -4059,7 +4059,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
         >
           <div style={{ background: '#2D2D2D', padding: '8px 16px' }}>
             <span style={{ fontSize: '11px', color: '#71717A', fontFamily: 'monospace' }}>
-              tsx — using Prism components in your project
+              tsx, using Prism components in your project
             </span>
           </div>
           <pre
@@ -4411,7 +4411,7 @@ import { Card } from './components/prism/organisms/Card/Card'
               }}
             >
               Building Prism changed how I think about design. Every decision had downstream
-              consequences. I learned to design for every screen that will ever exist — not just the
+              consequences. I learned to design for every screen that will ever exist, not just the
               one in front of me.
             </p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>

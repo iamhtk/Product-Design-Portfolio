@@ -116,13 +116,13 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
           <AnimateIn variant="up" rootMargin="0px" className="mb-3">
             <h1 className="type-display text-gray-900">
-              Product Designer at CWPC.
+              Product Designer at IBM.
             </h1>
           </AnimateIn>
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
             <p className="type-body-lg text-gray-900">
               Previously Design Engineer at{" "}
-              <span className="font-medium">GM, Kryptonas, TUG, BEL</span><br />
+              <span className="font-medium">CWPC, GM, Kryptonas, TUG, BEL</span><br />
               <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
             </p>
           </AnimateIn>

@@ -9,7 +9,7 @@ export function DesignGoals() {
           <h3 className="text-xl font-semibold text-gray-900 mb-6">Information Architecture</h3>
           
           <p className="text-gray-700 leading-relaxed mb-6">
-            To create a seamless and efficient user experience, the <strong>information architecture</strong> was carefully designed to cater to different user roles—<strong>pharmacists, healthcare providers, and customers</strong>. The goal was to structure the platform in a way that improves <strong>discoverability, usability, and accessibility</strong> while ensuring smooth navigation for all stakeholders.
+            To create a seamless and efficient user experience, the <strong>information architecture</strong> was carefully designed to cater to different user roles, <strong>pharmacists, healthcare providers, and customers</strong>. The goal was to structure the platform in a way that improves <strong>discoverability, usability, and accessibility</strong> while ensuring smooth navigation for all stakeholders.
           </p>
           
           <div className="mb-6">

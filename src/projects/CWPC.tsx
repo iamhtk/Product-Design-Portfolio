@@ -56,7 +56,7 @@ function RatingDemo() {
           letterSpacing: '0.06em',
         }}
       >
-        Rating — click to set value
+        Rating, click to set value
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         <Rating value={val} onChange={setVal} size="lg" showValue />
@@ -89,7 +89,7 @@ function InputStateDemo() {
           letterSpacing: '0.06em',
         }}
       >
-        Input — click a state
+        Input, click a state
       </div>
       <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px' }}>
         {(['default', 'hover', 'focus', 'error', 'disabled'] as const).map((s) => (
@@ -130,7 +130,7 @@ function TabBarDemo() {
   const content: Record<string, string> = {
     overview:
       "The CWPC Community Wildfire Resilience Scorecard follows the United Nations' 10 Essentials framework.",
-    components: '68 components across 3 atomic layers — 17 atoms, 26 molecules, 20 organisms.',
+    components: '68 components across 3 atomic layers, 17 atoms, 26 molecules, 20 organisms.',
     tokens: '100+ design tokens covering color, spacing, typography, elevation, and blur.',
     accessibility:
       'Every component meets WCAG AA minimum. Keyboard navigation documented for each.',
@@ -155,7 +155,7 @@ function TabBarDemo() {
             letterSpacing: '0.06em',
           }}
         >
-          TabBar — click to switch content
+          TabBar, click to switch content
         </div>
       </div>
       <TabBar
@@ -211,7 +211,7 @@ function StepperDemo() {
           letterSpacing: '0.06em',
         }}
       >
-        Stepper — click Prev/Next
+        Stepper, click Prev/Next
       </div>
       <Stepper
         steps={steps.map((s, i) => ({
@@ -305,7 +305,7 @@ function AlertDemo() {
           letterSpacing: '0.06em',
         }}
       >
-        Alert — 4 variants, dismissible
+        Alert, 4 variants, dismissible
       </div>
       <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
         {alerts
@@ -358,7 +358,7 @@ function CardVariantDemo() {
           letterSpacing: '0.06em',
         }}
       >
-        Card — variant toggle
+        Card, variant toggle
       </div>
       <div style={{ display: 'flex', gap: '8px', marginBottom: '16px' }}>
         {(['default', 'highlighted'] as const).map((v) => (
@@ -434,19 +434,19 @@ function CaseStudyContent() {
     },
     {
       date: '2025 Q2',
-      title: '⚛️ Atoms — 17',
+      title: '⚛️ Atoms, 17',
       points: ['Button, Label, Field', 'Badge, Avatar, Rating', 'All states documented'],
       highlight: 'Smallest pieces first',
     },
     {
       date: '2025 Q2',
-      title: '🧬 Molecules — 26',
+      title: '🧬 Molecules, 26',
       points: ['Input, Checkbox, Switch', 'ProgressBar, TabBar', 'All interactive'],
       highlight: 'Atoms working together',
     },
     {
       date: '2025 Q3',
-      title: '🏛️ Organisms — 20',
+      title: '🏛️ Organisms, 20',
       points: ['Navbar, Card, Forms', 'Modal, Toast, Alert', 'Full page patterns'],
       highlight: 'Complete UI sections',
     },
@@ -468,7 +468,7 @@ function CaseStudyContent() {
           assess wildfire risk, prepare their properties, and access emergency resources.
           During wildfire season, someone might open the Community Scorecard to check whether
           their neighborhood is in danger. Smoke in the air. Phone in shaking hands. If the
-          interface is unclear, if the text is too small, if the button is hard to find — they
+          interface is unclear, if the text is too small, if the button is hard to find, they
           give up.
         </p>
         <p style={{ ...bodyText, marginTop: '16px' }}>
@@ -858,7 +858,7 @@ function CaseStudyContent() {
         <p style={sectionLabel}>METHODOLOGY</p>
         <h2 style={sectionHeading}>Building from the smallest possible piece</h2>
         <p style={bodyText}>
-          I chose Brad Frost&apos;s Atomic Design methodology — the same framework used by IBM
+          I chose Brad Frost&apos;s Atomic Design methodology, the same framework used by IBM
           Carbon, Shopify Polaris, and Codecademy Gamut. Design the smallest possible unit first,
           then combine units into increasingly complex structures. Every decision made at the
           atom level propagates correctly up through molecules and organisms.
@@ -973,7 +973,7 @@ function CaseStudyContent() {
               letterSpacing: '0.08em',
             }}
           >
-            Live hierarchy — these are actual running components
+            Live hierarchy, these are actual running components
           </div>
           <div
             style={{
@@ -1016,7 +1016,7 @@ function CaseStudyContent() {
                   textAlign: 'center',
                 }}
               >
-                Button — standalone, no dependencies
+                Button, standalone, no dependencies
               </div>
             </div>
             <div>
@@ -1050,7 +1050,7 @@ function CaseStudyContent() {
                   textAlign: 'center',
                 }}
               >
-                Input — Label + Field + hint text
+                Input, Label + Field + hint text
               </div>
             </div>
             <div>
@@ -1088,7 +1088,7 @@ function CaseStudyContent() {
                   textAlign: 'center',
                 }}
               >
-                Card — complete UI section
+                Card, complete UI section
               </div>
             </div>
           </div>
@@ -1296,7 +1296,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
           <div
             style={{ fontSize: '13px', fontWeight: 600, color: '#F5F5F7', marginBottom: '16px' }}
           >
-            Typography Scale — Work Sans
+            Typography Scale, Work Sans
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '2px' }}>
             {[
@@ -1377,7 +1377,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
       </div>
 
       <div style={sectionGap}>
-        <p style={sectionLabel}>ATOMS — 17 COMPONENTS</p>
+        <p style={sectionLabel}>ATOMS, 17 COMPONENTS</p>
         <h2 style={sectionHeading}>The raw materials</h2>
         <p style={bodyText}>
           17 atoms form the foundation of Ember. Each fully documented with interactive controls,
@@ -1448,7 +1448,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               letterSpacing: '0.08em',
             }}
           >
-            Button States Matrix — live components
+            Button States Matrix, live components
           </div>
           <table style={{ borderCollapse: 'collapse', width: '100%', minWidth: '600px' }}>
             <thead>
@@ -1532,7 +1532,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.06em',
               }}
             >
-              Badge — 6 semantic variants
+              Badge, 6 semantic variants
             </div>
             <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '12px' }}>
               {(['primary', 'success', 'warning', 'error', 'info', 'neutral'] as const).map((v) => (
@@ -1563,7 +1563,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.06em',
               }}
             >
-              Avatar — 5 sizes + status
+              Avatar, 5 sizes + status
             </div>
             <div
               style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '16px' }}
@@ -1596,7 +1596,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.06em',
               }}
             >
-              Loader — 3 sizes, pure CSS
+              Loader, 3 sizes, pure CSS
             </div>
             <div style={{ display: 'flex', gap: '24px', alignItems: 'center' }}>
               <Loader size="sm" variant="primary" />
@@ -1611,7 +1611,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
       </div>
 
       <div style={sectionGap}>
-        <p style={sectionLabel}>MOLECULES — 26 COMPONENTS</p>
+        <p style={sectionLabel}>MOLECULES, 26 COMPONENTS</p>
         <h2 style={sectionHeading}>Atoms working together</h2>
         <p style={bodyText}>
           Molecules are where atoms start working as a team. The Input molecule combines Label +
@@ -1646,7 +1646,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.06em',
               }}
             >
-              ProgressBar — 5 variants
+              ProgressBar, 5 variants
             </div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
               {(
@@ -1693,7 +1693,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
       </div>
 
       <div style={sectionGap}>
-        <p style={sectionLabel}>ORGANISMS — 20 COMPONENTS</p>
+        <p style={sectionLabel}>ORGANISMS, 20 COMPONENTS</p>
         <h2 style={sectionHeading}>Page-level patterns</h2>
         <p style={bodyText}>
           Organisms are the complex UI sections that represent meaningful pieces of the CWPC
@@ -1721,7 +1721,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               letterSpacing: '0.06em',
             }}
           >
-            Navbar — actual CWPC navigation
+            Navbar, actual CWPC navigation
           </div>
           <Navbar
             sticky={false}
@@ -1758,7 +1758,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
               letterSpacing: '0.06em',
             }}
           >
-            AccordionItem — click to expand
+            AccordionItem, click to expand
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             <AccordionItem
@@ -1782,7 +1782,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
         <p style={sectionLabel}>DOCUMENTATION</p>
         <h2 style={sectionHeading}>Components without docs are just code</h2>
         <p style={bodyText}>
-          I built Ember — a full Storybook-style documentation site. Every component has
+          I built Ember, a full Storybook-style documentation site. Every component has
           interactive controls, per-variant code, props table, Do&apos;s and Don&apos;ts, and
           accessibility notes.
         </p>
@@ -1814,7 +1814,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
             {
               emoji: '♿',
               title: 'Accessibility Notes',
-              desc: 'ARIA roles, keyboard nav, WCAG level — per component.',
+              desc: 'ARIA roles, keyboard nav, WCAG level, per component.',
             },
           ].map((item, i) => (
             <div
@@ -1958,7 +1958,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
             {
               icon: '⌨️',
               label: 'Keyboard Navigation',
-              desc: 'Every interactive component fully navigable by keyboard. Tab, Enter, Space, Escape — all mapped.',
+              desc: 'Every interactive component fully navigable by keyboard. Tab, Enter, Space, Escape, all mapped.',
             },
             {
               icon: '🎨',
@@ -2047,7 +2047,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                   color: 'white',
                 }}
               >
-                {item.pass ? '✓ PASS' : '✗ FAIL — not used'}
+                {item.pass ? '✓ PASS' : '✗ FAIL, not used'}
               </div>
             </div>
           ))}
@@ -2128,7 +2128,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
         >
           <div style={{ background: '#2D2D2D', padding: '8px 16px' }}>
             <span style={{ fontSize: '11px', color: '#71717A', fontFamily: 'monospace' }}>
-              tsx — using Ember in production
+              tsx, using Ember in production
             </span>
           </div>
           <pre
@@ -2366,11 +2366,11 @@ import { Card } from './components/prism/organisms/Card/Card'
             }}
           >
             &quot;Building Ember changed how I think about design. Every decision had downstream
-            consequences. I learned to design for every screen that will ever exist — not just the
+            consequences. I learned to design for every screen that will ever exist, not just the
             one in front of me.&quot;
           </div>
           <div style={{ fontSize: '13px', color: '#71717A', fontWeight: 600 }}>
-            — Hrithik Sanyal, Product Designer
+           , Hrithik Sanyal, Product Designer
           </div>
         </div>
       </div>
@@ -2382,13 +2382,13 @@ import { Card } from './components/prism/organisms/Card/Card'
           {[
             {
               emoji: '🏗️',
-              title: 'Tokens are the foundation — get them right first',
-              body: "I spent time refactoring early components after my initial token naming wasn't scalable. color-orange is wrong. color-primary-default is right — it carries meaning, not just appearance. Spend a full week on token architecture before touching any component.",
+              title: 'Tokens are the foundation, get them right first',
+              body: "I spent time refactoring early components after my initial token naming wasn't scalable. color-orange is wrong. color-primary-default is right, it carries meaning, not just appearance. Spend a full week on token architecture before touching any component.",
             },
             {
               emoji: '📝',
               title: 'Documentation is half the product',
-              body: "Beautiful components that no one understands are useless. The props tables, Do's and Don'ts, accessibility notes — these are what make Ember a system rather than a component library.",
+              body: "Beautiful components that no one understands are useless. The props tables, Do's and Don'ts, accessibility notes, these are what make Ember a system rather than a component library.",
             },
             {
               emoji: '🔁',
@@ -2429,7 +2429,7 @@ import { Card } from './components/prism/organisms/Card/Card'
             What I&apos;d do differently
           </h3>
           <p style={bodyText}>
-            Start with a minimal viable system — 10 core components, fully documented — then expand
+            Start with a minimal viable system, 10 core components, fully documented, then expand
             based on real usage. I tried to build comprehensively from day one. Better to ship
             something useful than something complete.
           </p>
@@ -2441,7 +2441,7 @@ import { Card } from './components/prism/organisms/Card/Card'
           <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
             {[
               'Publish as an npm package so CWPC developers can install and import directly',
-              'Add dark mode support — the token architecture is already ready for it',
+              'Add dark mode support, the token architecture is already ready for it',
               'Build Figma Code Connect so Figma components link directly to their code counterparts',
               'Add automated accessibility testing to the Ember docs site',
             ].map((line, i) => (
@@ -2496,9 +2496,9 @@ export function EmberDesignSystemProject({
   const speedReadChallenge =
     'CWPC had no shared design language. Five different button styles across three platforms. Forty-seven raw color values with no naming system. Zero accessibility standards. Emergency tools that people depend on during wildfires were failing the communities they were built to serve.';
   const speedReadProcess =
-    "I audited every existing CWPC UI pattern, extracted design tokens from Figma, and built the system bottom-up using Atomic Design principles — 17 atoms first, then 26 molecules, then 20 organisms. I wrote the component library in React with TypeScript and CSS custom properties, then built Ember — a full Storybook-style documentation site with interactive controls, per-component code examples, Do's and Don'ts, and accessibility guidelines.";
+    "I audited every existing CWPC UI pattern, extracted design tokens from Figma, and built the system bottom-up using Atomic Design principles, 17 atoms first, then 26 molecules, then 20 organisms. I wrote the component library in React with TypeScript and CSS custom properties, then built Ember, a full Storybook-style documentation site with interactive controls, per-component code examples, Do's and Don'ts, and accessibility guidelines.";
   const speedReadTakeaways =
-    "Building a design system alone taught me that the hardest part isn't the components — it's the decisions. Every token name, every prop interface, every state has downstream consequences. I learned to think in systems, not screens. Documentation is not an afterthought — it is half the product.";
+    "Building a design system alone taught me that the hardest part isn't the components, it's the decisions. Every token name, every prop interface, every state has downstream consequences. I learned to think in systems, not screens. Documentation is not an afterthought, it is half the product.";
   const speedReadImpact =
     '68 fully documented interactive components. 100+ design tokens. A live Storybook-style documentation site. A shared design language that ensures CWPC tools now serve every community member including elderly residents and people using assistive technology.';
 

@@ -11,7 +11,7 @@ export function Retrospective() {
             The iterative design process, grounded in user feedback, ensured that the platform met the unique needs of pharmacists, healthcare providers, and customers.
           </p>
           <p className="text-gray-700 italic">
-            "The changes make it so much easier to manage everything—my staff and I feel more confident now." – Pharmacist Participant
+            "The changes make it so much easier to manage everything, my staff and I feel more confident now." – Pharmacist Participant
           </p>
         </div>
         

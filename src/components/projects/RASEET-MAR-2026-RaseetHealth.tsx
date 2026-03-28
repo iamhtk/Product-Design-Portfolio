@@ -765,31 +765,31 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     { type: 'video', src: '/raseet/vids/2/PP-demo.mp4', maxHeight: '400px', group: 'row3' }, // ipad screen 1
     { type: 'video', src: '/raseet/vids/2/HP-demo.mp4', maxHeight: '400px', group: 'row3' }, // ipad screen 2
     { type: 'video', src: '/raseet/vids/2/onboarding-2.mp4', maxHeight: '400px', group: 'row3' }, // iphone screen 2
-    { type: 'imageCaption', src: '/raseet/vids/website-cover.png', caption: 'Product in Context, Raseet Health website homepage.' },
     { type: 'externalLink', label: 'View Mobile App Prototype ↗', href: RASEET_FIGMA_MOBILE_URL, variant: 'button' },
     
     { type: 'text', header: 'Project Statement', content: 'Empower local pharmacies to compete with e‑pharmacy giants by delivering a simpler, more trustworthy way to manage prescriptions, health records, and orders, across in‑store and mobile experiences.' },
 
     // Mission + Vision
-    // { type: 'text', header: 'Mission', content: 'Make quality healthcare more accessible by empowering local pharmacies with a digital system that increases revenue, improves customer lifetime value, and reduces out-of-pocket cost through better access and follow-through.', indent: true },
-    // { type: 'text', header: 'Vision', content: "Build a “Vocal for Local” ecosystem where credible providers, pharmacies, and customers collaborate seamlessly, turning the pharmacy into a one‑stop health and wellness hub.", indent: true },
+    { type: 'text', header: 'Mission', content: 'Make quality healthcare more accessible by empowering local pharmacies with a digital system that increases revenue, improves customer lifetime value, and reduces out-of-pocket cost through better access and follow-through.', indent: true },
+    { type: 'text', header: 'Vision', content: "Build a “Vocal for Local” ecosystem where credible providers, pharmacies, and customers collaborate seamlessly, turning the pharmacy into a one‑stop health and wellness hub.", indent: true },
 
     // Summary / Overview
-    // { type: 'text', header: 'Overview / Summary', content: "Raseet Health digitizes local pharmacies so they can offer modern services like refills, orders, delivery tracking, and health record access, while keeping the human trust loop that makes local pharmacies valuable. The platform is designed to work for a broad audience (all ages and tech comfort levels) and for multiple stakeholders (pharmacists, customers, and providers).", indent: true },
+    { type: 'text', header: 'Overview / Summary', content: "Raseet Health digitizes local pharmacies so they can offer modern services like refills, orders, delivery tracking, and health record access, while keeping the human trust loop that makes local pharmacies valuable. The platform is designed to work for a broad audience (all ages and tech comfort levels) and for multiple stakeholders (pharmacists, customers, and providers).", indent: true },
+    { type: 'imageCaption', src: '/raseet/vids/website-cover.png', caption: 'Product in Context, Raseet Health website homepage.' },
 
     // Audience + Value
     
-    /* { type: 'textBullets', header: 'Target Audience', items: [
+    { type: 'textBullets', header: 'Target Audience', items: [
       'Pharmacies: Owners and staff who need simple tooling, minimal training overhead, and reliable day-to-day workflows.',
       'Customers: People who want transparency, reminders, refills, and trusted support without complicated apps.',
       'Healthcare providers: Partners who need clear coordination and secure access to relevant records and updates.',
-    ],listIndent: 1 }, */
+    ],listIndent: 1 },
     
-    /* { type: 'textBullets', header: 'Value Proposition', items: [
+    { type: 'textBullets', header: 'Value Proposition', items: [
       'For pharmacies: higher retention + repeat orders via better follow-ups, reminders, and digital presence.',
       'For customers: less friction for refills, orders, and record access; more clarity and trust.',
       'For the ecosystem: fewer manual errors and a more consistent handoff between people and systems.',
-    ],listIndent: 1 }, */
+    ],listIndent: 1 },
 
     // Problem
     { type: 'text', header: 'Design Process', content: "Designing Raseet Health’s digital experience required a structured yet flexible design process, rooted in Agile methodologies and Design Sprints. Our goal was to create an intuitive, scalable, and accessible pharmacy platform while balancing business goals and technical feasibility. To achieve this, I followed a user-centered iterative design approach with rapid prototyping, continuous feedback loops, and close cross-functional collaboration" },
@@ -810,22 +810,20 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     
     { type: 'text', header: 'User Research', content: 'To ground the product in real-world needs, I conducted interviews, surveys, contextual inquiries, and competitor analysis across pharmacists, patients, and providers.'},
     
-    // { type: 'text', header: 'Background', content: "To design a solution that meets the needs of pharmacies, healthcare providers, and customers, it was essential to understand their existing workflows, pain points, and expectations. Through a mix of qualitative and quantitative research, we identified gaps in the current ecosystem and opportunities to create a more streamlined, user-friendly platform.", indent: true },
+    { type: 'text', header: 'Background', content: "To design a solution that meets the needs of pharmacies, healthcare providers, and customers, it was essential to understand their existing workflows, pain points, and expectations. Through a mix of qualitative and quantitative research, we identified gaps in the current ecosystem and opportunities to create a more streamlined, user-friendly platform.", indent: true },
 
-    // { type: 'text', header: 'Research Objectives', content: 'Clarify where existing pharmacy workflows break down, why digital tools are underused, and how we can design a platform that feels trustworthy and simple for all stakeholders.', indent: true },
+    { type: 'text', header: 'Research Objectives', content: 'Clarify where existing pharmacy workflows break down, why digital tools are underused, and how we can design a platform that feels trustworthy and simple for all stakeholders.', indent: true },
 
-    /* { type: 'textBullets', header: '', items: [
+    { type: 'textBullets', header: '', items: [
       "Identify inefficiencies in pharmacy operations and customer engagement.",
       "Understand barriers to digital adoption for pharmacies and customers.",
       "Explore how healthcare providers and pharmacies collaborate to manage patient data and prescriptions",
       "Data-Driven Decision-Making: A/B testing and usability research informed key iterations.",
-    ], indent: true, indentLevel: 2}, */
+    ], indent: true, indentLevel: 2},
 
-    { type: 'text', header: 'Research', content: 'I used four methods across 30+ participants, user interviews with pharmacists, patients, and providers; surveys for quantitative validation; contextual inquiries shadowing pharmacy staff; and competitive analysis of PharmEasy, Netmeds, and 1mg.' },
+    { type: 'text', header: 'Research Methodology', subheader: 'Multi-method approach', content: "We employed a multi-method research approach to gather insights from diverse stakeholders:", indent: true },
 
-    { type: 'text', header: 'Key Findings', content: 'Five patterns emerged consistently across all research methods: pharmacy workflows were manual and fragmented; digital adoption was blocked by fear of complexity; customers dropped off during navigation and checkout; rejected prescriptions left users with no clear path forward; and trust, in medicine authenticity, data security, and platform reliability, was the single biggest barrier across all user groups.' },
-
-    /* { type: 'text', header: '1.User Interviews:', subheader: 'Participants:', content: "", indent: true },
+    { type: 'text', header: '1.User Interviews:', subheader: 'Participants:', content: "", indent: true },
 
     { type: 'image', src: '/raseet/final/1.png', indent: true, maxHeight: '200px'  },
     { type: 'image', src: '/raseet/final/2.png', indent: true, maxHeight: '150px'  },
@@ -871,7 +869,6 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
     ], headerIndent: 1, listIndent: 2},
     
     { type: 'image', src: '/raseet/final/8.png', maxHeight: '300px', indent: true },
-   */
   
 // { type: 'textTextRow', headerLeft: 'For pharmacists', contentLeft: "Manage inventory, orders, and prescriptions in one place. Clear dashboards and workflows designed for pharmacy staff with varying levels of digital experience.", headerRight: 'For customers', contentRight: "Order refills, view health records, and get reminders. The interface prioritizes clarity and trust so customers feel confident managing their health online." },
 
@@ -882,7 +879,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'textImageRow', header: 'Zeno Health', subheader: '', content: "Zeno Health is a Mumbai-based pharmacy application that provides generic medicines and branded medicines.", items: ['Home delivery of medicines', 'Provides doctor consultations.'], src: '/raseet/zeno.png', itemsIndent: 1, imageSide: 'right', maxHeight: '400px', maxWidth: '400px' },
 
-// { type: 'text', header: 'To summarize all the problems….', subheader: '', content: "", align: 'center'},
+{ type: 'text', header: 'To summarize all the problems….', subheader: '', content: "", align: 'center'},
 
 { type: 'image', src: '/raseet/final/9.png', },
 
@@ -890,65 +887,62 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 
 
-// { type: 'text', header: 'Key Findings', subheader: '1. Pharmacy Workflows Are Inefficient:', content: "", },
+{ type: 'text', header: 'Key Findings', subheader: '1. Pharmacy Workflows Are Inefficient:', content: "", },
 
-// { type: 'image', src: '/raseet/final/11.png'},
+{ type: 'image', src: '/raseet/final/11.png'},
 
-// { type: 'image', src: '/raseet/final/12.png' },
-
-
-// { type: 'text', header: '', subheader: '2. Digital Adoption Barriers for Pharmacies:', content: "", },
-
-// { type: 'image', src: '/raseet/final/13.png'},
-
-// { type: 'image', src: '/raseet/final/14.png' },
+{ type: 'image', src: '/raseet/final/12.png' },
 
 
-// { type: 'text', header: '', subheader: '3. Customers Struggle With Navigation:', content: "", },
+{ type: 'text', header: '', subheader: '2. Digital Adoption Barriers for Pharmacies:', content: "", },
 
-// { type: 'image', src: '/raseet/final/15.png'},
+{ type: 'image', src: '/raseet/final/13.png'},
 
-// { type: 'image', src: '/raseet/final/16.png' },
-
-// { type: 'text', header: '', subheader: '4. Lack of Guidance Post-Rejection:', content: "", },
-
-// { type: 'image', src: '/raseet/final/17.png'},
-
-// { type: 'image', src: '/raseet/final/18.png' },
-
-// { type: 'text', header: '', subheader: '5. Trust Issues With Digital Platforms:', content: "", },
-
-// { type: 'image', src: '/raseet/final/19.png'},
-
-// { type: 'image', src: '/raseet/final/20.png' },
+{ type: 'image', src: '/raseet/final/14.png' },
 
 
-/* { type: 'text', header: 'Insights at a Glance', subheader: '', content: "", align: 'center'},
+{ type: 'text', header: '', subheader: '3. Customers Struggle With Navigation:', content: "", },
+
+{ type: 'image', src: '/raseet/final/15.png'},
+
+{ type: 'image', src: '/raseet/final/16.png' },
+
+{ type: 'text', header: '', subheader: '4. Lack of Guidance Post-Rejection:', content: "", },
+
+{ type: 'image', src: '/raseet/final/17.png'},
+
+{ type: 'image', src: '/raseet/final/18.png' },
+
+{ type: 'text', header: '', subheader: '5. Trust Issues With Digital Platforms:', content: "", },
+
+{ type: 'image', src: '/raseet/final/19.png'},
+
+{ type: 'image', src: '/raseet/final/20.png' },
+
+
+{ type: 'text', header: 'Insights at a Glance??', subheader: '', content: "", align: 'center'},
 
 { type: 'image', src: '/raseet/final/21.png'},
 
  
 
-{ type: 'text', header: '', subheader: '', content: "These insights served as a valuable tool to identify opportunities for introducing a potential solution.", align: 'center'}, */
+{ type: 'text', header: '', subheader: '', content: "These insights served as a valuable tool to identify opportunities for introducing a potential solution.", align: 'center'},
 
-// { type: 'text', header: 'User Persona', subheader: '', content: 'A primary persona captures the needs of a pharmacy owner balancing walk‑in traffic, digital orders, and coordination with doctors and patients.', },
+{ type: 'text', header: 'User Persona', subheader: '', content: 'A primary persona captures the needs of a pharmacy owner balancing walk‑in traffic, digital orders, and coordination with doctors and patients.', },
 
-// { type: 'text', header: 'Empathy Map', subheader: '', content: 'The empathy map helped align the team on what pharmacies and patients say, think, feel, and do across the medication journey.', },
+{ type: 'video', src: '/raseet/PERSONA.mp4', maxHeight: '500px' },
 
-// { type: 'text', header: 'User Journey', subheader: '', content: 'End‑to‑end journeys highlighted moments of confusion, drop‑offs, and trust gaps in ordering, refilling, and tracking medicines.', },
+{ type: 'text', header: 'Empathy Map', subheader: '', content: 'The empathy map helped align the team on what pharmacies and patients say, think, feel, and do across the medication journey.', },
 
-{ type: 'text', header: 'Research Artifacts', content: 'User persona, empathy map, and user journey developed from interviews with 30+ pharmacists, patients, and healthcare providers.' },
+{ type: 'video', src: '/raseet/EM.mp4', maxHeight: '500px' },
 
-{ type: 'video', src: '/raseet/PERSONA.mp4', maxHeight: '500px', group: 'row3' },
+{ type: 'text', header: 'User Journey', subheader: '', content: 'End‑to‑end journeys highlighted moments of confusion, drop‑offs, and trust gaps in ordering, refilling, and tracking medicines.', },
 
-{ type: 'video', src: '/raseet/EM.mp4', maxHeight: '500px', group: 'row3' },
-
-{ type: 'video', src: '/raseet/UJ.mp4', maxHeight: '500px', group: 'row3' },
+{ type: 'video', src: '/raseet/UJ.mp4', maxHeight: '500px' },
 
 
 { type: 'text', header: 'Impact of Research', subheader: '', content: "The insights from user research directly informed the design goals and solutions for Raseet Health:", items: ['User-Centric Onboarding', 'Enhanced Navigation', 'Privacy Assurance'] },
 
-{ type: 'keyDesignDecisions' },
 
 { type: 'text', header: 'Product Goals: Sort Qualitative Feedback', subheader: '', content: "The success of Raseet Health depended on aligning business objectives with user needs, ensuring a seamless and scalable experience for all stakeholders. By analyzing research insights and market trends, we defined three core product goals:" },
 
@@ -964,16 +958,14 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: '', subheader: '', content: "These goals shaped the design decisions, guiding the development of a frictionless user experience that balanced operational efficiency with user-centric healthcare services.", headerIndent: 1 },
 
-// { type: 'image', src: '/raseet/bsu.png', maxHeight: '400px'},
-
-{ type: 'goalsVenn' },
+{ type: 'image', src: '/raseet/bsu.png', maxHeight: '400px'},
 
 ////////////////////////////////////////////////////////////
 
 { type: 'text', header: 'Solutions', subheader: '1. Seamless integration of stakeholder systems', content: 'A three‑sided platform connects pharmacies, healthcare providers, and customers so information flows reliably instead of being trapped in silos.', },
 
 
-// { type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Disconnected systems for pharmacies, doctors, and customers led to inefficiencies, missed opportunities, and frustration.", headerRight: 'Solution', contentRight: "Unified Dashboards and Secure Collaboration Tools." },
+{ type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Disconnected systems for pharmacies, doctors, and customers led to inefficiencies, missed opportunities, and frustration.", headerRight: 'Solution', contentRight: "Unified Dashboards and Secure Collaboration Tools." },
 
 { type: 'text', header: 'Features', subheader: 'Role-based dashboards', content: 'Each role sees only what they need to act with confidence, reducing clutter and cognitive load.', },
 
@@ -1012,7 +1004,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 { type: 'text', header: '', subheader: '2. Simplifying complex onboarding for pharmacies', content: 'Onboarding flows are broken into guided steps so non‑technical teams can go digital without feeling overwhelmed.', },
 
 
-// { type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Small pharmacies struggled with the technical barriers of going digital, including setting up online catalogs and training staff.", headerRight: 'Solution', contentRight: "Automated Onboarding Workflows." },
+{ type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Small pharmacies struggled with the technical barriers of going digital, including setting up online catalogs and training staff.", headerRight: 'Solution', contentRight: "Automated Onboarding Workflows." },
 
 { type: 'text', header: 'Features', subheader: 'Bulk catalog uploads', content: 'Pharmacies can upload existing catalogs instead of re‑entering data, dramatically reducing setup time.', },
 
@@ -1023,7 +1015,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 ],listIndent: 1 },
 
 
-// { type: 'textTextRow', headerLeft: 'Step-by-Step Onboarding Guides', contentLeft: "Interactive walkthroughs guide pharmacy owners through system setup, from uploading inventories to customizing their storefront. Progress trackers provide visibility into onboarding milestones.", headerRight: 'Dedicated Support', contentRight: "24/7 live chat support for troubleshooting during setup. On-call assistance for pharmacies with specific needs or technical challenges." },
+{ type: 'textTextRow', headerLeft: 'Step-by-Step Onboarding Guides', contentLeft: "Interactive walkthroughs guide pharmacy owners through system setup, from uploading inventories to customizing their storefront. Progress trackers provide visibility into onboarding milestones.", headerRight: 'Dedicated Support', contentRight: "24/7 live chat support for troubleshooting during setup. On-call assistance for pharmacies with specific needs or technical challenges." },
 
 
 { type: 'image', src: '/raseet/final/27.png', },
@@ -1036,7 +1028,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 { type: 'text', header: '', subheader: '3. Enhancing UX in e‑commerce', content: 'We redesigned navigation, search, and checkout to reduce friction and increase completed orders.', },
 
 
-// { type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Customers struggled with poor navigation, complex checkout processes, and lack of real-time updates, leading to high drop-off rates.", headerRight: 'Solution', contentRight: "Intuitive Navigation and Streamlined Checkout." },
+{ type: 'textTextRow', headerLeft: 'Problem', contentLeft: "Customers struggled with poor navigation, complex checkout processes, and lack of real-time updates, leading to high drop-off rates.", headerRight: 'Solution', contentRight: "Intuitive Navigation and Streamlined Checkout." },
 
 { type: 'text', header: 'Features', subheader: 'Advanced search and filters', content: 'Search supports natural queries and filters that match how people actually shop for medicines and health products.', },
 
@@ -1058,9 +1050,9 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 
 
-// { type: 'text', header: 'Design Goals & Considerations', subheader: 'Information Architecture', content: "To create a seamless and efficient user experience, the information architecture was carefully designed to cater to different user roles, including pharmacists, healthcare providers, and customers. The goal was to structure the platform in a way that improves discoverability, usability, and accessibility while ensuring smooth navigation for all stakeholders.", },
+{ type: 'text', header: 'Design Goals & Considerations', subheader: 'Information Architecture', content: "To create a seamless and efficient user experience, the information architecture was carefully designed to cater to different user roles, including pharmacists, healthcare providers, and customers. The goal was to structure the platform in a way that improves discoverability, usability, and accessibility while ensuring smooth navigation for all stakeholders.", },
 
-/* { type: 'textBullets', header: 'Key Considerations', items: [
+{ type: 'textBullets', header: 'Key Considerations', items: [
   'Role-Specific Navigation: Tailored dashboards for pharmacies, customers, and healthcare providers to minimize cognitive load and present relevant information.',
   'E-Commerce & Healthcare Services: A clear distinction between shopping for medications, managing prescriptions, and accessing healthcare services.',
   "Search & Filtering: Robust search functionality and category-based navigation to enhance product and service discovery.",
@@ -1073,11 +1065,9 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   'Healthcare Providers: Patient records, collaboration tools, and prescription management.',
   "Customers: Dashboard for health records, shopping, and order tracking.",
   "Global Components: Header (search, filters, profile), footer (privacy policies, support), and system notifications.",
-],listIndent: 1 }, */
+],listIndent: 1 },
 
-// { type: 'text', header: '', subheader: '', content: "By designing a hierarchical yet intuitive structure, we ensured that users could quickly access the most relevant features, resulting in a smoother and more efficient experience for all stakeholders.", },
-
-{ type: 'text', header: 'Information Architecture', content: 'The IA was structured around three distinct user roles, pharmacists, customers, and healthcare providers, each with tailored navigation and dashboards. E-commerce, prescription management, and healthcare services were kept clearly separated to reduce cognitive load, with a global search and role-based access control connecting everything.' },
+{ type: 'text', header: '', subheader: '', content: "By designing a hierarchical yet intuitive structure, we ensured that users could quickly access the most relevant features, resulting in a smoother and more efficient experience for all stakeholders.", },
 
 { type: 'image', src: '/raseet/IA.png', },
 
@@ -1102,9 +1092,9 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 
 
-// { type: 'text', header: 'Impact of Solutions', subheader: '', content: '', align: 'center' },
+{ type: 'text', header: 'Impact of Solutions', subheader: '', content: '', align: 'center' },
 
-// { type: 'image', src: '/raseet/final/32.png', },
+{ type: 'image', src: '/raseet/final/32.png', },
 
 // { type: 'text', header: '', subheader: '', content: "", align: 'center' },
 
@@ -1112,25 +1102,21 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 { type: 'image', src: '/raseet/kpi.png', maxHeight: '640px' },
 { type: 'impactStatsInline' },
 
-{ type: 'beforeAfter' },
+{ type: 'text', header: 'MedScope: A Scalable & Systematic Design System', subheader: 'The Challenge', content: "As Raseet Health expanded, maintaining design consistency, efficiency, and scalability became a challenge. A fragmented UI led to inconsistencies in components, longer design cycles, and increased development overhead. The need for a unified design system became evident to streamline collaboration, reduce redundancy, and enhance the user experience across all touchpoints.", },
 
-{ type: 'text', header: 'MedScope Design System', content: 'Six months in, design inconsistencies and repeated engineering work made it clear we needed a shared system. I built MedScope from scratch using Atomic Design principles, 60+ components across atoms, molecules, organisms, and templates. Design tokens exported as JSON mapped directly to React components, so Figma updates cascaded through the codebase. Development cycle dropped from 3 weeks to 10 days.' },
-
-// { type: 'text', header: 'MedScope: A Scalable & Systematic Design System', subheader: 'The Challenge', content: "As Raseet Health expanded, maintaining design consistency, efficiency, and scalability became a challenge. A fragmented UI led to inconsistencies in components, longer design cycles, and increased development overhead. The need for a unified design system became evident to streamline collaboration, reduce redundancy, and enhance the user experience across all touchpoints.", },
-
-/* { type: 'textBullets', header: 'The Goal', items: [
+{ type: 'textBullets', header: 'The Goal', items: [
   'Establish a scalable design system following Atomic Design Principles.',
   'Ensure cross-platform consistency while allowing flexibility for future expansions',
   "Improve efficiency by reducing time spent on repetitive UI decisions.",
   "Enable a structured decision-making process to govern component usage and modifications.",
-],listIndent: 1 }, */
+],listIndent: 1 },
 
-// { type: 'image', src: '/raseet/DS.png', },
+{ type: 'image', src: '/raseet/DS.png', },
 
 
-// { type: 'text', header: 'Structuring MedScope: Design System Architecture', subheader: '', content: "", },
+{ type: 'text', header: 'Structuring MedScope: Design System Architecture', subheader: '', content: "", },
 
-/* { type: 'textBullets', header: 'MedScope was built using:', items: [
+{ type: 'textBullets', header: 'MedScope was built using:', items: [
   'Atomic Design Principles – Breaking down components into atoms, molecules, organisms, templates, and pages for modular reusability.',
   'A Reusable Component Library – Standardizing UI elements to ensure consistency across different features.',
   "Scalability Standards – Creating a foundation for future expansion without compromising usability.",
@@ -1141,13 +1127,13 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   'Spacing & Grid Systems – Providing a structured layout framework.',
   "Component Library – Predefined UI elements for seamless design iteration.",
   "Interactive Patterns & States – Standardizing hover states, transitions, and user feedback mechanisms.",
-],listIndent: 1 }, */
+],listIndent: 1 },
 
 
-// { type: 'text', header: 'MedScope Design System Decision-Making Process: How We Built It', subheader: '', content: "A structured decision-making framework was implemented to maintain consistency and prevent design fragmentation:", },
+{ type: 'text', header: 'MedScope Design System Decision-Making Process: How We Built It', subheader: '', content: "A structured decision-making framework was implemented to maintain consistency and prevent design fragmentation:", },
 
 
-/* { type: 'textBullets', header: '1. Assess the Need - Does a similar component exist in MedScope?', items: [
+{ type: 'textBullets', header: '1. Assess the Need - Does a similar component exist in MedScope?', items: [
   'Yes → Use the existing component.',
   'No → Proceed to the next step.',
 ],listIndent: 1 },
@@ -1168,7 +1154,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 { type: 'textBullets', header: '4. Integration & Documentation - The new/updated component is', items: [
   'Incorporated into the design system.',
   'Guidelines and best practices are documented for seamless adoption.',
-],listIndent: 1 }, */
+],listIndent: 1 },
 
 
 { type: 'image', src: '/raseet/2.png', },
@@ -1185,9 +1171,9 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 
 
-// { type: 'text', header: 'Key Outcomes & Impact', subheader: '', content: "", align: 'center' },
+{ type: 'text', header: 'Key Outcomes & Impact', subheader: '', content: "", align: 'center' },
 
-// { type: 'image', src: '/raseet/final/32.png', },
+{ type: 'image', src: '/raseet/final/32.png', },
 
 
 { type: 'text', header: 'Wireframes', subheader: '', content: 'Early wireframes explored multiple layout options for onboarding, home, and cart flows before we committed to high‑fidelity designs.', },
@@ -1221,54 +1207,45 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Retrospectives', subheader: '1. Empathy-Driven Design', content: "The iterative design process, grounded in user feedback, ensured that the platform met the unique needs of pharmacists, healthcare providers, and customers.", },
 
+{ type: 'image', src: '/raseet/final/33.png', },
+
+
+{ type: 'textBullets', header: '2. Importance of Simplicity', items: [
+  'Simplified workflows and intuitive interfaces reduced onboarding barriers and user frustration.',
+  'Streamlined experiences, like the improved checkout process, significantly boosted user satisfaction and engagement.',
+],listIndent: 1 },
+
+{ type: 'textBullets', header: '3. Leveraging Ecosystem Synergy', items: [
+  'Integrating tools and features within the Raseet Health ecosystem enhanced its value proposition for both users and the business.',
+  'Example: The seamless connection between inventory management and customer-facing features created a cohesive experience.',
+],listIndent: 1 },
+
+
+
 // { type: 'image', src: '/raseet/final/33.png', },
 
 
-// { type: 'textBullets', header: '2. Importance of Simplicity', items: [
-//   'Simplified workflows and intuitive interfaces reduced onboarding barriers and user frustration.',
-//   'Streamlined experiences, like the improved checkout process, significantly boosted user satisfaction and engagement.',
-// ],listIndent: 1 },
-
-// { type: 'textBullets', header: '3. Leveraging Ecosystem Synergy', items: [
-//   'Integrating tools and features within the Raseet Health ecosystem enhanced its value proposition for both users and the business.',
-//   'Example: The seamless connection between inventory management and customer-facing features created a cohesive experience.',
-// ],listIndent: 1 },
-
-
-
-// { type: 'image', src: '/raseet/final/33.png', },
-
-
-// { type: 'text', header: 'Collaboration at Raseet Health', subheader: '', content: "At Raseet Health, collaboration was a fundamental part of the design process. As the Product/UX Designer, I worked closely with cross-functional teams, ensuring that design decisions were aligned with business goals, technical feasibility, and user needs.", },
-
-{ type: 'text', header: 'Collaboration', content: 'Worked directly with co-founders on product strategy, engineers in daily sprints during critical launches, pharmacy partners for operational validation, and support teams for post-launch iteration. Every major design decision was tested against real operational constraints before shipping.' },
+{ type: 'text', header: 'Collaboration at Raseet Health', subheader: '', content: "At Raseet Health, collaboration was a fundamental part of the design process. As the Product/UX Designer, I worked closely with cross-functional teams, ensuring that design decisions were aligned with business goals, technical feasibility, and user needs.", },
 
 { type: 'image', src: '/raseet/1.png', maxHeight: '640px' },
 
-// { type: 'text', header: 'How collaboration shaped the final product', subheader: '', content: 'Regular touchpoints with founders, engineers, pharmacists, and support teams ensured that each iteration reflected both user insight and operational reality.', },
+{ type: 'text', header: 'How collaboration shaped the final product', subheader: '', content: 'Regular touchpoints with founders, engineers, pharmacists, and support teams ensured that each iteration reflected both user insight and operational reality.', },
 
-// { type: 'image', src: '/raseet/final/34.png', },
+{ type: 'image', src: '/raseet/final/34.png', },
 
 { type: 'text', header: 'Lessons learned', subheader: '', content: 'Designing in healthcare means designing for trust, patience, and clarity. Small details, like copy, empty states, and recovery paths, have outsized impact on whether people feel safe using the product.', },
 
-// { type: 'textTextRow', headerLeft: 'Continuous Feedback Is Key', contentLeft: "", headerRight: '', contentRight: "Regular usability testing and feedback loops were instrumental in identifying areas for improvement and driving iterative changes." },
+{ type: 'textTextRow', headerLeft: 'Continuous Feedback Is Key', contentLeft: "", headerRight: '', contentRight: "Regular usability testing and feedback loops were instrumental in identifying areas for improvement and driving iterative changes." },
 
-// { type: 'textTextRow', headerLeft: 'Localized Solutions Matter', contentLeft: "", headerRight: '', contentRight: "Localized onboarding guides and multilingual support helped expand adoption in diverse regions." },
+{ type: 'textTextRow', headerLeft: 'Localized Solutions Matter', contentLeft: "", headerRight: '', contentRight: "Localized onboarding guides and multilingual support helped expand adoption in diverse regions." },
 
 
-// { type: 'textTextRow', headerLeft: 'Trust Is Foundational', contentLeft: "", headerRight: '', contentRight: "Transparent communication about data privacy and security built confidence among users, addressing one of the biggest barriers to digital adoption." },
+{ type: 'textTextRow', headerLeft: 'Trust Is Foundational', contentLeft: "", headerRight: '', contentRight: "Transparent communication about data privacy and security built confidence among users, addressing one of the biggest barriers to digital adoption." },
 
 { type: 'image', src: '/raseet/7.png', maxHeight: '640px' },
 
 
-// { type: 'text', header: 'Closing Reflections', subheader: '', content: "The success of Raseet Health lies in its ability to empower local pharmacies, improve healthcare accessibility for customers, and foster seamless collaboration across stakeholders. By continuously iterating based on user feedback and leveraging technology to solve real-world problems, Raseet Health achieved its mission to make quality healthcare accessible and equitable.", },
-
-{ type: 'text', header: 'Reflections', content: '' },
-{ type: 'textBullets', header: '', items: [
-  'Involving engineers from day one changed how I design. Early at Raseet I handed off designs that required costly rework. After building a habit of daily syncs during sprints, implementation surprises dropped significantly and the final product matched the intent.',
-  'Designing for elderly users taught me that accessibility constraints make everything better. The first chronic care design was modern and clean, and completely unusable for the people who needed it most. Rebuilding it under the constraint of clarity over aesthetics produced a stronger product for every user group, not just elderly patients.',
-  'Data without session recordings is just numbers. The prescription upload drop-off was visible in Mixpanel for weeks. The real insight, that users were confused about which documents to upload and worried about privacy, only came from watching actual session recordings. The fix was messaging and trust, not the upload interface itself.',
-], listIndent: 0 },
+{ type: 'text', header: 'Closing Reflections', subheader: '', content: "The success of Raseet Health lies in its ability to empower local pharmacies, improve healthcare accessibility for customers, and foster seamless collaboration across stakeholders. By continuously iterating based on user feedback and leveraging technology to solve real-world problems, Raseet Health achieved its mission to make quality healthcare accessible and equitable.", },
 
   ];
 
@@ -1277,7 +1254,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   // ═══════════════════════════════════════════════════════════════════════
 
   return (
-    <div className="min-h-screen bg-white" style={{ overflowX: 'hidden', paddingBottom: 0 }}>
+    <div className="min-h-screen bg-white" style={{ overflowX: 'hidden' }}>
       <style>{`
         .raseet-hero-cta {
           display: inline-flex;
@@ -1502,7 +1479,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-6 md:px-12 pt-12 md:pt-16 pb-8">
+      <div className="max-w-[1200px] mx-auto px-6 md:px-12 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] gap-12 md:gap-16">
           <div className="space-y-8 order-2 md:order-none">
             {icon ? (
@@ -1705,11 +1682,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
         {caseStudyVisible ? (
           <>
-        <div
-          id="case-study-start"
-          className="space-y-16 mt-16"
-          style={{ scrollMarginTop: 'var(--nav-height, 80px)', paddingBottom: 0 }}
-        >
+        <div id="case-study-start" className="space-y-16 mt-16" style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}>
           {(() => {
             const skipped = new Set<number>();
             return blocks.map((block, index) => {
@@ -2070,409 +2043,6 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               return (
                 <div key={index} className="w-full">
                   <RaseetAccessibilityNativeSection />
-                </div>
-              );
-            }
-            if (block.type === 'goalsVenn') {
-              return (
-                <div key={index} className="w-full flex flex-col items-center py-8">
-                  <div className="w-full max-w-[600px]">
-                    <svg viewBox="0 0 600 320" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto">
-                      {/* Business circle */}
-                      <circle
-                        cx="220"
-                        cy="160"
-                        r="130"
-                        fill="#1A6B8A"
-                        fillOpacity="0.12"
-                        stroke="#1A6B8A"
-                        strokeWidth="1.5"
-                        strokeOpacity="0.4"
-                      />
-                      {/* User circle */}
-                      <circle
-                        cx="380"
-                        cy="160"
-                        r="130"
-                        fill="#1A6B8A"
-                        fillOpacity="0.12"
-                        stroke="#1A6B8A"
-                        strokeWidth="1.5"
-                        strokeOpacity="0.4"
-                      />
-                      {/* Shared overlap highlight */}
-                      <ellipse cx="300" cy="160" rx="55" ry="95" fill="#1A6B8A" fillOpacity="0.25" />
-
-                      {/* Business label */}
-                      <text x="165" y="120" textAnchor="middle" fill="#1A6B8A" fontSize="13" fontWeight="700" fontFamily="inherit">
-                        Business
-                      </text>
-                      <text x="165" y="138" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Revenue growth
-                      </text>
-                      <text x="165" y="154" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Repeat orders
-                      </text>
-                      <text x="165" y="170" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Partner retention
-                      </text>
-                      <text x="165" y="186" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Operational scale
-                      </text>
-
-                      {/* Shared label */}
-                      <text x="300" y="143" textAnchor="middle" fill="#1A6B8A" fontSize="12" fontWeight="700" fontFamily="inherit">
-                        Shared
-                      </text>
-                      <text x="300" y="160" textAnchor="middle" fill="#1A6B8A" fontSize="10" fontFamily="inherit">
-                        Trust
-                      </text>
-                      <text x="300" y="175" textAnchor="middle" fill="#1A6B8A" fontSize="10" fontFamily="inherit">
-                        Simplicity
-                      </text>
-                      <text x="300" y="190" textAnchor="middle" fill="#1A6B8A" fontSize="10" fontFamily="inherit">
-                        Access
-                      </text>
-
-                      {/* User label */}
-                      <text x="435" y="120" textAnchor="middle" fill="#1A6B8A" fontSize="13" fontWeight="700" fontFamily="inherit">
-                        User
-                      </text>
-                      <text x="435" y="138" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Easy refills
-                      </text>
-                      <text x="435" y="154" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Clear status
-                      </text>
-                      <text x="435" y="170" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Trusted platform
-                      </text>
-                      <text x="435" y="186" textAnchor="middle" fill="#374151" fontSize="11" fontFamily="inherit">
-                        Low friction
-                      </text>
-                    </svg>
-                  </div>
-                  <p style={{ fontSize: '13px', color: '#6b7280', marginTop: '12px', textAlign: 'center' }}>
-                    Design decisions were evaluated against all three goal sets, prioritizing the overlap.
-                  </p>
-                </div>
-              );
-            }
-            if (block.type === 'keyDesignDecisions') {
-              return (
-                <div key={index} className="w-full space-y-6">
-                  <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
-                    Key Design Decisions
-                  </h3>
-                  <p className="text-[18px] leading-[1.85] text-gray-700">
-                    Four moments that fundamentally shaped the product.
-                  </p>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {[
-                      {
-                        number: '01',
-                        decision: 'Trust over aesthetics',
-                        context:
-                          'Research showed trust was the single biggest barrier, not price, not selection.',
-                        action:
-                          'Replaced generic "Proceed to pay" with "Secure checkout". Added verified pharmacy badges, batch numbers, and explicit data security messaging throughout every flow.',
-                        outcome: '68% monthly retention vs 40-50% industry average.',
-                      },
-                      {
-                        number: '02',
-                        decision: 'Accessibility forced a complete rebuild',
-                        context:
-                          'First chronic care design was modern and minimalistic, following typical SaaS patterns.',
-                        action:
-                          "Usability testing with 15 elderly patients revealed they couldn't navigate or read critical medication information. Rebuilt entirely: larger text, high contrast, fewer steps, guided mode.",
-                        outcome: '45% increase in customer lifetime value. 2,000+ chronic patients served.',
-                      },
-                      {
-                        number: '03',
-                        decision: 'The drop-off was a trust problem, not a UX problem',
-                        context:
-                          'Mixpanel showed 40% prescription upload drop-off. Initial assumption was the interface was too complex.',
-                        action:
-                          'Session recordings revealed users were scared, confused about which documents to upload and worried about privacy. Fixed with messaging: "Your data is encrypted", "Verified by licensed pharmacists". Then simplified from 4 steps to 2.',
-                        outcome: '40% drop-off → eventually single digits through continued iteration.',
-                      },
-                      {
-                        number: '04',
-                        decision: 'Ship in a week or lose the revenue',
-                        context:
-                          'Mixpanel flagged significant payment page dropouts on a Monday morning.',
-                        action:
-                          'Monday: identified via analytics. Tuesday: session recordings + usability tests. Wednesday: modal-based redesign with engineers. Thursday: Figma prototypes + A/B tests. Friday: final implementation. Following Monday: live.',
-                        outcome: 'Cart abandonment noticeably reduced. 5 steps → 3 steps. Shipped in 7 days.',
-                      },
-                    ].map((item, i) => (
-                      <div
-                        key={i}
-                        style={{
-                          borderTop: '3px solid #1A6B8A',
-                          padding: '24px',
-                          background: 'rgba(26, 107, 138, 0.03)',
-                          borderRadius: '0 0 8px 8px',
-                        }}
-                      >
-                        <div
-                          style={{
-                            fontSize: '11px',
-                            fontWeight: 700,
-                            color: '#1A6B8A',
-                            letterSpacing: '0.15em',
-                            marginBottom: '8px',
-                          }}
-                        >
-                          {item.number}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: '1.1rem',
-                            fontWeight: 700,
-                            color: '#111827',
-                            marginBottom: '16px',
-                            lineHeight: 1.3,
-                          }}
-                        >
-                          {item.decision}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: '0.85rem',
-                            color: '#6b7280',
-                            marginBottom: '8px',
-                            lineHeight: 1.6,
-                          }}
-                        >
-                          <span style={{ fontWeight: 600, color: '#374151' }}>Context: </span>
-                          {item.context}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: '0.85rem',
-                            color: '#6b7280',
-                            marginBottom: '8px',
-                            lineHeight: 1.6,
-                          }}
-                        >
-                          <span style={{ fontWeight: 600, color: '#374151' }}>Decision: </span>
-                          {item.action}
-                        </div>
-                        <div
-                          style={{
-                            fontSize: '0.85rem',
-                            color: '#1A6B8A',
-                            fontWeight: 600,
-                            lineHeight: 1.6,
-                            paddingTop: '8px',
-                            borderTop: '1px solid rgba(26, 107, 138, 0.15)',
-                          }}
-                        >
-                          {item.outcome}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              );
-            }
-            if (block.type === 'beforeAfter') {
-              const comparisons = [
-                {
-                  title: 'Prescription Upload Flow',
-                  metric: '40% drop-off → single digits',
-                  before: {
-                    label: 'Before',
-                    steps: [
-                      'Select document type',
-                      'Upload photo or file',
-                      'Enter prescription details manually',
-                      'Wait for verification (no status)',
-                    ],
-                    note: '40% of users abandoned here',
-                  },
-                  after: {
-                    label: 'After',
-                    steps: ['Take a clear photo of your prescription', 'Confirm details'],
-                    note: 'Drop-off reduced to single digits',
-                  },
-                },
-                {
-                  title: 'Payment Flow',
-                  metric: 'Cart abandonment noticeably reduced',
-                  before: {
-                    label: 'Before',
-                    steps: [
-                      'Review cart',
-                      'Enter delivery address',
-                      'Select delivery slot',
-                      'Enter payment details',
-                      'Confirm order',
-                    ],
-                    note: 'Significant dropouts at payment step',
-                  },
-                  after: {
-                    label: 'After',
-                    steps: ['Review cart', 'Confirm address + slot', 'Pay and confirm'],
-                    note: 'Cart abandonment noticeably reduced',
-                  },
-                },
-              ];
-
-              return (
-                <div key={index} className="w-full space-y-12">
-                  <div>
-                    <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium mb-4">
-                      Before vs After
-                    </h3>
-                    <p className="text-[18px] leading-[1.85] text-gray-700">
-                      Two flows that were quietly losing users, and what changed.
-                    </p>
-                  </div>
-                  {comparisons.map((comp, ci) => (
-                    <div key={ci} className="w-full space-y-4">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
-                        <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827' }}>{comp.title}</h4>
-                        <span
-                          style={{
-                            fontSize: '0.8rem',
-                            fontWeight: 600,
-                            color: '#1A6B8A',
-                            background: 'rgba(26, 107, 138, 0.08)',
-                            padding: '4px 12px',
-                            borderRadius: '100px',
-                          }}
-                        >
-                          {comp.metric}
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div
-                          style={{
-                            border: '1px solid rgba(239, 68, 68, 0.2)',
-                            borderTop: '3px solid #ef4444',
-                            borderRadius: '0 0 8px 8px',
-                            padding: '20px',
-                            background: 'rgba(239, 68, 68, 0.02)',
-                          }}
-                        >
-                          <div
-                            style={{
-                              fontSize: '11px',
-                              fontWeight: 700,
-                              color: '#ef4444',
-                              letterSpacing: '0.15em',
-                              marginBottom: '16px',
-                            }}
-                          >
-                            BEFORE
-                          </div>
-                          <div className="space-y-2">
-                            {comp.before.steps.map((step, si) => (
-                              <div key={si} className="flex items-start gap-3">
-                                <div
-                                  style={{
-                                    width: '20px',
-                                    height: '20px',
-                                    borderRadius: '50%',
-                                    background: 'rgba(239, 68, 68, 0.1)',
-                                    border: '1px solid rgba(239, 68, 68, 0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '10px',
-                                    fontWeight: 700,
-                                    color: '#ef4444',
-                                    flexShrink: 0,
-                                    marginTop: '2px',
-                                  }}
-                                >
-                                  {si + 1}
-                                </div>
-                                <span style={{ fontSize: '0.875rem', color: '#374151', lineHeight: 1.5 }}>
-                                  {step}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                          <div
-                            style={{
-                              marginTop: '16px',
-                              paddingTop: '12px',
-                              borderTop: '1px solid rgba(239, 68, 68, 0.15)',
-                              fontSize: '0.8rem',
-                              color: '#ef4444',
-                              fontWeight: 500,
-                            }}
-                          >
-                            {comp.before.note}
-                          </div>
-                        </div>
-                        <div
-                          style={{
-                            border: '1px solid rgba(26, 107, 138, 0.2)',
-                            borderTop: '3px solid #1A6B8A',
-                            borderRadius: '0 0 8px 8px',
-                            padding: '20px',
-                            background: 'rgba(26, 107, 138, 0.02)',
-                          }}
-                        >
-                          <div
-                            style={{
-                              fontSize: '11px',
-                              fontWeight: 700,
-                              color: '#1A6B8A',
-                              letterSpacing: '0.15em',
-                              marginBottom: '16px',
-                            }}
-                          >
-                            AFTER
-                          </div>
-                          <div className="space-y-2">
-                            {comp.after.steps.map((step, si) => (
-                              <div key={si} className="flex items-start gap-3">
-                                <div
-                                  style={{
-                                    width: '20px',
-                                    height: '20px',
-                                    borderRadius: '50%',
-                                    background: 'rgba(26, 107, 138, 0.1)',
-                                    border: '1px solid rgba(26, 107, 138, 0.3)',
-                                    display: 'flex',
-                                    alignItems: 'center',
-                                    justifyContent: 'center',
-                                    fontSize: '10px',
-                                    fontWeight: 700,
-                                    color: '#1A6B8A',
-                                    flexShrink: 0,
-                                    marginTop: '2px',
-                                  }}
-                                >
-                                  {si + 1}
-                                </div>
-                                <span style={{ fontSize: '0.875rem', color: '#374151', lineHeight: 1.5 }}>
-                                  {step}
-                                </span>
-                              </div>
-                            ))}
-                          </div>
-                          <div
-                            style={{
-                              marginTop: '16px',
-                              paddingTop: '12px',
-                              borderTop: '1px solid rgba(26, 107, 138, 0.15)',
-                              fontSize: '0.8rem',
-                              color: '#1A6B8A',
-                              fontWeight: 500,
-                            }}
-                          >
-                            {comp.after.note}
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
                 </div>
               );
             }

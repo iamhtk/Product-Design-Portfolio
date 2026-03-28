@@ -11,7 +11,7 @@ export function QuoteBlock({ quote, attribution, isDark = false }: QuoteBlockPro
         "{quote}"
       </p>
       {attribution && (
-        <p className={`text-sm mt-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}>— {attribution}</p>
+        <p className={`text-sm mt-2 ${isDark ? 'text-gray-400' : 'text-gray-500'}`}> {attribution}</p>
       )}
     </div>
   );

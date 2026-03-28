@@ -74,7 +74,7 @@ export function Solutions() {
             </div>
             
             <p className="text-gray-700 italic mt-6">
-              "Finally, everything I need is in one place—it saves me so much time and keeps everything organized." – Pharmacist Participant
+              "Finally, everything I need is in one place, it saves me so much time and keeps everything organized." – Pharmacist Participant
             </p>
             
             <div className="mt-6 space-y-2">
@@ -139,7 +139,7 @@ export function Solutions() {
             </div>
             
             <p className="text-gray-700 italic mt-6">
-              "The onboarding guide was so straightforward—I was up and running in no time!" – Pharmacy Owner Participant
+              "The onboarding guide was so straightforward, I was up and running in no time!" – Pharmacy Owner Participant
             </p>
             
             <div className="mt-6 space-y-2">
@@ -205,7 +205,7 @@ export function Solutions() {
             </div>
             
             <p className="text-gray-700 italic mt-6">
-              "Shopping for medicines has never been this easy—I love how fast and smooth the process is now." – Customer Participant
+              "Shopping for medicines has never been this easy, I love how fast and smooth the process is now." – Customer Participant
             </p>
             
             <div className="mt-6 space-y-2">

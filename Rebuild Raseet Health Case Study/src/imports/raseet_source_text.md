@@ -246,7 +246,7 @@ Pharmacists rely heavily on manual processes for inventory management and order 
 **Impact:**  
 There is a critical need for dynamic inventory management and order fulfillment tools.
 
-“Managing stock manually is exhausting—I’ve lost customers due to delays.” – Pharmacist Participant
+“Managing stock manually is exhausting, I’ve lost customers due to delays.” – Pharmacist Participant
 
 ### Finding 2
 **Digital Adoption Barriers for Pharmacies:**
@@ -257,7 +257,7 @@ Many pharmacy owners feel overwhelmed by the technical setup required to go onli
 **Impact:**  
 Simplified onboarding workflows and dedicated support are essential for adoption.
 
-“I’m not familiar with digital tools—it feels like too much work.” – Pharmacy Owner Participant
+“I’m not familiar with digital tools, it feels like too much work.” – Pharmacy Owner Participant
 
 ### Finding 3
 **Customers Struggle With Navigation**:
@@ -268,7 +268,7 @@ Poor search functionality and complex checkout processes lead to frustration and
 **Impact:**  
 Intuitive navigation and personalized search recommendations are top priorities.
 
-“It took me ages to find what I needed—the filters were confusing.” – Customer Participant
+“It took me ages to find what I needed, the filters were confusing.” – Customer Participant
 
 ### Finding 4
 **Lack of Guidance Post-Rejection**:
@@ -290,19 +290,19 @@ Privacy concerns are a significant barrier to adoption.
 **Impact:**  
 Transparent communication about data security and compliance is vital.
 
-“I’m worried about sharing my health data—how can I be sure it’s secure?” – Customer Participant
+“I’m worried about sharing my health data, how can I be sure it’s secure?” – Customer Participant
 
 ## Insights at a Glance
 **Insights at a Glance??**
 
 **#1**  
-“Managing stock manually is exhausting—I’ve lost customers due to delays.” – Pharmacist 
+“Managing stock manually is exhausting, I’ve lost customers due to delays.” – Pharmacist 
 
 **#2**  
-“It took me ages to find what I needed—the filters were confusing.” – Customer Participant
+“It took me ages to find what I needed, the filters were confusing.” – Customer Participant
 
 **#3**  
-“I’m worried about sharing my health data—how can I be sure it’s secure?” – Customer Participant
+“I’m worried about sharing my health data, how can I be sure it’s secure?” – Customer Participant
 
 These insights served as a valuable tool to identify opportunities for introducing a potential solution.
 
@@ -408,7 +408,7 @@ Unified Dashboards and Secure Collaboration Tools.
 
 * Implemented end-to-end encryption and role-based access control to safeguard sensitive data like medical records and prescriptions.
 
-“Finally, everything I need is in one place—it saves me so much time and keeps everything organized." – Pharmacist Participant
+“Finally, everything I need is in one place, it saves me so much time and keeps everything organized." – Pharmacist Participant
 
 Reduced operational errors by **30%**, saving pharmacies an average of **5 hours per week**.
 
@@ -443,7 +443,7 @@ Automated Onboarding Workflows.
 * 24/7 live chat support for troubleshooting during setup.  
 * On-call assistance for pharmacies with specific needs or technical challenges.
 
-“The onboarding guide was so straightforward—I was up and running in no time!" – Pharmacy Owner Participant
+“The onboarding guide was so straightforward, I was up and running in no time!" – Pharmacy Owner Participant
 
 Reduced onboarding time by **50%**, with most pharmacies completing setup within **2–3 days**.
 
@@ -479,7 +479,7 @@ Intuitive Navigation and Streamlined Checkout.
 * Push notifications inform users at every stage: order confirmation, processing, dispatch, and delivery.  
 * A visual progress tracker provides transparency and reduces customer anxiety.
 
-“Shopping for medicines has never been this easy—I love how fast and smooth the process is now." – Customer Participant
+“Shopping for medicines has never been this easy, I love how fast and smooth the process is now." – Customer Participant
 
 Product discovery time reduced by **40%**, allowing customers to find what they need faster.
 
@@ -490,7 +490,7 @@ Cart abandonment rates decreased by **25%**, and order completion rates increase
 ### Information Architecture
 **Information Architecture**
 
-To create a seamless and efficient user experience, the **information architecture** was carefully designed to cater to different user roles—**pharmacists, healthcare providers, and customers**. The goal was to structure the platform in a way that improves **discoverability, usability, and accessibility** while ensuring smooth navigation for all stakeholders.
+To create a seamless and efficient user experience, the **information architecture** was carefully designed to cater to different user roles, **pharmacists, healthcare providers, and customers**. The goal was to structure the platform in a way that improves **discoverability, usability, and accessibility** while ensuring smooth navigation for all stakeholders.
 
 **Key Considerations**
 
@@ -637,7 +637,7 @@ Once the usability issues were resolved, I moved on to design the final screens 
 
 The iterative design process, grounded in user feedback, ensured that the platform met the unique needs of pharmacists, healthcare providers, and customers.
 
-“The changes make it so much easier to manage everything—my staff and I feel more confident now.” – Pharmacist Participant
+“The changes make it so much easier to manage everything, my staff and I feel more confident now.” – Pharmacist Participant
 
 ### Importance of Simplicity
 **Importance of Simplicity**

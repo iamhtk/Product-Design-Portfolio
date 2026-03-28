@@ -33,7 +33,7 @@ export function KeyFindings() {
                 </p>
               </div>
               
-              <p className="text-gray-300 italic mt-4">"Managing stock manually is exhausting—I've lost customers due to delays." – Pharmacist Participant</p>
+              <p className="text-gray-300 italic mt-4">"Managing stock manually is exhausting, I've lost customers due to delays." – Pharmacist Participant</p>
             </div>
           </div>
           
@@ -57,7 +57,7 @@ export function KeyFindings() {
                 </p>
               </div>
               
-              <p className="text-gray-300 italic mt-4">"I'm not familiar with digital tools—it feels like too much work." – Pharmacy Owner Participant</p>
+              <p className="text-gray-300 italic mt-4">"I'm not familiar with digital tools, it feels like too much work." – Pharmacy Owner Participant</p>
             </div>
           </div>
           
@@ -81,7 +81,7 @@ export function KeyFindings() {
                 </p>
               </div>
               
-              <p className="text-gray-300 italic mt-4">"It took me ages to find what I needed—the filters were confusing." – Customer Participant</p>
+              <p className="text-gray-300 italic mt-4">"It took me ages to find what I needed, the filters were confusing." – Customer Participant</p>
             </div>
           </div>
           
@@ -129,7 +129,7 @@ export function KeyFindings() {
                 </p>
               </div>
               
-              <p className="text-gray-300 italic mt-4">"I'm worried about sharing my health data—how can I be sure it's secure?" – Customer Participant</p>
+              <p className="text-gray-300 italic mt-4">"I'm worried about sharing my health data, how can I be sure it's secure?" – Customer Participant</p>
             </div>
           </div>
         </div>

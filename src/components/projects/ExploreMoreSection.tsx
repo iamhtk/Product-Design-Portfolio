@@ -132,7 +132,7 @@ export function ExploreMoreSection({
             aria-hidden
           />
 
-          {/* Next / Right block — 280px card, content right-aligned to match image */}
+          {/* Next / Right block, 280px card, content right-aligned to match image */}
           <div
             className="min-w-0 flex-1 flex justify-end"
             style={{ maxWidth: 'min(48%, 480px)' }}
