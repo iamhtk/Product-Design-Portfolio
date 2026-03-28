@@ -694,6 +694,7 @@ import { PROJECT_ENABLED, PROJECT_SLUGS } from './components/projects/projectOrd
 import { Blog } from './components/Blog';
 import { FavoritesPage } from './components/FavoritesPage';
 import { AnalyticsDashboard } from './components/AnalyticsDashboard';
+import { LightboxProvider } from './components/Lightbox';
 import {
   trackPageView,
   trackProjectOpen,
@@ -948,7 +949,10 @@ function App() {
     pushRoute('work', null);
   };
 
+  const lightboxEnabled = currentPage === 'project';
+
   return (
+    <LightboxProvider enabled={lightboxEnabled}>
     <div className="min-h-screen overflow-x-hidden">
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
 
@@ -1012,6 +1016,7 @@ function App() {
         })()}
       </div>
     </div>
+    </LightboxProvider>
   );
 }
 

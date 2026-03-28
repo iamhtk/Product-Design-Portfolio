@@ -11,6 +11,7 @@ import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { useLightbox } from '../Lightbox';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
 import { getInitialCaseStudyVisible } from './caseStudyRestore';
@@ -59,6 +60,7 @@ interface AutomotiveUX_GMProjectProps {
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 
 export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_GMProjectProps) {
+  const { openLightbox } = useLightbox();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
   const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
@@ -403,7 +405,12 @@ export function AutomotiveUX_GMProject({ onBack, onProjectClick }: AutomotiveUX_
                 <img
                   src={icon.startsWith('/') ? icon : `/${icon}`}
                   alt={`${title} icon`}
-                  style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    const src = icon.startsWith('/') ? icon : `/${icon}`;
+                    openLightbox([{ src, alt: `${title} icon`, caption: `${title} icon` }], 0);
+                  }}
+                  style={{ width: '100%', height: '100%', objectFit: 'contain', cursor: 'zoom-in' }}
                 />
               </div>
             ) : (

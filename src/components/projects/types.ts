@@ -79,7 +79,13 @@ export type ContentBlock =
   /** Key design decisions grid. Raseet Health only. */
   | { type: 'keyDesignDecisions' }
   /** Before vs after flow comparisons. Raseet Health only. */
-  | { type: 'beforeAfter' };
+  | { type: 'beforeAfter' }
+  /** Accessibility contrast problem screens. Raseet Health only. */
+  | { type: 'accessibilityContrast' }
+  /** Product breadth showcase grid. Raseet Health only. */
+  | { type: 'productShowcase' }
+  /** Patient onboarding story screens. Raseet Health only. */
+  | { type: 'onboardingStory' };
 
 export type ProjectSection = {
   header?: string; // Optional - leave empty if you don't want a header

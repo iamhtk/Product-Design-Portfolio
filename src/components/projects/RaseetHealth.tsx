@@ -29,6 +29,7 @@ import {
   Youtube,
 } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
+import { useLightbox } from '../Lightbox';
 import { ImageWithFallback } from '../figma/ImageWithFallback';
 import { ExploreMoreSection } from './ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
@@ -547,7 +548,7 @@ const RASEET_FIGMA_MOBILE_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCE
 const RASEET_FIGMA_PARTNER_DASHBOARD_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-4394&p=f&viewport=60%2C472%2C0.09&t=eQG2dOI3a4xSIRlo-1&scaling=scale-down&content-scaling=fixed&page-id=6602%3A2&starting-point-node-id=6602%3A4394&hide-ui=1';
 const RASEET_FIGMA_HCP_DASHBOARD_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-4&viewport=-2691%2C197%2C0.41&t=mL1Fml7UK3LEasph-1&scaling=scale-down&content-scaling=fixed&page-id=6602%3A3&hide-ui=1';
 const RASEET_IMPACT_STATS = [
-  { value: '120+', label: 'Pharmacies onboarded', end: 120, prefix: '', suffix: '+' },
+  { value: '250+', label: 'Pharmacies onboarded', end: 250, prefix: '', suffix: '+' },
   { value: '5 States', label: 'Geographical Reach', end: 5, prefix: '', suffix: ' States' },
   { value: 'Rs. 5Cr+', label: 'Revenue Captured', end: 5, prefix: 'Rs. ', suffix: 'Cr+' },
   { value: '100,000+', label: 'Digital Bills Processed', end: 100000, prefix: '', suffix: '+' },
@@ -661,6 +662,7 @@ interface RaseetHealthProjectProps {
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 
 export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProjectProps) {
+  const { openLightbox } = useLightbox();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
   const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
@@ -995,6 +997,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
   'A personal dashboard allows users to manage prescriptions, view health records, and track orders seamlessly.',
 ],listIndent: 1 },
 
+{ type: 'onboardingStory' },
+
 { type: 'video', src: '/raseet/vids/2/PP-demo.mp4', maxHeight: '500px', group: 'row3' },
 
 { type: 'externalLink', label: 'Partner Pharmacy Dashboard ↗', href: RASEET_FIGMA_PARTNER_DASHBOARD_URL, variant: 'inline' },
@@ -1181,6 +1185,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 { type: 'text', header: 'Accessibility: Designing for an inclusive experience', subheader: 'The goal', content: "Given that a significant portion of Raseet Health’s target audience includes chronic and geriatric patients, accessibility was a core consideration in the design process. The goal was to create an intuitive and frictionless experience that accommodates users with varying levels of digital literacy and physical limitations.", },
 
+{ type: 'accessibilityContrast' },
+
 { type: 'raseetAccessibilitySection' },
 
 
@@ -1198,6 +1204,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
 
 
 { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity aligned with the brand’s values of trust, clarity, and accessibility. I studied competitors and drew from a curated reference library to balance familiarity with differentiation.", },
+
+{ type: 'productShowcase' },
 
 // { type: 'text', header: 'UI Design', subheader: '', content: "Once the usability issues were resolved, I moved on to design the final screens in Figma. My goal was to create a visual identity that’s aligned with the brand’s values and message, which is: “brand motto”. Also, I’ve checked the competition and took a deep dive into my catalog of references for inspiration.", },
 
@@ -2280,58 +2288,86 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
             if (block.type === 'beforeAfter') {
               const comparisons = [
                 {
-                  title: 'Prescription Upload Flow',
-                  metric: '40% drop-off → single digits',
-                  before: {
-                    label: 'Before',
-                    steps: [
-                      'Select document type',
-                      'Upload photo or file',
-                      'Enter prescription details manually',
-                      'Wait for verification (no status)',
-                    ],
-                    note: '40% of users abandoned here',
-                  },
-                  after: {
-                    label: 'After',
-                    steps: ['Take a clear photo of your prescription', 'Confirm details'],
-                    note: 'Drop-off reduced to single digits',
-                  },
-                },
-                {
                   title: 'Payment Flow',
                   metric: 'Cart abandonment noticeably reduced',
+                  beforeScreens: [
+                    { src: '/raseet/bef-af/bef/Cart.png', label: 'Cart' },
+                    { src: '/raseet/bef-af/bef/Map%20view%20order.png', label: 'Delivery' },
+                    { src: '/raseet/bef-af/bef/Place%20Order%20Step%201.png', label: 'Payment' },
+                  ],
+                  afterScreens: [
+                    { src: '/raseet/bef-af/aft/mycart.png', label: 'Cart' },
+                    { src: '/raseet/bef-af/aft/payment%20screen.png', label: 'Payment' },
+                    { src: '/raseet/bef-af/aft/order%20placed.png', label: 'Confirmed' },
+                  ],
                   before: {
-                    label: 'Before',
                     steps: [
                       'Review cart',
-                      'Enter delivery address',
-                      'Select delivery slot',
+                      'Select delivery address',
+                      'Choose delivery slot',
                       'Enter payment details',
                       'Confirm order',
                     ],
                     note: 'Significant dropouts at payment step',
                   },
                   after: {
-                    label: 'After',
                     steps: ['Review cart', 'Confirm address + slot', 'Pay and confirm'],
                     note: 'Cart abandonment noticeably reduced',
+                  },
+                },
+                {
+                  title: 'Onboarding Flow',
+                  metric: '0 → 21,000+ users. 68% retention.',
+                  beforeScreens: [
+                    { src: '/raseet/bef-af/bef/Mobile%20Entry.png', label: 'Phone Entry' },
+                    { src: '/raseet/bef-af/bef/Screen%20after%20sign%20up.png', label: 'Success' },
+                  ],
+                  afterScreens: [
+                    { src: '/raseet/bef-af/aft/Splash.png', label: 'Splash' },
+                    { src: '/raseet/bef-af/aft/Phone-1.png', label: 'Phone Entry' },
+                    { src: '/raseet/bef-af/aft/Welcome.png', label: 'Welcome' },
+                  ],
+                  before: {
+                    steps: [
+                      'Enter phone number',
+                      'Verify OTP',
+                      'Age verification',
+                      'Biometric scan',
+                      'Profile setup',
+                      'Welcome screen',
+                    ],
+                    note: 'Long flow with multiple friction points',
+                  },
+                  after: {
+                    steps: ['Enter phone', 'Verify OTP', 'Welcome'],
+                    note: 'Streamlined to 3 steps. Drop-offs reduced significantly.',
                   },
                 },
               ];
 
               return (
-                <div key={index} className="w-full space-y-12">
+                <div key={index} className="w-full space-y-16">
                   <div>
                     <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium mb-4">
                       Before vs After
                     </h3>
                     <p className="text-[18px] leading-[1.85] text-gray-700">
-                      Two flows that were quietly losing users, and what changed.
+                      Two flows that were quietly losing users - and what changed.
                     </p>
                   </div>
-                  {comparisons.map((comp, ci) => (
-                    <div key={ci} className="w-full space-y-4">
+                  {comparisons.map((comp, ci) => {
+                    const beforeLbImages = comp.beforeScreens.map((s) => ({
+                      src: s.src,
+                      alt: s.label,
+                      caption: s.label,
+                    }));
+                    const afterLbImages = comp.afterScreens.map((s) => ({
+                      src: s.src,
+                      alt: s.label,
+                      caption: s.label,
+                    }));
+                    return (
+                    <div key={ci} className="w-full space-y-6">
                       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2">
                         <h4 style={{ fontSize: '1rem', fontWeight: 700, color: '#111827' }}>{comp.title}</h4>
                         <span
@@ -2339,7 +2375,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                             fontSize: '0.8rem',
                             fontWeight: 600,
                             color: '#1A6B8A',
-                            background: 'rgba(26, 107, 138, 0.08)',
+                            background: 'rgba(26,107,138,0.08)',
                             padding: '4px 12px',
                             borderRadius: '100px',
                           }}
@@ -2347,14 +2383,95 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                           {comp.metric}
                         </span>
                       </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                          <p
+                            style={{
+                              fontSize: '11px',
+                              fontWeight: 700,
+                              color: '#ef4444',
+                              letterSpacing: '0.12em',
+                              textTransform: 'uppercase',
+                              marginBottom: '12px',
+                            }}
+                          >
+                            Before
+                          </p>
+                          <div className="flex gap-4 overflow-x-auto pb-2">
+                            {comp.beforeScreens.map((screen, si) => (
+                              <div key={si} className="flex flex-col items-center gap-2 flex-shrink-0">
+                                <img
+                                  src={screen.src}
+                                  alt={screen.label}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    openLightbox(beforeLbImages, si);
+                                  }}
+                                  style={{
+                                    height: '300px',
+                                    width: 'auto',
+                                    borderRadius: '12px',
+                                    border: '1px solid rgba(239,68,68,0.15)',
+                                    boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                                    filter: 'grayscale(25%) opacity(0.85)',
+                                    cursor: 'zoom-in',
+                                  }}
+                                />
+                                <span style={{ fontSize: '11px', color: '#9ca3af' }}>{screen.label}</span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                        <div>
+                          <p
+                            style={{
+                              fontSize: '11px',
+                              fontWeight: 700,
+                              color: '#1A6B8A',
+                              letterSpacing: '0.12em',
+                              textTransform: 'uppercase',
+                              marginBottom: '12px',
+                            }}
+                          >
+                            After
+                          </p>
+                          <div className="flex gap-4 overflow-x-auto pb-2">
+                            {comp.afterScreens.map((screen, si) => (
+                              <div key={si} className="flex flex-col items-center gap-2 flex-shrink-0">
+                                <img
+                                  src={screen.src}
+                                  alt={screen.label}
+                                  onClick={(e) => {
+                                    e.stopPropagation();
+                                    openLightbox(afterLbImages, si);
+                                  }}
+                                  style={{
+                                    height: '300px',
+                                    width: 'auto',
+                                    borderRadius: '12px',
+                                    border: '1px solid rgba(26,107,138,0.15)',
+                                    boxShadow: '0 4px 16px rgba(26,107,138,0.12)',
+                                    cursor: 'zoom-in',
+                                  }}
+                                />
+                                <span style={{ fontSize: '11px', color: '#1A6B8A', fontWeight: 600 }}>
+                                  {screen.label}
+                                </span>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div
                           style={{
-                            border: '1px solid rgba(239, 68, 68, 0.2)',
+                            border: '1px solid rgba(239,68,68,0.2)',
                             borderTop: '3px solid #ef4444',
                             borderRadius: '0 0 8px 8px',
                             padding: '20px',
-                            background: 'rgba(239, 68, 68, 0.02)',
+                            background: 'rgba(239,68,68,0.02)',
                           }}
                         >
                           <div
@@ -2376,8 +2493,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                                     width: '20px',
                                     height: '20px',
                                     borderRadius: '50%',
-                                    background: 'rgba(239, 68, 68, 0.1)',
-                                    border: '1px solid rgba(239, 68, 68, 0.3)',
+                                    background: 'rgba(239,68,68,0.1)',
+                                    border: '1px solid rgba(239,68,68,0.3)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
@@ -2400,7 +2517,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                             style={{
                               marginTop: '16px',
                               paddingTop: '12px',
-                              borderTop: '1px solid rgba(239, 68, 68, 0.15)',
+                              borderTop: '1px solid rgba(239,68,68,0.15)',
                               fontSize: '0.8rem',
                               color: '#ef4444',
                               fontWeight: 500,
@@ -2411,11 +2528,11 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                         </div>
                         <div
                           style={{
-                            border: '1px solid rgba(26, 107, 138, 0.2)',
+                            border: '1px solid rgba(26,107,138,0.2)',
                             borderTop: '3px solid #1A6B8A',
                             borderRadius: '0 0 8px 8px',
                             padding: '20px',
-                            background: 'rgba(26, 107, 138, 0.02)',
+                            background: 'rgba(26,107,138,0.02)',
                           }}
                         >
                           <div
@@ -2437,8 +2554,8 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                                     width: '20px',
                                     height: '20px',
                                     borderRadius: '50%',
-                                    background: 'rgba(26, 107, 138, 0.1)',
-                                    border: '1px solid rgba(26, 107, 138, 0.3)',
+                                    background: 'rgba(26,107,138,0.1)',
+                                    border: '1px solid rgba(26,107,138,0.3)',
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
@@ -2461,7 +2578,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                             style={{
                               marginTop: '16px',
                               paddingTop: '12px',
-                              borderTop: '1px solid rgba(26, 107, 138, 0.15)',
+                              borderTop: '1px solid rgba(26,107,138,0.15)',
                               fontSize: '0.8rem',
                               color: '#1A6B8A',
                               fontWeight: 500,
@@ -2472,7 +2589,338 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                         </div>
                       </div>
                     </div>
-                  ))}
+                  );
+                  })}
+                </div>
+              );
+            }
+            if (block.type === 'accessibilityContrast') {
+              const accOldScreens = [
+                { src: '/raseet/bef-af/bef/Home.png', label: 'Home - dense, hard to scan' },
+                { src: '/raseet/bef-af/bef/Category.png', label: 'Browse - small text, no hierarchy' },
+              ];
+              const accNewScreens = [
+                {
+                  src: '/raseet/bef-af/aft/homescreen-.png',
+                  label: 'Home - clear hierarchy, larger text',
+                },
+                {
+                  src: '/raseet/bef-af/aft/Search%20med.png',
+                  label: 'Browse - accessible, spacious layout',
+                },
+              ];
+              const accOldLb = accOldScreens.map((s) => ({ src: s.src, alt: s.label, caption: s.label }));
+              const accNewLb = accNewScreens.map((s) => ({ src: s.src, alt: s.label, caption: s.label }));
+              return (
+                <div key={index} className="w-full space-y-6">
+                  <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">
+                    The Problem We Discovered
+                  </h3>
+                  <p className="text-[18px] leading-[1.85] text-gray-700">
+                    Our first design followed standard SaaS patterns - compact, modern, information-dense. Usability
+                    testing with 15 elderly chronic care patients revealed they couldn&apos;t navigate it.
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="space-y-4">
+                      <p
+                        style={{
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          color: '#ef4444',
+                          letterSpacing: '0.12em',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        Old Design - What Failed
+                      </p>
+                      <div className="flex gap-4">
+                        {accOldScreens.map((screen, i) => (
+                          <div key={i} className="flex min-w-0 flex-1 flex-col gap-3">
+                            <div
+                              className="flex w-full items-center justify-center overflow-hidden rounded-xl"
+                              style={{
+                                aspectRatio: '860 / 1864',
+                                border: '1px solid rgba(239,68,68,0.15)',
+                                boxShadow: '0 2px 8px rgba(0,0,0,0.06)',
+                              }}
+                            >
+                              <img
+                                src={screen.src}
+                                alt={screen.label}
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  openLightbox(accOldLb, i);
+                                }}
+                                style={{
+                                  width: '100%',
+                                  height: '100%',
+                                  objectFit: 'contain',
+                                  filter: 'grayscale(30%) opacity(0.8)',
+                                  cursor: 'zoom-in',
+                                }}
+                              />
+                            </div>
+                            <p
+                              style={{
+                                fontSize: '11px',
+                                color: '#c53030',
+                                lineHeight: 1.4,
+                                fontWeight: 500,
+                              }}
+                            >
+                              {screen.label}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                      <div
+                        style={{
+                          padding: '16px',
+                          background: 'rgba(239,68,68,0.04)',
+                          border: '1px solid rgba(239,68,68,0.15)',
+                          borderRadius: '8px',
+                        }}
+                      >
+                        <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#ef4444', marginBottom: '8px' }}>
+                          What testing revealed
+                        </p>
+                        <ul
+                          style={{
+                            fontSize: '0.85rem',
+                            color: '#374151',
+                            lineHeight: 1.7,
+                            listStyleType: 'disc',
+                            paddingLeft: '16px',
+                          }}
+                        >
+                          <li>Elderly patients couldn&apos;t read medication names at default size</li>
+                          <li>Compact rows made it impossible to distinguish items</li>
+                          <li>No visual hierarchy between critical and secondary info</li>
+                          <li>Touch targets too small for users with limited motor control</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="space-y-4">
+                      <p
+                        style={{
+                          fontSize: '11px',
+                          fontWeight: 700,
+                          color: '#1A6B8A',
+                          letterSpacing: '0.12em',
+                          textTransform: 'uppercase',
+                        }}
+                      >
+                        New Design - What We Rebuilt
+                      </p>
+                      <div className="flex gap-4">
+                        {accNewScreens.map((screen, i) => (
+                          <div key={i} className="flex flex-col gap-2 flex-1">
+                            <img
+                              src={screen.src}
+                              alt={screen.label}
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                openLightbox(accNewLb, i);
+                              }}
+                              style={{
+                                width: '100%',
+                                height: 'auto',
+                                borderRadius: '12px',
+                                border: '1px solid rgba(26,107,138,0.2)',
+                                boxShadow: '0 4px 16px rgba(26,107,138,0.12)',
+                                cursor: 'zoom-in',
+                              }}
+                            />
+                            <p
+                              style={{
+                                fontSize: '11px',
+                                color: '#1A6B8A',
+                                lineHeight: 1.4,
+                                fontWeight: 500,
+                              }}
+                            >
+                              {screen.label}
+                            </p>
+                          </div>
+                        ))}
+                      </div>
+                      <div
+                        style={{
+                          padding: '16px',
+                          background: 'rgba(26,107,138,0.04)',
+                          border: '1px solid rgba(26,107,138,0.15)',
+                          borderRadius: '8px',
+                        }}
+                      >
+                        <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#1A6B8A', marginBottom: '8px' }}>
+                          What we rebuilt
+                        </p>
+                        <ul
+                          style={{
+                            fontSize: '0.85rem',
+                            color: '#374151',
+                            lineHeight: 1.7,
+                            listStyleType: 'disc',
+                            paddingLeft: '16px',
+                          }}
+                        >
+                          <li>Significantly larger text throughout</li>
+                          <li>High contrast color schemes (WCAG 2.2 AA)</li>
+                          <li>44px minimum touch targets on all interactions</li>
+                          <li>Guided step-by-step mode for chronic care flows</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            if (block.type === 'productShowcase') {
+              const keyFeatureCards = [
+                {
+                  src: '/raseet/bef-af/aft/mycart.png',
+                  feature: 'One-Tap Checkout',
+                  desc: 'Reduced from 5 steps to 3. Returning users complete orders in under 2 minutes with saved addresses and one-click payment.',
+                },
+                {
+                  src: '/raseet/bef-af/aft/meds-reminder.png',
+                  feature: 'Medication Reminders',
+                  desc: 'Smart notifications triggered by prescription end dates. One-tap refill directly from the notification reduced chronic patient drop-offs significantly.',
+                },
+                {
+                  src: '/raseet/bef-af/aft/Upload%20Rx.png',
+                  feature: 'Prescription Upload',
+                  desc: 'Redesigned from 4 steps to 2. Added trust indicators and clear guidance. Drop-off rate went from 40% to single digits.',
+                },
+                {
+                  src: '/raseet/bef-af/aft/pharma-chat.png',
+                  feature: 'Pharmacist Chat',
+                  desc: 'Direct messaging with verified pharmacists built trust for first-time users and reduced support tickets by giving customers a human touchpoint.',
+                },
+              ];
+              const keyFeatureLb = keyFeatureCards.map((item) => ({
+                src: item.src,
+                alt: item.feature,
+                caption: item.feature,
+              }));
+              return (
+                <div key={index} className="w-full space-y-6">
+                  <div>
+                    <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium mb-4">Key Features</h3>
+                    <p className="text-[18px] leading-[1.85] text-gray-700">Four features that defined the product experience.</p>
+                  </div>
+
+                  <div className="w-full min-w-0">
+                    <div
+                      className="hidden w-full md:grid"
+                      style={{ gridTemplateColumns: '1fr 1px 1fr', gap: '0 48px' }}
+                    >
+                      {keyFeatureCards.map((item, i) => (
+                        <>
+                          <div key={`kf-${i}`} className="flex min-w-0 flex-col py-4 text-left">
+                            <p className="text-[80px] font-extralight leading-none text-gray-200">
+                              {String(i + 1).padStart(2, '0')}
+                            </p>
+                            <p className="mt-2 text-[18px] font-semibold text-gray-900">{item.feature}</p>
+                            <p className="mt-2 text-[15px] leading-relaxed text-gray-500">{item.desc}</p>
+                            <img
+                              src={item.src}
+                              alt={item.feature}
+                              onClick={(e) => { e.stopPropagation(); openLightbox(keyFeatureLb, i); }}
+                              className="mt-4 cursor-zoom-in self-start object-contain"
+                              style={{ height: '500px', width: 'auto', maxWidth: '250px' }}
+                            />
+                          </div>
+                          {i % 2 === 0 && (
+                            <div key={`divider-${i}`} className="bg-gray-200 w-px" />
+                          )}
+                        </>
+                      ))}
+                    </div>
+                    {/* Mobile: single column */}
+                    <div className="flex flex-col gap-12 md:hidden">
+                      {keyFeatureCards.map((item, i) => (
+                        <div key={`kf-mob-${i}`} className="flex min-w-0 flex-col text-left">
+                          <p className="text-[64px] font-extralight leading-none text-gray-200 sm:text-[80px]">
+                            {String(i + 1).padStart(2, '0')}
+                          </p>
+                          <p className="mt-2 text-[18px] font-semibold text-gray-900">{item.feature}</p>
+                          <p className="mt-2 text-[15px] leading-relaxed text-gray-500">{item.desc}</p>
+                          <img
+                            src={item.src}
+                            alt={item.feature}
+                            onClick={(e) => { e.stopPropagation(); openLightbox(keyFeatureLb, i); }}
+                            className="mt-4 cursor-zoom-in self-start object-contain"
+                            style={{ height: '280px', width: 'auto', maxWidth: '140px' }}
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              );
+            }
+            if (block.type === 'onboardingStory') {
+              const onboardingScreens = [
+                {
+                  src: '/raseet/bef-af/aft/Mobile.png',
+                  label: '1. Brand entry point',
+                  desc: 'Clear brand identity from first launch',
+                },
+                {
+                  src: '/raseet/bef-af/aft/Phone-1.png',
+                  label: '2. Phone verification',
+                  desc: 'Simple auth - no password to remember',
+                },
+                {
+                  src: '/raseet/bef-af/aft/Phone-2.png',
+                  label: '3. OTP verification',
+                  desc: 'Secure but frictionless',
+                },
+                {
+                  src: '/raseet/bef-af/aft/Welcome.png',
+                  label: '4. Welcome moment',
+                  desc: 'Warm confirmation that builds trust immediately',
+                },
+              ];
+              const onboardingLb = onboardingScreens.map((s) => ({
+                src: s.src,
+                alt: s.label,
+                caption: s.label,
+              }));
+              return (
+                <div key={index} className="w-full space-y-6">
+                  <h3 className="text-[11px] tracking-[0.2em] text-gray-400 uppercase font-medium">Patient Onboarding</h3>
+                  <p className="text-[18px] leading-[1.85] text-gray-700">
+                    Getting patients from zero to their first order - with trust built at every step.
+                  </p>
+                  <div className="flex flex-col md:flex-row gap-6 items-start">
+                    {onboardingScreens.map((screen, i) => (
+                      <div key={i} className="flex flex-col gap-3 flex-1">
+                        <img
+                          src={screen.src}
+                          alt={screen.label}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            openLightbox(onboardingLb, i);
+                          }}
+                          style={{
+                            width: '100%',
+                            maxWidth: '200px',
+                            height: 'auto',
+                            borderRadius: '16px',
+                            border: '1px solid rgba(26,107,138,0.15)',
+                            boxShadow: '0 4px 20px rgba(26,107,138,0.1)',
+                            cursor: 'zoom-in',
+                          }}
+                        />
+                        <div>
+                          <p style={{ fontSize: '13px', fontWeight: 600, color: '#111827' }}>{screen.label}</p>
+                          <p style={{ fontSize: '12px', color: '#9ca3af', marginTop: '2px' }}>{screen.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               );
             }

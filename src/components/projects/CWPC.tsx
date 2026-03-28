@@ -16,6 +16,7 @@ import { AccordionItem } from '../prism/organisms/AccordionItem/AccordionItem';
 import { Alert } from '../prism/organisms/Alert/Alert';
 import { Navbar } from '../prism/organisms/Navbar/Navbar';
 import { ScrollToTop } from '../ScrollToTop';
+import { useLightbox } from '../Lightbox';
 import { ExploreMoreSection } from './ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
 import { getInitialCaseStudyVisible } from './caseStudyRestore';
@@ -4534,6 +4535,7 @@ export function EmberDesignSystemProject({
   onBack,
   onProjectClick,
 }: EmberDesignSystemProjectProps) {
+  const { openLightbox } = useLightbox();
   const [scrollProgress, setScrollProgress] = useState(0);
   const [progressBarVisible, setProgressBarVisible] = useState(false);
   const [caseStudyVisible, setCaseStudyVisible] = useState(getInitialCaseStudyVisible);
@@ -4654,7 +4656,20 @@ export function EmberDesignSystemProject({
         <img
           src="/cwpc/Group 15.png"
           alt="CWPC header"
-          style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center' }}
+          onClick={(e) => {
+            e.stopPropagation();
+            openLightbox(
+              [{ src: '/cwpc/Group 15.png', alt: 'CWPC header', caption: 'CWPC header' }],
+              0
+            );
+          }}
+          style={{
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            cursor: 'zoom-in',
+          }}
           loading="eager"
           decoding="async"
         />
@@ -4667,7 +4682,26 @@ export function EmberDesignSystemProject({
                 <img
                   src="/cwpc/cwpc-logo.png"
                   alt="Catastrophic Wildfire Prevention Consortium"
-                  style={{ width: '100%', height: '100%', objectFit: 'contain', objectPosition: 'left center' }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    openLightbox(
+                      [
+                        {
+                          src: '/cwpc/cwpc-logo.png',
+                          alt: 'Catastrophic Wildfire Prevention Consortium',
+                          caption: 'Catastrophic Wildfire Prevention Consortium',
+                        },
+                      ],
+                      0
+                    );
+                  }}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
+                    objectPosition: 'left center',
+                    cursor: 'zoom-in',
+                  }}
                   loading="eager"
                   decoding="async"
                 />
