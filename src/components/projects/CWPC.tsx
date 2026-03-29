@@ -4656,19 +4656,11 @@ export function EmberDesignSystemProject({
         <img
           src="/cwpc/Group 15.png"
           alt="CWPC header"
-          onClick={(e) => {
-            e.stopPropagation();
-            openLightbox(
-              [{ src: '/cwpc/Group 15.png', alt: 'CWPC header', caption: 'CWPC header' }],
-              0
-            );
-          }}
           style={{
             width: '100%',
             height: '100%',
             objectFit: 'cover',
             objectPosition: 'center',
-            cursor: 'zoom-in',
           }}
           loading="eager"
           decoding="async"

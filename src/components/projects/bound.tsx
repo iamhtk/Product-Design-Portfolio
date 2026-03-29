@@ -134,7 +134,7 @@ export function BoundProject({ onBack, onProjectClick }: BoundProjectProps) {
                   );
                 }
                 return (
-                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
+                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority enableLightbox={false} />
                 );
               })()}
             </div>

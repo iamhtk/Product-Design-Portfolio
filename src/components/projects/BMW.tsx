@@ -221,7 +221,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
                   );
                 }
                 return (
-                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
+                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority enableLightbox={false} />
                 );
               })()}
             </div>

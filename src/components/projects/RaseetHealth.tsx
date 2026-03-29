@@ -1498,7 +1498,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                   );
                 }
                 return (
-                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
+                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority enableLightbox={false} />
                 );
               })()}
             </div>

@@ -130,7 +130,7 @@ export function ProductivityProject({ onBack }: ProductivityProjectProps) {
                   );
                 }
                 return (
-                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority />
+                  <ImageWithFallback src={iconPath} alt={`${title} icon`} className={sizeClasses} priority enableLightbox={false} />
                 );
               })()}
             </div>
