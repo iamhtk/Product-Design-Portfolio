@@ -543,6 +543,8 @@ function RaseetAccessibilityNativeSection() {
 }
 
 const CURRENT_PROJECT_ID = 'RaseetHealth';
+/** Toggle when hero + sidebar should link to the live site again. */
+const RASEET_LIVE_SITE_LINKS_ENABLED = false;
 const RASEET_WEBSITE_URL = 'https://raseet.com';
 const RASEET_FIGMA_MOBILE_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=4628-357&p=f&viewport=369%2C429%2C0.02&t=kg6GHaKkbVY0NcZZ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4628%3A13344&page-id=4628%3A264&show-proto-sidebar=1&hide-ui=1';
 const RASEET_FIGMA_PARTNER_DASHBOARD_URL = 'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-4394&p=f&viewport=60%2C472%2C0.09&t=eQG2dOI3a4xSIRlo-1&scaling=scale-down&content-scaling=fixed&page-id=6602%3A2&starting-point-node-id=6602%3A4394&hide-ui=1';
@@ -1325,6 +1327,20 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
         .raseet-hero-cta:hover .raseet-hero-cta-arrow {
           transform: translate(2px, -2px);
         }
+        .raseet-hero-cta--disabled,
+        .raseet-hero-cta--disabled:hover,
+        .raseet-hero-cta--disabled:active {
+          background: #94a3b8;
+          border-color: #94a3b8;
+          color: #ffffff;
+          transform: none;
+          box-shadow: none;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+        .raseet-hero-cta--disabled:hover .raseet-hero-cta-arrow {
+          transform: none;
+        }
         .raseet-sidebar-link {
           display: inline-flex;
           align-items: center;
@@ -1372,6 +1388,22 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
         }
         .raseet-sidebar-link:active {
           color: #124E65;
+        }
+        .raseet-sidebar-link--disabled,
+        .raseet-sidebar-link--disabled:hover,
+        .raseet-sidebar-link--disabled:active {
+          color: #9ca3af;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+        .raseet-sidebar-link--disabled .raseet-sidebar-link-label {
+          text-decoration-color: rgba(156, 163, 175, 0.45);
+        }
+        .raseet-sidebar-link--disabled:hover .raseet-sidebar-link-label {
+          text-decoration-color: rgba(156, 163, 175, 0.45);
+        }
+        .raseet-sidebar-link--disabled:hover .raseet-sidebar-link-arrow {
+          transform: none;
         }
         .raseet-impact-stats {
           position: relative;
@@ -1549,15 +1581,25 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
               <div>
                 <div className="text-gray-400 uppercase tracking-wider mb-2 text-[11px]">Live Links</div>
                 <div className="flex flex-col gap-2">
-                  <a
-                    href={RASEET_WEBSITE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="raseet-sidebar-link"
-                  >
-                    <span className="raseet-sidebar-link-label">Live Website</span>
-                    <span className="raseet-sidebar-link-arrow">↗</span>
-                  </a>
+                  {RASEET_LIVE_SITE_LINKS_ENABLED ? (
+                    <a
+                      href={RASEET_WEBSITE_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="raseet-sidebar-link"
+                    >
+                      <span className="raseet-sidebar-link-label">Live Website</span>
+                      <span className="raseet-sidebar-link-arrow">↗</span>
+                    </a>
+                  ) : (
+                    <span
+                      className="raseet-sidebar-link raseet-sidebar-link--disabled"
+                      aria-disabled="true"
+                    >
+                      <span className="raseet-sidebar-link-label">Live Website</span>
+                      <span className="raseet-sidebar-link-arrow">↗</span>
+                    </span>
+                  )}
                   <a
                     href={RASEET_FIGMA_MOBILE_URL}
                     target="_blank"
@@ -1615,15 +1657,25 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
                 {subtitle}
               </p>
               <div>
-                <a
-                  href={RASEET_WEBSITE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="raseet-hero-cta"
-                >
-                  <span>Visit Raseet Health</span>
-                  <span className="raseet-hero-cta-arrow">↗</span>
-                </a>
+                {RASEET_LIVE_SITE_LINKS_ENABLED ? (
+                  <a
+                    href={RASEET_WEBSITE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="raseet-hero-cta"
+                  >
+                    <span>Visit Raseet Health</span>
+                    <span className="raseet-hero-cta-arrow">↗</span>
+                  </a>
+                ) : (
+                  <span
+                    className="raseet-hero-cta raseet-hero-cta--disabled"
+                    aria-disabled="true"
+                  >
+                    <span>Visit Raseet Health</span>
+                    <span className="raseet-hero-cta-arrow">↗</span>
+                  </span>
+                )}
               </div>
               {SHOW_PROJECT_OVERVIEW && overview && (
                 <p className="text-[18px] md:text-[20px] text-gray-700 leading-[1.8]">
