@@ -8,6 +8,8 @@ import { CalmiRingProject } from './CalmiRing';
 import { BoundProject } from './bound';
 import { WeddingBlissProject } from './WeddingBliss';
 import { PortfolioDesignSystemProject } from './PortfolioDesignSystem';
+import { CwpcDsCaseStudyProject } from './CwpcDsCaseStudy';
+import { RaseetHealthDsCaseStudyProject } from './RaseetHealthDsCaseStudy';
 
 export { PROJECT_ORDER } from './projectOrder';
 
@@ -25,4 +27,6 @@ export const projectComponents: Record<string, React.ComponentType<ProjectCompon
   bound: BoundProject,
   WeddingBliss: WeddingBlissProject,
   PortfolioDesignSystem: PortfolioDesignSystemProject,
+  CWPC_DS: CwpcDsCaseStudyProject,
+  RaseetHealth_DS: RaseetHealthDsCaseStudyProject,
 };

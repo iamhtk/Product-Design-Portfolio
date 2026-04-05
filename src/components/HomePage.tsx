@@ -26,6 +26,104 @@ interface HomePageProps {
   onNavigate: (page: HomeNavigatePage) => void;
 }
 
+type HomeProjectTile = {
+  id: string;
+  title: string;
+  company: string;
+  readTime: string;
+  bgColor: string;
+  image: string;
+};
+
+const TILE_STAGGER_KEYS = [
+  'stagger-1',
+  'stagger-2',
+  'stagger-3',
+  'stagger-4',
+  'stagger-5',
+  'stagger-6',
+  'stagger-7',
+  'stagger-8',
+  'stagger-9',
+] as const;
+
+function HomeProjectTileCard({
+  project,
+  index,
+  onProjectClick,
+}: {
+  project: HomeProjectTile;
+  index: number;
+  onProjectClick: (id: string) => void;
+}) {
+  const isEnabled = PROJECT_ENABLED[project.id] !== false;
+  const staggerKey = TILE_STAGGER_KEYS[Math.min(index, TILE_STAGGER_KEYS.length - 1)];
+  return (
+    <AnimateIn stagger={staggerKey} rootMargin="0px 0px -80px 0px">
+      <div
+        onClick={() => {
+          if (!isEnabled) {
+            return;
+          }
+          if (project.id === 'CalmiRing') {
+            window.open(
+              'https://beautiful-leader-fa9.notion.site/Calmi-Ring-ad8e4dee5a794da48dda0e5ad4bdde33',
+              '_blank',
+            );
+          } else {
+            onProjectClick(project.id);
+          }
+        }}
+        className={`h-full flex flex-col rounded-xl overflow-hidden bg-white border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08] ${
+          isEnabled ? 'cursor-pointer' : 'cursor-not-allowed'
+        }`}
+      >
+        <div
+          className={`mb-4 w-full flex-shrink-0 overflow-hidden transition-transform duration-500 ease-out ${
+            project.id === 'CalmiRing' ? 'flex items-center justify-center' : ''
+          }`}
+          style={{ backgroundColor: project.bgColor, aspectRatio: '1 / 1' }}
+        >
+          {project.image &&
+            (() => {
+              const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(project.image);
+              const mediaClass = `transition-transform duration-300 ease-out ${
+                project.id === 'CalmiRing'
+                  ? 'max-w-full max-h-full object-contain'
+                  : 'w-full h-full object-cover'
+              } hover:scale-105`;
+              return isVideo ? (
+                <video
+                  src={project.image}
+                  className={mediaClass}
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  aria-label={project.title}
+                />
+              ) : (
+                <ImageWithFallback
+                  src={project.image}
+                  alt={project.title}
+                  className={mediaClass}
+                />
+              );
+            })()}
+        </div>
+
+        <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+          <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
+            {project.title}
+          </h3>
+          <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">{project.company}</p>
+          <p className="type-caption text-gray-400 pt-1 mt-auto tracking-wide">{project.readTime}</p>
+        </div>
+      </div>
+    </AnimateIn>
+  );
+}
+
 export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
   const [expandedRecommendations, setExpandedRecommendations] = useState<Set<number>>(new Set());
 
@@ -105,6 +203,25 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
       bgColor: "#fff5f7",
       image: "/main_title/main_bound.png",
     },
+  ] satisfies HomeProjectTile[];
+
+  const designSystemProjects: HomeProjectTile[] = [
+    {
+      id: "CWPC_DS",
+      title: "Prism Design System",
+      company: "DESIGN SYSTEM | PRISM | REACT + TYPESCRIPT | DOCUMENTATION",
+      readTime: "10 MINUTE READ →",
+      bgColor: "#6366F1",
+      image: "/main_title/main_cwpc.png",
+    },
+    {
+      id: "RaseetHealth_DS",
+      title: "MedScope Design System",
+      company: "DESIGN SYSTEM | FIGMA | MULTI-PLATFORM UI",
+      readTime: "12 MINUTE READ →",
+      bgColor: "#4A90E2",
+      image: "/main_title/main_raseet.png",
+    },
   ];
 
   return (
@@ -145,82 +262,30 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
 
         {/* Project Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-32 items-stretch">
-          {projects.map((project, index) => {
-            // Check if project is enabled (defaults to true if not specified)
-            const isEnabled = PROJECT_ENABLED[project.id] !== false;
-            const staggerKey = (['stagger-1','stagger-2','stagger-3','stagger-4','stagger-5','stagger-6','stagger-7','stagger-8','stagger-9'] as const)[Math.min(index, 8)];
-            return (
-            <AnimateIn key={project.id} stagger={staggerKey} rootMargin="0px 0px -80px 0px">
-            <div
-              onClick={() => {
-                if (!isEnabled) {
-                  return; // Disabled - do nothing (but animations still work)
-                }
-                if (project.id === 'CalmiRing') {
-                  window.open('https://beautiful-leader-fa9.notion.site/Calmi-Ring-ad8e4dee5a794da48dda0e5ad4bdde33', '_blank');
-                } else {
-                  onProjectClick(project.id);
-                }
-              }}
-              className={`h-full flex flex-col rounded-xl overflow-hidden bg-white border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08] ${
-                isEnabled 
-                  ? 'cursor-pointer' 
-                  : 'cursor-not-allowed'
-              }`}
-            >
-              {/* Project Image - Fixed aspect ratio container */}
-              <div
-                className={`mb-4 w-full flex-shrink-0 overflow-hidden transition-transform duration-500 ease-out ${
-                  project.id === 'CalmiRing' ? 'flex items-center justify-center' : ''
-                }`}
-                style={{ backgroundColor: project.bgColor, aspectRatio: '1 / 1' }}
+          {projects.map((project, index) => (
+            <HomeProjectTileCard
+              key={project.id}
+              project={project}
+              index={index}
+              onProjectClick={onProjectClick}
+            />
+          ))}
+        </div>
 
-              >
-                {project.image && (
-                  (() => {
-                    const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(project.image);
-                    const mediaClass = `transition-transform duration-300 ease-out ${
-                      project.id === 'CalmiRing'
-                        ? 'max-w-full max-h-full object-contain'
-                        : 'w-full h-full object-cover'
-                    } hover:scale-105`;
-                    return isVideo ? (
-                      <video
-                        src={project.image}
-                        className={mediaClass}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        aria-label={project.title}
-                      />
-                    ) : (
-                      <ImageWithFallback
-                        src={project.image}
-                        alt={project.title}
-                        className={mediaClass}
-                      />
-                    );
-                  })()
-                )}
-              </div>
+        <AnimateIn variant="up" rootMargin="0px 0px -60px 0px" className="flex items-center justify-between mb-4">
+          <h2 className="type-overline text-gray-400">Design systems</h2>
+          <h2 className="type-overline text-gray-400">Tokens & components</h2>
+        </AnimateIn>
 
-              {/* Project Info - Flex column with read time at bottom */}
-              <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
-                <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
-                  {project.title}
-                </h3>
-                <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">
-                  {project.company}
-                </p>
-                <p className="type-caption text-gray-400 pt-1 mt-auto tracking-wide">
-                  {project.readTime}
-                </p>
-              </div>
-            </div>
-            </AnimateIn>
-          );
-          })}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-32 items-stretch">
+          {designSystemProjects.map((project, index) => (
+            <HomeProjectTileCard
+              key={project.id}
+              project={project}
+              index={index}
+              onProjectClick={onProjectClick}
+            />
+          ))}
         </div>
 
         <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">

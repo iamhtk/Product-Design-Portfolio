@@ -3,8 +3,10 @@ import { designTokens } from '../../lib/designTokens';
 /** Homepage project order (id + title). Used for prev/next navigation at end of case studies. */
 export const PROJECT_ORDER: { id: string; title: string }[] = [
   { id: 'CWPC', title: 'CWPC: Unifying Interfaces for Speed and Consistency' },
+  { id: 'CWPC_DS', title: 'CWPC DS Case study' },
   { id: 'AutomotiveUX_GM', title: "Automotive UX - Cadillac Escalade Design Proposal" },
   { id: 'RaseetHealth', title: 'Raseet Health: Empowering Local Pharmacies' },
+  { id: 'RaseetHealth_DS', title: 'Raseet Health DS Case study' },
   { id: 'BMW', title: "Redesigning BMW's Digital Interface" },
   { id: 'CalmiRing', title: 'CalmiRing' },
   { id: 'jobgenius', title: 'JobGenius' },
@@ -20,8 +22,10 @@ export const PROJECT_ORDER: { id: string; title: string }[] = [
 // ═══════════════════════════════════════════════════════════════════════════
 export const PROJECT_ENABLED: Record<string, boolean> = {
   CWPC: true,
+  CWPC_DS: true,
   AutomotiveUX_GM: true,
   RaseetHealth: true,
+  RaseetHealth_DS: true,
   BMW: true,
   PortfolioDesignSystem: true,
   CalmiRing: true,
@@ -33,8 +37,10 @@ export const PROJECT_ENABLED: Record<string, boolean> = {
 /** URL slugs for project pages. Used in /project/<slug>. Omit entry to use id.toLowerCase(). */
 export const PROJECT_SLUGS: Record<string, string> = {
   CWPC: 'cwpc-prism-design-system',
+  CWPC_DS: 'cwpc-ds-case-study',
   AutomotiveUX_GM: 'automotive-ux-cadillac-escalade',
   RaseetHealth: 'raseet-health',
+  RaseetHealth_DS: 'raseet-health-ds-case-study',
   BMW: 'bmw-idrive-redesign',
   PortfolioDesignSystem: 'portfolio-design-system',
   CalmiRing: 'calmiring',
@@ -49,8 +55,10 @@ export const CALMIRING_EXTERNAL_URL = 'https://beautiful-leader-fa9.notion.site/
 /** Project tile media for Explore more tiles (mirrors HomePage main title images). */
 export const PROJECT_TILE_MEDIA: Record<string, { image: string; bgColor: string }> = {
   CWPC: { image: '/main_title/main_cwpc.png', bgColor: '#6366F1' },
+  CWPC_DS: { image: '/main_title/main_cwpc.png', bgColor: '#6366F1' },
   AutomotiveUX_GM: { image: '/main_title/main_gm.png', bgColor: '#f5f5f7' },
   RaseetHealth: { image: '/main_title/main_raseet.png', bgColor: '#4A90E2' },
+  RaseetHealth_DS: { image: '/main_title/main_raseet.png', bgColor: '#4A90E2' },
   BMW: { image: '/main_title/main_bmw.png', bgColor: '#e8f4f8' },
   PortfolioDesignSystem: {
     image: '/miniapps/f3.png',
