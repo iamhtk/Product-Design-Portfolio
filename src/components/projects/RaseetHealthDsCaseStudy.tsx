@@ -25,8 +25,8 @@ const RASEET_FIGMA_PARTNER_DASHBOARD_URL =
   'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-4394&p=f&viewport=60%2C472%2C0.09&t=eQG2dOI3a4xSIRlo-1&scaling=scale-down&content-scaling=fixed&page-id=6602%3A2&starting-point-node-id=6602%3A4394&hide-ui=1';
 const RASEET_FIGMA_HCP_DASHBOARD_URL =
   'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=6602-4&viewport=-2691%2C197%2C0.41&t=mL1Fml7UK3LEasph-1&scaling=scale-down&content-scaling=fixed&page-id=6602%3A3&hide-ui=1';
-const RASEET_FIGMA_FILE_URL =
-  'https://www.figma.com/design/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2';
+// const RASEET_FIGMA_FILE_URL =
+//   'https://www.figma.com/design/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2';
 
 export interface RaseetHealthDsCaseStudyProjectProps {
   onBack: () => void;
@@ -80,8 +80,8 @@ export function RaseetHealthDsCaseStudyProject({ onBack, onProjectClick }: Rasee
   }, []);
 
   const exploreActions = [
-    { label: 'Open Storybook', href: "medscope.storybook.raseethealth.hrithiksanyal.com", variant: 'primary' as const },
-    { label: 'View Component Showcase', href: "medscope.raseethealth.hrithiksanyal.com", variant: 'secondary' as const },
+    { label: 'Open Storybook', href: "https://medscope.storybook.raseethealth.hrithiksanyal.com/?path=/docs/introduction--docs", variant: 'primary' as const },
+    { label: 'View Component Showcase', href: "https://medscope.raseethealth.hrithiksanyal.com/", variant: 'secondary' as const },
     // { label: 'View Docs', href: "https://prism.cwpc.hrithiksanyal.com/docs/", variant: 'secondary' as const },
     // { label: 'View Figma File', href: PRISM_FIGMA_URL, variant: 'secondary' as const, showArrow: false },
     { label: 'View Mobile App Prototype', href: RASEET_FIGMA_MOBILE_URL, variant: 'secondary' as const },
