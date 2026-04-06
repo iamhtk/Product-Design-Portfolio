@@ -17,7 +17,7 @@ import { DesignSystemExploreCallout } from './DesignSystemExploreCallout';
 const CURRENT_PROJECT_ID = 'RaseetHealth_DS';
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
 const HEADER_COLOR = '#1A6B8A';
-const HEADER_ICON = '/raseet/test5.png';
+const HEADER_ICON = '/DS/medscope-hero-2.png';
 
 const RASEET_FIGMA_MOBILE_URL =
   'https://www.figma.com/proto/XKSlqw5bsQYbJAoudCEzjy/iOS_RaseetHealth_v2?node-id=4628-357&p=f&viewport=369%2C429%2C0.02&t=kg6GHaKkbVY0NcZZ-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=4628%3A13344&page-id=4628%3A264&show-proto-sidebar=1&hide-ui=1';

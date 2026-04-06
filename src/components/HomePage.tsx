@@ -149,7 +149,7 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
   const projects = [
     {
       id: "CWPC",
-      title: "CWPC: Ember Design System",
+      title: "CWPC: Design System",
       company: "DESIGN SYSTEM | REACT + TYPESCRIPT | 68 COMPONENTS | DOCUMENTATION",
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
@@ -212,7 +212,7 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
       company: "DESIGN SYSTEM | PRISM | REACT + TYPESCRIPT | DOCUMENTATION",
       readTime: "10 MINUTE READ →",
       bgColor: "#6366F1",
-      image: "/main_title/main_cwpc.png",
+      image: "/DS/prism-tile.png",
     },
     {
       id: "RaseetHealth_DS",
@@ -220,7 +220,7 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
       company: "DESIGN SYSTEM | FIGMA | MULTI-PLATFORM UI",
       readTime: "12 MINUTE READ →",
       bgColor: "#4A90E2",
-      image: "/main_title/main_raseet.png",
+      image: "/DS/medscope-tile-2.png",
     },
   ];
 
