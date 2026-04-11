@@ -1,0 +1,49 @@
+.link {
+  font-family: var(--ds-font-family-text);
+  font-size: var(--ds-paragraph-nav);
+  font-weight: 400;
+  line-height: var(--ds-line-height-tight);
+  color: var(--ds-text-information-default);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  border-radius: 2px;
+}
+
+.link:hover {
+  filter: brightness(1.15);
+}
+
+.link:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+
+.subtle {
+  color: var(--ds-text-disabled-default);
+  text-decoration: none;
+}
+
+.subtle:hover {
+  color: var(--ds-text-on-color-headings);
+  text-decoration: underline;
+}
+
+.inline {
+  text-decoration: none;
+}
+
+.inline:hover {
+  text-decoration: underline;
+}
+
+.onDark {
+  color: var(--ds-text-information-default);
+}
+
+.onDark.subtle {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.onDark.subtle:hover {
+  color: var(--ds-text-default-headings);
+}

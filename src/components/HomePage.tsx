@@ -187,22 +187,22 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
       bgColor: "#f5f5f7",
       image: "/main_title/main_calmi.png",
     },
-    {
-      id: "jobgenius",
-      title: "JobGenius",
-      company: "UX DESIGN | UX RESEARCH",
-      readTime: "9 MINUTE READ →",
-      bgColor: "#f5f5f7",
-      image: "/main_title/main_jobgenius.png",
-    },
-    {
-      id: "bound",
-      title: "Bound International UX Audit: Identifying and Solving Key Usability Issues",
-      company: "UX DESIGN & RESEARCH",
-      readTime: "14 MINUTE READ →",
-      bgColor: "#fff5f7",
-      image: "/main_title/main_bound.png",
-    },
+    // {
+    //   id: "jobgenius",
+    //   title: "JobGenius",
+    //   company: "UX DESIGN | UX RESEARCH",
+    //   readTime: "9 MINUTE READ →",
+    //   bgColor: "#f5f5f7",
+    //   image: "/main_title/main_jobgenius.png",
+    // },
+    // {
+    //   id: "bound",
+    //   title: "Bound International UX Audit: Identifying and Solving Key Usability Issues",
+    //   company: "UX DESIGN & RESEARCH",
+    //   readTime: "14 MINUTE READ →",
+    //   bgColor: "#fff5f7",
+    //   image: "/main_title/main_bound.png",
+    // },
   ] satisfies HomeProjectTile[];
 
   const designSystemProjects: HomeProjectTile[] = [
@@ -238,7 +238,8 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
             <p className="type-body-lg text-gray-900">
               Previously Design Engineer at{" "}
-              <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br />
+              <span className="font-medium">CWPC, GM, Kryptonas, TUG, BEL</span><br />
+              {/* <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br /> */}
               <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
             </p>
           </AnimateIn>

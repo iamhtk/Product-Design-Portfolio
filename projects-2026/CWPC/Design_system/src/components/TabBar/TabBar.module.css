@@ -1,0 +1,58 @@
+.list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  border-bottom: var(--ds-border-width-xs) solid var(--ds-border-disabled-subtle);
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.tab {
+  position: relative;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  font-family: var(--ds-font-family-text);
+  font-size: var(--ds-paragraph-nav);
+  font-weight: 600;
+  line-height: var(--ds-line-height-tight);
+  color: var(--ds-text-disabled-default);
+  cursor: pointer;
+  border-radius: var(--ds-radius-md) var(--ds-radius-md) 0 0;
+  margin-bottom: -1px;
+}
+
+.tab:hover {
+  color: var(--ds-text-on-color-headings);
+  background: rgba(13, 114, 255, 0.06);
+}
+
+.tab:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+  z-index: 1;
+}
+
+.active {
+  color: var(--ds-text-secondary-secondary-blue-default);
+  background: var(--ds-surface-page-light);
+  border: var(--ds-border-width-xs) solid var(--ds-border-disabled-subtle);
+  border-bottom-color: var(--ds-surface-page-light);
+}
+
+.onDark .tab {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.onDark .tab:hover {
+  color: var(--ds-text-default-headings);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.onDark .active {
+  color: var(--ds-text-information-default);
+  background: var(--ds-surface-card-dark);
+  border-color: var(--ds-border-disabled-subtle);
+  border-bottom-color: var(--ds-surface-card-dark);
+}

@@ -20,3 +20,8 @@ dist/
 
 # Wrangler (Cloudflare)
 .wrangler/
+
+# Nested project repos
+projects-2026/CWPC/cwpc-design-system-storybook/
+projects-2026/CWPC/cwpc-design-system/
+projects-2026/Kryptonas/raseet-design-system/

@@ -1,0 +1,42 @@
+.svg {
+  transform: rotate(-90deg);
+  display: block;
+}
+
+.track {
+  fill: none;
+  stroke: var(--ds-border-disabled-subtle);
+  stroke-width: var(--stroke, 4);
+}
+
+.arc {
+  fill: none;
+  stroke: var(--ds-surface-information-default);
+  stroke-width: var(--stroke, 4);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.35s ease;
+}
+
+.arcPrimary {
+  stroke: var(--ds-surface-primary-default);
+}
+
+.center {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--ds-paragraph-nav);
+  font-weight: 600;
+  color: var(--ds-text-on-color-headings);
+}
+
+.wrap {
+  position: relative;
+  display: inline-flex;
+}
+
+.onDark .center {
+  color: var(--ds-text-default-headings);
+}

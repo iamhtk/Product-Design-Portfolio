@@ -1,0 +1,86 @@
+/* Matches Figma `Field` inside Input block */
+.root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ds-gap-field-inner);
+  width: 100%;
+}
+
+.labelRow {
+  display: flex;
+  align-items: center;
+  gap: var(--ds-gap-field-inner);
+}
+
+.label {
+  font-family: var(--ds-font-family-text);
+  font-size: var(--ds-paragraph-nav);
+  font-weight: 400;
+  line-height: var(--ds-line-height-tight);
+  color: var(--ds-text-on-color-headings);
+}
+
+.labelOnDark {
+  color: var(--ds-text-default-headings);
+}
+
+.textarea {
+  width: 100%;
+  min-height: 88px;
+  padding: var(--ds-field-padding-y) var(--ds-field-padding-x);
+  font-family: var(--ds-font-family-text);
+  font-size: var(--ds-paragraph-nav);
+  line-height: var(--ds-line-height-tight);
+  color: var(--ds-text-on-color-headings);
+  background: var(--ds-surface-page-light);
+  border: var(--ds-border-width-xs) solid var(--ds-border-disabled-subtle);
+  border-radius: var(--ds-radius-md);
+  resize: vertical;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.textarea::placeholder {
+  color: var(--ds-text-disabled-default);
+}
+
+.textarea:hover:not(:disabled):not(:read-only) {
+  border-color: var(--ds-border-disabled-default);
+}
+
+.textarea:focus {
+  outline: none;
+  border-color: var(--ds-surface-information-default);
+  box-shadow: 0 0 0 1px var(--ds-surface-information-default);
+}
+
+.textarea:disabled,
+.textarea:read-only {
+  background: var(--ds-surface-disabled-bg-strong);
+  opacity: 0.9;
+}
+
+.error {
+  border-color: #c1121f;
+}
+
+.error:focus {
+  box-shadow: 0 0 0 1px #c1121f;
+}
+
+.hint {
+  font-family: var(--ds-font-family-text);
+  font-size: var(--ds-hint-size);
+  font-weight: 400;
+  line-height: var(--ds-line-height-tight);
+  color: var(--ds-text-on-color-headings);
+}
+
+.hintOnDark {
+  color: var(--ds-text-default-headings);
+}
+
+.hintError {
+  color: #c1121f;
+}

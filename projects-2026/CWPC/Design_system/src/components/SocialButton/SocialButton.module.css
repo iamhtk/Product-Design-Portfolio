@@ -1,0 +1,35 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--ds-radius-button);
+  border: 1px solid var(--ds-border-disabled-subtle);
+  background: var(--ds-surface-page-light);
+  color: var(--ds-text-secondary-secondary-blue-default);
+  text-decoration: none;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.button:hover {
+  background: rgba(13, 114, 255, 0.08);
+  border-color: var(--ds-border-information-default-hover);
+}
+
+.button:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+.icon {
+  width: var(--ds-icon-sm);
+  height: var(--ds-icon-sm);
+}

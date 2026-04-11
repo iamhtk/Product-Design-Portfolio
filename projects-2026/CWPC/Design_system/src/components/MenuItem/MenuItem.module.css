@@ -1,0 +1,48 @@
+.item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: var(--ds-gap-field-inner);
+  padding: var(--ds-field-padding-y) var(--ds-field-padding-x);
+  border: none;
+  border-radius: var(--ds-radius-md);
+  background: transparent;
+  font-family: var(--ds-font-family-text);
+  font-size: var(--ds-paragraph-nav);
+  line-height: var(--ds-line-height-tight);
+  text-align: left;
+  color: var(--ds-text-on-color-headings);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.item:hover:not(:disabled) {
+  background: rgba(13, 114, 255, 0.08);
+}
+
+.item:focus-visible {
+  outline: none;
+  box-shadow: var(--ds-focus-ring);
+}
+
+.disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.destructive {
+  color: #c1121f;
+}
+
+.destructive:hover:not(:disabled) {
+  background: rgba(193, 18, 31, 0.08);
+}
+
+/* On dark surfaces (menus over marketing card) */
+.onDark {
+  color: var(--ds-text-default-headings);
+}
+
+.onDark:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.08);
+}
