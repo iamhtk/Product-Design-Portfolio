@@ -70,7 +70,7 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
   const progressBarColor = '#E5A63D';
   const arrowColor = '#000000';
   const icon = 'bmw/logo.png'; // Sidebar icon (left column) - Add image/video path here
-  const headerIcon = '/bmw/cover2.png'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
+  const headerIcon = '/bmw/cover2.jpg'; // Header section icon (top banner) - Add image/video path here (e.g., '/path/to/header-icon.png' or '/path/to/header-icon.mp4')
   const role = 'Product Designer';
   const team = 'Hrithik Sanyal, and Prof. James Rhampton';
   const when = 'January 2024 - May 2024';
@@ -101,11 +101,11 @@ export function BMWProject({ onBack, onProjectClick }: BMWProjectProps) {
     { type: 'text', header: "Exploring iDrive 8: Part One", content: "This exploration highlighted BMW's dedication to a sophisticated and minimalist aesthetic. This design ethos not only resonates with the preferences of BMW's customer base but also reflects the company's desired image. Personally, I am drawn to this minimalist approach and aim to integrate it into my redesign efforts.", indent: true },
     { type: 'image', src: '/bmw/bmw1.jpg' },
     
-    { type: 'textImageRow', header: '2022, BMW i7', content: "BMW i7's Adaptive Cruise Control (ACC) interface, showcases a clear, user-friendly and intuitive interface. It allows users to customize following distances, following distance and enabling/disabling ACC and intervention thresholds making it more user-centric user-friendly for ease of interaction during driving.", src: '/bmw/bmw_compt.png' },
+    { type: 'textImageRow', header: '2022, BMW i7', content: "BMW i7's Adaptive Cruise Control (ACC) interface, showcases a clear, user-friendly and intuitive interface. It allows users to customize following distances, following distance and enabling/disabling ACC and intervention thresholds making it more user-centric user-friendly for ease of interaction during driving.", src: '/bmw/bmw_compt.jpg' },
     
-    { type: 'textImageRow', header: "2020, Mercedes-Benz S-Class", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/merc_compt.png' },
+    { type: 'textImageRow', header: "2020, Mercedes-Benz S-Class", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/merc_compt.jpg' },
 
-    { type: 'textImageRow', header: "2019, Porche Taycan", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/p_compt.png' },
+    { type: 'textImageRow', header: "2019, Porche Taycan", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", src: '/bmw/p_compt.jpg' },
 
     { type: 'text', header: "Takeaways & Considerations", content: "We conducted user interviews, surveys, and analyzed in-app analytics to understand the pain points and user needs. We also studied competitor apps and industry trends to gather insights", indent: true },
     { type: 'image', src: '/bmw/bmw6.jpeg' },

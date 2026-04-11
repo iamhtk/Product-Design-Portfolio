@@ -80,7 +80,7 @@ export function AboutPage() {
           </div>
           <div className="w-full h-[400px] overflow-hidden rounded-lg">
             <ImageWithFallback 
-              src={"/about/more/IMG_3962.png"}
+              src={"/about/more/IMG_3962.jpg"}
               alt="Design critique session"
               className="w-full h-full object-cover"
             />
@@ -109,7 +109,7 @@ export function AboutPage() {
         {/* Image 2 */}
         <AnimateIn variant="up" className="mb-16">
           <ImageWithFallback 
-            src={"/about/more/IMG_9612.png"}
+            src={"/about/more/IMG_9612.jpg"}
             alt="Presentation"
             className="w-full h-auto rounded-lg"
           />
