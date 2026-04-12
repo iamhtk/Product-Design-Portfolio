@@ -94,7 +94,7 @@ export function ResumePage() {
           </div> */}
 
           {/* TechMentee */}
-          <div className="mb-10">
+          {/* <div className="mb-10">
             <h3 className="text-[15px] text-gray-900 mb-1">
               <strong>TechMentee, Inc</strong>,  Product Designer
             </h3>
@@ -109,7 +109,7 @@ export function ResumePage() {
                 </span>
               </li>
             </ul>
-          </div>
+          </div> */}
 
           {/* CWPC */}
           <div className="mb-10">
@@ -117,7 +117,7 @@ export function ResumePage() {
               <strong>Catastrophic Wildfire Prevention Consortium (CWPC)</strong>, Product Designer
             </h3>
             <p className="text-[13px] text-gray-500 mb-4">
-              <strong>July 2025—January 2026</strong> — San Francisco, CA
+              <strong>July 2025—April 2026</strong> — San Francisco, CA
             </p>
             <ul className="space-y-3">
               <li className="flex gap-3">
@@ -441,16 +441,46 @@ export function ResumePage() {
                 <strong>UX Design & Research Skills:</strong>
               </h3>
               <p className="text-[15px] leading-[1.7] text-gray-700">
-                A/B Testing, Affinity Mapping, Cognitive Ergonomics, Competitor Analysis, Contextual Inquiry, Design Thinking, Design Systems, Empathy Mapping, Ethnography, Heuristic Evaluation, Ideation Workshops, Information Architecture, Interaction Design, Journey Mapping, Persona, Prototyping, Qualitative Research, Quantitative Research, Rapid Prototyping, Responsive Design, Storyboarding, UI Design, Visual Design, Wireframing
+                {/* A/B Testing, Affinity Mapping, Cognitive Ergonomics, Competitor Analysis, Contextual Inquiry, Design Thinking, Design Systems, Empathy Mapping, Ethnography, Heuristic Evaluation, Ideation Workshops, Information Architecture, Interaction Design, Journey Mapping, Persona, Prototyping, Qualitative Research, Quantitative Research, Rapid Prototyping, Responsive Design, Storyboarding, UI Design, Visual Design, Wireframing */}
+                User-Centered Design, Design Thinking, Interaction Design, Visual Design, Design Systems, Component Libraries, Design Tokens, Responsive UI, Cross-Platform Design, Information Architecture, Accessibility (WCAG 2.2), Journey Mapping, Interaction Models, Wireframing, Rapid Prototyping, Design Documentation, System-of-Systems Thinking
               </p>
             </div>
 
             <div>
               <h3 className="text-[15px] text-gray-900 mb-3">
-                <strong>UX Tools:</strong>
+                <strong>Design Tools:</strong>
               </h3>
               <p className="text-[15px] leading-[1.7] text-gray-700">
-                Adobe Creative Suite, Aero, Illustrator, Photoshop, Adobe XD, AfterEffects, Axure, Bezi, FigJam, Figma, Framer, Invision, Meta Spark Studio, Miro, Omnigraffle, Sketch, Snapchat Lens Studio, Unity, UserTesting.com, Webflow, Wireframe.cc, Accessibility Guidelines, Web Standards (W3C)
+              Figma, FigJam, Sketch, Adobe Creative Suite, Maze, Useberry, Miro, InVision, Bezi, Unity, ProtoPie
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-[15px] text-gray-900 mb-3">
+                <strong>Research & Testing:</strong>
+              </h3>
+              <p className="text-[15px] leading-[1.7] text-gray-700">
+              User Research, Usability Testing, A/B Testing, Heuristic Evaluation, Mixed Methods Research, Surveys, Card Sorting, Tree Testing, Affinity Mapping, Contextual Inquiry, Iterative Design
+              </p>
+            </div>
+
+            <div>
+              <h3 className="text-[15px] text-gray-900 mb-3">
+                <strong>AI & Emerging Tech:</strong>
+              </h3>
+              <p className="text-[15px] leading-[1.7] text-gray-700">
+              Conversational AI Design, LLM Integration, AI Agent Design, Prompt Engineering, Predictive Analytics, ChatGPT, Claude, Midjourney, Figma Make, Framer AI , Lovable, Galileo AI, Stitch, Fronty, AI-Assisted Prototyping, Cursor
+              </p>
+            </div>
+            
+
+            <div>
+              <h3 className="text-[15px] text-gray-900 mb-3">
+                <strong>Programming Languages:</strong>
+              </h3>
+              <p className="text-[15px] leading-[1.7] text-gray-700">
+                {/* Bootstrap, HTML5, CSS3, JavaScript, Python, React, GitHub, MySQL, Oracle, Xcode */}
+                HTML, CSS, JavaScript, React, Bootstrap,TypeScript, SQL, GitHub, Jira, Confluence, Front-End Fundamentals, XCode, Linux, GitHub,
               </p>
             </div>
 
@@ -460,15 +490,6 @@ export function ResumePage() {
               </h3>
               <p className="text-[15px] leading-[1.7] text-gray-700">
                 Agile Methodologies, AWS Management, JIRA, Reetro, Scrum, Trello
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-[15px] text-gray-900 mb-3">
-                <strong>Programming Languages:</strong>
-              </h3>
-              <p className="text-[15px] leading-[1.7] text-gray-700">
-                Bootstrap, HTML5, CSS3, JavaScript, Python, React, GitHub, MySQL, Oracle, Xcode
               </p>
             </div>
           </div>
@@ -528,13 +549,13 @@ export function ResumePage() {
 
             <div>
               <p className="text-[15px] leading-[1.7] text-gray-700">
-                [5]. Sanyal, <strong>H.</strong>, Saxena, P., Agrawal, R. (2021). Enhanced Accuracy in Machine Learning Using Feature Set Bifurcation. In: Gunjan, V.K., Suganthan, P.N., Haase, J., Kumar, A. (eds) Cybernetics, Cognition and Machine Learning Applications. Algorithms for Intelligent Systems. Springer, Singapore. https://doi.org/10.1007/978-981-33-6691-6_46
+                [5]. <strong>Sanyal, H.</strong>, Saxena, P., Agrawal, R. (2021). Enhanced Accuracy in Machine Learning Using Feature Set Bifurcation. In: Gunjan, V.K., Suganthan, P.N., Haase, J., Kumar, A. (eds) Cybernetics, Cognition and Machine Learning Applications. Algorithms for Intelligent Systems. Springer, Singapore. https://doi.org/10.1007/978-981-33-6691-6_46
               </p>
             </div>
 
             <div>
               <p className="text-[15px] leading-[1.7] text-gray-700">
-                [6]. Sanyal, <strong>H.</strong>, Agrawal, R. (2021). Study of Holoportation: Using Network Errors for Improving Accuracy and Efficiency. In: Shakya, S., Balas, V.E., Haoxiang, W., Baig, Z. (eds) Proceedings of International Conference on Sustainable Expert Systems. Lecture Notes in Networks and Systems, vol 176. Springer, Singapore. https://doi.org/10.1007/978-981-33-4355-9_9
+                [6]. <strong>Sanyal, H.</strong>, Agrawal, R. (2021). Study of Holoportation: Using Network Errors for Improving Accuracy and Efficiency. In: Shakya, S., Balas, V.E., Haoxiang, W., Baig, Z. (eds) Proceedings of International Conference on Sustainable Expert Systems. Lecture Notes in Networks and Systems, vol 176. Springer, Singapore. https://doi.org/10.1007/978-981-33-4355-9_9
               </p>
             </div>
           </div>
