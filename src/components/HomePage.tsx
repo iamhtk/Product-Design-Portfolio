@@ -47,6 +47,14 @@ const TILE_STAGGER_KEYS = [
   'stagger-9',
 ] as const;
 
+/** Matches the outer shell of `HomeProjectTileCard` (Selected Work / Design systems). */
+const MINI_APP_TILE_SHELL =
+  'h-full flex flex-col rounded-xl overflow-hidden bg-white border border-solid border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] group-hover:-translate-y-1 group-hover:shadow-[var(--shadow-depth)] group-hover:border-black/[0.08]';
+
+/** Wrapper for external links: border lives on inner div (same as div-based tiles) so the grey frame always paints. */
+const MINI_APP_LINK_CLASS =
+  'group block h-full cursor-pointer no-underline text-inherit rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2';
+
 function HomeProjectTileCard({
   project,
   index,
@@ -292,48 +300,94 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
         <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
             <h2 className="type-overline text-gray-400 mb-2">
-              Side Projects - Mini Apps
+              BUILT WITH AI - Vibe coded. Shipped anyway!
+              {/* VIBE CODED / BUILT WITH AI - Vibe coded. Shipped anyway */}
+
             </h2>
             <p className="type-body-lg text-gray-900">
-              Small experiments & creative explorations.
+            Things I built fast, with AI, because the idea wouldn't leave me alone.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <a href="#" onClick={(e) => e.preventDefault()} className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4" aria-hidden>
-            <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
-
-                <ImageWithFallback
-                  src="miniapps/AVICII-FOREVER-ARTWORK-CLEAN_2.webp"
-                  alt="LE7ELS"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
-                />
-              </div>
-              <div>
-                <h3 className="type-body text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
-                  LE7ELS
-                </h3>
-                <p className="type-caption text-gray-500">
-                  Music Library Organizer
-                </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
+            <a
+              href="https://ghostuxapp.pages.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={MINI_APP_LINK_CLASS}
+            >
+              <div className={MINI_APP_TILE_SHELL}>
+                <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+                  <ImageWithFallback
+                    src="/hackathon/ghost/ghost-app.png"
+                    alt="Ghost — UX intelligence platform"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                  />
+                </div>
+                <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                  <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
+                    Ghost
+                  </h3>
+                  <p className="type-caption text-gray-600 leading-relaxed">
+                    UX intelligence platform that resurrects your churned users
+                  </p>
+                  <div className="mt-2 rounded-lg border border-violet-200/80 bg-gradient-to-br from-violet-50 to-indigo-50/70 px-2.5 py-2.5 shadow-[0_1px_4px_rgba(79,70,229,0.08)] ring-1 ring-violet-100/60">
+                    <p className="type-overline text-violet-700 mb-1.5 tracking-[0.06em]">
+                      Agent Hack Day · San Francisco · Apr 11, 2026
+                    </p>
+                    <p className="text-[13px] font-medium text-gray-900 leading-[1.55]">
+                      Built solo in one day at Agent Hack Day — a full-day build sprint hosted by Wordware at their Beach House
+                      in The Presidio, San Francisco. Wordware raised $30M straight out of YC. Powered by Groq, Cloudflare
+                      Workers, and OpenAI.
+                    </p>
+                  </div>
+                </div>
               </div>
             </a>
 
-            <a href="https://stories.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4">
-              <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
-                <ImageWithFallback
-                  src="miniapps/avicii-stories-wallpaper-upscaled-3840-1900-v0-t0cxcu66a9of1.webp"
-                  alt="Stories"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
-                />
+            <a
+              href="#"
+              onClick={(e) => e.preventDefault()}
+              className={`${MINI_APP_LINK_CLASS} cursor-not-allowed`}
+              aria-hidden
+            >
+              <div className={MINI_APP_TILE_SHELL}>
+                <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+                  <ImageWithFallback
+                    src="miniapps/AVICII-FOREVER-ARTWORK-CLEAN_2.webp"
+                    alt="LE7ELS"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                  />
+                </div>
+                <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                  <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
+                    LE7ELS
+                  </h3>
+                  <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">Music Library Organizer</p>
+                </div>
               </div>
-              <div>
-                <h3 className="type-body text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
-                  Stories
-                </h3>
-                <p className="type-caption text-gray-500">
-                  Design System Builder
-                </p>
+            </a>
+
+            <a
+              href="https://stories.hrithiksanyal.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={MINI_APP_LINK_CLASS}
+            >
+              <div className={MINI_APP_TILE_SHELL}>
+                <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+                  <ImageWithFallback
+                    src="miniapps/avicii-stories-wallpaper-upscaled-3840-1900-v0-t0cxcu66a9of1.webp"
+                    alt="Stories"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                  />
+                </div>
+                <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                  <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
+                    Stories
+                  </h3>
+                  <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">Design System Builder</p>
+                </div>
               </div>
             </a>
 
@@ -391,28 +445,30 @@ export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
               </div>
             </a> */}
 
-            <a
+            {/* <a
               href="https://www.mathematical-sequence-generator.hrithiksanyal.com/"
               target="_blank"
               rel="noopener noreferrer"
-              className="group block cursor-pointer rounded-none overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-1 hover:border-black/[0.08] px-4 pb-4"
+              className={MINI_APP_LINK_CLASS}
             >
-              <div className="mb-4 -mx-4 rounded-none overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
-                <ImageWithFallback
-                  src="miniapps/f3.png"
-                  alt="Mathematical Sequence Generator"
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
-                />
+              <div className={MINI_APP_TILE_SHELL}>
+                <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+                  <ImageWithFallback
+                    src="miniapps/f3.png"
+                    alt="Mathematical Sequence Generator"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                  />
+                </div>
+                <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                  <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
+                    Mathematical Sequence Generator
+                  </h3>
+                  <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">
+                    Generate and customize FizzBuzz, Fibonacci sequences, and their combinations
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="type-body text-gray-900 mb-1 group-hover:opacity-70 transition-opacity">
-                  Mathematical Sequence Generator
-                </h3>
-                <p className="type-caption text-gray-500">
-                  Generate and customize FizzBuzz, Fibonacci sequences, and their combinations
-                </p>
-              </div>
-            </a>
+            </a> */}
           </div>
         </AnimateIn>
 
