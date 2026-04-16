@@ -4,7 +4,7 @@ import { AnimateIn } from './AnimateIn';
 
 // Set your resume PDF URL here (e.g. "/resume.pdf" if file is in public folder, or a full URL)
 const RESUME_PDF_URL =
-  'https://drive.google.com/file/d/17T5MrPLpxk9qviueThkuLv0GGXuuQdg-/view';
+  'https://drive.google.com/file/d/1D82BWUppkjRhevf1eZUtMWote9R8uJZ7/view?usp=sharing';
 
 export function ResumePage() {
   const handleCertClick = (e: React.MouseEvent<HTMLAnchorElement>) => {

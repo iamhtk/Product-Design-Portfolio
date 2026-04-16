@@ -44,7 +44,7 @@ export function RaseetHealthDsCaseStudyProject({ onBack, onProjectClick }: Rasee
     'Design-system lens on Raseet: shared patterns across mobile, partner pharmacy, and provider experiences, documented in Figma and shipped with consistent tokens.';
   const role = 'Design System, UX, Figma Libraries, Cross-platform UI';
   const team = 'Lead Product Designer';
-  const when = '2024 – 2025';
+  const when = '2019 - 2022';
   const progressBarColor = '#1A6B8A';
   const overview: string | undefined = '';
   const speedReadChallenge =
