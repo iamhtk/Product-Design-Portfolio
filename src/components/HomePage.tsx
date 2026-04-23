@@ -11,6 +11,11 @@ import { ScrollToTop } from "./ScrollToTop";
 import { AnimateIn } from "./AnimateIn";
 import { PROJECT_ENABLED } from "./projects/projectOrder";
 import { ImageWithFallback } from "./figma/ImageWithFallback";
+import {
+  getProjectCaseStudyHref,
+  handleProjectCaseStudyAnchorClick,
+  isExternalCaseStudyProject,
+} from "./projects/projectNav";
 
 type HomeNavigatePage =
   | "work"
@@ -65,74 +70,81 @@ function HomeProjectTileCard({
   onProjectClick: (id: string) => void;
 }) {
   const isEnabled = PROJECT_ENABLED[project.id] !== false;
+  const href = getProjectCaseStudyHref(project.id);
   const staggerKey = TILE_STAGGER_KEYS[Math.min(index, TILE_STAGGER_KEYS.length - 1)];
+  const shellClass = `h-full flex flex-col rounded-xl overflow-hidden bg-white border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08] ${
+    isEnabled ? 'cursor-pointer' : 'cursor-not-allowed'
+  }`;
+  const linkExtra =
+    "no-underline text-inherit outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2";
+
+  const cardInner = (
+    <>
+      <div
+        className={`mb-4 w-full flex-shrink-0 overflow-hidden transition-transform duration-500 ease-out ${
+          project.id === 'CalmiRing' ? 'flex items-center justify-center' : ''
+        }`}
+        style={{ backgroundColor: project.bgColor, aspectRatio: '1 / 1' }}
+      >
+        {project.image &&
+          (() => {
+            const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(project.image);
+            const mediaClass = `transition-transform duration-300 ease-out ${
+              project.id === 'CalmiRing'
+                ? 'max-w-full max-h-full object-contain'
+                : 'w-full h-full object-cover'
+            } hover:scale-105`;
+            return isVideo ? (
+              <video
+                src={project.image}
+                className={mediaClass}
+                autoPlay
+                loop
+                muted
+                playsInline
+                aria-label={project.title}
+              />
+            ) : (
+              <ImageWithFallback
+                src={project.image}
+                alt={project.title}
+                className={mediaClass}
+              />
+            );
+          })()}
+      </div>
+
+      <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+        <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
+          {project.title}
+        </h3>
+        <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">{project.company}</p>
+        <p className="type-caption text-gray-400 pt-1 mt-auto tracking-wide">{project.readTime}</p>
+      </div>
+    </>
+  );
+
   return (
     <AnimateIn stagger={staggerKey} rootMargin="0px 0px -80px 0px">
-      <div
-        onClick={() => {
-          if (!isEnabled) {
-            return;
-          }
-          if (project.id === 'CalmiRing') {
-            window.open(
-              'https://beautiful-leader-fa9.notion.site/Calmi-Ring-ad8e4dee5a794da48dda0e5ad4bdde33',
-              '_blank',
-            );
-          } else {
-            onProjectClick(project.id);
-          }
-        }}
-        className={`h-full flex flex-col rounded-xl overflow-hidden bg-white border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:-translate-y-1 hover:shadow-[var(--shadow-depth)] hover:border-black/[0.08] ${
-          isEnabled ? 'cursor-pointer' : 'cursor-not-allowed'
-        }`}
-      >
-        <div
-          className={`mb-4 w-full flex-shrink-0 overflow-hidden transition-transform duration-500 ease-out ${
-            project.id === 'CalmiRing' ? 'flex items-center justify-center' : ''
-          }`}
-          style={{ backgroundColor: project.bgColor, aspectRatio: '1 / 1' }}
+      {href ? (
+        <a
+          href={href}
+          {...(isExternalCaseStudyProject(project.id)
+            ? { target: "_blank" as const, rel: "noopener noreferrer" as const }
+            : {})}
+          onClick={(e) => handleProjectCaseStudyAnchorClick(e, project.id, onProjectClick)}
+          className={`${shellClass} ${linkExtra}`}
         >
-          {project.image &&
-            (() => {
-              const isVideo = /\.(mp4|webm|mov)(\?|$)/i.test(project.image);
-              const mediaClass = `transition-transform duration-300 ease-out ${
-                project.id === 'CalmiRing'
-                  ? 'max-w-full max-h-full object-contain'
-                  : 'w-full h-full object-cover'
-              } hover:scale-105`;
-              return isVideo ? (
-                <video
-                  src={project.image}
-                  className={mediaClass}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  aria-label={project.title}
-                />
-              ) : (
-                <ImageWithFallback
-                  src={project.image}
-                  alt={project.title}
-                  className={mediaClass}
-                />
-              );
-            })()}
-        </div>
-
-        <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
-          <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
-            {project.title}
-          </h3>
-          <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">{project.company}</p>
-          <p className="type-caption text-gray-400 pt-1 mt-auto tracking-wide">{project.readTime}</p>
-        </div>
-      </div>
+          {cardInner}
+        </a>
+      ) : (
+        <div className={shellClass}>{cardInner}</div>
+      )}
     </AnimateIn>
   );
 }
 
-export function HomePage({ onProjectClick, onNavigate }: HomePageProps) {
+export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePageProps) {
   const [expandedRecommendations, setExpandedRecommendations] = useState<Set<number>>(new Set());
 
   const toggleRecommendation = (index: number) => {
