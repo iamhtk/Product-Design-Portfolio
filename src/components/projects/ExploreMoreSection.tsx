@@ -2,8 +2,13 @@ import {
   PROJECT_ORDER,
   PROJECT_TILE_MEDIA,
   PROJECT_ENABLED,
-  CALMIRING_EXTERNAL_URL,
 } from './projectOrder';
+import { allowBrowserDefaultNav } from '../../lib/spaLink';
+import {
+  getProjectCaseStudyHref,
+  handleProjectCaseStudyAnchorClick,
+  isExternalCaseStudyProject,
+} from './projectNav';
 
 export interface ExploreMoreSectionProps {
   currentProjectId: string;
@@ -11,15 +16,6 @@ export interface ExploreMoreSectionProps {
   onProjectClick?: (projectId: string) => void;
   /** Prev/next project titles (e.g. `#ffffff` on dark case studies). Default dark for light pages. */
   projectTitleColor?: string;
-}
-
-function handleProjectNav(projectId: string, onProjectClick?: (projectId: string) => void) {
-  if (PROJECT_ENABLED[projectId] === false) return;
-  if (projectId === 'CalmiRing') {
-    window.open(CALMIRING_EXTERNAL_URL, '_blank');
-  } else {
-    onProjectClick?.(projectId);
-  }
 }
 
 function isProjectEnabled(projectId: string): boolean {
@@ -47,6 +43,8 @@ export function ExploreMoreSection({
 
   const hasPrev = !!prevProject;
   const hasNext = !!nextProject;
+  const prevHref = prevProject ? getProjectCaseStudyHref(prevProject.id) : null;
+  const nextHref = nextProject ? getProjectCaseStudyHref(nextProject.id) : null;
 
   return (
     <div className="pt-24 pb-8">
@@ -61,63 +59,120 @@ export function ExploreMoreSection({
             style={{ maxWidth: 'min(48%, 480px)' }}
           >
             {hasPrev ? (
-              <button
-                type="button"
-                onClick={() => handleProjectNav(prevProject.id, onProjectClick)}
-                    className="p-0 m-0 border-0 bg-transparent text-left cursor-pointer block w-full max-w-[280px] group transition-all duration-300 ease-out hover:-translate-y-1"
-              >
-                <div className="p-0 h-full flex flex-col transition-all duration-300 ease-out">
-                  <div
-                    className="flex-shrink-0 w-full rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out group-hover:shadow-[var(--shadow-card)]"
-                    style={{
-                      backgroundColor:
-                        PROJECT_TILE_MEDIA[prevProject.id]?.bgColor ?? '#f5f5f5',
-                      aspectRatio: '4 / 3',
-                    }}
-                  >
-                    {PROJECT_TILE_MEDIA[prevProject.id] &&
-                      (/\.(mp4|webm|mov)(\?|$)/i.test(
-                        PROJECT_TILE_MEDIA[prevProject.id].image
-                      ) ? (
-                        <video
-                          src={PROJECT_TILE_MEDIA[prevProject.id].image}
-                          className={`w-full h-full object-cover object-left block transition-transform duration-300 ease-out ${
-                            isProjectEnabled(prevProject.id) ? 'group-hover:scale-105' : ''
-                          }`}
-                          autoPlay
-                          loop
-                          muted
-                          playsInline
-                          aria-label={prevProject.title}
-                        />
-                      ) : (
-                        <img
-                          src={PROJECT_TILE_MEDIA[prevProject.id].image}
-                          alt={prevProject.title}
-                          className={`w-full h-full object-cover object-left block transition-transform duration-300 ease-out ${
-                            isProjectEnabled(prevProject.id) ? 'group-hover:scale-105' : ''
-                          }`}
-                          loading="lazy"
-                        />
-                      ))}
+              prevHref ? (
+                <a
+                  href={prevHref}
+                  {...(isExternalCaseStudyProject(prevProject.id)
+                    ? { target: '_blank' as const, rel: 'noopener noreferrer' as const }
+                    : {})}
+                  onClick={(e) =>
+                    handleProjectCaseStudyAnchorClick(e, prevProject.id, onProjectClick)
+                  }
+                  className="p-0 m-0 border-0 bg-transparent text-left cursor-pointer block w-full max-w-[280px] group transition-all duration-300 ease-out hover:-translate-y-1 no-underline text-inherit rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2"
+                >
+                  <div className="p-0 h-full flex flex-col transition-all duration-300 ease-out">
+                    <div
+                      className="flex-shrink-0 w-full rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out group-hover:shadow-[var(--shadow-card)]"
+                      style={{
+                        backgroundColor:
+                          PROJECT_TILE_MEDIA[prevProject.id]?.bgColor ?? '#f5f5f5',
+                        aspectRatio: '4 / 3',
+                      }}
+                    >
+                      {PROJECT_TILE_MEDIA[prevProject.id] &&
+                        (/\.(mp4|webm|mov)(\?|$)/i.test(
+                          PROJECT_TILE_MEDIA[prevProject.id].image
+                        ) ? (
+                          <video
+                            src={PROJECT_TILE_MEDIA[prevProject.id].image}
+                            className={`w-full h-full object-cover object-left block transition-transform duration-300 ease-out ${
+                              isProjectEnabled(prevProject.id) ? 'group-hover:scale-105' : ''
+                            }`}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            aria-label={prevProject.title}
+                          />
+                        ) : (
+                          <img
+                            src={PROJECT_TILE_MEDIA[prevProject.id].image}
+                            alt={prevProject.title}
+                            className={`w-full h-full object-cover object-left block transition-transform duration-300 ease-out ${
+                              isProjectEnabled(prevProject.id) ? 'group-hover:scale-105' : ''
+                            }`}
+                            loading="lazy"
+                          />
+                        ))}
+                    </div>
+                    <span className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
+                      Previous
+                    </span>
+                    <span
+                      className={`block w-full text-left text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
+                        isProjectEnabled(prevProject.id) ? 'group-hover:opacity-80' : ''
+                      } ${!isProjectEnabled(prevProject.id) && !projectTitleColor ? 'text-gray-500' : ''}`}
+                      style={{
+                        color: isProjectEnabled(prevProject.id)
+                          ? titleEnabledColor
+                          : titleDisabledColor,
+                      }}
+                    >
+                      ← {prevProject.title}
+                    </span>
                   </div>
-                  <span className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
-                    Previous
-                  </span>
-                  <span
-                    className={`block w-full text-left text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
-                      isProjectEnabled(prevProject.id) ? 'group-hover:opacity-80' : ''
-                    } ${!isProjectEnabled(prevProject.id) && !projectTitleColor ? 'text-gray-500' : ''}`}
-                    style={{
-                      color: isProjectEnabled(prevProject.id)
-                        ? titleEnabledColor
-                        : titleDisabledColor,
-                    }}
-                  >
-                    ← {prevProject.title}
-                  </span>
+                </a>
+              ) : (
+                <div className="p-0 m-0 block w-full max-w-[280px] group cursor-not-allowed opacity-70">
+                  <div className="p-0 h-full flex flex-col transition-all duration-300 ease-out">
+                    <div
+                      className="flex-shrink-0 w-full rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out"
+                      style={{
+                        backgroundColor:
+                          PROJECT_TILE_MEDIA[prevProject.id]?.bgColor ?? '#f5f5f5',
+                        aspectRatio: '4 / 3',
+                      }}
+                    >
+                      {PROJECT_TILE_MEDIA[prevProject.id] &&
+                        (/\.(mp4|webm|mov)(\?|$)/i.test(
+                          PROJECT_TILE_MEDIA[prevProject.id].image
+                        ) ? (
+                          <video
+                            src={PROJECT_TILE_MEDIA[prevProject.id].image}
+                            className="w-full h-full object-cover object-left block transition-transform duration-300 ease-out"
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                            aria-label={prevProject.title}
+                          />
+                        ) : (
+                          <img
+                            src={PROJECT_TILE_MEDIA[prevProject.id].image}
+                            alt={prevProject.title}
+                            className="w-full h-full object-cover object-left block transition-transform duration-300 ease-out"
+                            loading="lazy"
+                          />
+                        ))}
+                    </div>
+                    <span className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
+                      Previous
+                    </span>
+                    <span
+                      className={`block w-full text-left text-[15px] md:text-[17px] font-semibold leading-snug ${
+                        !isProjectEnabled(prevProject.id) && !projectTitleColor ? 'text-gray-500' : ''
+                      }`}
+                      style={{
+                        color: isProjectEnabled(prevProject.id)
+                          ? titleEnabledColor
+                          : titleDisabledColor,
+                      }}
+                    >
+                      ← {prevProject.title}
+                    </span>
+                  </div>
                 </div>
-              </button>
+              )
             ) : (
               <div className="p-0 max-w-[280px] opacity-60">
                 <span className="text-[15px] md:text-[17px] text-gray-400">
@@ -138,72 +193,130 @@ export function ExploreMoreSection({
             style={{ maxWidth: 'min(48%, 480px)' }}
           >
             {hasNext ? (
-              <button
-                type="button"
-                onClick={() => handleProjectNav(nextProject.id, onProjectClick)}
-                className={`p-0 m-0 border-0 bg-transparent w-full max-w-[280px] group transition-all duration-300 ease-out ${
-                  isProjectEnabled(nextProject.id)
-                    ? 'cursor-pointer hover:-translate-y-1'
-                    : 'cursor-not-allowed opacity-70'
-                }`}
-                style={{ textAlign: 'right' }}
-              >
-                {/* Image: same width as card */}
-                <div
-                  className={`rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out ${
-                    isProjectEnabled(nextProject.id) ? 'group-hover:shadow-[var(--shadow-card)]' : ''
+              nextHref ? (
+                <a
+                  href={nextHref}
+                  {...(isExternalCaseStudyProject(nextProject.id)
+                    ? { target: '_blank' as const, rel: 'noopener noreferrer' as const }
+                    : {})}
+                  onClick={(e) =>
+                    handleProjectCaseStudyAnchorClick(e, nextProject.id, onProjectClick)
+                  }
+                  className={`p-0 m-0 border-0 bg-transparent w-full max-w-[280px] group transition-all duration-300 ease-out no-underline text-inherit rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2 ${
+                    isProjectEnabled(nextProject.id)
+                      ? 'cursor-pointer hover:-translate-y-1'
+                      : 'cursor-not-allowed opacity-70'
                   }`}
-                  style={{
-                    backgroundColor:
-                      PROJECT_TILE_MEDIA[nextProject.id]?.bgColor ?? '#f5f5f5',
-                    aspectRatio: '4 / 3',
-                  }}
+                  style={{ textAlign: 'right' }}
                 >
-                  {PROJECT_TILE_MEDIA[nextProject.id] &&
-                    (/\.(mp4|webm|mov)(\?|$)/i.test(
-                      PROJECT_TILE_MEDIA[nextProject.id].image
-                    ) ? (
-                      <video
-                        src={PROJECT_TILE_MEDIA[nextProject.id].image}
-                        className={`w-full h-full object-cover object-right block transition-transform duration-300 ease-out ${
-                          isProjectEnabled(nextProject.id) ? 'group-hover:scale-105' : ''
-                        }`}
-                        autoPlay
-                        loop
-                        muted
-                        playsInline
-                        aria-label={nextProject.title}
-                      />
-                    ) : (
-                      <img
-                        src={PROJECT_TILE_MEDIA[nextProject.id].image}
-                        alt={nextProject.title}
-                        className={`w-full h-full object-cover object-right block transition-transform duration-300 ease-out ${
-                          isProjectEnabled(nextProject.id) ? 'group-hover:scale-105' : ''
-                        }`}
-                        loading="lazy"
-                      />
-                    ))}
-                </div>
-                {/* Label and title: right-aligned so "t" of Next lines up with image */}
-                <div style={{ textAlign: 'right' }}>
-                  <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
-                    Next
-                  </div>
                   <div
-                    className={`text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
-                      isProjectEnabled(nextProject.id) ? 'group-hover:opacity-80' : ''
-                    } ${!isProjectEnabled(nextProject.id) && !projectTitleColor ? 'text-gray-500' : ''}`}
+                    className={`rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out ${
+                      isProjectEnabled(nextProject.id) ? 'group-hover:shadow-[var(--shadow-card)]' : ''
+                    }`}
                     style={{
-                      color: isProjectEnabled(nextProject.id)
-                        ? titleEnabledColor
-                        : titleDisabledColor,
+                      backgroundColor:
+                        PROJECT_TILE_MEDIA[nextProject.id]?.bgColor ?? '#f5f5f5',
+                      aspectRatio: '4 / 3',
                     }}
                   >
-                    {nextProject.title} →
+                    {PROJECT_TILE_MEDIA[nextProject.id] &&
+                      (/\.(mp4|webm|mov)(\?|$)/i.test(
+                        PROJECT_TILE_MEDIA[nextProject.id].image
+                      ) ? (
+                        <video
+                          src={PROJECT_TILE_MEDIA[nextProject.id].image}
+                          className={`w-full h-full object-cover object-right block transition-transform duration-300 ease-out ${
+                            isProjectEnabled(nextProject.id) ? 'group-hover:scale-105' : ''
+                          }`}
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          aria-label={nextProject.title}
+                        />
+                      ) : (
+                        <img
+                          src={PROJECT_TILE_MEDIA[nextProject.id].image}
+                          alt={nextProject.title}
+                          className={`w-full h-full object-cover object-right block transition-transform duration-300 ease-out ${
+                            isProjectEnabled(nextProject.id) ? 'group-hover:scale-105' : ''
+                          }`}
+                          loading="lazy"
+                        />
+                      ))}
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
+                      Next
+                    </div>
+                    <div
+                      className={`text-[15px] md:text-[17px] font-semibold leading-snug transition-opacity duration-300 ${
+                        isProjectEnabled(nextProject.id) ? 'group-hover:opacity-80' : ''
+                      } ${!isProjectEnabled(nextProject.id) && !projectTitleColor ? 'text-gray-500' : ''}`}
+                      style={{
+                        color: isProjectEnabled(nextProject.id)
+                          ? titleEnabledColor
+                          : titleDisabledColor,
+                      }}
+                    >
+                      {nextProject.title} →
+                    </div>
+                  </div>
+                </a>
+              ) : (
+                <div
+                  className="p-0 m-0 w-full max-w-[280px] group cursor-not-allowed opacity-70"
+                  style={{ textAlign: 'right' }}
+                >
+                  <div
+                    className="rounded-lg overflow-hidden mb-4 shadow-[var(--shadow-subtle)] transition-all duration-300 ease-out"
+                    style={{
+                      backgroundColor:
+                        PROJECT_TILE_MEDIA[nextProject.id]?.bgColor ?? '#f5f5f5',
+                      aspectRatio: '4 / 3',
+                    }}
+                  >
+                    {PROJECT_TILE_MEDIA[nextProject.id] &&
+                      (/\.(mp4|webm|mov)(\?|$)/i.test(
+                        PROJECT_TILE_MEDIA[nextProject.id].image
+                      ) ? (
+                        <video
+                          src={PROJECT_TILE_MEDIA[nextProject.id].image}
+                          className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                          aria-label={nextProject.title}
+                        />
+                      ) : (
+                        <img
+                          src={PROJECT_TILE_MEDIA[nextProject.id].image}
+                          alt={nextProject.title}
+                          className="w-full h-full object-cover object-right block transition-transform duration-300 ease-out"
+                          loading="lazy"
+                        />
+                      ))}
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div className="text-[11px] tracking-[0.15em] text-gray-400 uppercase mb-1.5">
+                      Next
+                    </div>
+                    <div
+                      className={`text-[15px] md:text-[17px] font-semibold leading-snug ${
+                        !isProjectEnabled(nextProject.id) && !projectTitleColor ? 'text-gray-500' : ''
+                      }`}
+                      style={{
+                        color: isProjectEnabled(nextProject.id)
+                          ? titleEnabledColor
+                          : titleDisabledColor,
+                      }}
+                    >
+                      {nextProject.title} →
+                    </div>
                   </div>
                 </div>
-              </button>
+              )
             ) : (
               <div className="p-0 max-w-[280px] ml-auto opacity-60 text-right">
                 <span className="text-[15px] md:text-[17px] text-gray-400">
@@ -215,12 +328,17 @@ export function ExploreMoreSection({
         </div>
       </div>
       <div className="mb-12">
-        <button
-          onClick={onBack}
-          className="text-[17px] text-gray-700 hover:text-gray-900 transition-colors duration-300 font-medium cursor-pointer focus-ring rounded focus:outline-none"
+        <a
+          href="/"
+          onClick={(e) => {
+            if (allowBrowserDefaultNav(e)) return;
+            e.preventDefault();
+            onBack();
+          }}
+          className="inline-block text-[17px] text-gray-700 hover:text-gray-900 transition-colors duration-300 font-medium cursor-pointer focus-ring rounded focus:outline-none no-underline"
         >
           ← Back to Homepage
-        </button>
+        </a>
       </div>
     </div>
   );

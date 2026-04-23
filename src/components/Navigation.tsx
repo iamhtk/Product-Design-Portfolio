@@ -6,6 +6,8 @@ import {
   trackEmailClick,
   trackMobileMenuOpen,
 } from '../services/analytics';
+import { allowBrowserDefaultNav } from '../lib/spaLink';
+import { SITE_CONTENT_PATHS } from '../sitePaths';
 
 type Page =
   | 'work'
@@ -80,21 +82,29 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         }`}
       >
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-5 flex flex-row flex-nowrap items-center justify-between gap-4 min-w-0">
-          <button
-            type="button"
-            onClick={() => handleNavigation('work')}
-            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-2 px-1 cursor-pointer"
+          <a
+            href={SITE_CONTENT_PATHS.work}
+            onClick={(e) => {
+              if (allowBrowserDefaultNav(e)) return;
+              e.preventDefault();
+              handleNavigation('work');
+            }}
+            className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-2 px-1 cursor-pointer no-underline"
           >
             Hrithik Sanyal
-          </button>
+          </a>
 
           <div className="hidden md:flex md:flex-shrink-0 items-center gap-6 md:gap-8" role="navigation" aria-label="Main">
             {links.map((link) => (
-              <button
+              <a
                 key={link.page}
-                type="button"
-                onClick={() => handleNavigation(link.page)}
-                className="relative group focus-ring rounded py-2 px-1 cursor-pointer"
+                href={SITE_CONTENT_PATHS[link.page]}
+                onClick={(e) => {
+                  if (allowBrowserDefaultNav(e)) return;
+                  e.preventDefault();
+                  handleNavigation(link.page);
+                }}
+                className="relative group focus-ring rounded py-2 px-1 cursor-pointer no-underline"
                 aria-current={linkIsActive(link.page) ? 'page' : undefined}
               >
                 <span
@@ -109,7 +119,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 {linkIsActive(link.page) && (
                   <div className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gray-900 rounded-full transition-all duration-200 ease-out" />
                 )}
-              </button>
+              </a>
             ))}
             <a
               href="mailto:sanyalhrithik@gmail.com"
@@ -138,13 +148,17 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
         <div className="fixed inset-0 z-50 bg-white md:hidden">
           <div className="flex flex-col h-full">
             <div className="px-8 py-5 flex items-center justify-between border-b border-gray-100/80 bg-white">
-              <button
-                type="button"
-                onClick={() => handleNavigation('work')}
-                className="text-[15px] text-gray-900 cursor-pointer"
+              <a
+                href={SITE_CONTENT_PATHS.work}
+                onClick={(e) => {
+                  if (allowBrowserDefaultNav(e)) return;
+                  e.preventDefault();
+                  handleNavigation('work');
+                }}
+                className="text-[15px] text-gray-900 cursor-pointer no-underline"
               >
                 Hrithik Sanyal
-              </button>
+              </a>
               <button
                 type="button"
                 onClick={() => setMobileMenuOpen(false)}
@@ -158,11 +172,15 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
             <div className="flex-1 flex flex-col justify-between px-8 py-12">
               <nav className="space-y-6" aria-label="Main">
                 {links.map((link) => (
-                  <button
+                  <a
                     key={link.page}
-                    type="button"
-                    onClick={() => handleNavigation(link.page)}
-                    className={`block text-[20px] text-left relative cursor-pointer ${
+                    href={SITE_CONTENT_PATHS[link.page]}
+                    onClick={(e) => {
+                      if (allowBrowserDefaultNav(e)) return;
+                      e.preventDefault();
+                      handleNavigation(link.page);
+                    }}
+                    className={`block text-[20px] text-left relative cursor-pointer no-underline ${
                       linkIsActive(link.page) ? 'text-gray-900' : 'text-gray-400'
                     }`}
                     aria-current={linkIsActive(link.page) ? 'page' : undefined}
@@ -171,7 +189,7 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                     {linkIsActive(link.page) && (
                       <div className="absolute -left-4 top-1/2 transform -translate-y-1/2 w-1.5 h-1.5 bg-gray-900 rounded-full" />
                     )}
-                  </button>
+                  </a>
                 ))}
               </nav>
 

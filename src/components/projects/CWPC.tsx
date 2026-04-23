@@ -20,11 +20,22 @@ import { useLightbox } from '../Lightbox';
 import { ExploreMoreSection } from './ExploreMoreSection';
 import { SHOW_PROJECT_OVERVIEW } from './projectConfig';
 import { getInitialCaseStudyVisible } from './caseStudyRestore';
+import { DesignSystemExploreCallout } from './DesignSystemExploreCallout';
 
 /** Must match `PROJECT_ORDER` in projectOrder.ts so ExploreMoreSection prev/next resolves. */
 const CURRENT_PROJECT_ID = 'CWPC';
 
 const PROGRESS_BAR_HIDE_DELAY_MS = 400;
+
+/** Same endpoints as `CwpcDsCaseStudy.tsx` EXPLORE PRISM block */
+const PRISM_FIGMA_URL = 'https://www.figma.com/@iamhtk';
+
+const CWPC_PRISM_EXPLORE_ACTIONS = [
+  { label: 'Open Storybook', href: 'https://prism-cwpc-storybook.pages.dev/', variant: 'primary' as const },
+  { label: 'View Component Showcase', href: 'https://prism.cwpc.hrithiksanyal.com/', variant: 'secondary' as const },
+  { label: 'View Docs', href: 'https://prism.cwpc.hrithiksanyal.com/docs/', variant: 'secondary' as const },
+  { label: 'View Figma File', href: PRISM_FIGMA_URL, variant: 'secondary' as const, showArrow: false },
+];
 
 function EmberStyles() {
   return (
@@ -4869,8 +4880,18 @@ export function EmberDesignSystemProject({
                   Have more time?
                 </p>
                 <p className="text-[16px] leading-relaxed" style={{ color: '#F5F5F7' }}>
-                  Click the arrow to read the entire case study.
+                  Jump into live Prism resources docs, Storybook, showcase, and Figma.
                 </p>
+                <div className="w-full max-w-[960px] mt-6">
+                  <DesignSystemExploreCallout
+                    theme="cwpc"
+                    sectionLabel="Explore Prism"
+                    headlineLine1="68 components. 3 layers."
+                    headlineLine2="One source of truth."
+                    subtext="Every component interactive. Every prop documented."
+                    actions={CWPC_PRISM_EXPLORE_ACTIONS}
+                  />
+                </div>
                 <button
                   type="button"
                   onClick={scrollToCaseStudy}
