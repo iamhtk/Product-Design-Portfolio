@@ -26,11 +26,12 @@ export function ResumePage() {
               Hrithik Sanyal
             </h1>
             <p className="type-body text-gray-700 mb-2">
-              <strong>Senior Product Designer</strong> - with 5+ years of experience. Specializing in<br />
-              creating AI, AR/VR, FinTech products.<br />
+              <strong>Senior Product Designer</strong> - with 5+ years of experience. I design experiences<br />
+              that make the complex feel simple and the overlooked feel essential.<br />
               Drawing from my design and electronics engineering experience, I develop <br />
               user-first solutions that simplify decision-making, reduce friction, and build <br />
               trust while driving business outcomes.
+              {/* I design experiences that make the complex feel simple and the overlooked feel essential. With 5+ years taking products from 0 to 1, building design systems that scale, and crafting interfaces that feel inevitable, I've learned that the best work lives where curiosity, ambiguity, and craft converge. Drawn to problems that can't be solved with facts alone, I turn what's invisible to most into something millions of people can feel. */}
             </p>
           </div>
           <a
@@ -123,7 +124,7 @@ export function ResumePage() {
               <li className="flex gap-3">
                 <span className="text-green-600 text-[8px] mt-2">●</span>
                 <span className="text-[15px] leading-[1.7] text-gray-700">
-                  Led UX design and research for CWPC platform including donate feature system, community scorecard, sponsorship packages, authentication flows, and design system with 200+ WCAG-compliant components. Collaborated with fire officials, community leaders, engineering, marketing, and executive teams through stakeholder workshops and usability testing to design Scorecard and donation platform through A/B testing, achieving 85% task success rate, 32% conversion increase, 25% recurring contributions, and improved onboarding completion from 60% to 82%
+                Wildfire resilience is a problem that can't be solved with a single interface. It requires trust, clarity, and systems that hold up under pressure. Designed end-to-end experiences for a platform serving real communities, working alongside fire officials, community leaders, and engineers to shape a donation system, community scorecard, and sponsorship flows from concept through launch. Built Prism, a 60+ component WCAG-compliant design system, documented in Storybook, that became the team's shared language. Outcomes: 85% task success, 32% conversion increase, onboarding completion from 60% to 82%.
                 </span>
               </li>
             </ul>
@@ -166,7 +167,7 @@ export function ResumePage() {
               <li className="flex gap-3">
                 <span className="text-green-600 text-[8px] mt-2">●</span>
                 <span className="text-[15px] leading-[1.7] text-gray-700">
-                  Designed AI-enhanced luxury infotainment interfaces for high-performance driving balancing AI capabilities with NHTSA compliance. Collaborated with engineering, product managers, and safety specialists through design sprints and usability testing with 50+ participants across 3 iterations, achieving 85% task success rate and 30% reduction in user interactions while maintaining compliance standards.
+                Designed the interior intelligence of a luxury vehicle, where every interaction had to feel effortless at 80mph. Balanced the ambition of AI-enhanced infotainment with the reality of NHTSA compliance, collaborating with engineers, product managers, and safety specialists across 3 iterative rounds with 50+ participants. Reduced required user interactions by 30% while achieving 85% task success.
                 </span>
               </li>
             </ul>
@@ -185,7 +186,7 @@ export function ResumePage() {
               <li className="flex gap-3">
                 <span className="text-green-600 text-[8px] mt-2">●</span>
                 <span className="text-[15px] leading-[1.7] text-gray-700">
-                  Conducted IA research across 15+ clients in healthcare, retail, and financial services, creating wireframes, site maps, and content taxonomies. Led card sorting and tree testing with 150+ participants, delivering 8 strategic deliverables that shaped client digital experiences.
+                Most organizations don't know why their users get lost. They fail not because of bad design or they're poorly built, but because nobody mapped what users actually think or need to find. Mapped the invisible architecture behind 15+ enterprise products across healthcare, retail, and financial services, leading card sorting and tree testing with 150+ participants to translate messy organizational complexity into clear, navigable structures. Delivered 8 strategic IA frameworks that shaped how real users find what they need.
 
                 </span>
               </li>
@@ -258,7 +259,7 @@ export function ResumePage() {
               <li className="flex gap-3">
                 <span className="text-green-600 text-[8px] mt-2">●</span>
                 <span className="text-[15px] leading-[1.7] text-gray-700">
-                  Responsible for 0-to-1 design of e-pharmacy platform including onboarding, prescription management, checkout, MedScope design system with 60+ components, chronic care management, payment optimization, and pharmacy dashboards. Collaborating with co-founders, engineering, pharmacy partners, and medical advisors, grew platform from 0 to 10,000+ users with 68% retention, reducing prescription upload drop-off by 40%, and achieving 45% LTV increase.
+                In healthcare, complexity kills conversions. Built an e-pharmacy from nothing, owning the full design lifecycle across patient onboarding, prescription management, chronic care, payments, and provider dashboards. Created MedScope, a 100+ component design system documented in Storybook, that gave the entire product a unified voice. Scaled to 20,000+ users with 68% monthly retention, reduced prescription drop-off by 40%, and grew customer lifetime value by 45%.
                 </span>
               </li>
             </ul>
