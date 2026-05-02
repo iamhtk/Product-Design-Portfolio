@@ -323,6 +323,42 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 items-stretch">
             <a
+              href="https://framecut.butterbase.dev/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className={MINI_APP_LINK_CLASS}
+            >
+              <div className={MINI_APP_TILE_SHELL}>
+                <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+                  <ImageWithFallback
+                    src="/hackathon/framecut/Tiles.png"
+                    alt="Ghost — UX intelligence platform"
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                  />
+                </div>
+                <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                  <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
+                  Framecut
+                  </h3>
+                  <p className="type-caption text-gray-600 leading-relaxed">
+                  AI video studio that turns screenshots & notes into publish-ready videos
+                  </p>
+                  <div className="mt-2 rounded-lg border border-violet-200/80 bg-gradient-to-br from-violet-50 to-indigo-50/70 px-2.5 py-2.5 shadow-[0_1px_4px_rgba(79,70,229,0.08)] ring-1 ring-violet-100/60">
+                    <p className="type-overline text-violet-700 mb-1.5 tracking-[0.06em]">
+                      BETA SUPER HACKATHON · MOUNTAIN VIEW
+                      <br />
+                      MAY 2, 2026
+                    </p>
+                    <p className="text-[13px] font-medium text-gray-900 leading-[1.55]">
+                    Built solo in one day at the Beta Super Hackathon, a full-day build sprint hosted by Beta University at the Computer History Museum in Mountain View, Silicon Valley. Beta Fund has $50K on the line across 20 selected teams pitching live to 20+ active VCs. Powered by Seedance 2.0, Z.AI, and Butterbase.
+
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </a>
+
+            <a
               href="https://ghostuxapp.pages.dev/"
               target="_blank"
               rel="noopener noreferrer"
