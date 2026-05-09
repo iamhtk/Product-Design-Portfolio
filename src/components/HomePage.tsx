@@ -265,7 +265,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
             <p className="type-body-lg text-gray-900">
               Previously Designer at{" "}
-              <span className="font-medium">IBM,CWPC, GM, Kryptonas, TUG, BEL</span><br />
+              <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br />
               {/* <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br /> */}
               <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
             </p>
