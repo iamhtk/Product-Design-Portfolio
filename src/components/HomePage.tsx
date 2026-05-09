@@ -16,6 +16,7 @@ import {
   handleProjectCaseStudyAnchorClick,
   isExternalCaseStudyProject,
 } from "./projects/projectNav";
+import { GitHubActivity } from "./GitHubActivity";
 
 type HomeNavigatePage =
   | "work"
@@ -59,6 +60,12 @@ const MINI_APP_TILE_SHELL =
 /** Wrapper for external links: border lives on inner div (same as div-based tiles) so the grey frame always paints. */
 const MINI_APP_LINK_CLASS =
   'group block h-full cursor-pointer no-underline text-inherit rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2';
+
+/** Built with AI grid: flip to `true` when you want a tile live again. */
+const MINI_APP_ENABLED = {
+  le7els: false,
+  stories: false,
+} as const;
 
 function HomeProjectTileCard({
   project,
@@ -252,7 +259,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
           <AnimateIn variant="up" rootMargin="0px" className="mb-3">
             <h1 className="type-display text-gray-900">
-             Design Engineer, based in San Francisco.
+             AI Design Engineer, based in San Francisco.
             </h1>
           </AnimateIn>
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
@@ -393,51 +400,55 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
               </div>
             </a>
 
-            <a
-              href="#"
-              onClick={(e) => e.preventDefault()}
-              className={`${MINI_APP_LINK_CLASS} cursor-not-allowed`}
-              aria-hidden
-            >
-              <div className={MINI_APP_TILE_SHELL}>
-                <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
-                  <ImageWithFallback
-                    src="miniapps/AVICII-FOREVER-ARTWORK-CLEAN_2.webp"
-                    alt="LE7ELS"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
-                  />
+            {MINI_APP_ENABLED.le7els ? (
+              <a
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                className={`${MINI_APP_LINK_CLASS} cursor-not-allowed`}
+                aria-hidden
+              >
+                <div className={MINI_APP_TILE_SHELL}>
+                  <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+                    <ImageWithFallback
+                      src="miniapps/AVICII-FOREVER-ARTWORK-CLEAN_2.webp"
+                      alt="LE7ELS"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                    />
+                  </div>
+                  <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                    <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
+                      LE7ELS
+                    </h3>
+                    <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">Music Library Organizer</p>
+                  </div>
                 </div>
-                <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
-                  <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
-                    LE7ELS
-                  </h3>
-                  <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">Music Library Organizer</p>
-                </div>
-              </div>
-            </a>
+              </a>
+            ) : null}
 
-            <a
-              href="https://stories.hrithiksanyal.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className={MINI_APP_LINK_CLASS}
-            >
-              <div className={MINI_APP_TILE_SHELL}>
-                <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
-                  <ImageWithFallback
-                    src="miniapps/avicii-stories-wallpaper-upscaled-3840-1900-v0-t0cxcu66a9of1.webp"
-                    alt="Stories"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
-                  />
+            {MINI_APP_ENABLED.stories ? (
+              <a
+                href="https://stories.hrithiksanyal.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={MINI_APP_LINK_CLASS}
+              >
+                <div className={MINI_APP_TILE_SHELL}>
+                  <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
+                    <ImageWithFallback
+                      src="miniapps/avicii-stories-wallpaper-upscaled-3840-1900-v0-t0cxcu66a9of1.webp"
+                      alt="Stories"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
+                    />
+                  </div>
+                  <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
+                    <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
+                      Stories
+                    </h3>
+                    <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">Design System Builder</p>
+                  </div>
                 </div>
-                <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
-                  <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] group-hover:opacity-70 transition-opacity">
-                    Stories
-                  </h3>
-                  <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">Design System Builder</p>
-                </div>
-              </div>
-            </a>
+              </a>
+            ) : null}
 
             {/* <a href="https://flux.hrithiksanyal.com/" target="_blank" rel="noopener noreferrer" className="group block cursor-pointer rounded-2xl overflow-hidden border border-black/[0.06] shadow-[var(--shadow-card)] transition-all duration-300 ease-[cubic-bezier(0.25,0.46,0.45,0.94)] hover:shadow-[var(--shadow-depth)] hover:-translate-y-0.5 hover:border-black/[0.08]">
               <div className="mb-4 rounded-2xl overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
@@ -519,6 +530,8 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
             </a> */}
           </div>
         </AnimateIn>
+
+        <GitHubActivity username="iamhtk" />
 
         {/* Recommendations Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
