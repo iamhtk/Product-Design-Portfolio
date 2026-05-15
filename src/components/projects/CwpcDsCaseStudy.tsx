@@ -399,7 +399,7 @@ export function CwpcDsCaseStudyProject({ onBack, onProjectClick }: CwpcDsCaseStu
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12" data-footer>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 pb-8 text-[13px]">
           <div className="flex flex-wrap items-center gap-2" style={{ color: '#71717A' }}>
-            <span className="whitespace-nowrap">Designed and Developed.</span>
+            <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
             <span>© 2026</span>
           </div>
           <div className="flex items-center gap-3 md:gap-5">

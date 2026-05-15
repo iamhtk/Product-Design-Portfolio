@@ -704,6 +704,7 @@ import {
   trackTimeOnPage,
   track404,
 } from './services/analytics';
+import { usePageSeo } from './seo/usePageSeo';
 
 ReactGA.initialize('G-T6YVTT985T');
 
@@ -795,6 +796,8 @@ function App() {
   const didRestoreScroll = useRef(false);
   const pageEnterTime = useRef<number>(Date.now());
   const scrollDepthReached = useRef<Set<number>>(new Set());
+
+  usePageSeo(currentPage, selectedProjectId);
 
   if (typeof window !== 'undefined' && currentPage === 'project' && selectedProjectId) {
     try {

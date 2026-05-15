@@ -32,7 +32,7 @@ export function AboutPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
             <div>
               <p className="type-body-lg text-gray-700">
-                I'm a Product Designer with 5+ years of industry experience. I specialize in applying design thinking to break down complex problems and craft helpful experiences.
+                I'm a Designer Engineer with 5+ years of industry experience. I specialize in applying design thinking to break down complex problems and craft helpful experiences.
                 A Master's graduate in HCI/UX Design from the University of Michigan, School of Information,
                 I've been learning from and collaborating with some of the best minds on the planet.
               </p>
@@ -477,7 +477,7 @@ export function AboutPage() {
           {/* Left - Copyright */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="whitespace-nowrap">
-              Designed and Developed.
+              Designed & Developed by Hrithik Sanyal.
             </span>
             <span>© 2026</span>
           </div>

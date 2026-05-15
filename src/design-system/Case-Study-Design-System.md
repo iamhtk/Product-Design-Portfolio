@@ -368,7 +368,7 @@ Build each case study in this order:
      - **Case study content** (when visible): List of **ContentBlock**s (see below).
      - **ExploreMoreSection** (previous/next project tiles).
      - “← Back to Work” (mobile only, below content).
-5. **Footer**, “Designed and Developed.”, “© 2026”, social links; `type-caption` or 13px, `text-gray-500`.
+5. **Footer**, “Designed & Developed by Hrithik Sanyal.”, “© 2026”, social links; `type-caption` or 13px, `text-gray-500`.
 
 ---
 
@@ -402,7 +402,7 @@ Optional: `indent` / `indentLevel` on blocks for visual nesting (e.g. `marginLef
   Props: `currentProjectId`, `onBack`, `onProjectClick`.
 - **ImageWithFallback**, `import { ImageWithFallback } from '../figma/ImageWithFallback';` for images.
 - **Scroll-to-case-study arrow**, use `getArrowGradientColors(arrowColor)` from `./arrowGradient` for the SVG arrow that scrolls to `#case-study-start`.
-- **Footer**, reuse the same footer markup (Designed and Developed, © 2026, social links) and `data-footer` if needed for styling.
+- **Footer**, reuse the same footer markup (Designed & Developed by Hrithik Sanyal., © 2026, social links) and `data-footer` if needed for styling.
 
 ---
 

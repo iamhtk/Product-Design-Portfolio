@@ -3134,7 +3134,7 @@ export function RaseetHealthProject({ onBack, onProjectClick }: RaseetHealthProj
         >
           <div className="flex flex-wrap items-center gap-2">
             <span className="whitespace-nowrap">
-              Designed and Developed.
+              Designed & Developed by Hrithik Sanyal.
             </span>
             <span>© 2026</span>
           </div>

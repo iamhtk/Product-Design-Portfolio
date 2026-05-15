@@ -471,7 +471,7 @@ export function FintechProject({ onBack }: FintechProjectProps) {
       <div className="max-w-[1200px] mx-auto px-6 md:px-12 pb-12" data-footer>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 border-t border-gray-200 text-[13px] text-gray-500">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">Designed and Developed.</span>
+            <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
             <span>© 2026</span>
           </div>
 

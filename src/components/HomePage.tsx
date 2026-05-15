@@ -259,7 +259,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
           <AnimateIn variant="up" rootMargin="0px" className="mb-3">
             <h1 className="type-display text-gray-900">
-             AI Design Engineer, based in San Francisco Bay Area.
+             Design Engineer, based in San Francisco Bay Area.
             </h1>
           </AnimateIn>
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
@@ -872,7 +872,7 @@ Beyond his design expertise, Hrithik is a great team player who is approachable,
           {/* Left - Copyright */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="whitespace-nowrap">
-              Designed and Developed.
+            Designed & Developed by Hrithik Sanyal.
             </span>
             <span>© 2026</span>
           </div>

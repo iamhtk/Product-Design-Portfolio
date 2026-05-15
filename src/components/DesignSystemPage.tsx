@@ -36,7 +36,7 @@ function DSSiteFooter() {
         data-footer
       >
         <div className="flex flex-wrap items-center gap-2">
-          <span className="whitespace-nowrap">Designed and Developed.</span>
+          <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
           <span>© 2026</span>
         </div>
 
@@ -238,7 +238,7 @@ function DSLanding({
               Design System · V 1.0
             </p>
             <p className="text-[11px] tracking-widest uppercase text-gray-400 mt-1">
-              Designed & Developed by Hrithik Sanyal
+              Designed & Developed by Hrithik Sanyal.
             </p>
             <p
               style={{ fontSize: 'var(--type-body-lg)' }}

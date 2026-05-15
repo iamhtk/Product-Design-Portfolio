@@ -1,6 +1,6 @@
-# Product Design Portfolio
+# Design Engineer Portfolio
 
-A modern, interactive portfolio showcasing product design work and case studies.
+A modern, interactive portfolio showcasing design engineering work and case studies.
 
 ## Built With
 
@@ -30,4 +30,4 @@ npm run build
 
 ## Contact
 
-Hrithik Sanyal - Product Designer
+Hrithik Sanyal — Design Engineer

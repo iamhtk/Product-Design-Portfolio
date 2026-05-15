@@ -26,7 +26,7 @@ export function ResumePage() {
               Hrithik Sanyal
             </h1>
             <p className="type-body text-gray-700 mb-2">
-              <strong>Senior Product Designer</strong> - with 5+ years of experience. I design experiences<br />
+              <strong>Senior Designer Engineer</strong> - with 5+ years of experience. I design experiences<br />
               that make the complex feel simple and the overlooked feel essential.<br />
               Drawing from my design and electronics engineering experience, I develop <br />
               user-first solutions that simplify decision-making, reduce friction, and build <br />
@@ -649,7 +649,7 @@ export function ResumePage() {
           {/* Left - Copyright */}
           <div className="flex flex-wrap items-center gap-2">
             <span className="whitespace-nowrap">
-              Designed and Developed.
+              Designed & Developed by Hrithik Sanyal.
             </span>
             <span>© 2026</span>
           </div>

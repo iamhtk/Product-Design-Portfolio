@@ -1,0 +1,17 @@
+{
+  "name": "Hrithik Sanyal — Design Engineer",
+  "short_name": "Hrithik Sanyal",
+  "description": "Portfolio of Hrithik Sanyal, Design Engineer.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "en-US",
+  "icons": [
+    {
+      "src": "/icon/iconfac.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
