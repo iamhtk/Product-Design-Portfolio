@@ -1,11 +1,14 @@
-import { existsSync, mkdirSync, rmSync } from 'node:fs';
+import { existsSync, mkdirSync, statSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { execSync } from 'node:child_process';
+import sharp from 'sharp';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const publicDir = join(root, 'public');
 const outDir = join(publicDir, 'og', 'projects');
+
+const OG_WIDTH = 1200;
+const OG_HEIGHT = 630;
 
 /** slug → source image path under public/ */
 const PROJECT_SOURCES = {
@@ -19,19 +22,23 @@ const PROJECT_SOURCES = {
   calmiring: '/main_title/main_calmi.png',
 };
 
-function cropOg(src, dest) {
-  const tmp = `${dest}.tmp.png`;
-  execSync(`sips --resampleWidth 1200 "${src}" --out "${tmp}"`, { stdio: 'pipe' });
-  execSync(
-    `sips --cropToHeightWidth 630 1200 "${tmp}" --out "${dest}" -s format jpeg -s formatOptions 88`,
-    { stdio: 'pipe' },
-  );
-  rmSync(tmp, { force: true });
+async function cropOg(src, dest) {
+  await sharp(src)
+    .resize(OG_WIDTH, OG_HEIGHT, { fit: 'cover', position: 'centre' })
+    .jpeg({ quality: 88, mozjpeg: true })
+    .toFile(dest);
+}
+
+function isUpToDate(src, dest) {
+  if (!existsSync(dest)) return false;
+  return statSync(dest).mtimeMs >= statSync(src).mtimeMs;
 }
 
 mkdirSync(outDir, { recursive: true });
 
-let count = 0;
+let written = 0;
+let skipped = 0;
+
 for (const [slug, rel] of Object.entries(PROJECT_SOURCES)) {
   const src = join(publicDir, rel.replace(/^\//, ''));
   const dest = join(outDir, `${slug}.jpg`);
@@ -39,8 +46,14 @@ for (const [slug, rel] of Object.entries(PROJECT_SOURCES)) {
     console.warn(`Skip ${slug}: missing ${rel}`);
     continue;
   }
-  cropOg(src, dest);
-  count += 1;
+  if (isUpToDate(src, dest)) {
+    skipped += 1;
+    continue;
+  }
+  await cropOg(src, dest);
+  written += 1;
 }
 
-console.log(`Wrote ${count} project OG images to public/og/projects/`);
+console.log(
+  `OG images: ${written} written, ${skipped} up to date → public/og/projects/`,
+);
