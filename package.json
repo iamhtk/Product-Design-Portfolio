@@ -62,7 +62,7 @@
       },
       "scripts": {
             "dev": "vite",
-            "build": "node scripts/generate-sitemap.mjs && node scripts/generate-og-images.mjs && vite build && node scripts/prerender.mjs",
+            "build": "node scripts/generate-sitemap.mjs && node scripts/generate-og-images.mjs && vite build",
             "sitemap": "node scripts/generate-sitemap.mjs",
             "og-images": "node scripts/generate-og-images.mjs",
             "prerender": "node scripts/prerender.mjs"
