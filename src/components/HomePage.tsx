@@ -257,13 +257,18 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12">
         {/* Hero Section */}
         <div className="mt-32 pt-32 md:mt-40 pb-20 md:pb-24">
-          <AnimateIn variant="up" rootMargin="0px" className="mb-3">
+          <div className="flex flex-col gap-8 md:gap-10">
+          <AnimateIn variant="up" rootMargin="0px">
             <h1 className="type-display text-gray-900">
-             Design Engineer, based in San Francisco Bay Area.
+             Design Engineer at Coyax.ai
             </h1>
+            <h2 className="home-hero-location">
+             based in San Francisco Bay Area.
+            </h2>
           </AnimateIn>
-          <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1" className="mb-3">
-            <p className="type-body-lg text-gray-900">
+          <div className="flex flex-col gap-4 md:gap-5">
+          <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1">
+            <p className="home-hero-intro">
               Previously Designer at{" "}
               <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br />
               {/* <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br /> */}
@@ -271,11 +276,13 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
             </p>
           </AnimateIn>
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-2">
-            <p className="type-body text-gray-500 max-w-[500px]">
+            <p className="home-hero-tagline max-w-[500px]">
               Curious about interfaces, intelligent systems
               and the ways in which we interact with them.
             </p>
           </AnimateIn>
+          </div>
+          </div>
         </div>
 
         {/* Section Header */}

@@ -7,3 +7,59 @@ div.project-card-meta p,
 .project-card-meta p.tracking-wide {
   font-size: 13px !important;
 }
+
+/* Home hero — “Previously Designer…” line. Edit size here only (does not change site-wide body-lg). */
+:root {
+  --home-hero-intro-size: var(--type-body-lg); /* try var(--type-h3) or 1.25rem */
+}
+
+.home-hero-intro,
+.home-hero-tagline {
+  font-size: var(--home-hero-intro-size) !important;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.home-hero-intro {
+  color: #111827;
+}
+
+.home-hero-tagline {
+  color: #6b7280; /* gray-500 */
+}
+
+/*
+ * Home hero second line — typography follows the heading tag you choose.
+ * Change h2 ↔ h3 in HomePage and size updates without touching .type-display.
+ */
+.home-hero-location {
+  color: #111827;
+  margin: 0;
+}
+
+h1.home-hero-location {
+  font-size: var(--type-display) !important;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+h2.home-hero-location {
+  font-size: var(--type-h1) !important;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+h3.home-hero-location {
+  font-size: var(--type-h2) !important;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h4.home-hero-location {
+  font-size: var(--type-h3) !important;
+  font-weight: 600;
+  line-height: 1.3;
+}
