@@ -4,7 +4,7 @@ import { AnimateIn } from './AnimateIn';
 
 // Set your resume PDF URL here (e.g. "/resume.pdf" if file is in public folder, or a full URL)
 const RESUME_PDF_URL =
-  'https://drive.google.com/file/d/1D82BWUppkjRhevf1eZUtMWote9R8uJZ7/view?usp=sharing';
+  'https://drive.google.com/file/d/19qvmkLJLQKtuLz8ZnmaYPlupSMCvxSKb/view?usp=sharing';
 
 export function ResumePage() {
   const handleCertClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
@@ -112,13 +112,53 @@ export function ResumePage() {
             </ul>
           </div> */}
 
+          {/* COYAX */}
+          <div className="mb-10">
+            <h3 className="text-[15px] text-gray-900 mb-1">
+              <strong>Coyax.ai</strong>, Founding Designer Engineer
+            </h3>
+            <p className="text-[13px] text-gray-500 mb-4">
+              <strong>March 2026—Present
+              </strong> — San Jose, CA
+            </p>
+            <ul className="space-y-3">
+              <li className="flex gap-3">
+                <span className="text-green-600 text-[8px] mt-2">●</span>
+                <span className="text-[15px] leading-[1.7] text-gray-700">
+                Finance teams don't trust what they can't see. When AI touches money, every automated decision needs to be legible, auditable, and easy to override. Built the end-to-end product experience for Coyax.ai, a B2B fintech platform automating AR/AP workflows, running discovery across 8 stakeholder sessions with finance and operations teams to map where document ingestion and approval processes broke down. That research shaped a core interaction model, human-in-the-loop escalation flows, AI confidence indicators, and automated action surfaces that made agentic processing transparent for the teams responsible for it. Shipped 23 React/TypeScript UI components, a token-based design system cutting front-end implementation time by 35%, and a live demo environment supporting 12 corporate pilots. Outcome: invoice processing time down 68%.
+
+                </span>
+              </li>
+            </ul>
+          </div>
+          
+          {/* IBM */}
+          <div className="mb-10">
+            <h3 className="text-[15px] text-gray-900 mb-1">
+              <strong>IBM, SVL</strong>, Product Designer
+            </h3>
+            <p className="text-[13px] text-gray-500 mb-4">
+              <strong>(Offer Rescinded)
+              </strong> — San Jose, CA
+            </p>
+            <ul className="space-y-3">
+              <li className="flex gap-3">
+                <span className="text-green-600 text-[8px] mt-2">●</span>
+                <span className="text-[15px] leading-[1.7] text-gray-700">
+                Selected through IBM's full hiring process for a Product Designer role at the Silicon Valley Lab. Offer rescinded prior to start date due to company-wide layoffs.
+                </span>
+              </li>
+            </ul>
+          </div>
+          
+          
           {/* CWPC */}
           <div className="mb-10">
             <h3 className="text-[15px] text-gray-900 mb-1">
               <strong>Catastrophic Wildfire Prevention Consortium (CWPC)</strong>, Product Designer
             </h3>
             <p className="text-[13px] text-gray-500 mb-4">
-              <strong>July 2025—April 2026</strong> — San Francisco, CA
+              <strong>July 2025—March 2026</strong> — San Francisco, CA
             </p>
             <ul className="space-y-3">
               <li className="flex gap-3">

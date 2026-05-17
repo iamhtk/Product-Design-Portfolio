@@ -1,4 +1,5 @@
 import {
+  Download,
   Linkedin,
   Youtube,
   Instagram,
@@ -6,6 +7,7 @@ import {
   Github,
   Figma,
 } from "lucide-react";
+import { RESUME_PDF_URL } from "../lib/resumePdfUrl";
 import { useState } from "react";
 import { ScrollToTop } from "./ScrollToTop";
 import { AnimateIn } from "./AnimateIn";
@@ -270,7 +272,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-1">
             <p className="home-hero-intro">
               Previously Designer at{" "}
-              <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br />
+              <span className="font-medium">IBM SVL, CWPC, GM, Kryptonas, TUG, BEL</span><br />
               {/* <span className="font-medium">IBM, CWPC, GM, Kryptonas, TUG, BEL</span><br /> */}
               <span className="font-medium">University of Michigan, School of Information Alumni. Go Blue!</span>
             </p>
@@ -539,6 +541,29 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
         </AnimateIn>
 
         <GitHubActivity username="iamhtk" />
+
+        <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
+          <div className="mb-12">
+            <h2 className="type-overline text-gray-400 mb-2">
+              Resume
+            </h2>
+            {/* <p className="type-body-lg text-gray-900">
+              Download a PDF of my experience.
+            </p> */}
+          </div>
+          <div className="flex justify-center">
+            <a
+              href={RESUME_PDF_URL}
+              download
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white type-body rounded-lg hover:bg-gray-700 transition-colors"
+            >
+              <Download className="w-4 h-4" />
+              Download Resume
+            </a>
+          </div>
+        </AnimateIn>
 
         {/* Recommendations Section */}
         <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
