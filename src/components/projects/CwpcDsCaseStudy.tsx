@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, type CSSProperties } from 'react';
+import { FooterCreditsRow } from '../FooterAccessibilityLink';
 import { createPortal } from 'react-dom';
 import { Facebook, Figma, Github, Instagram, Linkedin, Youtube } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
@@ -362,12 +363,12 @@ export function CwpcDsCaseStudyProject({ onBack, onProjectClick }: CwpcDsCaseStu
           className="space-y-16 mt-16 w-full min-w-0 max-w-full overflow-x-clip"
           style={{ scrollMarginTop: 'var(--nav-height, 80px)' }}
         >
-          <div className="rounded-2xl border border-white/[0.08] bg-[#232329] px-6 py-16 md:px-12 text-center">
+          {/* <div className="rounded-2xl border border-white/[0.08] bg-[#232329] px-6 py-16 md:px-12 text-center">
             <p className="text-[18px] leading-relaxed" style={{ color: '#A1A1AA' }}>
               Full case study narrative for the CWPC design system is coming soon. Use the links above for live docs,
               Storybook, and the component showcase.
             </p>
-          </div>
+          </div> */}
           <div style={{ marginTop: '80px' }}>
             <div
               style={{
@@ -399,8 +400,7 @@ export function CwpcDsCaseStudyProject({ onBack, onProjectClick }: CwpcDsCaseStu
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12" data-footer>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 pb-8 text-[13px]">
           <div className="flex flex-wrap items-center gap-2" style={{ color: '#71717A' }}>
-            <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
-            <span>© 2026</span>
+            <FooterCreditsRow />
           </div>
           <div className="flex items-center gap-3 md:gap-5">
             <a

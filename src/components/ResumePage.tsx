@@ -1,4 +1,5 @@
 import { Download, Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
+import { FooterCreditsRow } from './FooterAccessibilityLink';
 import { ScrollToTop } from './ScrollToTop';
 import { AnimateIn } from './AnimateIn';
 
@@ -145,7 +146,7 @@ export function ResumePage() {
               <li className="flex gap-3">
                 <span className="text-green-600 text-[8px] mt-2">●</span>
                 <span className="text-[15px] leading-[1.7] text-gray-700">
-                Selected through IBM's full hiring process for a Product Designer role at the Silicon Valley Lab. Offer rescinded prior to start date due to company-wide layoffs.
+                Selected through IBM's full hiring process for a Product Designer role at the Silicon Valley Lab. Offer rescinded prior to start date due to visa related issues.
                 </span>
               </li>
             </ul>
@@ -687,12 +688,7 @@ export function ResumePage() {
           data-footer
         >
           {/* Left - Copyright */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">
-              Designed & Developed by Hrithik Sanyal.
-            </span>
-            <span>© 2026</span>
-          </div>
+          <FooterCreditsRow />
 
           {/* Right - Social Links */}
           <div className="flex items-center gap-3 md:gap-5">

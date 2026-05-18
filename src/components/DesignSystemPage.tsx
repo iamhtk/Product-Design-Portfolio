@@ -11,6 +11,7 @@ import {
   Zap,
   AlignLeft,
 } from 'lucide-react';
+import { FooterCreditsRow } from './FooterAccessibilityLink';
 
 type DSSection = 'landing' | 'foundation' | 'components' | 'interactions' | 'principles';
 
@@ -35,10 +36,7 @@ function DSSiteFooter() {
         className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 pb-8 text-[13px] text-gray-500"
         data-footer
       >
-        <div className="flex flex-wrap items-center gap-2">
-          <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
-          <span>© 2026</span>
-        </div>
+        <FooterCreditsRow />
 
         <div className="flex items-center gap-3 md:gap-5">
           <a

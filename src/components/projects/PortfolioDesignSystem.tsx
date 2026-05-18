@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { FooterCreditsRow } from '../FooterAccessibilityLink';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
@@ -618,10 +619,7 @@ export function PortfolioDesignSystemProject({
           className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 pb-8"
           style={{ fontSize: dt.typography.scale.caption.size, color: dt.colors.textMuted }}
         >
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
-            <span>© 2026</span>
-          </div>
+          <FooterCreditsRow />
 
           <div className="flex items-center gap-3 md:gap-5">
             <a

@@ -19,6 +19,7 @@ import {
   isExternalCaseStudyProject,
 } from "./projects/projectNav";
 import { GitHubActivity } from "./GitHubActivity";
+import { FooterCreditsRow } from "./FooterAccessibilityLink";
 
 type HomeNavigatePage =
   | "work"
@@ -902,12 +903,7 @@ Beyond his design expertise, Hrithik is a great team player who is approachable,
           data-footer
         >
           {/* Left - Copyright */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">
-            Designed & Developed by Hrithik Sanyal.
-            </span>
-            <span>© 2026</span>
-          </div>
+          <FooterCreditsRow />
 
           {/* Right - Social Links */}
           <div className="flex items-center gap-3 md:gap-5">

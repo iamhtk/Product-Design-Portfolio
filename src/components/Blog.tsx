@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { FooterCreditsRow } from './FooterAccessibilityLink';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from './ScrollToTop';
 import { ImageWithFallback } from './figma/ImageWithFallback';
@@ -147,12 +148,7 @@ export function Blog() {
           data-footer
         >
           {/* Left - Copyright */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">
-              Designed & Developed by Hrithik Sanyal.
-            </span>
-            <span>© 2026</span>
-          </div>
+          <FooterCreditsRow />
 
           {/* Right - Social Links */}
           <div className="flex items-center gap-3 md:gap-5">

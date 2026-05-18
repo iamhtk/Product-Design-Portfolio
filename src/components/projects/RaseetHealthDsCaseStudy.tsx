@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { FooterCreditsRow } from '../FooterAccessibilityLink';
 import { createPortal } from 'react-dom';
 import {
   Facebook,
@@ -310,10 +311,7 @@ export function RaseetHealthDsCaseStudyProject({ onBack, onProjectClick }: Rasee
 
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12" data-footer>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 pb-8 text-[13px] text-gray-500">
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
-            <span>© 2026</span>
-          </div>
+          <FooterCreditsRow />
           <div className="flex items-center gap-3 md:gap-5">
             <a
               href="https://www.figma.com/@iamhtk"

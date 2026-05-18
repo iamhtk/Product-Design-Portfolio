@@ -8,6 +8,7 @@
 // ═══════════════════════════════════════════════════════════════════════════
 
 import { useEffect, useRef, useState } from 'react';
+import { FooterCreditsRow } from '../FooterAccessibilityLink';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { ScrollToTop } from '../ScrollToTop';
@@ -582,12 +583,7 @@ export function MosaicCaseProject({ onBack, onProjectClick }: MosaicCaseProjectP
         <div
           className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 pb-8 text-[13px] text-gray-500"
         >
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">
-              Designed & Developed by Hrithik Sanyal.
-            </span>
-            <span>© 2026</span>
-          </div>
+          <FooterCreditsRow />
           
           <div className="flex items-center gap-3 md:gap-5">
             <a href="https://www.figma.com/@iamhtk" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-gray-900 transition-colors" aria-label="Figma">

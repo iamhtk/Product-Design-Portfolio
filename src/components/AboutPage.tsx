@@ -1,5 +1,6 @@
 // import { useState } from 'react'; // for Me in a grid section
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma /* Sun, Trash2, X - for Me in a grid */ } from 'lucide-react';
+import { FooterCreditsRow } from './FooterAccessibilityLink';
 import { ScrollToTop } from './ScrollToTop';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { AnimateIn } from './AnimateIn';
@@ -475,12 +476,7 @@ export function AboutPage() {
           data-footer
         >
           {/* Left - Copyright */}
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="whitespace-nowrap">
-              Designed & Developed by Hrithik Sanyal.
-            </span>
-            <span>© 2026</span>
-          </div>
+          <FooterCreditsRow />
 
           {/* Right - Social Links */}
           <div className="flex items-center gap-3 md:gap-5">

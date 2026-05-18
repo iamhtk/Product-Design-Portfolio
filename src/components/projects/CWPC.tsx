@@ -1,4 +1,5 @@
 import React, { Fragment, useEffect, useRef, useState, type CSSProperties } from 'react';
+import { FooterCreditsRow } from '../FooterAccessibilityLink';
 import { createPortal } from 'react-dom';
 import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-react';
 import { Button } from '../prism/atoms/Button/Button';
@@ -555,7 +556,7 @@ const E = {
   PlaceholderImage: ({
     label,
     width = '100%',
-    height = '240px',
+    height = '400px',
     note,
   }: {
     label: string;
@@ -1382,6 +1383,9 @@ function MapPinDemo() {
 }
 
 function CaseStudyContent() {
+  const screenshotHeight = '400px';
+  const figmaAtomPairMinHeight = '520px';
+
   const sectionLabelAccent: CSSProperties = {
     display: 'inline-block',
     width: '24px',
@@ -1758,7 +1762,7 @@ function CaseStudyContent() {
             </div>
           ))}
         </div>
-        <div style={{ marginBottom: '80px' }}>
+        <div hidden style={{ marginBottom: '80px' }}>
           <p
             style={{
               fontSize: '11px',
@@ -1773,7 +1777,7 @@ function CaseStudyContent() {
           </p>
           <E.PlaceholderImage
             label="UI Audit: Before Prism"
-            height="280px"
+            height={screenshotHeight}
             note="Replace with: Screenshot from Figma showing 5 inconsistent button styles found across CWPC products"
           />
         </div>
@@ -2016,11 +2020,36 @@ function CaseStudyContent() {
           >
             FIGMA FILE STRUCTURE
           </p>
-          <E.PlaceholderImage
-            label="Figma File Structure"
-            height="240px"
-            note="Replace with: Screenshot of Figma file pages panel showing Foundation + Component pages"
-          />
+          <div
+            className="cwpc-grid-2"
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(2, 1fr)',
+              gap: '16px',
+            }}
+          >
+            {[
+              { src: '/cwpc/responsive.png', alt: 'Responsive breakpoints in Figma' },
+              { src: '/cwpc/mapped.png', alt: 'Mapped token structure in Figma' },
+              { src: '/cwpc/alias.png', alt: 'Alias tokens in Figma' },
+              { src: '/cwpc/brand.png', alt: 'Brand color tokens in Figma' },
+            ].map((image) => (
+              <img
+                key={image.src}
+                src={image.src}
+                alt={image.alt}
+                style={{
+                  width: '100%',
+                  minHeight: screenshotHeight,
+                  height: 'auto',
+                  display: 'block',
+                  objectFit: 'contain',
+                }}
+                loading="lazy"
+                decoding="async"
+              />
+            ))}
+          </div>
         </div>
         <div
           className="cwpc-grid-2"
@@ -2181,7 +2210,7 @@ function CaseStudyContent() {
             </div>
           ))}
         </div>
-        <div style={{ marginBottom: '32px' }}>
+        <div hidden style={{ marginBottom: '32px' }}>
           <p
             style={{
               fontSize: '11px',
@@ -2196,7 +2225,7 @@ function CaseStudyContent() {
           </p>
           <E.PlaceholderImage
             label="Atomic Design Diagram"
-            height="200px"
+            height={screenshotHeight}
             note="Replace with: Figma diagram showing Atom → Molecule → Organism hierarchy"
           />
         </div>
@@ -2726,9 +2755,17 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
             gridTemplateColumns: '1fr 1fr',
             gap: '16px',
             marginBottom: '32px',
+            alignItems: 'stretch',
           }}
         >
-          <div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: 0,
+              minWidth: 0,
+            }}
+          >
             <p
               style={{
                 fontSize: '11px',
@@ -2737,17 +2774,55 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.08em',
                 fontWeight: 600,
                 marginBottom: '12px',
+                flexShrink: 0,
               }}
             >
               FIGMA: BUTTON COMPONENT
             </p>
-            <E.PlaceholderImage
-              label="Button in Figma"
-              height="200px"
-              note="Replace with: Figma screenshot of Button component (node 349:75071): properties panel + all variants"
-            />
+            <div
+              className="cwpc-grid-2"
+              style={{
+                flex: 1,
+                display: 'grid',
+                gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+                gridTemplateRows: 'repeat(3, minmax(0, 1fr))',
+                gap: '12px',
+                minHeight: figmaAtomPairMinHeight,
+              }}
+            >
+              {[
+                { src: '/cwpc/Button1.png', alt: 'Button component in Figma — view 1' },
+                { src: '/cwpc/Button2.png', alt: 'Button component in Figma — view 2' },
+                { src: '/cwpc/Button3.png', alt: 'Button component in Figma — view 3' },
+                { src: '/cwpc/Button4.png', alt: 'Button component in Figma — view 4' },
+                { src: '/cwpc/Button5.png', alt: 'Button component in Figma — view 5' },
+              ].map((image) => (
+                <img
+                  key={image.src}
+                  src={image.src}
+                  alt={image.alt}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    minHeight: 0,
+                    minWidth: 0,
+                    display: 'block',
+                    objectFit: 'contain',
+                  }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ))}
+            </div>
           </div>
-          <div>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              minHeight: 0,
+              minWidth: 0,
+            }}
+          >
             <p
               style={{
                 fontSize: '11px',
@@ -2756,14 +2831,24 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
                 letterSpacing: '0.08em',
                 fontWeight: 600,
                 marginBottom: '12px',
+                flexShrink: 0,
               }}
             >
               FIGMA: INPUT COMPONENT
             </p>
-            <E.PlaceholderImage
-              label="Input in Figma"
-              height="200px"
-              note="Replace with: Figma screenshot of Input component (node 349:75243)"
+            <img
+              src="/cwpc/Input.png"
+              alt="Input component in Figma"
+              style={{
+                flex: 1,
+                width: '100%',
+                minHeight: figmaAtomPairMinHeight,
+                minWidth: 0,
+                display: 'block',
+                objectFit: 'contain',
+              }}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -3328,11 +3413,40 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
           >
             FIGMA: FORMS ORGANISM
           </p>
-          <E.PlaceholderImage
-            label="Forms Organism in Figma"
-            height="240px"
-            note="Replace with: Figma screenshot of Forms organism (node 349:75719)"
-          />
+          <div style={{ overflowX: 'auto', WebkitOverflowScrolling: 'touch' }}>
+            <div
+              style={{
+                display: 'grid',
+                gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
+                gap: '12px',
+                height: screenshotHeight,
+                minWidth: 'min(100%, 720px)',
+              }}
+            >
+              {[
+                { src: '/cwpc/forms-dialgoue.png', alt: 'Forms dialogue in Figma' },
+                { src: '/cwpc/Forms-Dialogues.png', alt: 'Forms dialogues in Figma' },
+                { src: '/cwpc/Forms-Dialogues-1.png', alt: 'Forms dialogues variant 1 in Figma' },
+                { src: '/cwpc/Forms-Dialogues-2.png', alt: 'Forms dialogues variant 2 in Figma' },
+                { src: '/cwpc/Forms.png', alt: 'Forms organism in Figma' },
+              ].map((image) => (
+                <img
+                  key={image.src}
+                  src={image.src}
+                  alt={image.alt}
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    minWidth: 0,
+                    display: 'block',
+                    objectFit: 'contain',
+                  }}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ))}
+            </div>
+          </div>
         </div>
         <div
           className="cwpc-navbar-preview min-w-0 max-w-full"
@@ -3513,10 +3627,17 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
             >
               PRISM DOCS: INTRODUCTION
             </p>
-            <E.PlaceholderImage
-              label="Prism Docs Introduction Page"
-              height="220px"
-              note="Replace with: Screenshot of localhost:5179/docs Introduction page"
+            <img
+              src="/cwpc/homepagee.png"
+              alt="Prism docs introduction page"
+              style={{
+                width: '100%',
+                height: screenshotHeight,
+                display: 'block',
+                objectFit: 'contain',
+              }}
+              loading="lazy"
+              decoding="async"
             />
           </div>
           <div>
@@ -3532,10 +3653,17 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
             >
               PRISM DOCS: BUTTON PAGE
             </p>
-            <E.PlaceholderImage
-              label="Prism Button Docs with Controls"
-              height="220px"
-              note="Replace with: Screenshot of localhost:5179/docs/atoms/button with controls visible"
+            <img
+              src="/cwpc/button-page.png"
+              alt="Prism docs button page with controls"
+              style={{
+                width: '100%',
+                height: screenshotHeight,
+                display: 'block',
+                objectFit: 'contain',
+              }}
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
@@ -3929,7 +4057,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
           </div>
         </div>
         <p style={{ fontSize: '11px', color: '#71717A', marginTop: '4px' }}>← Scroll to see more →</p>
-        <div style={{ marginBottom: '32px' }}>
+        <div hidden style={{ marginBottom: '32px' }}>
           <p
             style={{
               fontSize: '11px',
@@ -3944,7 +4072,7 @@ color: var(--color-primary-default);  /* ✅ one source of truth */
           </p>
           <E.PlaceholderImage
             label="Accessibility Before / After Comparison"
-            height="200px"
+            height={screenshotHeight}
             note="Replace with: Side-by-side showing old CWPC element (2.8:1 FAIL) vs new Prism version (4.8:1 PASS)"
           />
         </div>
@@ -4127,10 +4255,16 @@ import { Card } from './components/prism/organisms/Card/Card'
           >
             TOKEN FILE: VS CODE
           </p>
-          <E.PlaceholderImage
-            label="cwpc-tokens.css open in VS Code"
-            height="200px"
-            note="Replace with: Screenshot of cwpc-tokens.css showing CSS custom properties"
+          <img
+            src="/cwpc/tokens-css.png"
+            alt="ember-tokens.css open in VS Code showing CSS custom properties"
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+            }}
+            loading="lazy"
+            decoding="async"
           />
         </div>
         <div style={{ fontSize: '13px', fontWeight: 600, color: '#F5F5F7', marginBottom: '16px' }}>
@@ -5000,8 +5134,7 @@ export function EmberDesignSystemProject({
       <div className="max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12" data-footer>
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pt-12 pb-8 text-[13px]">
           <div className="flex flex-wrap items-center gap-2" style={{ color: '#71717A' }}>
-            <span className="whitespace-nowrap">Designed & Developed by Hrithik Sanyal.</span>
-            <span>© 2026</span>
+            <FooterCreditsRow />
           </div>
           <div className="flex items-center gap-3 md:gap-5">
             <a
