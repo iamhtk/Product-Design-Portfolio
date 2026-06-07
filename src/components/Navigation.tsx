@@ -5,6 +5,7 @@ import {
   trackOutboundLink,
   trackEmailClick,
   trackMobileMenuOpen,
+  trackSocialLinkClick,
 } from '../services/analytics';
 import { allowBrowserDefaultNav } from '../lib/spaLink';
 import { SITE_CONTENT_PATHS } from '../sitePaths';
@@ -198,7 +199,10 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                   <a
                     key={social.label}
                     href={social.url}
-                    onClick={() => trackOutboundLink(social.label, social.url)}
+                    onClick={() => {
+                      trackOutboundLink(social.label, social.url);
+                      trackSocialLinkClick(social.label, social.url);
+                    }}
                     className="block text-[15px] text-gray-500 hover:text-gray-900"
                   >
                     {social.label}

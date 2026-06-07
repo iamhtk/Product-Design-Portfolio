@@ -9,6 +9,7 @@ import {
   handleProjectCaseStudyAnchorClick,
   isExternalCaseStudyProject,
 } from './projectNav';
+import { trackExploreMoreProjectClicked } from '../../services/analytics';
 
 export interface ExploreMoreSectionProps {
   currentProjectId: string;
@@ -65,9 +66,10 @@ export function ExploreMoreSection({
                   {...(isExternalCaseStudyProject(prevProject.id)
                     ? { target: '_blank' as const, rel: 'noopener noreferrer' as const }
                     : {})}
-                  onClick={(e) =>
-                    handleProjectCaseStudyAnchorClick(e, prevProject.id, onProjectClick)
-                  }
+                  onClick={(e) => {
+                    trackExploreMoreProjectClicked(currentProjectId, prevProject.id, 'previous');
+                    handleProjectCaseStudyAnchorClick(e, prevProject.id, onProjectClick);
+                  }}
                   className="p-0 m-0 border-0 bg-transparent text-left cursor-pointer block w-full max-w-[280px] group transition-all duration-300 ease-out hover:-translate-y-1 no-underline text-inherit rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2"
                 >
                   <div className="p-0 h-full flex flex-col transition-all duration-300 ease-out">
@@ -199,9 +201,10 @@ export function ExploreMoreSection({
                   {...(isExternalCaseStudyProject(nextProject.id)
                     ? { target: '_blank' as const, rel: 'noopener noreferrer' as const }
                     : {})}
-                  onClick={(e) =>
-                    handleProjectCaseStudyAnchorClick(e, nextProject.id, onProjectClick)
-                  }
+                  onClick={(e) => {
+                    trackExploreMoreProjectClicked(currentProjectId, nextProject.id, 'next');
+                    handleProjectCaseStudyAnchorClick(e, nextProject.id, onProjectClick);
+                  }}
                   className={`p-0 m-0 border-0 bg-transparent w-full max-w-[280px] group transition-all duration-300 ease-out no-underline text-inherit rounded-sm outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2 ${
                     isProjectEnabled(nextProject.id)
                       ? 'cursor-pointer hover:-translate-y-1'

@@ -4,6 +4,7 @@ import { Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 'lucide-re
 import { ScrollToTop } from './ScrollToTop';
 import { ImageWithFallback } from './figma/ImageWithFallback';
 import { AnimateIn } from './AnimateIn';
+import { trackBlogPostClick } from '../services/analytics';
 
 export function Blog() {
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -107,6 +108,7 @@ export function Blog() {
                   href={post.link}
                   target="_blank"
                   rel="noopener noreferrer"
+                  onClick={() => trackBlogPostClick(post.title, post.link)}
                   className="inline-flex items-center text-[15px] text-gray-900 hover:text-gray-600 transition-colors group"
                 >
                   <span>Read on Medium</span>
@@ -126,6 +128,7 @@ export function Blog() {
                 href={post.link}
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackBlogPostClick(post.title, post.link)}
                 className="w-full aspect-[4/3] rounded-2xl overflow-hidden bg-gray-100 block cursor-pointer hover:opacity-90 transition-opacity"
               >
                 <ImageWithFallback 

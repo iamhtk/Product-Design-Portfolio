@@ -2,6 +2,7 @@ import { Download, Linkedin, Youtube, Instagram, Facebook, Github, Figma } from 
 import { FooterCreditsRow } from './FooterAccessibilityLink';
 import { ScrollToTop } from './ScrollToTop';
 import { AnimateIn } from './AnimateIn';
+import { trackResumeDownload, trackCertificationClick, trackResearchPublicationClick } from '../services/analytics';
 
 // Set your resume PDF URL here (e.g. "/resume.pdf" if file is in public folder, or a full URL)
 const RESUME_PDF_URL =
@@ -11,6 +12,8 @@ export function ResumePage() {
   const handleCertClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const href = e.currentTarget.getAttribute('href');
     if (href && href !== '#') {
+      const certName = e.currentTarget.textContent?.replace(/^•\s*/, '').trim() ?? '';
+      trackCertificationClick(certName, href);
       e.preventDefault();
       window.open(href, '_blank', 'noopener,noreferrer');
     }
@@ -40,6 +43,7 @@ export function ResumePage() {
             download
             target="_blank"
             rel="noopener noreferrer"
+            onClick={trackResumeDownload}
             className="hidden md:flex items-center gap-2 px-5 py-2.5 bg-gray-900 text-white type-body rounded-lg hover:bg-gray-700 transition-colors"
           >
             <Download className="w-4 h-4" />
@@ -53,6 +57,7 @@ export function ResumePage() {
           download
           target="_blank"
           rel="noopener noreferrer"
+          onClick={trackResumeDownload}
           className="md:hidden w-full flex items-center justify-center gap-2 px-5 py-3 bg-gray-900 text-white type-body rounded-lg hover:bg-gray-700 transition-colors mb-12"
         >
           <Download className="w-4 h-4" />
@@ -545,19 +550,21 @@ export function ResumePage() {
 
           <div className="space-y-4 mb-6">
             <div className="flex flex-wrap gap-4">
-              <a 
-                href="https://ieeexplore.ieee.org/author/37088553575" 
+              <a
+                href="https://ieeexplore.ieee.org/author/37088553575"
                 className="text-blue-600 hover:text-blue-800 text-[15px] underline"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackResearchPublicationClick('IEEE Xplore Profile', 'https://ieeexplore.ieee.org/author/37088553575')}
               >
                 IEEE Xplore Profile
               </a>
-              <a 
-                href="https://link.springer.com/search?dc.creator=Hrithik%20Sanyal" 
+              <a
+                href="https://link.springer.com/search?dc.creator=Hrithik%20Sanyal"
                 className="text-blue-600 hover:text-blue-800 text-[15px] underline"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => trackResearchPublicationClick('Springer Profile', 'https://link.springer.com/search?dc.creator=Hrithik%20Sanyal')}
               >
                 Springer Profile
               </a>

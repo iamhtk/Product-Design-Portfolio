@@ -4,6 +4,7 @@ import {
   handleProjectCaseStudyAnchorClick,
   isExternalCaseStudyProject,
 } from './projectNav';
+import { trackAdjacentProjectNavigated } from '../../services/analytics';
 
 interface AdjacentProjectsProps {
   currentProjectId: string;
@@ -34,9 +35,10 @@ export function AdjacentProjects({ currentProjectId, onProjectClick }: AdjacentP
               {...(isExternalCaseStudyProject(prevProject.id)
                 ? { target: '_blank' as const, rel: 'noopener noreferrer' as const }
                 : {})}
-              onClick={(e) =>
-                handleProjectCaseStudyAnchorClick(e, prevProject.id, onProjectClick)
-              }
+              onClick={(e) => {
+                trackAdjacentProjectNavigated(currentProjectId, prevProject.id, 'previous');
+                handleProjectCaseStudyAnchorClick(e, prevProject.id, onProjectClick);
+              }}
               className={`${linkClass} text-left`}
             >
               ← {prevProject.title}
@@ -60,9 +62,10 @@ export function AdjacentProjects({ currentProjectId, onProjectClick }: AdjacentP
               {...(isExternalCaseStudyProject(nextProject.id)
                 ? { target: '_blank' as const, rel: 'noopener noreferrer' as const }
                 : {})}
-              onClick={(e) =>
-                handleProjectCaseStudyAnchorClick(e, nextProject.id, onProjectClick)
-              }
+              onClick={(e) => {
+                trackAdjacentProjectNavigated(currentProjectId, nextProject.id, 'next');
+                handleProjectCaseStudyAnchorClick(e, nextProject.id, onProjectClick);
+              }}
               className={`${linkClass} text-right ml-auto inline-block`}
             >
               {nextProject.title} →
