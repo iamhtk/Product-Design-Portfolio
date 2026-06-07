@@ -682,8 +682,9 @@
 
 
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import ReactGA from 'react-ga4';
+import { useNavigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { HomePage } from './components/HomePage';
 import { AboutPage } from './components/AboutPage';
@@ -776,19 +777,10 @@ function buildPath(page: Page, projectId: string | null): string {
   return ROUTE_PATHS[page as Exclude<Page, 'project'>];
 }
 
-function pushRoute(page: Page, projectId: string | null) {
-  const path = buildPath(page, projectId);
-  window.history.pushState({ page, projectId }, '', path + window.location.search);
-}
-
-function replaceRoute(page: Page, projectId: string | null) {
-  const path = buildPath(page, projectId);
-  window.history.replaceState({ page, projectId }, '', path + window.location.search);
-}
-
 export const EXPAND_CASE_STUDY_PREFIX = 'portfolio_expand_case_study_';
 
 function App() {
+  const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<Page>('work');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const prevNavigationRef = useRef<{ page: Page; projectId: string | null } | null>(null);
@@ -796,6 +788,22 @@ function App() {
   const didRestoreScroll = useRef(false);
   const pageEnterTime = useRef<number>(Date.now());
   const scrollDepthReached = useRef<Set<number>>(new Set());
+
+  const pushRoute = useCallback(
+    (page: Page, projectId: string | null) => {
+      const path = buildPath(page, projectId);
+      navigate(path + window.location.search);
+    },
+    [navigate],
+  );
+
+  const replaceRoute = useCallback(
+    (page: Page, projectId: string | null) => {
+      const path = buildPath(page, projectId);
+      navigate(path + window.location.search, { replace: true });
+    },
+    [navigate],
+  );
 
   usePageSeo(currentPage, selectedProjectId);
 
@@ -830,7 +838,7 @@ function App() {
     }
     window.addEventListener('popstate', handlePopState);
     return () => window.removeEventListener('popstate', handlePopState);
-  }, []);
+  }, [replaceRoute]);
 
   useEffect(() => {
     let timeout: ReturnType<typeof setTimeout> | null = null;
@@ -855,7 +863,7 @@ function App() {
       setSelectedProjectId(null);
       replaceRoute('work', null);
     }
-  }, [currentPage, selectedProjectId]);
+  }, [currentPage, selectedProjectId, replaceRoute]);
 
   useEffect(() => {
     if (didRestoreScroll.current) return;

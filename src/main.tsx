@@ -1,7 +1,9 @@
 
   import { createRoot } from "react-dom/client";
+  import { BrowserRouter } from "react-router-dom";
   import posthog from 'posthog-js';
   import App from "./App.tsx";
+  import { PostHogPageViewTracker } from "./components/PostHogPageViewTracker.tsx";
   import "./index.css";
   import "./styles/globals.css";
   import "./styles/type-overrides.css";
@@ -12,7 +14,10 @@
     capture_exceptions: true,
   });
 
-  
-
-  createRoot(document.getElementById("root")!).render(<App />);
+  createRoot(document.getElementById("root")!).render(
+    <BrowserRouter>
+      <PostHogPageViewTracker />
+      <App />
+    </BrowserRouter>,
+  );
   

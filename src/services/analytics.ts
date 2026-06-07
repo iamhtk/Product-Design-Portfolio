@@ -5,6 +5,10 @@ export function trackPageView(path: string) {
   ReactGA.send({ hitType: 'pageview', page: path });
 }
 
+export function trackPostHogPageView(url: string) {
+  posthog.capture('$pageview', { $current_url: url });
+}
+
 export function trackNavClick(label: string) {
   ReactGA.event({
     category: 'Navigation',
