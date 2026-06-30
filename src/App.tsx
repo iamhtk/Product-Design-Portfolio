@@ -682,20 +682,20 @@
 
 
 
-import { useState, useEffect, useRef, useCallback } from 'react';
+import { useState, useEffect, useRef, useCallback, lazy, Suspense } from 'react';
 // import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
-import { HomePage } from './components/HomePage';
-import { WorkPage } from './components/WorkPage';
-import { AboutPage } from './components/AboutPage';
-import { FriendsPage } from './components/FriendsPage';
-import { ResumePage } from './components/ResumePage';
+const HomePage = lazy(() => import('./components/HomePage').then(m => ({ default: m.HomePage })));
+const WorkPage = lazy(() => import('./components/WorkPage').then(m => ({ default: m.WorkPage })));
+const AboutPage = lazy(() => import('./components/AboutPage').then(m => ({ default: m.AboutPage })));
+const FriendsPage = lazy(() => import('./components/FriendsPage').then(m => ({ default: m.FriendsPage })));
+const ResumePage = lazy(() => import('./components/ResumePage').then(m => ({ default: m.ResumePage })));
+const Blog = lazy(() => import('./components/Blog').then(m => ({ default: m.Blog })));
+const FavoritesPage = lazy(() => import('./components/FavoritesPage').then(m => ({ default: m.FavoritesPage })));
+const AnalyticsDashboard = lazy(() => import('./components/AnalyticsDashboard').then(m => ({ default: m.AnalyticsDashboard })));
 import { projectComponents } from './components/projects';
 import { PROJECT_ENABLED, PROJECT_SLUGS } from './components/projects/projectOrder';
-import { Blog } from './components/Blog';
-import { FavoritesPage } from './components/FavoritesPage';
-import { AnalyticsDashboard } from './components/AnalyticsDashboard';
 import { LightboxProvider } from './components/Lightbox';
 import {
   trackPageView,
@@ -986,6 +986,7 @@ function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
 
       <main>
+      <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
       <div className="page-transition">
         {currentPage === 'home' && (
           <HomePage onProjectClick={handleProjectClick} onNavigate={handleNavigate} />
@@ -1048,6 +1049,7 @@ function App() {
           );
         })()}
       </div>
+      </Suspense>
       </main>
     </div>
     </LightboxProvider>
