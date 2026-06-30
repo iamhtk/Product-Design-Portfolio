@@ -683,7 +683,7 @@
 
 
 import { useState, useEffect, useRef, useCallback } from 'react';
-import ReactGA from 'react-ga4';
+// import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { HomePage } from './components/HomePage';
@@ -709,7 +709,7 @@ import {
 import { usePageSeo } from './seo/usePageSeo';
 import { WORK_PAGE_ENABLED } from './sitePaths';
 
-ReactGA.initialize('G-T6YVTT985T');
+// ReactGA.initialize('G-T6YVTT985T');
 
 type Page =
   | 'home'
@@ -985,6 +985,7 @@ function App() {
     <div className="min-h-screen overflow-x-hidden">
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
 
+      <main>
       <div className="page-transition">
         {currentPage === 'home' && (
           <HomePage onProjectClick={handleProjectClick} onNavigate={handleNavigate} />
@@ -1047,6 +1048,7 @@ function App() {
           );
         })()}
       </div>
+      </main>
     </div>
     </LightboxProvider>
   );

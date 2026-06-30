@@ -63,18 +63,18 @@ export const CALMIRING_EXTERNAL_URL = 'https://beautiful-leader-fa9.notion.site/
 
 /** Project tile media for Explore more tiles (mirrors HomePage main title images). */
 export const PROJECT_TILE_MEDIA: Record<string, { image: string; bgColor: string }> = {
-  CWPC: { image: '/DS/prism-tile.png', bgColor: '#6366F1' },
-  CWPC_DS: { image: '/main_title/main_cwpc.png', bgColor: '#6366F1' },
-  AutomotiveUX_GM: { image: '/main_title/main_gm.png', bgColor: '#f5f5f7' },
-  RaseetHealth: { image: '/main_title/main_raseet.png', bgColor: '#4A90E2' },
-  RaseetHealth_DS: { image: '/main_title/main_raseet.png', bgColor: '#4A90E2' },
-  CoyaxDesignSystem: { image: '/coyax/DS/main-tile-silver.png', bgColor: '#e7e5e4' },
-  BMW: { image: '/main_title/main_bmw.png', bgColor: '#e8f4f8' },
+  CWPC: { image: '/DS/prism-tile.webp', bgColor: '#6366F1' },
+  CWPC_DS: { image: '/main_title/main_cwpc.webp', bgColor: '#6366F1' },
+  AutomotiveUX_GM: { image: '/main_title/main_gm.webp', bgColor: '#f5f5f7' },
+  RaseetHealth: { image: '/main_title/main_raseet.webp', bgColor: '#4A90E2' },
+  RaseetHealth_DS: { image: '/main_title/main_raseet.webp', bgColor: '#4A90E2' },
+  CoyaxDesignSystem: { image: '/coyax/DS/main-tile-silver.webp', bgColor: '#e7e5e4' },
+  BMW: { image: '/main_title/main_bmw.webp', bgColor: '#e8f4f8' },
   PortfolioDesignSystem: {
     image: '/miniapps/f3.png',
     bgColor: designTokens.colors.imagePlaceholder,
   },
-  CalmiRing: { image: '/main_title/main_calmi.png', bgColor: '#f5f5f7' },
+  CalmiRing: { image: '/main_title/main_calmi.webp', bgColor: '#f5f5f7' },
   jobgenius: { image: '/main_title/main_jobgenius.png', bgColor: '#f5f5f7' },
   bound: { image: '/main_title/main_bound.png', bgColor: '#fff5f7' },
   WeddingBliss: { image: '/main_title/main_weddingbliss.png', bgColor: '#f5f5f7' },

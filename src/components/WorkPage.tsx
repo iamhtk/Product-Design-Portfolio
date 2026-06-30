@@ -174,7 +174,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
       ],
       readTime: '12 minute read →',
       bgColor: '#f5f5f7',
-      image: '/main_title/main_gm.png',
+      image: '/main_title/main_gm.webp',
     },
     {
       id: 'RaseetHealth',
@@ -189,7 +189,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
       ],
       readTime: '16 minute read →',
       bgColor: '#4A90E2',
-      image: '/main_title/main_raseet.png',
+      image: '/main_title/main_raseet.webp',
     },
     {
       id: 'BMW',
@@ -197,7 +197,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
       company: 'AUTOMOTIVE UX DESIGN',
       readTime: '8 MINUTE READ →',
       bgColor: '#e8f4f8',
-      image: '/main_title/main_bmw.png',
+      image: '/main_title/main_bmw.webp',
     },
     {
       id: 'CalmiRing',
@@ -205,7 +205,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
       company: 'IOT | END-TO-END UX DESIGN | UX RESEARCH',
       readTime: '10 MINUTE READ →',
       bgColor: '#f5f5f7',
-      image: '/main_title/main_calmi.png',
+      image: '/main_title/main_calmi.webp',
     },
   ];
 
@@ -223,7 +223,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
       ],
       readTime: '10 minute read',
       bgColor: '#e7e5e4',
-      image: '/coyax/DS/main-tile-silver.png',
+      image: '/coyax/DS/main-tile-silver.webp',
     },
     {
       id: 'CWPC',
@@ -238,7 +238,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
       ],
       readTime: '10 minute read →',
       bgColor: '#6366F1',
-      image: '/DS/prism-tile.png',
+      image: '/DS/prism-tile.webp',
     },
     {
       id: 'RaseetHealth_DS',
@@ -253,7 +253,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
       ],
       readTime: '12 minute read →',
       bgColor: '#4A90E2',
-      image: '/DS/medscope-tile-2.png',
+      image: '/DS/medscope-tile-2.webp',
     },
   ];
 
@@ -361,7 +361,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
               <div className={MINI_APP_TILE_SHELL}>
                 <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                   <ImageWithFallback
-                    src="/hackathon/framecut/Tiles.png"
+                    src="/hackathon/framecut/Tiles.webp"
                     alt="Framecut"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                   />
@@ -397,7 +397,7 @@ export function WorkPage({ onProjectClick }: WorkPageProps) {
               <div className={MINI_APP_TILE_SHELL}>
                 <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                   <ImageWithFallback
-                    src="/hackathon/ghost/ghost-app.png"
+                    src="/hackathon/ghost/ghost-app.webp"
                     alt="Ghost"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                   />

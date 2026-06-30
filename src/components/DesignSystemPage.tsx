@@ -601,7 +601,7 @@ function DSComponents() {
       <div className="mb-10">
         <p className="text-[11px] tracking-widest uppercase text-gray-400 mt-16 mb-6">SECTION LABEL</p>
         <div className="border border-black/10 rounded-[var(--radius-card)] p-8 mb-4">
-          <h2 className="type-overline text-gray-400">DESIGN x ENGINEERING</h2>
+          <h2 className="type-overline text-gray-600">DESIGN x ENGINEERING</h2>
         </div>
       </div>
 
@@ -627,8 +627,8 @@ function DSComponents() {
         <p className="text-[11px] tracking-widest uppercase text-gray-400 mt-16 mb-6">OVERLINE / SECTION IDENTIFIER</p>
         <div className="border border-black/10 rounded-[var(--radius-card)] p-8 mb-4">
           <div className="space-y-4">
-          <p className="text-[11px] tracking-widest uppercase text-gray-400">SELECTED WORK</p>
-          <p className="text-[11px] tracking-widest uppercase text-gray-400">DESIGN x ENGINEERING</p>
+          <p className="text-[11px] tracking-widest uppercase text-gray-600">SELECTED WORK</p>
+          <p className="text-[11px] tracking-widest uppercase text-gray-600">DESIGN x ENGINEERING</p>
           <p className="text-[11px] tracking-widest uppercase text-gray-400">SIDE PROJECTS — MINI APPS</p>
           </div>
         </div>

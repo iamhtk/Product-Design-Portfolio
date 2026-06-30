@@ -220,7 +220,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
       ],
       readTime: "10 minute read",
       bgColor: "#e7e5e4",
-      image: "/coyax/DS/main-tile-silver.png",
+      image: "/coyax/DS/main-tile-silver.webp",
     },
     {
       id: "AutomotiveUX_GM",
@@ -235,7 +235,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
       ],
       readTime: "12 minute read →",
       bgColor: "#f5f5f7",
-      image: "/main_title/main_gm.png",
+      image: "/main_title/main_gm.webp",
     },
     {
       id: "RaseetHealth",
@@ -250,7 +250,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
       ],
       readTime: "16 minute read →",
       bgColor: "#4A90E2",
-      image: "/main_title/main_raseet.png",
+      image: "/main_title/main_raseet.webp",
     },
     // {
     //   id: "jobgenius",
@@ -284,7 +284,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
       ],
       readTime: "10 minute read →",
       bgColor: "#6366F1",
-      image: "/DS/prism-tile.png",
+      image: "/DS/prism-tile.webp",
     },
     {
       id: "RaseetHealth_DS",
@@ -299,7 +299,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
       ],
       readTime: "12 minute read →",
       bgColor: "#4A90E2",
-      image: "/DS/medscope-tile-2.png",
+      image: "/DS/medscope-tile-2.webp",
     },
   ];
 
@@ -403,7 +403,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
               <div className={MINI_APP_TILE_SHELL}>
                 <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                   <ImageWithFallback
-                    src="/hackathon/framecut/Tiles.png"
+                    src="/hackathon/framecut/Tiles.webp"
                     alt="Ghost — UX intelligence platform"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                   />
@@ -439,7 +439,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
               <div className={MINI_APP_TILE_SHELL}>
                 <div className="mb-4 w-full flex-shrink-0 overflow-hidden bg-[#f5f5f7]" style={{ aspectRatio: '4 / 3' }}>
                   <ImageWithFallback
-                    src="/hackathon/ghost/ghost-app.png"
+                    src="/hackathon/ghost/ghost-app.webp"
                     alt="Ghost — UX intelligence platform"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ease-out"
                   />
@@ -661,7 +661,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
               </div>
               <div className="flex items-center gap-4">
                 <img
-                  src="/recommendations/IMG_E1850.JPG"
+                  src="/recommendations/IMG_E1850.webp"
                   alt="Jessica Allen "
                   className="w-12 h-12 rounded-full object-cover"
                 />

@@ -1,8 +1,8 @@
-import ReactGA from 'react-ga4';
+// import ReactGA from 'react-ga4';
 import posthog from 'posthog-js';
 
 export function trackPageView(path: string) {
-  ReactGA.send({ hitType: 'pageview', page: path });
+  // ReactGA.send({ hitType: 'pageview', page: path });
 }
 
 export function trackPostHogPageView(url: string) {
@@ -10,38 +10,38 @@ export function trackPostHogPageView(url: string) {
 }
 
 export function trackNavClick(label: string) {
-  ReactGA.event({
-    category: 'Navigation',
-    action: 'nav_click',
-    label,
-  });
+  // ReactGA.event({
+  //   category: 'Navigation',
+  //   action: 'nav_click',
+  //   label,
+  // });
   posthog.capture('nav_clicked', { page: label });
 }
 
 export function trackProjectOpen(projectId: string) {
-  ReactGA.event({
-    category: 'Projects',
-    action: 'project_open',
-    label: projectId,
-  });
+  // ReactGA.event({
+  //   category: 'Projects',
+  //   action: 'project_open',
+  //   label: projectId,
+  // });
   posthog.capture('project_opened', { project_id: projectId });
 }
 
 export function trackProjectBack(projectId: string) {
-  ReactGA.event({
-    category: 'Projects',
-    action: 'project_back',
-    label: projectId,
-  });
+  // ReactGA.event({
+  //   category: 'Projects',
+  //   action: 'project_back',
+  //   label: projectId,
+  // });
   posthog.capture('project_back_clicked', { project_id: projectId });
 }
 
 export function trackResumeView() {
-  ReactGA.event({
-    category: 'Resume',
-    action: 'resume_view',
-    label: 'Resume page opened',
-  });
+  // ReactGA.event({
+  //   category: 'Resume',
+  //   action: 'resume_view',
+  //   label: 'Resume page opened',
+  // });
   posthog.capture('resume_viewed');
 }
 
@@ -66,57 +66,57 @@ export function trackResumeDownload() {
 }
 
 export function trackOutboundLink(label: string, url: string) {
-  ReactGA.event({
-    category: 'Outbound',
-    action: 'outbound_click',
-    label: `${label} - ${url}`,
-  });
+  // ReactGA.event({
+  //   category: 'Outbound',
+  //   action: 'outbound_click',
+  //   label: `${label} - ${url}`,
+  // });
   posthog.capture('outbound_link_clicked', { link_label: label, url });
 }
 
 export function trackEmailClick() {
-  ReactGA.event({
-    category: 'Contact',
-    action: 'email_click',
-    label: 'sanyalhrithik@gmail.com',
-  });
+  // ReactGA.event({
+  //   category: 'Contact',
+  //   action: 'email_click',
+  //   label: 'sanyalhrithik@gmail.com',
+  // });
   posthog.capture('email_clicked');
 }
 
 export function trackMobileMenuOpen() {
-  ReactGA.event({
-    category: 'Navigation',
-    action: 'mobile_menu_open',
-  });
+  // ReactGA.event({
+  //   category: 'Navigation',
+  //   action: 'mobile_menu_open',
+  // });
   posthog.capture('mobile_menu_opened');
 }
 
 export function trackScrollDepth(page: string, depth: 25 | 50 | 75 | 100) {
-  ReactGA.event({
-    category: 'Engagement',
-    action: 'scroll_depth',
-    label: `${page} - ${depth}%`,
-    value: depth,
-  });
+  // ReactGA.event({
+  //   category: 'Engagement',
+  //   action: 'scroll_depth',
+  //   label: `${page} - ${depth}%`,
+  //   value: depth,
+  // });
   posthog.capture('scroll_depth_reached', { page, depth });
 }
 
 export function trackTimeOnPage(page: string, seconds: number) {
-  ReactGA.event({
-    category: 'Engagement',
-    action: 'time_on_page',
-    label: page,
-    value: seconds,
-  });
+  // ReactGA.event({
+  //   category: 'Engagement',
+  //   action: 'time_on_page',
+  //   label: page,
+  //   value: seconds,
+  // });
   posthog.capture('time_on_page', { page, seconds });
 }
 
 export function track404(path: string) {
-  ReactGA.event({
-    category: 'Errors',
-    action: 'page_not_found',
-    label: path,
-  });
+  // ReactGA.event({
+  //   category: 'Errors',
+  //   action: 'page_not_found',
+  //   label: path,
+  // });
   posthog.capture('page_not_found', { path });
 }
 

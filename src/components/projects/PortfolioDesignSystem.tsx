@@ -465,7 +465,7 @@ export function PortfolioDesignSystemProject({
 
             <div style={componentCell}>
               <p className={`${sectionLabelClass()} mb-4`}>SECTION LABEL</p>
-              <h2 className="type-overline text-gray-400">DESIGN x ENGINEERING</h2>
+              <h2 className="type-overline text-gray-600">DESIGN x ENGINEERING</h2>
             </div>
 
             <div style={{ ...componentCell, gridColumn: '1 / -1' }}>
