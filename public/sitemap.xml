@@ -56,6 +56,11 @@
     <priority>0.85</priority>
   </url>
   <url>
+    <loc>https://hrithiksanyal.com/coyax-design-system</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+  <url>
     <loc>https://hrithiksanyal.com/bmw-idrive-redesign</loc>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>

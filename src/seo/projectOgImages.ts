@@ -8,6 +8,7 @@ const PROJECT_OG_PATH_BY_ID: Record<string, string> = {
   AutomotiveUX_GM: '/og/projects/automotive-ux-cadillac-escalade.jpg',
   RaseetHealth: '/og/projects/raseet-health.jpg',
   RaseetHealth_DS: '/og/projects/raseet-health-ds-case-study.jpg',
+  CoyaxDesignSystem: '/og/projects/coyax-design-system.jpg',
   BMW: '/og/projects/bmw-idrive-redesign.jpg',
   PortfolioDesignSystem: '/og/projects/portfolio-design-system.jpg',
   CalmiRing: '/og/projects/calmiring.jpg',

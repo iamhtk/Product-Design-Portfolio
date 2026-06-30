@@ -687,6 +687,7 @@ import ReactGA from 'react-ga4';
 import { useNavigate } from 'react-router-dom';
 import { Navigation } from './components/Navigation';
 import { HomePage } from './components/HomePage';
+import { WorkPage } from './components/WorkPage';
 import { AboutPage } from './components/AboutPage';
 import { FriendsPage } from './components/FriendsPage';
 import { ResumePage } from './components/ResumePage';
@@ -706,10 +707,12 @@ import {
   track404,
 } from './services/analytics';
 import { usePageSeo } from './seo/usePageSeo';
+import { WORK_PAGE_ENABLED } from './sitePaths';
 
 ReactGA.initialize('G-T6YVTT985T');
 
 type Page =
+  | 'home'
   | 'work'
   | 'about'
   | 'friends'
@@ -723,7 +726,8 @@ const VALID_PROJECT_IDS = Object.keys(projectComponents);
 const SCROLL_RESTORE_KEY = 'portfolio_scroll_restore';
 
 const ROUTE_PATHS: Record<Exclude<Page, 'project'>, string> = {
-  work: '/',
+  home: '/',
+  work: '/work',
   about: '/about-me',
   friends: '/friends',
   resume: '/resume-experience',
@@ -733,7 +737,8 @@ const ROUTE_PATHS: Record<Exclude<Page, 'project'>, string> = {
 };
 
 const PATH_TO_PAGE: Record<string, Page> = {
-  '/': 'work',
+  '/': 'home',
+  '/work': 'work',
   '/about-me': 'about',
   '/friends': 'friends',
   '/resume-experience': 'resume',
@@ -752,21 +757,22 @@ function getProjectIdFromSegment(segment: string): string | null {
 
 function getRouteFromPath(): { page: Page; projectId: string | null } {
   const path = window.location.pathname.toLowerCase().replace(/\/$/, '') || '/';
-  if (path === '/') return { page: 'work', projectId: null };
+  if (path === '/') return { page: 'home', projectId: null };
+  if (path === '/work' && !WORK_PAGE_ENABLED) return { page: 'home', projectId: null };
   const page = PATH_TO_PAGE[path];
   if (page) return { page, projectId: null };
   if (path.startsWith('/project/')) {
     const segment = path.slice(9);
     const projectId = getProjectIdFromSegment(segment);
     if (projectId) return { page: 'project', projectId };
-    return { page: 'work', projectId: null };
+    return { page: 'home', projectId: null };
   }
   const segment = path.slice(1);
   if (segment && !segment.includes('/')) {
     const projectId = getProjectIdFromSegment(segment);
     if (projectId) return { page: 'project', projectId };
   }
-  return { page: 'work', projectId: null };
+  return { page: 'home', projectId: null };
 }
 
 function buildPath(page: Page, projectId: string | null): string {
@@ -781,7 +787,7 @@ export const EXPAND_CASE_STUDY_PREFIX = 'portfolio_expand_case_study_';
 
 function App() {
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState<Page>('work');
+  const [currentPage, setCurrentPage] = useState<Page>('home');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const prevNavigationRef = useRef<{ page: Page; projectId: string | null } | null>(null);
   const isInitialMount = useRef(true);
@@ -859,11 +865,19 @@ function App() {
 
   useEffect(() => {
     if (currentPage === 'project' && selectedProjectId && PROJECT_ENABLED[selectedProjectId] === false) {
-      setCurrentPage('work');
+      setCurrentPage('home');
       setSelectedProjectId(null);
-      replaceRoute('work', null);
+      replaceRoute('home', null);
     }
   }, [currentPage, selectedProjectId, replaceRoute]);
+
+  useEffect(() => {
+    if (!WORK_PAGE_ENABLED && currentPage === 'work') {
+      setCurrentPage('home');
+      setSelectedProjectId(null);
+      replaceRoute('home', null);
+    }
+  }, [currentPage, replaceRoute]);
 
   useEffect(() => {
     if (didRestoreScroll.current) return;
@@ -937,6 +951,9 @@ function App() {
   }, []);
 
   const handleNavigate = (page: Exclude<Page, 'project'>) => {
+    if (page === 'work' && !WORK_PAGE_ENABLED) {
+      page = 'home';
+    }
     if (page === currentPage) return;
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     setCurrentPage(page);
@@ -955,9 +972,10 @@ function App() {
   const handleBackToWork = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
     if (selectedProjectId) trackProjectBack(selectedProjectId);
-    setCurrentPage('work');
+    const destination: Exclude<Page, 'project'> = WORK_PAGE_ENABLED ? 'work' : 'home';
+    setCurrentPage(destination);
     setSelectedProjectId(null);
-    pushRoute('work', null);
+    pushRoute(destination, null);
   };
 
   const lightboxEnabled = currentPage === 'project';
@@ -968,8 +986,11 @@ function App() {
       <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
 
       <div className="page-transition">
-        {currentPage === 'work' && (
+        {currentPage === 'home' && (
           <HomePage onProjectClick={handleProjectClick} onNavigate={handleNavigate} />
+        )}
+        {WORK_PAGE_ENABLED && currentPage === 'work' && (
+          <WorkPage onProjectClick={handleProjectClick} />
         )}
         {currentPage === 'about' && <AboutPage />}
         {currentPage === 'friends' && <FriendsPage />}

@@ -22,26 +22,34 @@ import { GitHubActivity } from "./GitHubActivity";
 import { FooterCreditsRow } from "./FooterAccessibilityLink";
 
 type HomeNavigatePage =
-  | "work"
-  | "about"
-  | "friends"
-  | "resume"
-  | "favorites"
-  | "blog"
-  | "analytics";
+  | 'home'
+  | 'work'
+  | 'about'
+  | 'friends'
+  | 'resume'
+  | 'favorites'
+  | 'blog'
+  | 'analytics';
 
 interface HomePageProps {
   onProjectClick: (id: string) => void;
   onNavigate: (page: HomeNavigatePage) => void;
 }
 
+type HomeProjectMetric = {
+  value: string;
+  label: string;
+};
+
 type HomeProjectTile = {
   id: string;
   title: string;
   company: string;
+  description?: string;
   readTime: string;
   bgColor: string;
   image: string;
+  metrics?: HomeProjectMetric[];
 };
 
 const TILE_STAGGER_KEYS = [
@@ -63,6 +71,9 @@ const MINI_APP_TILE_SHELL =
 /** Wrapper for external links: border lives on inner div (same as div-based tiles) so the grey frame always paints. */
 const MINI_APP_LINK_CLASS =
   'group block h-full cursor-pointer no-underline text-inherit rounded-xl outline-none focus-visible:ring-2 focus-visible:ring-gray-900/15 focus-visible:ring-offset-2';
+
+/** Set to `true` to show the Built with AI section on the homepage. */
+const SHOW_BUILT_WITH_AI_SECTION = true;
 
 /** Built with AI grid: flip to `true` when you want a tile live again. */
 const MINI_APP_ENABLED = {
@@ -91,7 +102,7 @@ function HomeProjectTileCard({
   const cardInner = (
     <>
       <div
-        className={`mb-4 w-full flex-shrink-0 overflow-hidden transition-transform duration-500 ease-out ${
+        className={`w-full flex-shrink-0 overflow-hidden transition-transform duration-500 ease-out ${
           project.id === 'CalmiRing' ? 'flex items-center justify-center' : ''
         }`}
         style={{ backgroundColor: project.bgColor, aspectRatio: '1 / 1' }}
@@ -124,12 +135,31 @@ function HomeProjectTileCard({
           })()}
       </div>
 
-      <div className="project-card-meta flex flex-col flex-1 space-y-2 px-3 pb-3">
-        <h3 className="type-body-lg text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
+      <div className="project-card-meta flex flex-col flex-1">
+        <p className="project-card-tags type-overline text-gray-400 truncate">{project.company}</p>
+        <h3 className="project-card-title type-body-lg text-gray-900 font-semibold leading-[1.4] line-clamp-2 transition-opacity duration-300 hover:opacity-70">
           {project.title}
         </h3>
-        <p className="type-caption text-gray-500 leading-relaxed line-clamp-2">{project.company}</p>
-        <p className="type-caption text-gray-400 pt-1 mt-auto tracking-wide">{project.readTime}</p>
+        {project.description && project.metrics && project.metrics.length > 0 ? (
+          <p className="project-card-description type-caption text-gray-500 truncate">{project.description}</p>
+        ) : null}
+        {project.metrics && project.metrics.length > 0 ? (
+          <div className="project-card-metrics">
+            {project.metrics.map((metric) => (
+              <div key={metric.label} className="project-card-metric">
+                <div className="project-card-metric-value text-gray-900">{metric.value}</div>
+                <span className="project-card-metric-label text-gray-500">{metric.label}</span>
+              </div>
+            ))}
+          </div>
+        ) : null}
+        <p
+          className={`project-card-read-time type-caption text-gray-400 mt-auto tracking-wide ${
+            project.metrics && project.metrics.length > 0 ? '' : 'project-card-read-time--compact'
+          }`}
+        >
+          {project.readTime}
+        </p>
       </div>
     </>
   );
@@ -178,44 +208,49 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
 
   const projects = [
     {
-      id: "CWPC",
-      title: "CWPC: Design System",
-      company: "DESIGN SYSTEM | REACT + TYPESCRIPT | 68 COMPONENTS | DOCUMENTATION",
-      readTime: "10 MINUTE READ →",
-      bgColor: "#6366F1",
-      image: "/main_title/main_cwpc.png",
+      id: "CoyaxDesignSystem",
+      title: "Coyax Design System",
+      company: "B2B FINTECH | DESIGN SYSTEMS | TOKEN ARCHITECTURE | CODEBASE AUDIT",
+      description:
+        "Auditing a live production codebase and building a unified three-tier token system from scratch.",
+      metrics: [
+        { value: "13", label: "Audit files" },
+        { value: "2", label: "Libraries unified" },
+        { value: "40%", label: "Faster handoff" },
+      ],
+      readTime: "10 minute read",
+      bgColor: "#e7e5e4",
+      image: "/coyax/DS/main-tile-silver.png",
     },
     {
       id: "AutomotiveUX_GM",
       title: "Automotive UX - Cadillac Escalade Design Proposal",
-      company: "END-TO-END PRODUCT DESIGN | UX DESIGN & RESEARCH",
-      readTime: "12 MINUTE READ →",
+      company: "AUTOMOTIVE UX | IN-CAR INTERFACE | MOBILE COMPANION | SPECULATIVE",
+      description:
+        "Develop a new In-vehicle experience for the luxury car segment focusing on in-car themes.",
+      metrics: [
+        { value: "2", label: "Surfaces redesigned" },
+        { value: "4", label: "Core user flows defined" },
+        { value: "0 to 1", label: "Concept to high fidelity" },
+      ],
+      readTime: "12 minute read →",
       bgColor: "#f5f5f7",
       image: "/main_title/main_gm.png",
     },
     {
       id: "RaseetHealth",
       title: "Raseet Health: Empowering Local Pharmacies",
-      company: "END-TO-END PRODUCT DESIGN | UX RESEARCH | DESIGN SYSTEM",
-      readTime: "16 MINUTE READ →",
+      company: "HEALTHCARE | MULTI-PLATFORM | UX RESEARCH | DESIGN SYSTEM",
+      description:
+        "An intuitive platform for pharmacies, catering to users of all ages and tech levels, with a focus on a broad audience.",
+      metrics: [
+        { value: "229+", label: "Pharmacies connected" },
+        { value: "67,552+", label: "Lives impacted" },
+        { value: "4x", label: "Faster prescription workflows" },
+      ],
+      readTime: "16 minute read →",
       bgColor: "#4A90E2",
       image: "/main_title/main_raseet.png",
-    },
-    {
-      id: "BMW",
-      title: "Redesigning BMW's Digital Interface",
-      company: "AUTOMOTIVE UX DESIGN",
-      readTime: "8 MINUTE READ →",
-      bgColor: "#e8f4f8",
-      image: "/main_title/main_bmw.png",
-    },
-    {
-      id: "CalmiRing",
-      title: "CalmiRing",
-      company: "IOT | END-TO-END UX DESIGN | UX RESEARCH",
-      readTime: "10 MINUTE READ →",
-      bgColor: "#f5f5f7",
-      image: "/main_title/main_calmi.png",
     },
     // {
     //   id: "jobgenius",
@@ -237,18 +272,32 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
 
   const designSystemProjects: HomeProjectTile[] = [
     {
-      id: "CWPC_DS",
-      title: "Prism Design System",
-      company: "DESIGN SYSTEM | PRISM | REACT + TYPESCRIPT | DOCUMENTATION",
-      readTime: "10 MINUTE READ →",
+      id: "CWPC",
+      title: "CWPC: Design System",
+      company: "DESIGN SYSTEM | REACT | TYPESCRIPT | ACCESSIBILITY | WCAG AA",
+      description:
+        "A production-ready React + TypeScript design system with 68 documented components, 100+ tokens, and a Storybook-style docs site for CWPC emergency tools.",
+      metrics: [
+        { value: "68", label: "Components built" },
+        { value: "WCAG AA", label: "Accessibility met" },
+        { value: "40%", label: "Faster design handoff" },
+      ],
+      readTime: "10 minute read →",
       bgColor: "#6366F1",
       image: "/DS/prism-tile.png",
     },
     {
       id: "RaseetHealth_DS",
       title: "MedScope Design System",
-      company: "DESIGN SYSTEM | FIGMA | MULTI-PLATFORM UI",
-      readTime: "12 MINUTE READ →",
+      company: "DESIGN SYSTEM | HEALTHCARE | MULTI-PLATFORM | TOKEN-FIRST",
+      description:
+        "Design-system lens on Raseet: shared patterns across mobile, partner pharmacy, and provider experiences, documented in Figma and shipped with consistent tokens.",
+      metrics: [
+        { value: "100", label: "Components shipped" },
+        { value: "4", label: "Platforms unified" },
+        { value: "1", label: "Source of truth" },
+      ],
+      readTime: "12 minute read →",
       bgColor: "#4A90E2",
       image: "/DS/medscope-tile-2.png",
     },
@@ -263,7 +312,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
           <div className="flex flex-col gap-8 md:gap-10">
           <AnimateIn variant="up" rootMargin="0px">
             <h1 className="type-display text-gray-900">
-             Design Engineer at Coyax.ai
+             Product Designer at Coyax.ai
             </h1>
             <h2 className="home-hero-location">
              based in San Francisco Bay Area.
@@ -280,9 +329,14 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
           </AnimateIn>
           <AnimateIn variant="up" rootMargin="0px" stagger="stagger-2">
             <p className="home-hero-tagline max-w-[500px]">
-              Curious about interfaces, intelligent systems
-              and the ways in which we interact with them.
+              Design Engineer with a focus on systems thinking and product craft. I design and ship AI-powered,{" "}
+              <br />
+              agentic B2B SaaS products across fintech, healthcare, and automotive, turning complex data{" "}
+              <br />
+              workflows into interfaces that are clear enough to deploy with confidence.
             </p>
+      
+            
           </AnimateIn>
           </div>
           </div>
@@ -326,6 +380,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
           ))}
         </div>
 
+        {SHOW_BUILT_WITH_AI_SECTION ? (
         <AnimateIn variant="up" rootMargin="0px 0px -80px 0px" className="mb-32">
           <div className="mb-12">
             <h2 className="type-overline text-gray-400 mb-2">
@@ -540,6 +595,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
             </a> */}
           </div>
         </AnimateIn>
+        ) : null}
 
         <GitHubActivity username="iamhtk" />
 

@@ -4799,7 +4799,7 @@ export function EmberDesignSystemProject({
       >
         {/* Paste your header image src path here (must be served from `public/`). */}
         <img
-          src="/cwpc/Group 15.png"
+          src="/DS/prism-hero.png"
           alt="CWPC header"
           style={{
             width: '100%',

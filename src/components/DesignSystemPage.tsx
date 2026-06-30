@@ -16,6 +16,7 @@ import { FooterCreditsRow } from './FooterAccessibilityLink';
 type DSSection = 'landing' | 'foundation' | 'components' | 'interactions' | 'principles';
 
 type NavigatePage =
+  | 'home'
   | 'work'
   | 'about'
   | 'friends'

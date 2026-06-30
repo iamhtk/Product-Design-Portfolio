@@ -1,5 +1,5 @@
 import { PROJECT_ENABLED, PROJECT_SLUGS } from '../components/projects/projectOrder';
-import { SITE_CONTENT_PATHS } from '../sitePaths';
+import { SITE_CONTENT_PATHS, WORK_PAGE_ENABLED } from '../sitePaths';
 import { SITE_URL } from './siteConfig';
 
 export type SitemapEntry = {
@@ -13,6 +13,9 @@ const NOINDEX_PATHS = new Set([SITE_CONTENT_PATHS.analytics]);
 export function getSitemapEntries(): SitemapEntry[] {
   const entries: SitemapEntry[] = [
     { loc: `${SITE_URL}/`, changefreq: 'weekly', priority: 1 },
+    ...(WORK_PAGE_ENABLED
+      ? [{ loc: `${SITE_URL}${SITE_CONTENT_PATHS.work}`, changefreq: 'weekly' as const, priority: 0.95 }]
+      : []),
     { loc: `${SITE_URL}${SITE_CONTENT_PATHS.about}`, changefreq: 'monthly', priority: 0.8 },
     { loc: `${SITE_URL}${SITE_CONTENT_PATHS.resume}`, changefreq: 'monthly', priority: 0.9 },
     { loc: `${SITE_URL}${SITE_CONTENT_PATHS.blog}`, changefreq: 'weekly', priority: 0.7 },

@@ -298,8 +298,10 @@ export function CaseStudyStatStrip({
       </div>
       <div className="md:hidden">
         <div
-          className="grid grid-cols-2 gap-3"
+          className="grid grid-cols-2"
           style={{
+            columnGap: 16,
+            rowGap: 32,
             opacity: statsInView ? 1 : 0,
             transition: 'opacity 0.5s ease',
           }}

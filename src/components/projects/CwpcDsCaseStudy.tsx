@@ -131,7 +131,7 @@ export function CwpcDsCaseStudyProject({ onBack, onProjectClick }: CwpcDsCaseStu
         style={{ height: 'clamp(300px, 42vw, 500px)', background: '#1B1B1F' }}
       >
         <img
-          src="/DS/prism-hero.png"
+          src="/cwpc/Group 15.png"
           alt="CWPC header"
           style={{
             width: '100%',

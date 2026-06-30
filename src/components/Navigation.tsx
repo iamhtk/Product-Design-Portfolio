@@ -8,9 +8,10 @@ import {
   trackSocialLinkClick,
 } from '../services/analytics';
 import { allowBrowserDefaultNav } from '../lib/spaLink';
-import { SITE_CONTENT_PATHS } from '../sitePaths';
+import { SITE_CONTENT_PATHS, WORK_PAGE_ENABLED } from '../sitePaths';
 
 type Page =
+  | 'home'
   | 'work'
   | 'about'
   | 'friends'
@@ -36,7 +37,8 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
   }, []);
 
   const links: { label: string; page: Page }[] = [
-    { label: 'Work', page: 'work' },
+    { label: 'Home', page: 'home' },
+    ...(WORK_PAGE_ENABLED ? [{ label: 'Work', page: 'work' as Page }] : []),
     { label: 'Resume', page: 'resume' },
     { label: 'Blog', page: 'blog' },
     { label: 'Friends', page: 'friends' },
@@ -84,11 +86,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
       >
         <div className="w-full max-w-[1600px] mx-auto px-6 md:px-8 lg:px-12 py-5 flex flex-row flex-nowrap items-center justify-between gap-4 min-w-0">
           <a
-            href={SITE_CONTENT_PATHS.work}
+            href={SITE_CONTENT_PATHS.home}
             onClick={(e) => {
               if (allowBrowserDefaultNav(e)) return;
               e.preventDefault();
-              handleNavigation('work');
+              handleNavigation('home');
             }}
             className="text-[15px] text-gray-900 hover:opacity-60 transition-opacity duration-300 focus-ring rounded py-2 px-1 cursor-pointer no-underline"
           >
@@ -150,11 +152,11 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
           <div className="flex flex-col h-full">
             <div className="px-8 py-5 flex items-center justify-between border-b border-gray-100/80 bg-white">
               <a
-                href={SITE_CONTENT_PATHS.work}
+                href={SITE_CONTENT_PATHS.home}
                 onClick={(e) => {
                   if (allowBrowserDefaultNav(e)) return;
                   e.preventDefault();
-                  handleNavigation('work');
+                  handleNavigation('home');
                 }}
                 className="text-[15px] text-gray-900 cursor-pointer no-underline"
               >

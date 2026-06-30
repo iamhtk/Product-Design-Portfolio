@@ -20,6 +20,7 @@ const PROJECT_SOURCES = {
   'bmw-idrive-redesign': '/main_title/main_bmw.png',
   'portfolio-design-system': '/miniapps/f3.png',
   calmiring: '/main_title/main_calmi.png',
+  'coyax-design-system': '/coyax/button-component.png',
 };
 
 async function cropOg(src, dest) {

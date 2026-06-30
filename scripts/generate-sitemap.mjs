@@ -6,8 +6,12 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 
 const SITE_URL = 'https://hrithiksanyal.com';
 
+/** Keep in sync with src/sitePaths.ts */
+const WORK_PAGE_ENABLED = false;
+
 const CONTENT_PATHS = [
   '/',
+  ...(WORK_PAGE_ENABLED ? ['/work'] : []),
   '/about-me',
   '/resume-experience',
   '/blog',
@@ -22,6 +26,7 @@ const PROJECT_SLUGS_ENABLED = [
   'automotive-ux-cadillac-escalade',
   'raseet-health',
   'raseet-health-ds-case-study',
+  'coyax-design-system',
   'bmw-idrive-redesign',
   'portfolio-design-system',
   'calmiring',
@@ -33,6 +38,7 @@ function entry(loc, changefreq, priority) {
 
 const urls = [
   entry(`${SITE_URL}/`, 'weekly', 1),
+  ...(WORK_PAGE_ENABLED ? [entry(`${SITE_URL}/work`, 'weekly', 0.95)] : []),
   entry(`${SITE_URL}/about-me`, 'monthly', 0.8),
   entry(`${SITE_URL}/resume-experience`, 'monthly', 0.9),
   entry(`${SITE_URL}/blog`, 'weekly', 0.7),

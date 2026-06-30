@@ -12,6 +12,7 @@ import {
 import { getProjectOgImage } from './projectOgImages';
 
 export type SeoPage =
+  | 'home'
   | 'work'
   | 'about'
   | 'friends'
@@ -34,9 +35,14 @@ const CONTENT_PAGE_SEO: Record<
   Exclude<SeoPage, 'project' | 'analytics'>,
   Pick<PageSeo, 'title' | 'description'>
 > = {
-  work: {
+  home: {
     title: DEFAULT_TITLE,
     description: DEFAULT_DESCRIPTION,
+  },
+  work: {
+    title: `Work — ${SITE_NAME}`,
+    description:
+      'Selected case studies, design systems, shipped products, and AI-built experiments by Hrithik Sanyal, Design Engineer.',
   },
   about: {
     title: `About — ${SITE_NAME}`,

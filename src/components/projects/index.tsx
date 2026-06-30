@@ -10,6 +10,9 @@ import { WeddingBlissProject } from './WeddingBliss';
 import { PortfolioDesignSystemProject } from './PortfolioDesignSystem';
 import { CwpcDsCaseStudyProject } from './CwpcDsCaseStudy';
 import { RaseetHealthDsCaseStudyProject } from './RaseetHealthDsCaseStudy';
+import { DesiPizzaHouseProject } from './DesiPizzaHouse';
+import { TandooriJunctionProject } from './TandooriJunction';
+import { CoyaxDesignSystemProject } from './CoyaxDesignSystem';
 
 export { PROJECT_ORDER } from './projectOrder';
 
@@ -29,4 +32,7 @@ export const projectComponents: Record<string, React.ComponentType<ProjectCompon
   PortfolioDesignSystem: PortfolioDesignSystemProject,
   CWPC_DS: CwpcDsCaseStudyProject,
   RaseetHealth_DS: RaseetHealthDsCaseStudyProject,
+  BuiltDeployed_Project1: DesiPizzaHouseProject,
+  BuiltDeployed_Project2: TandooriJunctionProject,
+  CoyaxDesignSystem: CoyaxDesignSystemProject,
 };

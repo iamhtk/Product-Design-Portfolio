@@ -85,7 +85,11 @@ export type ContentBlock =
   /** Product breadth showcase grid. Raseet Health only. */
   | { type: 'productShowcase' }
   /** Patient onboarding story screens. Raseet Health only. */
-  | { type: 'onboardingStory' };
+  | { type: 'onboardingStory' }
+  /** Hero metrics strip. Coyax Design System only. */
+  | { type: 'coyaxHeroStats' }
+  /** Full case study body sections. Coyax Design System only. */
+  | { type: 'coyaxCaseStudyContent' };
 
 export type ProjectSection = {
   header?: string; // Optional - leave empty if you don't want a header

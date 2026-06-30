@@ -1,11 +1,88 @@
 /* Load last: force design-system font sizes so Tailwind never wins. */
 
-/* Project card meta (company + read time) = caption 13px only */
-div.project-card-meta p,
-.project-card-meta p.type-caption,
-.project-card-meta p.leading-relaxed,
-.project-card-meta p.tracking-wide {
+/* Project card meta — Shriya-inspired spacing & hierarchy */
+.project-card-meta {
+  padding: 1.25rem 1.25rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .project-card-meta {
+    padding: 1.375rem 1.5rem 1.625rem;
+  }
+}
+
+.project-card-meta p.project-card-read-time,
+.project-card-meta p.type-caption.project-card-read-time,
+.project-card-meta p.leading-relaxed:not(.project-card-tags),
+.project-card-meta p.tracking-wide.project-card-read-time {
   font-size: 13px !important;
+}
+
+.project-card-meta p.project-card-tags {
+  font-size: var(--type-overline) !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.06em !important;
+  line-height: 1.5;
+  text-transform: uppercase;
+  margin: 0 0 0.75rem;
+}
+
+.project-card-meta .project-card-title {
+  margin: 0;
+}
+
+.project-card-meta p.project-card-description {
+  margin: 0.5rem 0;
+  font-size: var(--type-caption) !important;
+  font-weight: 400;
+  line-height: 1.5;
+}
+
+.project-card-metrics {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+  width: 100%;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  .project-card-metrics {
+    gap: 2rem;
+  }
+}
+
+.project-card-metric {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+}
+
+.project-card-metric-value {
+  font-size: var(--type-body-lg) !important;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.project-card-metric-label {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: var(--type-overline) !important;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  line-height: 1.35;
+}
+
+.project-card-meta p.project-card-read-time {
+  margin-top: 1.5rem;
+}
+
+.project-card-meta p.project-card-read-time--compact {
+  margin-top: 1rem;
+  padding-top: 0;
 }
 
 /* Home hero — “Previously Designer…” line. Edit size here only (does not change site-wide body-lg). */

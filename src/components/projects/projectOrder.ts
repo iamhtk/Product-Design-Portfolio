@@ -7,11 +7,14 @@ export const PROJECT_ORDER: { id: string; title: string }[] = [
   { id: 'AutomotiveUX_GM', title: "Automotive UX - Cadillac Escalade Design Proposal" },
   { id: 'RaseetHealth', title: 'Raseet Health: Empowering Local Pharmacies' },
   { id: 'RaseetHealth_DS', title: 'Raseet Health DS Case study' },
+  { id: 'CoyaxDesignSystem', title: 'Coyax Design System' },
   { id: 'BMW', title: "Redesigning BMW's Digital Interface" },
   { id: 'CalmiRing', title: 'CalmiRing' },
   { id: 'jobgenius', title: 'JobGenius' },
   { id: 'bound', title: 'Bound International UX Audit: Identifying and Solving Key Usability Issues' },
   { id: 'WeddingBliss', title: 'Wedding Bliss - AR Planner Assistant' },
+  { id: 'BuiltDeployed_Project1', title: 'Desi Pizza House' },
+  { id: 'BuiltDeployed_Project2', title: 'Tandoori Junction' },
 ];
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -26,12 +29,15 @@ export const PROJECT_ENABLED: Record<string, boolean> = {
   AutomotiveUX_GM: true,
   RaseetHealth: true,
   RaseetHealth_DS: true,
+  CoyaxDesignSystem: true,
   BMW: true,
   PortfolioDesignSystem: true,
   CalmiRing: true,
   jobgenius: false,
   bound: false,
   WeddingBliss: false,
+  BuiltDeployed_Project1: true,
+  BuiltDeployed_Project2: true,
 };
 
 /** URL slugs for project pages. Used in /project/<slug>. Omit entry to use id.toLowerCase(). */
@@ -41,12 +47,15 @@ export const PROJECT_SLUGS: Record<string, string> = {
   AutomotiveUX_GM: 'automotive-ux-cadillac-escalade',
   RaseetHealth: 'raseet-health',
   RaseetHealth_DS: 'raseet-health-ds-case-study',
+  CoyaxDesignSystem: 'coyax-design-system',
   BMW: 'bmw-idrive-redesign',
   PortfolioDesignSystem: 'portfolio-design-system',
   CalmiRing: 'calmiring',
   jobgenius: 'jobgenius',
   bound: 'bound-international-ux-audit',
   WeddingBliss: 'wedding-bliss',
+  BuiltDeployed_Project1: 'desi-pizza-house',
+  BuiltDeployed_Project2: 'tandoori-junction',
 };
 
 /** CalmiRing case study opens in external Notion link (used in Explore more section). */
@@ -54,11 +63,12 @@ export const CALMIRING_EXTERNAL_URL = 'https://beautiful-leader-fa9.notion.site/
 
 /** Project tile media for Explore more tiles (mirrors HomePage main title images). */
 export const PROJECT_TILE_MEDIA: Record<string, { image: string; bgColor: string }> = {
-  CWPC: { image: '/main_title/main_cwpc.png', bgColor: '#6366F1' },
+  CWPC: { image: '/DS/prism-tile.png', bgColor: '#6366F1' },
   CWPC_DS: { image: '/main_title/main_cwpc.png', bgColor: '#6366F1' },
   AutomotiveUX_GM: { image: '/main_title/main_gm.png', bgColor: '#f5f5f7' },
   RaseetHealth: { image: '/main_title/main_raseet.png', bgColor: '#4A90E2' },
   RaseetHealth_DS: { image: '/main_title/main_raseet.png', bgColor: '#4A90E2' },
+  CoyaxDesignSystem: { image: '/coyax/DS/main-tile-silver.png', bgColor: '#e7e5e4' },
   BMW: { image: '/main_title/main_bmw.png', bgColor: '#e8f4f8' },
   PortfolioDesignSystem: {
     image: '/miniapps/f3.png',
@@ -68,4 +78,6 @@ export const PROJECT_TILE_MEDIA: Record<string, { image: string; bgColor: string
   jobgenius: { image: '/main_title/main_jobgenius.png', bgColor: '#f5f5f7' },
   bound: { image: '/main_title/main_bound.png', bgColor: '#fff5f7' },
   WeddingBliss: { image: '/main_title/main_weddingbliss.png', bgColor: '#f5f5f7' },
+  BuiltDeployed_Project1: { image: '', bgColor: '#E8822A' },
+  BuiltDeployed_Project2: { image: '', bgColor: '#D4641C' },
 };

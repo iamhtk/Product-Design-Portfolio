@@ -166,9 +166,9 @@
   text-transform: uppercase;
 }
 
-/* Project cards: force caption size (13px) for meta lines — literal px so nothing overrides */
-.project-card-meta p,
-.project-card-meta p.type-caption {
+/* Project cards: caption size for read-time only — tags & metrics use dedicated classes */
+.project-card-meta p.project-card-read-time,
+.project-card-meta p.type-caption.project-card-read-time {
   font-size: 13px !important;
 }
 
