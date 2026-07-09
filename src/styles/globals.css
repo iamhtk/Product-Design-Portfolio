@@ -343,28 +343,30 @@
     scroll-behavior: smooth;
   }
 
-  /* Scrollbar: hidden by default, visible only while user is scrolling (class toggled from App) */
+  /* Scrollbar: track width always reserved so layout never shifts; thumb fades in while scrolling */
   html {
-    scrollbar-width: none;
+    overflow-y: scroll;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+    scrollbar-color: transparent transparent;
   }
   html.scrollbar-visible {
-    scrollbar-width: thin;
     scrollbar-color: rgba(0, 0, 0, 0.35) transparent;
   }
   html::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
-  html.scrollbar-visible::-webkit-scrollbar {
     width: 10px;
     height: 10px;
   }
-  html.scrollbar-visible::-webkit-scrollbar-track {
+  html::-webkit-scrollbar-track {
     background: transparent;
+  }
+  html::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+    transition: background 0.2s ease;
   }
   html.scrollbar-visible::-webkit-scrollbar-thumb {
     background: rgba(0, 0, 0, 0.35);
-    border-radius: 5px;
   }
   html.scrollbar-visible::-webkit-scrollbar-thumb:hover {
     background: rgba(0, 0, 0, 0.45);
