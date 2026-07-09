@@ -312,7 +312,7 @@ export function HomePage({ onProjectClick, onNavigate: _onNavigate }: HomePagePr
           <div className="flex flex-col gap-8 md:gap-10">
           <AnimateIn variant="up" rootMargin="0px">
             <h1 className="type-display text-gray-900">
-             Product Designer at Coyax.ai
+             Product Designer at Coyax
             </h1>
             <h2 className="home-hero-location">
              based in San Francisco Bay Area.
