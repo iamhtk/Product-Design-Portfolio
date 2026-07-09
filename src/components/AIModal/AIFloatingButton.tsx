@@ -56,9 +56,9 @@ export function AIFloatingButton({ onClick, isOpen }: AIFloatingButtonProps) {
         className={`ai-floating-btn${isOpen ? ' ai-floating-btn--open' : ''}`}
         style={{ right: `${right}px`, bottom: `${bottomPosition}px` }}
         onClick={onClick}
-        aria-label={isOpen ? 'Close chat' : 'Chat with Hrithik'}
+        aria-label={isOpen ? 'Close chat' : 'Chat with AI'}
       >
-        {isOpen ? '✕ Close' : '✦ Chat with Hrithik'}
+        {isOpen ? '✕ Close' : '✦ Chat with AI'}
       </button>
     </>
   );
