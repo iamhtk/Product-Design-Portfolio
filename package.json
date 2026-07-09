@@ -53,6 +53,7 @@
             "vaul": "^1.1.2"
       },
       "devDependencies": {
+            "@cloudflare/workers-types": "^4.20250214.0",
             "@types/node": "^20.10.0",
             "@types/react": "^19.2.10",
             "@types/react-dom": "^19.2.3",
@@ -60,13 +61,18 @@
             "puppeteer": "^24.2.0",
             "sharp": "^0.34.5",
             "typescript": "^5.9.3",
-            "vite": "^6.4.1"
+            "vite": "^6.4.1",
+            "wrangler": "^4.14.0"
       },
       "scripts": {
             "dev": "vite",
+            "dev:cf": "wrangler pages dev -- npm run dev",
             "build": "node scripts/generate-sitemap.mjs && node scripts/generate-og-images.mjs && vite build",
             "sitemap": "node scripts/generate-sitemap.mjs",
             "og-images": "node scripts/generate-og-images.mjs",
             "prerender": "node scripts/prerender.mjs"
+      },
+      "optionalDependencies": {
+            "@cloudflare/workerd-darwin-arm64": "^1.20260708.1"
       }
 }

@@ -23,9 +23,10 @@ type Page =
 interface NavigationProps {
   currentPage: Page | 'project';
   onNavigate: (page: Page) => void;
+  onOpenAI?: () => void;
 }
 
-export function Navigation({ currentPage, onNavigate }: NavigationProps) {
+export function Navigation({ currentPage, onNavigate, onOpenAI }: NavigationProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -77,8 +78,54 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
     return false;
   };
 
+  const handleOpenAI = () => {
+    onOpenAI?.();
+    setMobileMenuOpen(false);
+  };
+
   return (
     <>
+      <style>{`
+        .nav-ai-btn {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          padding: 5px 12px;
+          border: 1px solid rgba(99, 102, 241, 0.5);
+          border-radius: 6px;
+          color: #a5b4fc;
+          font-size: 13px;
+          font-weight: 600;
+          background: rgba(99, 102, 241, 0.08);
+          cursor: pointer;
+          transition: all 150ms ease;
+          font-family: inherit;
+          line-height: 1;
+        }
+        .nav-ai-btn:hover {
+          background: rgba(99, 102, 241, 0.16);
+          border-color: rgba(99, 102, 241, 0.8);
+        }
+        .nav-ai-btn:focus-visible {
+          outline: 2px solid #6366f1;
+          outline-offset: 2px;
+        }
+        .nav-ai-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #34d399;
+          animation: nav-ai-pulse 2s ease-in-out infinite;
+        }
+        @keyframes nav-ai-pulse {
+          0%, 100% { opacity: 1; transform: scale(1); }
+          50% { opacity: 0.45; transform: scale(0.75); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+          .nav-ai-dot { animation: none; }
+          .nav-ai-btn { transition: none; }
+        }
+      `}</style>
       <nav
         className={`liquid-glass fixed top-0 left-0 right-0 z-50 min-h-[var(--nav-height)] flex flex-row items-center w-full ${
           scrolled ? 'nav-scrolled' : ''
@@ -124,6 +171,12 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                 )}
               </a>
             ))}
+            {onOpenAI && (
+              <button type="button" onClick={handleOpenAI} className="nav-ai-btn">
+                <span className="nav-ai-dot" aria-hidden="true" />
+                AI
+              </button>
+            )}
             <a
               href="mailto:sanyalhrithik@gmail.com"
               onClick={() => {
@@ -210,6 +263,16 @@ export function Navigation({ currentPage, onNavigate }: NavigationProps) {
                     {social.label}
                   </a>
                 ))}
+                {onOpenAI && (
+                  <button
+                    type="button"
+                    onClick={handleOpenAI}
+                    className="nav-ai-btn text-[15px]"
+                  >
+                    <span className="nav-ai-dot" aria-hidden="true" />
+                    AI
+                  </button>
+                )}
                 <a
                   href="mailto:sanyalhrithik@gmail.com"
                   onClick={() => {

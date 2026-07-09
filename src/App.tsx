@@ -697,6 +697,8 @@ const AnalyticsDashboard = lazy(() => import('./components/AnalyticsDashboard').
 import { projectComponents } from './components/projects';
 import { PROJECT_ENABLED, PROJECT_SLUGS } from './components/projects/projectOrder';
 import { LightboxProvider } from './components/Lightbox';
+import { AIModal } from './components/AIModal/AIModal';
+import { AIFloatingButton } from './components/AIModal/AIFloatingButton';
 import {
   trackPageView,
   trackProjectOpen,
@@ -789,6 +791,7 @@ function App() {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState<Page>('home');
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
+  const [aiModalOpen, setAiModalOpen] = useState(false);
   const prevNavigationRef = useRef<{ page: Page; projectId: string | null } | null>(null);
   const isInitialMount = useRef(true);
   const didRestoreScroll = useRef(false);
@@ -983,7 +986,11 @@ function App() {
   return (
     <LightboxProvider enabled={lightboxEnabled}>
     <div className="min-h-screen overflow-x-hidden">
-      <Navigation currentPage={currentPage} onNavigate={handleNavigate} />
+      <Navigation
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onOpenAI={() => setAiModalOpen(true)}
+      />
 
       <main>
       <Suspense fallback={<div style={{ minHeight: '100vh' }} />}>
@@ -1052,6 +1059,11 @@ function App() {
       </Suspense>
       </main>
     </div>
+    <AIModal isOpen={aiModalOpen} onClose={() => setAiModalOpen(false)} />
+    <AIFloatingButton
+      onClick={() => setAiModalOpen((open) => !open)}
+      isOpen={aiModalOpen}
+    />
     </LightboxProvider>
   );
 }
